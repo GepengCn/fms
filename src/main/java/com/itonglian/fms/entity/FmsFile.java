@@ -15,6 +15,8 @@ public class FmsFile {
 
     private String modifytime;
 
+    private String textpath;
+
     private String attachpath;
 
     public String getId() {
@@ -71,6 +73,14 @@ public class FmsFile {
 
     public void setModifytime(String modifytime) {
         this.modifytime = modifytime == null ? null : modifytime.trim();
+    }
+
+    public String getTextpath() {
+        return textpath;
+    }
+
+    public void setTextpath(String textpath) {
+        this.textpath = textpath == null ? null : textpath.trim();
     }
 
     public String getAttachpath() {

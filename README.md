@@ -86,9 +86,10 @@
     | 5 | 归档状态 | status |int|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
     | 6 | 创建时间 | createTime |varchar(64)||
     | 7 | 修改时间 | modifyTime |varchar(64)||
-    | 8 | 附件FTP路径 | attachPath |varchar(256)||
-    | 9 | 公共数据 | commonData |blob|XML|
-    | 10 | 个性化数据 | customizedData |blob|XML|
+    | 8 | 正文FTP路径 | textPath |varchar(256)||
+    | 9 | 附件FTP路径 | attachPath |varchar(256)||
+    | 10 | 公共数据 | commonData |blob|XML|
+    | 11 | 个性化数据 | customizedData |blob|XML|
 
 ## 监控
 

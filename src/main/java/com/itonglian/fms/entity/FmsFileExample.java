@@ -584,6 +584,76 @@ public class FmsFileExample {
             return (Criteria) this;
         }
 
+        public Criteria andTextpathIsNull() {
+            addCriterion("textPath is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathIsNotNull() {
+            addCriterion("textPath is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathEqualTo(String value) {
+            addCriterion("textPath =", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathNotEqualTo(String value) {
+            addCriterion("textPath <>", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathGreaterThan(String value) {
+            addCriterion("textPath >", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathGreaterThanOrEqualTo(String value) {
+            addCriterion("textPath >=", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathLessThan(String value) {
+            addCriterion("textPath <", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathLessThanOrEqualTo(String value) {
+            addCriterion("textPath <=", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathLike(String value) {
+            addCriterion("textPath like", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathNotLike(String value) {
+            addCriterion("textPath not like", value, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathIn(List<String> values) {
+            addCriterion("textPath in", values, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathNotIn(List<String> values) {
+            addCriterion("textPath not in", values, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathBetween(String value1, String value2) {
+            addCriterion("textPath between", value1, value2, "textpath");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextpathNotBetween(String value1, String value2) {
+            addCriterion("textPath not between", value1, value2, "textpath");
+            return (Criteria) this;
+        }
+
         public Criteria andAttachpathIsNull() {
             addCriterion("attachPath is null");
             return (Criteria) this;

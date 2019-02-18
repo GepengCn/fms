@@ -4,10 +4,8 @@ import com.itonglian.fms.entity.FmsFile;
 import com.itonglian.fms.entity.FmsFileExample;
 import com.itonglian.fms.entity.FmsFileWithBLOBs;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-@Mapper
+
 public interface FmsFileMapper {
     long countByExample(FmsFileExample example);
 
