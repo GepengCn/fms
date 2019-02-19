@@ -55,6 +55,11 @@
 
 1. 将文件上传
 2. 保存路径信息
+3. FTP详情
+    - IP地址：192.0.101.134 
+    - 用户名密码：yongyou/yongyou  
+    - 路径：D://yongyou
+
 
 ### 结构化数据生成模块
 
@@ -83,13 +88,14 @@
     | 2 | 任务id | taskId |varchar(64)||
     | 3 | 拟稿人登录名 | draftLogin |varchar(64)||
     | 4 | 拟稿人姓名 | draftName |varchar(64)||
-    | 5 | 归档状态 | status |int|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
-    | 6 | 创建时间 | createTime |varchar(64)||
-    | 7 | 修改时间 | modifyTime |varchar(64)||
-    | 8 | 正文FTP路径 | textPath |varchar(256)||
-    | 9 | 附件FTP路径 | attachPath |varchar(256)||
-    | 10 | 公共数据 | commonData |blob|XML|
-    | 11 | 个性化数据 | customizedData |blob|XML|
+    | 5 | 公文类型 | fileType |varchar(64)||
+    | 6 | 归档状态 | status |int|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
+    | 7 | 创建时间 | createTime |varchar(64)||
+    | 8 | 修改时间 | modifyTime |varchar(64)||
+    | 9 | 正文FTP路径 | textPath |varchar(256)||
+    | 10 | 附件FTP路径 | attachPath |varchar(256)||
+    | 11 | 公共数据 | commonData |blob|XML|
+    | 12 | 个性化数据 | customizedData |blob|XML|
 
 ## 监控
 
@@ -118,3 +124,28 @@
 ```
 java -jar mybatis-generator-core-1.3.7.jar  -configfile generatorConfig.xml -overwrite
 ```
+
+## 数据sql
+
+- 已发事项
+
+    - 公共数据
+
+- 文件报批
+
+    - 个性化数据
+    - 附件及正文路径
+    
+- 办理详情
+
+    - 流程
+
+## 办公平台
+
+1. 归档
+  
+    - 已发事项界面上新增归档按钮
+    - taskId传递到后台
+    - 附件及正文解密
+    - 附件及正文上传FTP服务器
+    - 公共数据存储中间表
