@@ -1,18 +1,24 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.aspose.words.*;
-import com.google.common.util.concurrent.FutureCallback;
+import com.aspose.words.Document;
+import com.aspose.words.FindReplaceDirection;
+import com.aspose.words.FindReplaceOptions;
+import com.aspose.words.License;
 import com.itonglian.fms.service.bean.DocApprovalParam;
 import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FuturePieceTask;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class DocApprovalService extends BaseService {
     @Override
     public StringBuilder customizedImpl(Param param) throws Exception{
@@ -61,39 +67,4 @@ public class DocApprovalService extends BaseService {
         return stringBuilder;
     }
 
-
-    public static void main(String[] args) throws IOException {
-
-       /* for (int i = 0; i <100 ; i++) {
-            FileUtils.copyFile(new File("/Users/gepeng/Downloads/Template.doc"),new File("/Users/gepeng/Downloads/wordFolder/Template"+i+".doc"));
-        }*/
-
-        new Thread(new Task()).start();
-
-
-    }
-
-    public static class Task implements Runnable{
-
-        @Override
-        public void run() {
-            long start = System.currentTimeMillis();
-            DocApprovalService docApprovalService = new DocApprovalService();
-            DocApprovalParam param = new DocApprovalParam();
-            param.setTaskId("123");
-            param.setFlowNo("456");
-            docApprovalService.execute(param, new FutureCallback<String>() {
-                @Override
-                public void onSuccess(@Nullable String s) {
-                    log.info("xmlString:"+s);
-                    log.info("耗时:"+(System.currentTimeMillis()-start)+"秒");
-                }
-
-                @Override
-                public void onFailure(Throwable throwable) {
-                    log.error("error",throwable);
-                }
-            });
-        }
-    }
 }

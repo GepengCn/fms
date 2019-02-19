@@ -1,18 +1,14 @@
 package com.itonglian.fms.service.common;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
-
+@Slf4j
 public abstract class PieceTask implements Runnable{
 
     protected CountDownLatch countDownLatch;
 
-    protected final static Logger log = LoggerFactory.getLogger(PieceTask.class);
-
     protected FuturePieceTask futurePieceTask;
-
 
     public PieceTask(CountDownLatch countDownLatch,FuturePieceTask futurePieceTask) {
         this.countDownLatch = countDownLatch;

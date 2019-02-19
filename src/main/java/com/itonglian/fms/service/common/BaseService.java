@@ -2,16 +2,12 @@ package com.itonglian.fms.service.common;
 
 import com.google.common.util.concurrent.*;
 import com.itonglian.fms.service.bean.Param;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
 public abstract class BaseService {
 
-
-    protected final static Logger log = LoggerFactory.getLogger(BaseService.class);
 
     protected static ListeningExecutorService executorService = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(200));
 
