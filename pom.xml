@@ -172,6 +172,19 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>1.9.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+		</dependency>
+		<!-- zip压缩/解压缩工具类 -->
+		<dependency>
+			<groupId>org.zeroturnaround</groupId>
+			<artifactId>zt-zip</artifactId>
+			<version>1.13</version>
+			<type>jar</type>
+		</dependency>
 
 	</dependencies>
 

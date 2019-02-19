@@ -20,5 +20,4 @@ public class AttPieceTask extends PieceTask{
         log.info("AttPieceTask over");
     }
 
-
 }
