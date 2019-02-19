@@ -30,7 +30,7 @@ public class FileScanScheduler {
     @Autowired
     FileStatusManager fileStatusManager;
 
-    @Scheduled(fixedRate = 1000 * 5,initialDelay = 1000*10)
+    @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
     public void reportCurrentTime(){
         FmsFileExample fmsFileExample = new FmsFileExample();
         fmsFileExample.or().andStatusEqualTo(100);
@@ -65,7 +65,6 @@ public class FileScanScheduler {
                 @Override
                 public void onFailure(Throwable throwable) {
                     log.error("error",throwable);
-                    log.info("归档任务执行结束");
                     fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_103);
                 }
             });
