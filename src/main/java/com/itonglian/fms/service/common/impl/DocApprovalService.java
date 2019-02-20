@@ -27,12 +27,6 @@ public class DocApprovalService extends BaseService {
         stringBuilder.append("<div>").append(param.getTaskId()).append(",").append(((DocApprovalCustomized)param.getCustomized()).getFF02()).append("</div>");
         int taskSize = 1;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
-        License lic = new License();
-        try {
-            lic.setLicense(new FileInputStream(new File("/Users/gepeng/Downloads/Aspose.Words18.lic")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         final String dataDir = "/Users/gepeng/Downloads/wordFolder/";
 
         for (int i = 0; i < taskSize; i++) {
