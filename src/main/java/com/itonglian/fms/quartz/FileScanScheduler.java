@@ -31,7 +31,7 @@ public class FileScanScheduler {
     @Autowired
     FileStatusManager fileStatusManager;
 
-    /*@Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
+    @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
     public void reportCurrentTime(){
         FMS_FILEExample fmsFileExample = new FMS_FILEExample();
         fmsFileExample.or().andStatusEqualTo(100l);
@@ -50,6 +50,7 @@ public class FileScanScheduler {
         while(iterator.hasNext()){
             FMS_FILE fmsFile = iterator.next();
             log.info("正在归档的公文:taskId=["+fmsFile.getTaskid()+"]");
+            log.info("正在归档的公文类型:fileType=["+fmsFile.getFiletype()+"]");
             fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_101);
             DocApprovalService docApprovalService = new DocApprovalService();
             Param param = new Param();
@@ -73,6 +74,6 @@ public class FileScanScheduler {
 
 
         }
-    }*/
+    }
 
 }

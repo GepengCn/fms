@@ -19,6 +19,8 @@ public class FMS_FILE {
 
     private String attachpath;
 
+    private Long filetype;
+
     public String getId() {
         return id;
     }
@@ -89,5 +91,13 @@ public class FMS_FILE {
 
     public void setAttachpath(String attachpath) {
         this.attachpath = attachpath == null ? null : attachpath.trim();
+    }
+
+    public Long getFiletype() {
+        return filetype;
+    }
+
+    public void setFiletype(Long filetype) {
+        this.filetype = filetype;
     }
 }

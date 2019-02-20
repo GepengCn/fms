@@ -723,6 +723,66 @@ public class FMS_FILEExample {
             addCriterion("ATTACHPATH not between", value1, value2, "attachpath");
             return (Criteria) this;
         }
+
+        public Criteria andFiletypeIsNull() {
+            addCriterion("FILETYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeIsNotNull() {
+            addCriterion("FILETYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeEqualTo(Long value) {
+            addCriterion("FILETYPE =", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeNotEqualTo(Long value) {
+            addCriterion("FILETYPE <>", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeGreaterThan(Long value) {
+            addCriterion("FILETYPE >", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeGreaterThanOrEqualTo(Long value) {
+            addCriterion("FILETYPE >=", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeLessThan(Long value) {
+            addCriterion("FILETYPE <", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeLessThanOrEqualTo(Long value) {
+            addCriterion("FILETYPE <=", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeIn(List<Long> values) {
+            addCriterion("FILETYPE in", values, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeNotIn(List<Long> values) {
+            addCriterion("FILETYPE not in", values, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeBetween(Long value1, Long value2) {
+            addCriterion("FILETYPE between", value1, value2, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeNotBetween(Long value1, Long value2) {
+            addCriterion("FILETYPE not between", value1, value2, "filetype");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
