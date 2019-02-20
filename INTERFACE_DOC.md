@@ -1,10 +1,10 @@
-### 结构话数据格式
-#### 一、	使用XML作为数据载体
-#### 二、	数据分为公共数据与个性化数据两部分。
-#### 三、	公共数据是文件报批单、自由行文等7中文档中的公有部分，如标题、拟稿人、拟稿时间、流程id等
-#### 四、	个性化数据是不同公文的独有字段，比如流水号、校对人等字段
-#### 五、	为便于解析可以优先解析公共数据。使用个性化数据以便后续个性化扩展与实现。
-
+#### 一、结构话数据格式
+1.	使用XML作为数据载体
+2.	数据分为公共数据与个性化数据两部分。
+3.	公共数据是文件报批单、自由行文等7中文档中的公有部分，如标题、拟稿人、拟稿时间、流程id等
+4.	个性化数据是不同公文的独有字段，比如流水号、校对人等字段
+5.	为便于解析可以优先解析公共数据。使用个性化数据以便后续个性化扩展与实现。
+#### 二、公共数据字段表
  | 序号 | 字段描述 | 字段名称 | 字段类型|必填|参考值|
  | ------ | ------ | ------ | ------ | ------ |------ |
  | 1 | 任务id,公文唯一标识 | taskId |字符型|是|10665|
@@ -20,7 +20,9 @@
  | 11 | 备考表ftp地址| refFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
  | 12 | 个性化数据 | customized |字符型|是|不同公文不同字段,参考个性化字段表|
  | 13 | 文档类型 | type |int|是|0:文件报批单 1:自由行文 2:院发文|
+ | 14 | 关联文档 | refDocList |字符型|否|数组|
 
+> `json`范例如下
 
 ```metadata json
 {
@@ -89,3 +91,22 @@
 
 
 ```
+
+#### 三、个性化字段表
+
+![Alt text][wjbpd]
+![Alt text][zyxw]
+![Alt text][dwfw]
+![Alt text][dzfw]
+![Alt text][yfw]
+![Alt text][yjfs]
+![Alt text][swdj]
+
+
+[wjbpd]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/wjbpd.png
+[zyxw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/zyxw.png
+[dwfw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/dwfw.png
+[dzfw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/dzfw.png
+[yfw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/yfw.png
+[yjfs]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/yjfs.png
+[swdj]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/swdj.png
