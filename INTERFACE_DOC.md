@@ -19,7 +19,7 @@
  | 10 | 目录ftp地址| catalogFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
  | 11 | 备考表ftp地址| refFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
  | 12 | 个性化数据 | customized |字符型|是|不同公文不同字段,参考个性化字段表|
- | 13 | 文档类型 | type |int|是|0:文件报批单 1:自由行文 2:院发文|
+ | 13 | 文档类型 | type |int|是|1:文件报批单 2:自由行文 3:单位发文 4:党组发文 5:院发文 6:收文登记 7:阅件发送|
  | 14 | 关联文档 | refDocList |字符型|否|数组|
 
 > `json`范例如下
@@ -86,7 +86,7 @@
   },
   "taskId": "13464",
   "title": "全国政协委员马全林：保护生态就是保护民生",
-  "type": 0
+  "type": 1
 }
 
 
@@ -99,8 +99,9 @@
 ![Alt text][dwfw]
 ![Alt text][dzfw]
 ![Alt text][yfw]
-![Alt text][yjfs]
 ![Alt text][swdj]
+![Alt text][yjfs]
+
 
 
 [wjbpd]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/wjbpd.png
