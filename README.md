@@ -91,16 +91,17 @@
     | ------ | ------ | ------ | ------ | ------ |
     | 1 | 主键 | id |varchar(64)||
     | 2 | 任务id | taskId |varchar(64)||
-    | 3 | 拟稿人登录名 | draftLogin |varchar(64)||
-    | 4 | 拟稿人姓名 | draftName |varchar(64)||
-    | 5 | 公文类型 | fileType |varchar(64)||
-    | 6 | 归档状态 | status |int|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
-    | 7 | 创建时间 | createTime |varchar(64)||
-    | 8 | 修改时间 | modifyTime |varchar(64)||
-    | 9 | 正文FTP路径 | textPath |varchar(256)||
-    | 10 | 附件FTP路径 | attachPath |varchar(256)||
-    | 11 | 公共数据 | commonData |blob|XML|
-    | 12 | 个性化数据 | customizedData |blob|XML|
+    | 3 | 标题 | title |varchar(512)||
+    | 4 | 拟稿人登录名 | draftLogin |varchar(64)||
+    | 5 | 拟稿人姓名 | draftName |varchar(64)||
+    | 6 | 公文类型 | fileType |varchar(64)||
+    | 7 | 归档状态 | status |int|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
+    | 8 | 创建时间 | createTime |varchar(64)||
+    | 9 | 修改时间 | modifyTime |varchar(64)||
+    | 10 | 正文FTP路径 | textPath |varchar(256)||
+    | 11 | 附件FTP路径 | attachPath |varchar(256)||
+    | 12 | 公共数据 | commonData |blob|XML|
+    | 13 | 个性化数据 | customizedData |blob|XML|
 
 ## 监控
 

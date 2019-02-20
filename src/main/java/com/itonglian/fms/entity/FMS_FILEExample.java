@@ -783,6 +783,216 @@ public class FMS_FILEExample {
             addCriterion("FILETYPE not between", value1, value2, "filetype");
             return (Criteria) this;
         }
+
+        public Criteria andTitleIsNull() {
+            addCriterion("TITLE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleIsNotNull() {
+            addCriterion("TITLE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleEqualTo(String value) {
+            addCriterion("TITLE =", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotEqualTo(String value) {
+            addCriterion("TITLE <>", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleGreaterThan(String value) {
+            addCriterion("TITLE >", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("TITLE >=", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleLessThan(String value) {
+            addCriterion("TITLE <", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleLessThanOrEqualTo(String value) {
+            addCriterion("TITLE <=", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleLike(String value) {
+            addCriterion("TITLE like", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotLike(String value) {
+            addCriterion("TITLE not like", value, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleIn(List<String> values) {
+            addCriterion("TITLE in", values, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotIn(List<String> values) {
+            addCriterion("TITLE not in", values, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleBetween(String value1, String value2) {
+            addCriterion("TITLE between", value1, value2, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTitleNotBetween(String value1, String value2) {
+            addCriterion("TITLE not between", value1, value2, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameIsNull() {
+            addCriterion("TEXTNAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameIsNotNull() {
+            addCriterion("TEXTNAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameEqualTo(String value) {
+            addCriterion("TEXTNAME =", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameNotEqualTo(String value) {
+            addCriterion("TEXTNAME <>", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameGreaterThan(String value) {
+            addCriterion("TEXTNAME >", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameGreaterThanOrEqualTo(String value) {
+            addCriterion("TEXTNAME >=", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameLessThan(String value) {
+            addCriterion("TEXTNAME <", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameLessThanOrEqualTo(String value) {
+            addCriterion("TEXTNAME <=", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameLike(String value) {
+            addCriterion("TEXTNAME like", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameNotLike(String value) {
+            addCriterion("TEXTNAME not like", value, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameIn(List<String> values) {
+            addCriterion("TEXTNAME in", values, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameNotIn(List<String> values) {
+            addCriterion("TEXTNAME not in", values, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameBetween(String value1, String value2) {
+            addCriterion("TEXTNAME between", value1, value2, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTextnameNotBetween(String value1, String value2) {
+            addCriterion("TEXTNAME not between", value1, value2, "textname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameIsNull() {
+            addCriterion("ATTACHNAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameIsNotNull() {
+            addCriterion("ATTACHNAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameEqualTo(String value) {
+            addCriterion("ATTACHNAME =", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameNotEqualTo(String value) {
+            addCriterion("ATTACHNAME <>", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameGreaterThan(String value) {
+            addCriterion("ATTACHNAME >", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameGreaterThanOrEqualTo(String value) {
+            addCriterion("ATTACHNAME >=", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameLessThan(String value) {
+            addCriterion("ATTACHNAME <", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameLessThanOrEqualTo(String value) {
+            addCriterion("ATTACHNAME <=", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameLike(String value) {
+            addCriterion("ATTACHNAME like", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameNotLike(String value) {
+            addCriterion("ATTACHNAME not like", value, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameIn(List<String> values) {
+            addCriterion("ATTACHNAME in", values, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameNotIn(List<String> values) {
+            addCriterion("ATTACHNAME not in", values, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameBetween(String value1, String value2) {
+            addCriterion("ATTACHNAME between", value1, value2, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andAttachnameNotBetween(String value1, String value2) {
+            addCriterion("ATTACHNAME not between", value1, value2, "attachname");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

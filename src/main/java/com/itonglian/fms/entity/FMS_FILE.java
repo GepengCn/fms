@@ -21,6 +21,12 @@ public class FMS_FILE {
 
     private Long filetype;
 
+    private String title;
+
+    private String textname;
+
+    private String attachname;
+
     public String getId() {
         return id;
     }
@@ -99,5 +105,29 @@ public class FMS_FILE {
 
     public void setFiletype(Long filetype) {
         this.filetype = filetype;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getTextname() {
+        return textname;
+    }
+
+    public void setTextname(String textname) {
+        this.textname = textname == null ? null : textname.trim();
+    }
+
+    public String getAttachname() {
+        return attachname;
+    }
+
+    public void setAttachname(String attachname) {
+        this.attachname = attachname == null ? null : attachname.trim();
     }
 }

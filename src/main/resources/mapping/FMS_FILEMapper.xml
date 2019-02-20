@@ -12,6 +12,9 @@
     <result column="TEXTPATH" jdbcType="VARCHAR" property="textpath" />
     <result column="ATTACHPATH" jdbcType="VARCHAR" property="attachpath" />
     <result column="FILETYPE" jdbcType="DECIMAL" property="filetype" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="TEXTNAME" jdbcType="VARCHAR" property="textname" />
+    <result column="ATTACHNAME" jdbcType="VARCHAR" property="attachname" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
     <result column="COMMONDATA" jdbcType="BLOB" property="commondata" />
@@ -77,7 +80,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, TASKID, DRAFTLOGIN, DRAFTNAME, STATUS, CREATETIME, MODIFYTIME, TEXTPATH, ATTACHPATH, 
-    FILETYPE
+    FILETYPE, TITLE, TEXTNAME, ATTACHNAME
   </sql>
   <sql id="Blob_Column_List">
     COMMONDATA, CUSTOMIZEDDATA
@@ -136,12 +139,14 @@
     insert into FMS_FILE (ID, TASKID, DRAFTLOGIN, 
       DRAFTNAME, STATUS, CREATETIME, 
       MODIFYTIME, TEXTPATH, ATTACHPATH, 
-      FILETYPE, COMMONDATA, CUSTOMIZEDDATA
+      FILETYPE, TITLE, TEXTNAME, 
+      ATTACHNAME, COMMONDATA, CUSTOMIZEDDATA
       )
     values (#{id,jdbcType=VARCHAR}, #{taskid,jdbcType=VARCHAR}, #{draftlogin,jdbcType=VARCHAR}, 
       #{draftname,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{createtime,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=VARCHAR}, #{textpath,jdbcType=VARCHAR}, #{attachpath,jdbcType=VARCHAR}, 
-      #{filetype,jdbcType=DECIMAL}, #{commondata,jdbcType=BLOB}, #{customizeddata,jdbcType=BLOB}
+      #{filetype,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{textname,jdbcType=VARCHAR}, 
+      #{attachname,jdbcType=VARCHAR}, #{commondata,jdbcType=BLOB}, #{customizeddata,jdbcType=BLOB}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
@@ -176,6 +181,15 @@
       </if>
       <if test="filetype != null">
         FILETYPE,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="textname != null">
+        TEXTNAME,
+      </if>
+      <if test="attachname != null">
+        ATTACHNAME,
       </if>
       <if test="commondata != null">
         COMMONDATA,
@@ -214,6 +228,15 @@
       </if>
       <if test="filetype != null">
         #{filetype,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="textname != null">
+        #{textname,jdbcType=VARCHAR},
+      </if>
+      <if test="attachname != null">
+        #{attachname,jdbcType=VARCHAR},
       </if>
       <if test="commondata != null">
         #{commondata,jdbcType=BLOB},
@@ -262,6 +285,15 @@
       <if test="record.filetype != null">
         FILETYPE = #{record.filetype,jdbcType=DECIMAL},
       </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textname != null">
+        TEXTNAME = #{record.textname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachname != null">
+        ATTACHNAME = #{record.attachname,jdbcType=VARCHAR},
+      </if>
       <if test="record.commondata != null">
         COMMONDATA = #{record.commondata,jdbcType=BLOB},
       </if>
@@ -285,6 +317,9 @@
       TEXTPATH = #{record.textpath,jdbcType=VARCHAR},
       ATTACHPATH = #{record.attachpath,jdbcType=VARCHAR},
       FILETYPE = #{record.filetype,jdbcType=DECIMAL},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      TEXTNAME = #{record.textname,jdbcType=VARCHAR},
+      ATTACHNAME = #{record.attachname,jdbcType=VARCHAR},
       COMMONDATA = #{record.commondata,jdbcType=BLOB},
       CUSTOMIZEDDATA = #{record.customizeddata,jdbcType=BLOB}
     <if test="_parameter != null">
@@ -302,7 +337,10 @@
       MODIFYTIME = #{record.modifytime,jdbcType=VARCHAR},
       TEXTPATH = #{record.textpath,jdbcType=VARCHAR},
       ATTACHPATH = #{record.attachpath,jdbcType=VARCHAR},
-      FILETYPE = #{record.filetype,jdbcType=DECIMAL}
+      FILETYPE = #{record.filetype,jdbcType=DECIMAL},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      TEXTNAME = #{record.textname,jdbcType=VARCHAR},
+      ATTACHNAME = #{record.attachname,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -337,6 +375,15 @@
       <if test="filetype != null">
         FILETYPE = #{filetype,jdbcType=DECIMAL},
       </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="textname != null">
+        TEXTNAME = #{textname,jdbcType=VARCHAR},
+      </if>
+      <if test="attachname != null">
+        ATTACHNAME = #{attachname,jdbcType=VARCHAR},
+      </if>
       <if test="commondata != null">
         COMMONDATA = #{commondata,jdbcType=BLOB},
       </if>
@@ -357,6 +404,9 @@
       TEXTPATH = #{textpath,jdbcType=VARCHAR},
       ATTACHPATH = #{attachpath,jdbcType=VARCHAR},
       FILETYPE = #{filetype,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TEXTNAME = #{textname,jdbcType=VARCHAR},
+      ATTACHNAME = #{attachname,jdbcType=VARCHAR},
       COMMONDATA = #{commondata,jdbcType=BLOB},
       CUSTOMIZEDDATA = #{customizeddata,jdbcType=BLOB}
     where ID = #{id,jdbcType=VARCHAR}
@@ -371,7 +421,10 @@
       MODIFYTIME = #{modifytime,jdbcType=VARCHAR},
       TEXTPATH = #{textpath,jdbcType=VARCHAR},
       ATTACHPATH = #{attachpath,jdbcType=VARCHAR},
-      FILETYPE = #{filetype,jdbcType=DECIMAL}
+      FILETYPE = #{filetype,jdbcType=DECIMAL},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TEXTNAME = #{textname,jdbcType=VARCHAR},
+      ATTACHNAME = #{attachname,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

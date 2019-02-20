@@ -2,10 +2,12 @@ package com.itonglian.fms.service.common;
 
 import com.google.common.util.concurrent.*;
 import com.itonglian.fms.service.bean.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
+@Component
 public abstract class BaseService {
 
 
