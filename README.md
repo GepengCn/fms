@@ -154,4 +154,4 @@ java -jar mybatis-generator-core-1.3.7.jar  -configfile generatorConfig.xml -ove
     - 公共数据存储中间表
 
 
-[INTERFACE_DOC]:https://github.com/GepengCn/tlim/blob/master/INTERFACE_DOC.md
+[INTERFACE_DOC]:https://github.com/GepengCn/fms/blob/master/INTERFACE_DOC.md
