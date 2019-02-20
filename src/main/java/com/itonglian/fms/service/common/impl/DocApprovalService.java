@@ -4,7 +4,7 @@ import com.aspose.words.Document;
 import com.aspose.words.FindReplaceDirection;
 import com.aspose.words.FindReplaceOptions;
 import com.aspose.words.License;
-import com.itonglian.fms.service.bean.DocApprovalParam;
+import com.itonglian.fms.service.bean.DocApprovalCustomized;
 import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FuturePieceTask;
@@ -23,8 +23,8 @@ public class DocApprovalService extends BaseService {
     @Override
     public StringBuilder customizedImpl(Param param) throws Exception{
         StringBuilder stringBuilder = new StringBuilder();
-        DocApprovalParam docApprovalParam = (DocApprovalParam)param;
-        stringBuilder.append("<div>").append(docApprovalParam.getTaskId()).append(",").append(docApprovalParam.getFlowNo()).append("</div>");
+
+        stringBuilder.append("<div>").append(param.getTaskId()).append(",").append(((DocApprovalCustomized)param.getCustomized()).getFF02()).append("</div>");
         int taskSize = 1;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
         License lic = new License();
@@ -45,12 +45,6 @@ public class DocApprovalService extends BaseService {
                     try {
                         doc = new Document(in);
                         doc.getRange().replace("#{userName}","gp",new FindReplaceOptions(FindReplaceDirection.FORWARD));
-                       /* doc.setWarningCallback(new IWarningCallback() {
-                            @Override
-                            public void warning(WarningInfo warningInfo) {
-                                //log.warn(warningInfo.getDescription());
-                            }
-                        });*/
                         doc.setWarningCallback((warningInfo)->log.warn(warningInfo.getDescription()));
                         doc.save(dataDir +"/pdfFolder/"+ UUID.randomUUID().toString()+".pdf");
                     } catch (Exception e) {

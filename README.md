@@ -1,3 +1,5 @@
+## [接口文档][INTERFACE_DOC]
+
 ## 概要设计
 
 ### 归档扫描模块
@@ -66,12 +68,12 @@
 
 1. 归档执行后的数据
 2. 未发送到大数据中心的数据
-3. webservice server
+3. http
 
 ### 归档结果查询模块
 
 1. 定时查询
-2. webservice client
+2. http
 3. 更新办公平台归档状态
 
 ## 表设计
@@ -150,3 +152,6 @@ java -jar mybatis-generator-core-1.3.7.jar  -configfile generatorConfig.xml -ove
     - 附件及正文解密
     - 附件及正文上传FTP服务器
     - 公共数据存储中间表
+
+
+[INTERFACE_DOC]:https://github.com/GepengCn/tlim/blob/master/INTERFACE_DOC.md
