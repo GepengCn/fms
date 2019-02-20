@@ -3,6 +3,9 @@ mvn install:install-file -Dfile=DBstep.jar -DgroupId=com.itonglian -DartifactId=
 
 <dependency>
 			<groupId>com.itonglian</groupId>
-			<artifactId>dbstep</artifactId>
+			<artifactId>ojdbc6</artifactId>
 			<version>1.0</version>
 		</dependency>
+mvn install:install-file -Dfile=ojdbc6-11.2.0.3.jar -DgroupId=com.itonglian -DartifactId=ojdbc6 -Dversion=1.0 -Dpackaging=jar
+
+

@@ -11,12 +11,12 @@ public enum FileStatus {
     STATUS_300(300),
     STATUS_301(301);
 
-    private int status;
-    FileStatus(int status) {
+    private long status;
+    FileStatus(long status) {
         this.status = status;
     }
 
-    public int getStatus(){
+    public long getStatus(){
         return status;
     }
 }

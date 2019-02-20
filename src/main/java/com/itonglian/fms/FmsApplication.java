@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @ServletComponentScan
 @SpringBootApplication
-@MapperScan("com.itonglian.fms.dao")
+//@MapperScan({"com.itonglian.fms.dao.primary","com.itonglian.fms.dao.feapp5"})
 public class FmsApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

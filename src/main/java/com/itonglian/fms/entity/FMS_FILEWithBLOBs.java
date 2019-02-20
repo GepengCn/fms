@@ -1,6 +1,6 @@
 package com.itonglian.fms.entity;
 
-public class FmsFileWithBLOBs extends FMS_FILE {
+public class FMS_FILEWithBLOBs extends FMS_FILE {
     private byte[] commondata;
 
     private byte[] customizeddata;

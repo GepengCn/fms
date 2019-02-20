@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.primary.WfTaskMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.WfTask">
+    <id column="WT00" jdbcType="DECIMAL" property="wt00" />
+    <result column="WT01" jdbcType="VARCHAR" property="wt01" />
+    <result column="WT02" jdbcType="VARCHAR" property="wt02" />
+    <result column="WT03" jdbcType="VARCHAR" property="wt03" />
+    <result column="WT04" jdbcType="DECIMAL" property="wt04" />
+    <result column="WT05" jdbcType="VARCHAR" property="wt05" />
+    <result column="WT06" jdbcType="VARCHAR" property="wt06" />
+    <result column="WT07" jdbcType="VARCHAR" property="wt07" />
+    <result column="WT08" jdbcType="VARCHAR" property="wt08" />
+    <result column="WT09" jdbcType="TIMESTAMP" property="wt09" />
+    <result column="WT10" jdbcType="TIMESTAMP" property="wt10" />
+    <result column="WT11" jdbcType="VARCHAR" property="wt11" />
+    <result column="WT12" jdbcType="VARCHAR" property="wt12" />
+    <result column="WT13" jdbcType="VARCHAR" property="wt13" />
+    <result column="WT14" jdbcType="VARCHAR" property="wt14" />
+    <result column="WT15" jdbcType="VARCHAR" property="wt15" />
+    <result column="WT16" jdbcType="VARCHAR" property="wt16" />
+    <result column="WT17" jdbcType="VARCHAR" property="wt17" />
+    <result column="WT18" jdbcType="DECIMAL" property="wt18" />
+    <result column="WT19" jdbcType="VARCHAR" property="wt19" />
+    <result column="WT20" jdbcType="VARCHAR" property="wt20" />
+    <result column="WT21" jdbcType="VARCHAR" property="wt21" />
+    <result column="WT22" jdbcType="DECIMAL" property="wt22" />
+    <result column="WT23" jdbcType="DECIMAL" property="wt23" />
+    <result column="WT24" jdbcType="VARCHAR" property="wt24" />
+    <result column="WT25" jdbcType="VARCHAR" property="wt25" />
+    <result column="WT26" jdbcType="VARCHAR" property="wt26" />
+    <result column="WT27" jdbcType="VARCHAR" property="wt27" />
+    <result column="WT28" jdbcType="VARCHAR" property="wt28" />
+    <result column="WT29" jdbcType="VARCHAR" property="wt29" />
+    <result column="WT30" jdbcType="VARCHAR" property="wt30" />
+    <result column="WT31" jdbcType="DECIMAL" property="wt31" />
+    <result column="WT32" jdbcType="VARCHAR" property="wt32" />
+    <result column="WT33" jdbcType="VARCHAR" property="wt33" />
+    <result column="WT34" jdbcType="VARCHAR" property="wt34" />
+    <result column="WT35" jdbcType="VARCHAR" property="wt35" />
+    <result column="WT36" jdbcType="VARCHAR" property="wt36" />
+    <result column="WT37" jdbcType="DECIMAL" property="wt37" />
+    <result column="WT38" jdbcType="VARCHAR" property="wt38" />
+    <result column="WT39" jdbcType="VARCHAR" property="wt39" />
+    <result column="WT40" jdbcType="VARCHAR" property="wt40" />
+    <result column="ISDEPLOY" jdbcType="VARCHAR" property="isdeploy" />
+    <result column="ITEMSID" jdbcType="VARCHAR" property="itemsid" />
+    <result column="ISDEPLOYDATE" jdbcType="VARCHAR" property="isdeploydate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WT00, WT01, WT02, WT03, WT04, WT05, WT06, WT07, WT08, WT09, WT10, WT11, WT12, WT13, 
+    WT14, WT15, WT16, WT17, WT18, WT19, WT20, WT21, WT22, WT23, WT24, WT25, WT26, WT27, 
+    WT28, WT29, WT30, WT31, WT32, WT33, WT34, WT35, WT36, WT37, WT38, WT39, WT40, ISDEPLOY, 
+    ITEMSID, ISDEPLOYDATE
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.WfTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from WF_TASK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from WF_TASK
+    where WT00 = #{wt00,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from WF_TASK
+    where WT00 = #{wt00,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.WfTaskExample">
+    delete from WF_TASK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.WfTask">
+    insert into WF_TASK (WT00, WT01, WT02, 
+      WT03, WT04, WT05, WT06, 
+      WT07, WT08, WT09, 
+      WT10, WT11, WT12, 
+      WT13, WT14, WT15, WT16, 
+      WT17, WT18, WT19, WT20, 
+      WT21, WT22, WT23, WT24, 
+      WT25, WT26, WT27, WT28, 
+      WT29, WT30, WT31, WT32, 
+      WT33, WT34, WT35, WT36, 
+      WT37, WT38, WT39, WT40, 
+      ISDEPLOY, ITEMSID, ISDEPLOYDATE
+      )
+    values (#{wt00,jdbcType=DECIMAL}, #{wt01,jdbcType=VARCHAR}, #{wt02,jdbcType=VARCHAR}, 
+      #{wt03,jdbcType=VARCHAR}, #{wt04,jdbcType=DECIMAL}, #{wt05,jdbcType=VARCHAR}, #{wt06,jdbcType=VARCHAR}, 
+      #{wt07,jdbcType=VARCHAR}, #{wt08,jdbcType=VARCHAR}, #{wt09,jdbcType=TIMESTAMP}, 
+      #{wt10,jdbcType=TIMESTAMP}, #{wt11,jdbcType=VARCHAR}, #{wt12,jdbcType=VARCHAR}, 
+      #{wt13,jdbcType=VARCHAR}, #{wt14,jdbcType=VARCHAR}, #{wt15,jdbcType=VARCHAR}, #{wt16,jdbcType=VARCHAR}, 
+      #{wt17,jdbcType=VARCHAR}, #{wt18,jdbcType=DECIMAL}, #{wt19,jdbcType=VARCHAR}, #{wt20,jdbcType=VARCHAR}, 
+      #{wt21,jdbcType=VARCHAR}, #{wt22,jdbcType=DECIMAL}, #{wt23,jdbcType=DECIMAL}, #{wt24,jdbcType=VARCHAR}, 
+      #{wt25,jdbcType=VARCHAR}, #{wt26,jdbcType=VARCHAR}, #{wt27,jdbcType=VARCHAR}, #{wt28,jdbcType=VARCHAR}, 
+      #{wt29,jdbcType=VARCHAR}, #{wt30,jdbcType=VARCHAR}, #{wt31,jdbcType=DECIMAL}, #{wt32,jdbcType=VARCHAR}, 
+      #{wt33,jdbcType=VARCHAR}, #{wt34,jdbcType=VARCHAR}, #{wt35,jdbcType=VARCHAR}, #{wt36,jdbcType=VARCHAR}, 
+      #{wt37,jdbcType=DECIMAL}, #{wt38,jdbcType=VARCHAR}, #{wt39,jdbcType=VARCHAR}, #{wt40,jdbcType=VARCHAR}, 
+      #{isdeploy,jdbcType=VARCHAR}, #{itemsid,jdbcType=VARCHAR}, #{isdeploydate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.WfTask">
+    insert into WF_TASK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wt00 != null">
+        WT00,
+      </if>
+      <if test="wt01 != null">
+        WT01,
+      </if>
+      <if test="wt02 != null">
+        WT02,
+      </if>
+      <if test="wt03 != null">
+        WT03,
+      </if>
+      <if test="wt04 != null">
+        WT04,
+      </if>
+      <if test="wt05 != null">
+        WT05,
+      </if>
+      <if test="wt06 != null">
+        WT06,
+      </if>
+      <if test="wt07 != null">
+        WT07,
+      </if>
+      <if test="wt08 != null">
+        WT08,
+      </if>
+      <if test="wt09 != null">
+        WT09,
+      </if>
+      <if test="wt10 != null">
+        WT10,
+      </if>
+      <if test="wt11 != null">
+        WT11,
+      </if>
+      <if test="wt12 != null">
+        WT12,
+      </if>
+      <if test="wt13 != null">
+        WT13,
+      </if>
+      <if test="wt14 != null">
+        WT14,
+      </if>
+      <if test="wt15 != null">
+        WT15,
+      </if>
+      <if test="wt16 != null">
+        WT16,
+      </if>
+      <if test="wt17 != null">
+        WT17,
+      </if>
+      <if test="wt18 != null">
+        WT18,
+      </if>
+      <if test="wt19 != null">
+        WT19,
+      </if>
+      <if test="wt20 != null">
+        WT20,
+      </if>
+      <if test="wt21 != null">
+        WT21,
+      </if>
+      <if test="wt22 != null">
+        WT22,
+      </if>
+      <if test="wt23 != null">
+        WT23,
+      </if>
+      <if test="wt24 != null">
+        WT24,
+      </if>
+      <if test="wt25 != null">
+        WT25,
+      </if>
+      <if test="wt26 != null">
+        WT26,
+      </if>
+      <if test="wt27 != null">
+        WT27,
+      </if>
+      <if test="wt28 != null">
+        WT28,
+      </if>
+      <if test="wt29 != null">
+        WT29,
+      </if>
+      <if test="wt30 != null">
+        WT30,
+      </if>
+      <if test="wt31 != null">
+        WT31,
+      </if>
+      <if test="wt32 != null">
+        WT32,
+      </if>
+      <if test="wt33 != null">
+        WT33,
+      </if>
+      <if test="wt34 != null">
+        WT34,
+      </if>
+      <if test="wt35 != null">
+        WT35,
+      </if>
+      <if test="wt36 != null">
+        WT36,
+      </if>
+      <if test="wt37 != null">
+        WT37,
+      </if>
+      <if test="wt38 != null">
+        WT38,
+      </if>
+      <if test="wt39 != null">
+        WT39,
+      </if>
+      <if test="wt40 != null">
+        WT40,
+      </if>
+      <if test="isdeploy != null">
+        ISDEPLOY,
+      </if>
+      <if test="itemsid != null">
+        ITEMSID,
+      </if>
+      <if test="isdeploydate != null">
+        ISDEPLOYDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wt00 != null">
+        #{wt00,jdbcType=DECIMAL},
+      </if>
+      <if test="wt01 != null">
+        #{wt01,jdbcType=VARCHAR},
+      </if>
+      <if test="wt02 != null">
+        #{wt02,jdbcType=VARCHAR},
+      </if>
+      <if test="wt03 != null">
+        #{wt03,jdbcType=VARCHAR},
+      </if>
+      <if test="wt04 != null">
+        #{wt04,jdbcType=DECIMAL},
+      </if>
+      <if test="wt05 != null">
+        #{wt05,jdbcType=VARCHAR},
+      </if>
+      <if test="wt06 != null">
+        #{wt06,jdbcType=VARCHAR},
+      </if>
+      <if test="wt07 != null">
+        #{wt07,jdbcType=VARCHAR},
+      </if>
+      <if test="wt08 != null">
+        #{wt08,jdbcType=VARCHAR},
+      </if>
+      <if test="wt09 != null">
+        #{wt09,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wt10 != null">
+        #{wt10,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wt11 != null">
+        #{wt11,jdbcType=VARCHAR},
+      </if>
+      <if test="wt12 != null">
+        #{wt12,jdbcType=VARCHAR},
+      </if>
+      <if test="wt13 != null">
+        #{wt13,jdbcType=VARCHAR},
+      </if>
+      <if test="wt14 != null">
+        #{wt14,jdbcType=VARCHAR},
+      </if>
+      <if test="wt15 != null">
+        #{wt15,jdbcType=VARCHAR},
+      </if>
+      <if test="wt16 != null">
+        #{wt16,jdbcType=VARCHAR},
+      </if>
+      <if test="wt17 != null">
+        #{wt17,jdbcType=VARCHAR},
+      </if>
+      <if test="wt18 != null">
+        #{wt18,jdbcType=DECIMAL},
+      </if>
+      <if test="wt19 != null">
+        #{wt19,jdbcType=VARCHAR},
+      </if>
+      <if test="wt20 != null">
+        #{wt20,jdbcType=VARCHAR},
+      </if>
+      <if test="wt21 != null">
+        #{wt21,jdbcType=VARCHAR},
+      </if>
+      <if test="wt22 != null">
+        #{wt22,jdbcType=DECIMAL},
+      </if>
+      <if test="wt23 != null">
+        #{wt23,jdbcType=DECIMAL},
+      </if>
+      <if test="wt24 != null">
+        #{wt24,jdbcType=VARCHAR},
+      </if>
+      <if test="wt25 != null">
+        #{wt25,jdbcType=VARCHAR},
+      </if>
+      <if test="wt26 != null">
+        #{wt26,jdbcType=VARCHAR},
+      </if>
+      <if test="wt27 != null">
+        #{wt27,jdbcType=VARCHAR},
+      </if>
+      <if test="wt28 != null">
+        #{wt28,jdbcType=VARCHAR},
+      </if>
+      <if test="wt29 != null">
+        #{wt29,jdbcType=VARCHAR},
+      </if>
+      <if test="wt30 != null">
+        #{wt30,jdbcType=VARCHAR},
+      </if>
+      <if test="wt31 != null">
+        #{wt31,jdbcType=DECIMAL},
+      </if>
+      <if test="wt32 != null">
+        #{wt32,jdbcType=VARCHAR},
+      </if>
+      <if test="wt33 != null">
+        #{wt33,jdbcType=VARCHAR},
+      </if>
+      <if test="wt34 != null">
+        #{wt34,jdbcType=VARCHAR},
+      </if>
+      <if test="wt35 != null">
+        #{wt35,jdbcType=VARCHAR},
+      </if>
+      <if test="wt36 != null">
+        #{wt36,jdbcType=VARCHAR},
+      </if>
+      <if test="wt37 != null">
+        #{wt37,jdbcType=DECIMAL},
+      </if>
+      <if test="wt38 != null">
+        #{wt38,jdbcType=VARCHAR},
+      </if>
+      <if test="wt39 != null">
+        #{wt39,jdbcType=VARCHAR},
+      </if>
+      <if test="wt40 != null">
+        #{wt40,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeploy != null">
+        #{isdeploy,jdbcType=VARCHAR},
+      </if>
+      <if test="itemsid != null">
+        #{itemsid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeploydate != null">
+        #{isdeploydate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.WfTaskExample" resultType="java.lang.Long">
+    select count(*) from WF_TASK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update WF_TASK
+    <set>
+      <if test="record.wt00 != null">
+        WT00 = #{record.wt00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt01 != null">
+        WT01 = #{record.wt01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt02 != null">
+        WT02 = #{record.wt02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt03 != null">
+        WT03 = #{record.wt03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt04 != null">
+        WT04 = #{record.wt04,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt05 != null">
+        WT05 = #{record.wt05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt06 != null">
+        WT06 = #{record.wt06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt07 != null">
+        WT07 = #{record.wt07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt08 != null">
+        WT08 = #{record.wt08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt09 != null">
+        WT09 = #{record.wt09,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wt10 != null">
+        WT10 = #{record.wt10,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wt11 != null">
+        WT11 = #{record.wt11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt12 != null">
+        WT12 = #{record.wt12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt13 != null">
+        WT13 = #{record.wt13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt14 != null">
+        WT14 = #{record.wt14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt15 != null">
+        WT15 = #{record.wt15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt16 != null">
+        WT16 = #{record.wt16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt17 != null">
+        WT17 = #{record.wt17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt18 != null">
+        WT18 = #{record.wt18,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt19 != null">
+        WT19 = #{record.wt19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt20 != null">
+        WT20 = #{record.wt20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt21 != null">
+        WT21 = #{record.wt21,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt22 != null">
+        WT22 = #{record.wt22,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt23 != null">
+        WT23 = #{record.wt23,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt24 != null">
+        WT24 = #{record.wt24,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt25 != null">
+        WT25 = #{record.wt25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt26 != null">
+        WT26 = #{record.wt26,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt27 != null">
+        WT27 = #{record.wt27,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt28 != null">
+        WT28 = #{record.wt28,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt29 != null">
+        WT29 = #{record.wt29,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt30 != null">
+        WT30 = #{record.wt30,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt31 != null">
+        WT31 = #{record.wt31,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt32 != null">
+        WT32 = #{record.wt32,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt33 != null">
+        WT33 = #{record.wt33,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt34 != null">
+        WT34 = #{record.wt34,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt35 != null">
+        WT35 = #{record.wt35,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt36 != null">
+        WT36 = #{record.wt36,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt37 != null">
+        WT37 = #{record.wt37,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt38 != null">
+        WT38 = #{record.wt38,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt39 != null">
+        WT39 = #{record.wt39,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wt40 != null">
+        WT40 = #{record.wt40,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdeploy != null">
+        ISDEPLOY = #{record.isdeploy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemsid != null">
+        ITEMSID = #{record.itemsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdeploydate != null">
+        ISDEPLOYDATE = #{record.isdeploydate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update WF_TASK
+    set WT00 = #{record.wt00,jdbcType=DECIMAL},
+      WT01 = #{record.wt01,jdbcType=VARCHAR},
+      WT02 = #{record.wt02,jdbcType=VARCHAR},
+      WT03 = #{record.wt03,jdbcType=VARCHAR},
+      WT04 = #{record.wt04,jdbcType=DECIMAL},
+      WT05 = #{record.wt05,jdbcType=VARCHAR},
+      WT06 = #{record.wt06,jdbcType=VARCHAR},
+      WT07 = #{record.wt07,jdbcType=VARCHAR},
+      WT08 = #{record.wt08,jdbcType=VARCHAR},
+      WT09 = #{record.wt09,jdbcType=TIMESTAMP},
+      WT10 = #{record.wt10,jdbcType=TIMESTAMP},
+      WT11 = #{record.wt11,jdbcType=VARCHAR},
+      WT12 = #{record.wt12,jdbcType=VARCHAR},
+      WT13 = #{record.wt13,jdbcType=VARCHAR},
+      WT14 = #{record.wt14,jdbcType=VARCHAR},
+      WT15 = #{record.wt15,jdbcType=VARCHAR},
+      WT16 = #{record.wt16,jdbcType=VARCHAR},
+      WT17 = #{record.wt17,jdbcType=VARCHAR},
+      WT18 = #{record.wt18,jdbcType=DECIMAL},
+      WT19 = #{record.wt19,jdbcType=VARCHAR},
+      WT20 = #{record.wt20,jdbcType=VARCHAR},
+      WT21 = #{record.wt21,jdbcType=VARCHAR},
+      WT22 = #{record.wt22,jdbcType=DECIMAL},
+      WT23 = #{record.wt23,jdbcType=DECIMAL},
+      WT24 = #{record.wt24,jdbcType=VARCHAR},
+      WT25 = #{record.wt25,jdbcType=VARCHAR},
+      WT26 = #{record.wt26,jdbcType=VARCHAR},
+      WT27 = #{record.wt27,jdbcType=VARCHAR},
+      WT28 = #{record.wt28,jdbcType=VARCHAR},
+      WT29 = #{record.wt29,jdbcType=VARCHAR},
+      WT30 = #{record.wt30,jdbcType=VARCHAR},
+      WT31 = #{record.wt31,jdbcType=DECIMAL},
+      WT32 = #{record.wt32,jdbcType=VARCHAR},
+      WT33 = #{record.wt33,jdbcType=VARCHAR},
+      WT34 = #{record.wt34,jdbcType=VARCHAR},
+      WT35 = #{record.wt35,jdbcType=VARCHAR},
+      WT36 = #{record.wt36,jdbcType=VARCHAR},
+      WT37 = #{record.wt37,jdbcType=DECIMAL},
+      WT38 = #{record.wt38,jdbcType=VARCHAR},
+      WT39 = #{record.wt39,jdbcType=VARCHAR},
+      WT40 = #{record.wt40,jdbcType=VARCHAR},
+      ISDEPLOY = #{record.isdeploy,jdbcType=VARCHAR},
+      ITEMSID = #{record.itemsid,jdbcType=VARCHAR},
+      ISDEPLOYDATE = #{record.isdeploydate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.WfTask">
+    update WF_TASK
+    <set>
+      <if test="wt01 != null">
+        WT01 = #{wt01,jdbcType=VARCHAR},
+      </if>
+      <if test="wt02 != null">
+        WT02 = #{wt02,jdbcType=VARCHAR},
+      </if>
+      <if test="wt03 != null">
+        WT03 = #{wt03,jdbcType=VARCHAR},
+      </if>
+      <if test="wt04 != null">
+        WT04 = #{wt04,jdbcType=DECIMAL},
+      </if>
+      <if test="wt05 != null">
+        WT05 = #{wt05,jdbcType=VARCHAR},
+      </if>
+      <if test="wt06 != null">
+        WT06 = #{wt06,jdbcType=VARCHAR},
+      </if>
+      <if test="wt07 != null">
+        WT07 = #{wt07,jdbcType=VARCHAR},
+      </if>
+      <if test="wt08 != null">
+        WT08 = #{wt08,jdbcType=VARCHAR},
+      </if>
+      <if test="wt09 != null">
+        WT09 = #{wt09,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wt10 != null">
+        WT10 = #{wt10,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wt11 != null">
+        WT11 = #{wt11,jdbcType=VARCHAR},
+      </if>
+      <if test="wt12 != null">
+        WT12 = #{wt12,jdbcType=VARCHAR},
+      </if>
+      <if test="wt13 != null">
+        WT13 = #{wt13,jdbcType=VARCHAR},
+      </if>
+      <if test="wt14 != null">
+        WT14 = #{wt14,jdbcType=VARCHAR},
+      </if>
+      <if test="wt15 != null">
+        WT15 = #{wt15,jdbcType=VARCHAR},
+      </if>
+      <if test="wt16 != null">
+        WT16 = #{wt16,jdbcType=VARCHAR},
+      </if>
+      <if test="wt17 != null">
+        WT17 = #{wt17,jdbcType=VARCHAR},
+      </if>
+      <if test="wt18 != null">
+        WT18 = #{wt18,jdbcType=DECIMAL},
+      </if>
+      <if test="wt19 != null">
+        WT19 = #{wt19,jdbcType=VARCHAR},
+      </if>
+      <if test="wt20 != null">
+        WT20 = #{wt20,jdbcType=VARCHAR},
+      </if>
+      <if test="wt21 != null">
+        WT21 = #{wt21,jdbcType=VARCHAR},
+      </if>
+      <if test="wt22 != null">
+        WT22 = #{wt22,jdbcType=DECIMAL},
+      </if>
+      <if test="wt23 != null">
+        WT23 = #{wt23,jdbcType=DECIMAL},
+      </if>
+      <if test="wt24 != null">
+        WT24 = #{wt24,jdbcType=VARCHAR},
+      </if>
+      <if test="wt25 != null">
+        WT25 = #{wt25,jdbcType=VARCHAR},
+      </if>
+      <if test="wt26 != null">
+        WT26 = #{wt26,jdbcType=VARCHAR},
+      </if>
+      <if test="wt27 != null">
+        WT27 = #{wt27,jdbcType=VARCHAR},
+      </if>
+      <if test="wt28 != null">
+        WT28 = #{wt28,jdbcType=VARCHAR},
+      </if>
+      <if test="wt29 != null">
+        WT29 = #{wt29,jdbcType=VARCHAR},
+      </if>
+      <if test="wt30 != null">
+        WT30 = #{wt30,jdbcType=VARCHAR},
+      </if>
+      <if test="wt31 != null">
+        WT31 = #{wt31,jdbcType=DECIMAL},
+      </if>
+      <if test="wt32 != null">
+        WT32 = #{wt32,jdbcType=VARCHAR},
+      </if>
+      <if test="wt33 != null">
+        WT33 = #{wt33,jdbcType=VARCHAR},
+      </if>
+      <if test="wt34 != null">
+        WT34 = #{wt34,jdbcType=VARCHAR},
+      </if>
+      <if test="wt35 != null">
+        WT35 = #{wt35,jdbcType=VARCHAR},
+      </if>
+      <if test="wt36 != null">
+        WT36 = #{wt36,jdbcType=VARCHAR},
+      </if>
+      <if test="wt37 != null">
+        WT37 = #{wt37,jdbcType=DECIMAL},
+      </if>
+      <if test="wt38 != null">
+        WT38 = #{wt38,jdbcType=VARCHAR},
+      </if>
+      <if test="wt39 != null">
+        WT39 = #{wt39,jdbcType=VARCHAR},
+      </if>
+      <if test="wt40 != null">
+        WT40 = #{wt40,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeploy != null">
+        ISDEPLOY = #{isdeploy,jdbcType=VARCHAR},
+      </if>
+      <if test="itemsid != null">
+        ITEMSID = #{itemsid,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeploydate != null">
+        ISDEPLOYDATE = #{isdeploydate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WT00 = #{wt00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.WfTask">
+    update WF_TASK
+    set WT01 = #{wt01,jdbcType=VARCHAR},
+      WT02 = #{wt02,jdbcType=VARCHAR},
+      WT03 = #{wt03,jdbcType=VARCHAR},
+      WT04 = #{wt04,jdbcType=DECIMAL},
+      WT05 = #{wt05,jdbcType=VARCHAR},
+      WT06 = #{wt06,jdbcType=VARCHAR},
+      WT07 = #{wt07,jdbcType=VARCHAR},
+      WT08 = #{wt08,jdbcType=VARCHAR},
+      WT09 = #{wt09,jdbcType=TIMESTAMP},
+      WT10 = #{wt10,jdbcType=TIMESTAMP},
+      WT11 = #{wt11,jdbcType=VARCHAR},
+      WT12 = #{wt12,jdbcType=VARCHAR},
+      WT13 = #{wt13,jdbcType=VARCHAR},
+      WT14 = #{wt14,jdbcType=VARCHAR},
+      WT15 = #{wt15,jdbcType=VARCHAR},
+      WT16 = #{wt16,jdbcType=VARCHAR},
+      WT17 = #{wt17,jdbcType=VARCHAR},
+      WT18 = #{wt18,jdbcType=DECIMAL},
+      WT19 = #{wt19,jdbcType=VARCHAR},
+      WT20 = #{wt20,jdbcType=VARCHAR},
+      WT21 = #{wt21,jdbcType=VARCHAR},
+      WT22 = #{wt22,jdbcType=DECIMAL},
+      WT23 = #{wt23,jdbcType=DECIMAL},
+      WT24 = #{wt24,jdbcType=VARCHAR},
+      WT25 = #{wt25,jdbcType=VARCHAR},
+      WT26 = #{wt26,jdbcType=VARCHAR},
+      WT27 = #{wt27,jdbcType=VARCHAR},
+      WT28 = #{wt28,jdbcType=VARCHAR},
+      WT29 = #{wt29,jdbcType=VARCHAR},
+      WT30 = #{wt30,jdbcType=VARCHAR},
+      WT31 = #{wt31,jdbcType=DECIMAL},
+      WT32 = #{wt32,jdbcType=VARCHAR},
+      WT33 = #{wt33,jdbcType=VARCHAR},
+      WT34 = #{wt34,jdbcType=VARCHAR},
+      WT35 = #{wt35,jdbcType=VARCHAR},
+      WT36 = #{wt36,jdbcType=VARCHAR},
+      WT37 = #{wt37,jdbcType=DECIMAL},
+      WT38 = #{wt38,jdbcType=VARCHAR},
+      WT39 = #{wt39,jdbcType=VARCHAR},
+      WT40 = #{wt40,jdbcType=VARCHAR},
+      ISDEPLOY = #{isdeploy,jdbcType=VARCHAR},
+      ITEMSID = #{itemsid,jdbcType=VARCHAR},
+      ISDEPLOYDATE = #{isdeploydate,jdbcType=VARCHAR}
+    where WT00 = #{wt00,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

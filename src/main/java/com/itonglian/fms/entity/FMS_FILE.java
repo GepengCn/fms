@@ -1,6 +1,6 @@
 package com.itonglian.fms.entity;
 
-public class FmsFile {
+public class FMS_FILE {
     private String id;
 
     private String taskid;
@@ -9,7 +9,7 @@ public class FmsFile {
 
     private String draftname;
 
-    private Integer status;
+    private Long status;
 
     private String createtime;
 
@@ -51,11 +51,11 @@ public class FmsFile {
         this.draftname = draftname == null ? null : draftname.trim();
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 

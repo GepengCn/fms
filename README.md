@@ -61,7 +61,9 @@
 3. FTP详情
     - IP地址：192.0.101.134 
     - 用户名密码：yongyou/yongyou  
+    - 用户名密码：ftp/ftp123  
     - 路径：D://yongyou
+   
 
 
 ### 结构化数据生成模块
@@ -126,6 +128,7 @@
 
 ```
 java -jar mybatis-generator-core-1.3.7.jar  -configfile generatorConfig.xml -overwrite
+java -jar mybatis-generator-core-1.3.7.jar  -configfile config_oracle.xml -overwrite
 ```
 
 ## 数据sql

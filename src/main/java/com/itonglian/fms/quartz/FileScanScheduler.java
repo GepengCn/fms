@@ -1,10 +1,9 @@
 package com.itonglian.fms.quartz;
 
 import com.google.common.util.concurrent.FutureCallback;
-import com.itonglian.fms.entity.FmsFile;
-import com.itonglian.fms.entity.FmsFileExample;
+import com.itonglian.fms.entity.FMS_FILE;
+import com.itonglian.fms.entity.FMS_FILEExample;
 import com.itonglian.fms.service.FmsFileService;
-import com.itonglian.fms.service.bean.Customized;
 import com.itonglian.fms.service.bean.DocApprovalCustomized;
 import com.itonglian.fms.service.bean.FileStatus;
 import com.itonglian.fms.service.bean.Param;
@@ -32,10 +31,10 @@ public class FileScanScheduler {
     @Autowired
     FileStatusManager fileStatusManager;
 
-    @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
+    /*@Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
     public void reportCurrentTime(){
-        FmsFileExample fmsFileExample = new FmsFileExample();
-        fmsFileExample.or().andStatusEqualTo(100);
+        FMS_FILEExample fmsFileExample = new FMS_FILEExample();
+        fmsFileExample.or().andStatusEqualTo(100l);
         long count = fmsFileService.countByExample(fmsFileExample);
         log.info("查询到待归档数据数量:"+count);
         if(count==0){
@@ -44,19 +43,18 @@ public class FileScanScheduler {
         }
         log.info("开始执行归档...");
 
-        List<FmsFile> fmsFiles = fmsFileService.selectByExample(fmsFileExample);
+        List<FMS_FILE> fmsFiles = fmsFileService.selectByExample(fmsFileExample);
 
-        Iterator<FmsFile> iterator = fmsFiles.iterator();
+        Iterator<FMS_FILE> iterator = fmsFiles.iterator();
 
         while(iterator.hasNext()){
-            FmsFile fmsFile = iterator.next();
+            FMS_FILE fmsFile = iterator.next();
             log.info("正在归档的公文:taskId=["+fmsFile.getTaskid()+"]");
             fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_101);
             DocApprovalService docApprovalService = new DocApprovalService();
             Param param = new Param();
             param.setTaskId(fmsFile.getTaskid());
             DocApprovalCustomized customized = new DocApprovalCustomized();
-            //customized.setFlowNo("456");
             param.setCustomized(customized);
             docApprovalService.execute(param, new FutureCallback<String>() {
                 @Override
@@ -75,6 +73,6 @@ public class FileScanScheduler {
 
 
         }
-    }
+    }*/
 
 }

@@ -1,8 +1,8 @@
 package com.itonglian.fms.controller;
 
 
-import com.itonglian.fms.entity.FmsFileExample;
-import com.itonglian.fms.service.FmsFileService;
+import com.itonglian.fms.entity.FFGLExample;
+import com.itonglian.fms.service.FFGLService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value="测试接口Controller")
 public class TestController {
     @Autowired
-    FmsFileService fmsFileService;
+    FFGLService ffglService;
     @ApiOperation(value="测试用接口", notes="测试用接口" ,httpMethod="POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name="name", value="用户姓名", dataType = "String", required=true, paramType="form"),
@@ -24,9 +24,9 @@ public class TestController {
     })
     @RequestMapping("word")
     public long HelloWord(String name,Integer id) {
-        FmsFileExample fmsFileExample = new FmsFileExample();
-        fmsFileExample.or().andStatusEqualTo(100);
-        long count = fmsFileService.countByExample(fmsFileExample);
+        FFGLExample ffglExample = new FFGLExample();
+        ffglExample.or().andFf32EqualTo("902");
+        long count = ffglService.countByExample(ffglExample);
         return count;
     }
 

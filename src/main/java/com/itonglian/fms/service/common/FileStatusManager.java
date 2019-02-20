@@ -1,7 +1,7 @@
 package com.itonglian.fms.service.common;
 
-import com.itonglian.fms.entity.FmsFile;
-import com.itonglian.fms.entity.FmsFileExample;
+import com.itonglian.fms.entity.FMS_FILE;
+import com.itonglian.fms.entity.FMS_FILEExample;
 import com.itonglian.fms.service.FmsFileService;
 import com.itonglian.fms.service.bean.FileStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +16,9 @@ public class FileStatusManager {
     FmsFileService fmsFileService;
 
 
-    public void setStatus(FmsFile fmsFile, FileStatus fileStatus){
+    public void setStatus(FMS_FILE fmsFile, FileStatus fileStatus){
         fmsFile.setStatus(fileStatus.getStatus());
-        int result = fmsFileService.updateByExample(fmsFile,new FmsFileExample());
+        int result = fmsFileService.updateByExample(fmsFile,new FMS_FILEExample());
         if(result!=-1){
             log.info("此公文归档状态修改为:"+fileStatus.getStatus());
         }
