@@ -6,7 +6,6 @@ import com.itonglian.fms.entity.FMS_FILEExample;
 import com.itonglian.fms.service.FmsFileService;
 import com.itonglian.fms.service.bean.FileStatus;
 import com.itonglian.fms.service.bean.FileType;
-import com.itonglian.fms.service.bean.FtpList;
 import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FileStatusManager;
@@ -56,23 +55,11 @@ public class FileScanScheduler {
             log.info("正在归档的公文:taskId=["+fmsFile.getTaskid()+"]");
             log.info("正在归档的公文类型:fileType=["+fmsFile.getFiletype()+"]");
             fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_101);
-            Param param = new Param();
-            param.setTaskId(fmsFile.getTaskid());
-            int type = fmsFile.getFiletype().intValue();
-            param.setType(type);
-            param.setTitle(fmsFile.getTitle());
-            param.setDrafter(fmsFile.getDraftlogin());
-            param.setDrafterName(fmsFile.getDraftname());
-            param.setTaskId(fmsFile.getTaskid());
-            FtpList ftpList = new FtpList();
-            ftpList.setDocFtp(new FtpList.FtpDetail(fmsFile.getTextpath(),fmsFile.getTextname()));
-            ftpList.setAttFtp(new FtpList.FtpDetail(fmsFile.getAttachpath(),fmsFile.getAttachname()));
-
-            BaseService baseService = serviceRouter.getBean(FileType.parse(type));
-            baseService.execute(param,new FutureCallback<String>() {
+            BaseService baseService = serviceRouter.getBean(FileType.parse(fmsFile.getFiletype().intValue()));
+            baseService.execute(fmsFile,new FutureCallback<Param>() {
                 @Override
-                public void onSuccess(@Nullable String s) {
-                    log.info("xmlString:"+s);
+                public void onSuccess(@Nullable Param s) {
+                    log.info("taskId:"+s.getTaskId());
                     log.info("归档任务执行结束");
                     fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_102);
                 }
