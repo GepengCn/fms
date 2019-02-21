@@ -4,13 +4,15 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.itonglian.fms.entity.FMS_FILE;
 import com.itonglian.fms.entity.FMS_FILEExample;
 import com.itonglian.fms.service.FmsFileService;
-import com.itonglian.fms.service.bean.*;
-import com.itonglian.fms.service.common.CustomizedContext;
+import com.itonglian.fms.service.bean.FileStatus;
+import com.itonglian.fms.service.bean.FileType;
+import com.itonglian.fms.service.bean.FtpList;
+import com.itonglian.fms.service.bean.Param;
+import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FileStatusManager;
-import com.itonglian.fms.service.common.impl.DocApprovalService;
+import com.itonglian.fms.service.common.ServiceRouter;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -31,10 +33,10 @@ public class FileScanScheduler {
     @Autowired
     FileStatusManager fileStatusManager;
     @Autowired
-    CustomizedContext customizedContext;
+    ServiceRouter serviceRouter;
 
     @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
-    public void reportCurrentTime() throws Exception {
+    public void execute() throws Exception {
         FMS_FILEExample fmsFileExample = new FMS_FILEExample();
         fmsFileExample.or().andStatusEqualTo(100l);
         long count = fmsFileService.countByExample(fmsFileExample);
@@ -65,7 +67,9 @@ public class FileScanScheduler {
             FtpList ftpList = new FtpList();
             ftpList.setDocFtp(new FtpList.FtpDetail(fmsFile.getTextpath(),fmsFile.getTextname()));
             ftpList.setAttFtp(new FtpList.FtpDetail(fmsFile.getAttachpath(),fmsFile.getAttachname()));
-            customizedContext.execute(FileType.parse(type),param,new FutureCallback<String>() {
+
+            BaseService baseService = serviceRouter.getBean(FileType.parse(type));
+            baseService.execute(param,new FutureCallback<String>() {
                 @Override
                 public void onSuccess(@Nullable String s) {
                     log.info("xmlString:"+s);

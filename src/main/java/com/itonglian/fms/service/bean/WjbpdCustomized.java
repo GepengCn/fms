@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class DocApprovalCustomized extends Customized {
+public class WjbpdCustomized extends Customized {
 
     private String FF03;
 

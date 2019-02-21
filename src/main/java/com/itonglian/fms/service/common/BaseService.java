@@ -1,6 +1,7 @@
 package com.itonglian.fms.service.common;
 
 import com.google.common.util.concurrent.*;
+import com.itonglian.fms.service.bean.FileType;
 import com.itonglian.fms.service.bean.Param;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,8 @@ import java.util.concurrent.Executors;
 
 @Component
 public abstract class BaseService {
+
+    public abstract FileType getType();
 
 
     protected static ListeningExecutorService executorService = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(200));
