@@ -1,6 +1,6 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.itonglian.fms.entity.FMS_FILE;
+import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.service.bean.FileType;
 import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.BaseService;
@@ -16,7 +16,7 @@ public class ZyxwService extends BaseService {
     }
 
     @Override
-    public Param customizedImpl(Param param,final FMS_FILE fmsFile) throws Exception {
+    public Param customizedImpl(Param param,final FMS_TASK fmsTask) throws Exception {
         return param;
     }
 }

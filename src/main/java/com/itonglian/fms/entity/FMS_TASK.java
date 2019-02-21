@@ -1,7 +1,7 @@
 package com.itonglian.fms.entity;
 
-public class FMS_FILE {
-    private String id;
+public class FMS_TASK {
+    private Long id;
 
     private String taskid;
 
@@ -19,7 +19,7 @@ public class FMS_FILE {
 
     private String attachpath;
 
-    private Long filetype;
+    private String filetype;
 
     private String title;
 
@@ -27,12 +27,16 @@ public class FMS_FILE {
 
     private String attachname;
 
-    public String getId() {
+    private String parentroot;
+
+    private String dataid;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTaskid() {
@@ -99,12 +103,12 @@ public class FMS_FILE {
         this.attachpath = attachpath == null ? null : attachpath.trim();
     }
 
-    public Long getFiletype() {
+    public String getFiletype() {
         return filetype;
     }
 
-    public void setFiletype(Long filetype) {
-        this.filetype = filetype;
+    public void setFiletype(String filetype) {
+        this.filetype = filetype == null ? null : filetype.trim();
     }
 
     public String getTitle() {
@@ -129,5 +133,21 @@ public class FMS_FILE {
 
     public void setAttachname(String attachname) {
         this.attachname = attachname == null ? null : attachname.trim();
+    }
+
+    public String getParentroot() {
+        return parentroot;
+    }
+
+    public void setParentroot(String parentroot) {
+        this.parentroot = parentroot == null ? null : parentroot.trim();
+    }
+
+    public String getDataid() {
+        return dataid;
+    }
+
+    public void setDataid(String dataid) {
+        this.dataid = dataid == null ? null : dataid.trim();
     }
 }

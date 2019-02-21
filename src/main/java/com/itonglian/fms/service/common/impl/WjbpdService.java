@@ -1,7 +1,7 @@
 package com.itonglian.fms.service.common.impl;
 
 import com.itonglian.fms.entity.FFGL;
-import com.itonglian.fms.entity.FMS_FILE;
+import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.WfTask;
 import com.itonglian.fms.service.FFGLService;
 import com.itonglian.fms.service.WfTaskService;
@@ -54,7 +54,7 @@ public class WjbpdService extends BaseService {
     }
 
     @Override
-    public Param customizedImpl (Param param,FMS_FILE fmsFile) throws Exception{
+    public Param customizedImpl (Param param, FMS_TASK fmsTask) throws Exception{
 
         int taskSize = 5;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
@@ -79,19 +79,19 @@ public class WjbpdService extends BaseService {
         }));
         FtpList ftpList = new FtpList();
         //封皮
-        coverParent = serviceUtils.getParentPath(coverPath,fmsFile.getId());
+        coverParent = serviceUtils.getParentPath(coverPath,fmsTask.getId());
         coverFileName = serviceUtils.getPdfName();
         serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,coverPath,coverPath,catalogFileName);
         //目录
-        catalogParent = serviceUtils.getParentPath(catalogPath,fmsFile.getId());
+        catalogParent = serviceUtils.getParentPath(catalogPath,fmsTask.getId());
         catalogFileName = serviceUtils.getPdfName();
         serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, catalogPath, catalogParent, catalogFileName);
         //备考表
-        refParent = serviceUtils.getParentPath(refPath,fmsFile.getId());
+        refParent = serviceUtils.getParentPath(refPath,fmsTask.getId());
         refFileName = serviceUtils.getPdfName();
         serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, refPath, refParent, refFileName);
         //公文表单
-        formParent = serviceUtils.getParentPath(formPath,fmsFile.getId());
+        formParent = serviceUtils.getParentPath(formPath,fmsTask.getId());
         formFileName = serviceUtils.getPdfName();
         serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,formPath,formParent,formFileName);
 
@@ -102,8 +102,8 @@ public class WjbpdService extends BaseService {
         ftpList.setCatalogFtp(new FtpList.FtpDetail(catalogParent,catalogFileName));
         ftpList.setRefFtp(new FtpList.FtpDetail(refParent,refFileName));
         ftpList.setFormFtp(new FtpList.FtpDetail(formParent,formFileName));
-        ftpList.setDocFtp(new FtpList.FtpDetail(fmsFile.getTextpath(),fmsFile.getTextname()));
-        ftpList.setAttFtp(new FtpList.FtpDetail(fmsFile.getAttachpath(),fmsFile.getAttachname()));
+        ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
+        ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
         param.setFtpList(ftpList);
         log.info("自定义任务执行完毕");
         return param;

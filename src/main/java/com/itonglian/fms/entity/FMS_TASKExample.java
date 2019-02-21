@@ -3,14 +3,14 @@ package com.itonglian.fms.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FMS_FILEExample {
+public class FMS_TASKExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public FMS_FILEExample() {
+    public FMS_TASKExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -114,62 +114,52 @@ public class FMS_FILEExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(String value) {
+        public Criteria andIdEqualTo(Long value) {
             addCriterion("ID =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(String value) {
+        public Criteria andIdNotEqualTo(Long value) {
             addCriterion("ID <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(String value) {
+        public Criteria andIdGreaterThan(Long value) {
             addCriterion("ID >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(String value) {
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
             addCriterion("ID >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(String value) {
+        public Criteria andIdLessThan(Long value) {
             addCriterion("ID <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(String value) {
+        public Criteria andIdLessThanOrEqualTo(Long value) {
             addCriterion("ID <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLike(String value) {
-            addCriterion("ID like", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotLike(String value) {
-            addCriterion("ID not like", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIn(List<String> values) {
+        public Criteria andIdIn(List<Long> values) {
             addCriterion("ID in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<String> values) {
+        public Criteria andIdNotIn(List<Long> values) {
             addCriterion("ID not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(String value1, String value2) {
+        public Criteria andIdBetween(Long value1, Long value2) {
             addCriterion("ID between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(String value1, String value2) {
+        public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("ID not between", value1, value2, "id");
             return (Criteria) this;
         }
@@ -734,52 +724,62 @@ public class FMS_FILEExample {
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeEqualTo(Long value) {
+        public Criteria andFiletypeEqualTo(String value) {
             addCriterion("FILETYPE =", value, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeNotEqualTo(Long value) {
+        public Criteria andFiletypeNotEqualTo(String value) {
             addCriterion("FILETYPE <>", value, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeGreaterThan(Long value) {
+        public Criteria andFiletypeGreaterThan(String value) {
             addCriterion("FILETYPE >", value, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeGreaterThanOrEqualTo(Long value) {
+        public Criteria andFiletypeGreaterThanOrEqualTo(String value) {
             addCriterion("FILETYPE >=", value, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeLessThan(Long value) {
+        public Criteria andFiletypeLessThan(String value) {
             addCriterion("FILETYPE <", value, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeLessThanOrEqualTo(Long value) {
+        public Criteria andFiletypeLessThanOrEqualTo(String value) {
             addCriterion("FILETYPE <=", value, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeIn(List<Long> values) {
+        public Criteria andFiletypeLike(String value) {
+            addCriterion("FILETYPE like", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeNotLike(String value) {
+            addCriterion("FILETYPE not like", value, "filetype");
+            return (Criteria) this;
+        }
+
+        public Criteria andFiletypeIn(List<String> values) {
             addCriterion("FILETYPE in", values, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeNotIn(List<Long> values) {
+        public Criteria andFiletypeNotIn(List<String> values) {
             addCriterion("FILETYPE not in", values, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeBetween(Long value1, Long value2) {
+        public Criteria andFiletypeBetween(String value1, String value2) {
             addCriterion("FILETYPE between", value1, value2, "filetype");
             return (Criteria) this;
         }
 
-        public Criteria andFiletypeNotBetween(Long value1, Long value2) {
+        public Criteria andFiletypeNotBetween(String value1, String value2) {
             addCriterion("FILETYPE not between", value1, value2, "filetype");
             return (Criteria) this;
         }
@@ -991,6 +991,146 @@ public class FMS_FILEExample {
 
         public Criteria andAttachnameNotBetween(String value1, String value2) {
             addCriterion("ATTACHNAME not between", value1, value2, "attachname");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootIsNull() {
+            addCriterion("PARENTROOT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootIsNotNull() {
+            addCriterion("PARENTROOT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootEqualTo(String value) {
+            addCriterion("PARENTROOT =", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootNotEqualTo(String value) {
+            addCriterion("PARENTROOT <>", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootGreaterThan(String value) {
+            addCriterion("PARENTROOT >", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootGreaterThanOrEqualTo(String value) {
+            addCriterion("PARENTROOT >=", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootLessThan(String value) {
+            addCriterion("PARENTROOT <", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootLessThanOrEqualTo(String value) {
+            addCriterion("PARENTROOT <=", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootLike(String value) {
+            addCriterion("PARENTROOT like", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootNotLike(String value) {
+            addCriterion("PARENTROOT not like", value, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootIn(List<String> values) {
+            addCriterion("PARENTROOT in", values, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootNotIn(List<String> values) {
+            addCriterion("PARENTROOT not in", values, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootBetween(String value1, String value2) {
+            addCriterion("PARENTROOT between", value1, value2, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentrootNotBetween(String value1, String value2) {
+            addCriterion("PARENTROOT not between", value1, value2, "parentroot");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidIsNull() {
+            addCriterion("DATAID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidIsNotNull() {
+            addCriterion("DATAID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidEqualTo(String value) {
+            addCriterion("DATAID =", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidNotEqualTo(String value) {
+            addCriterion("DATAID <>", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidGreaterThan(String value) {
+            addCriterion("DATAID >", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidGreaterThanOrEqualTo(String value) {
+            addCriterion("DATAID >=", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidLessThan(String value) {
+            addCriterion("DATAID <", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidLessThanOrEqualTo(String value) {
+            addCriterion("DATAID <=", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidLike(String value) {
+            addCriterion("DATAID like", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidNotLike(String value) {
+            addCriterion("DATAID not like", value, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidIn(List<String> values) {
+            addCriterion("DATAID in", values, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidNotIn(List<String> values) {
+            addCriterion("DATAID not in", values, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidBetween(String value1, String value2) {
+            addCriterion("DATAID between", value1, value2, "dataid");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataidNotBetween(String value1, String value2) {
+            addCriterion("DATAID not between", value1, value2, "dataid");
             return (Criteria) this;
         }
     }

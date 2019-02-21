@@ -1,7 +1,7 @@
 package com.itonglian.fms.dao.primary;
 
-import com.itonglian.fms.dao.feapp5.FMS_FILEMapper;
-import com.itonglian.fms.entity.FMS_FILEExample;
+import com.itonglian.fms.dao.feapp5.FMS_TASKMapper;
+import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.entity.WfTaskExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,15 +17,15 @@ public class WfTaskMapperTest {
     WfTaskMapper wfTaskMapper;
 
     @Autowired
-    FMS_FILEMapper fms_fileMapper;
+    FMS_TASKMapper fmsTaskMapper;
 
     @Test
     public void test(){
         WfTaskExample wfTaskExample = new WfTaskExample();
         wfTaskExample.or().andWt00IsNull();
         System.out.println(wfTaskMapper.countByExample(wfTaskExample));
-        FMS_FILEExample fms_fileExample = new FMS_FILEExample();
-        fms_fileExample.or().andAttachpathIsNotNull();
-        System.out.println(fms_fileMapper.countByExample(fms_fileExample));
+        FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
+        fmsTaskExample.or().andAttachpathIsNotNull();
+        System.out.println(fmsTaskMapper.countByExample(fmsTaskExample));
     }
 }

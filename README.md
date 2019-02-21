@@ -89,19 +89,26 @@
 
     | 序号 | 字段释义 | 字段名 | 字段类型|备注|
     | ------ | ------ | ------ | ------ | ------ |
-    | 1 | 主键 | id |varchar(64)||
-    | 2 | 任务id | taskId |varchar(64)||
-    | 3 | 标题 | title |varchar(512)||
-    | 4 | 拟稿人登录名 | draftLogin |varchar(64)||
-    | 5 | 拟稿人姓名 | draftName |varchar(64)||
-    | 6 | 公文类型 | fileType |varchar(64)||
-    | 7 | 归档状态 | status |int|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
-    | 8 | 创建时间 | createTime |varchar(64)||
-    | 9 | 修改时间 | modifyTime |varchar(64)||
-    | 10 | 正文FTP路径 | textPath |varchar(256)||
-    | 11 | 附件FTP路径 | attachPath |varchar(256)||
-    | 12 | 公共数据 | commonData |blob|XML|
-    | 13 | 个性化数据 | customizedData |blob|XML|
+    | 1 | 主键 | ID |NUMBER(16)||
+    | 2 | 任务id | TASKID |varchar(64)||
+    | 3 | 拟稿人登录名 | DRAFTLOGIN |varchar(64)||
+    | 4 | 拟稿人姓名 | DRAFTNAME |varchar(64)||
+    | 5 | 归档状态 | STATUS |NUMBER(16)|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
+    | 6 | 创建时间 | CREATETIME |varchar(64)||
+    | 7 | 修改时间 | MODIFYTIME |varchar(64)||
+    | 8 | 正文FTP路径 | TEXTPATH |varchar(256)||
+    | 9 | 附件FTP路径 | ATTACHPATH |varchar(256)||
+    | 10 | 公文类型 | FILETYPE |varchar(20)||
+    | 11 | 标题 | TITLE |varchar(256)||
+    | 12 | 正文名称 | TEXTNAME |varchar(256)||
+    | 13 | 附件名称 | ATTACHNAME |varchar(256)||
+    | 14 | 文件root目录 | PARENTROOT |varchar(64)||
+    | 15 | 数据关联表id | DATAID |varchar(64)||
+       
+   
+   
+   
+
 
 ## 监控
 

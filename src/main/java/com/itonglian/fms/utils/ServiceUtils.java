@@ -29,7 +29,7 @@ public class ServiceUtils {
         return UUID.randomUUID().toString()+".pdf";
     }
 
-    public String getParentPath(String templatePath,String ftpParent){
+    public String getParentPath(String templatePath,Long ftpParent){
         return File.separator+ftpParent+File.separator+templatePath+File.separator+ UUID.randomUUID().toString();
     }
 

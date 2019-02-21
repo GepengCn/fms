@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.feapp5.FMS_DATAMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.FMS_DATA">
+    <id column="DATAID" jdbcType="VARCHAR" property="dataid" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="VARCHAR" property="dr" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.itonglian.fms.entity.FMS_DATAWithBLOBs">
+    <result column="COMMON" jdbcType="BLOB" property="common" />
+    <result column="CUSTOMIZED" jdbcType="BLOB" property="customized" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    DATAID, TS, DR
+  </sql>
+  <sql id="Blob_Column_List">
+    COMMON, CUSTOMIZED
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.itonglian.fms.entity.FMS_DATAExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from FMS_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_DATAExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from FMS_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from FMS_DATA
+    where DATAID = #{dataid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from FMS_DATA
+    where DATAID = #{dataid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.FMS_DATAExample">
+    delete from FMS_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.FMS_DATAWithBLOBs">
+    insert into FMS_DATA (DATAID, TS, DR, 
+      COMMON, CUSTOMIZED)
+    values (#{dataid,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=VARCHAR}, 
+      #{common,jdbcType=BLOB}, #{customized,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_DATAWithBLOBs">
+    insert into FMS_DATA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dataid != null">
+        DATAID,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="common != null">
+        COMMON,
+      </if>
+      <if test="customized != null">
+        CUSTOMIZED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dataid != null">
+        #{dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=VARCHAR},
+      </if>
+      <if test="common != null">
+        #{common,jdbcType=BLOB},
+      </if>
+      <if test="customized != null">
+        #{customized,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.FMS_DATAExample" resultType="java.lang.Long">
+    select count(*) from FMS_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update FMS_DATA
+    <set>
+      <if test="record.dataid != null">
+        DATAID = #{record.dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ts != null">
+        TS = #{record.ts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dr != null">
+        DR = #{record.dr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.common != null">
+        COMMON = #{record.common,jdbcType=BLOB},
+      </if>
+      <if test="record.customized != null">
+        CUSTOMIZED = #{record.customized,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update FMS_DATA
+    set DATAID = #{record.dataid,jdbcType=VARCHAR},
+      TS = #{record.ts,jdbcType=VARCHAR},
+      DR = #{record.dr,jdbcType=VARCHAR},
+      COMMON = #{record.common,jdbcType=BLOB},
+      CUSTOMIZED = #{record.customized,jdbcType=BLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update FMS_DATA
+    set DATAID = #{record.dataid,jdbcType=VARCHAR},
+      TS = #{record.ts,jdbcType=VARCHAR},
+      DR = #{record.dr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.FMS_DATAWithBLOBs">
+    update FMS_DATA
+    <set>
+      <if test="ts != null">
+        TS = #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        DR = #{dr,jdbcType=VARCHAR},
+      </if>
+      <if test="common != null">
+        COMMON = #{common,jdbcType=BLOB},
+      </if>
+      <if test="customized != null">
+        CUSTOMIZED = #{customized,jdbcType=BLOB},
+      </if>
+    </set>
+    where DATAID = #{dataid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.itonglian.fms.entity.FMS_DATAWithBLOBs">
+    update FMS_DATA
+    set TS = #{ts,jdbcType=VARCHAR},
+      DR = #{dr,jdbcType=VARCHAR},
+      COMMON = #{common,jdbcType=BLOB},
+      CUSTOMIZED = #{customized,jdbcType=BLOB}
+    where DATAID = #{dataid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.FMS_DATA">
+    update FMS_DATA
+    set TS = #{ts,jdbcType=VARCHAR},
+      DR = #{dr,jdbcType=VARCHAR}
+    where DATAID = #{dataid,jdbcType=VARCHAR}
+  </update>
+</mapper>

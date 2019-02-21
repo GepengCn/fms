@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itonglian.fms.dao.feapp5.FMS_FILEMapper">
-  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.FMS_FILE">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
+<mapper namespace="com.itonglian.fms.dao.feapp5.FMS_TASKMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.FMS_TASK">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
     <result column="TASKID" jdbcType="VARCHAR" property="taskid" />
     <result column="DRAFTLOGIN" jdbcType="VARCHAR" property="draftlogin" />
     <result column="DRAFTNAME" jdbcType="VARCHAR" property="draftname" />
@@ -11,14 +11,12 @@
     <result column="MODIFYTIME" jdbcType="VARCHAR" property="modifytime" />
     <result column="TEXTPATH" jdbcType="VARCHAR" property="textpath" />
     <result column="ATTACHPATH" jdbcType="VARCHAR" property="attachpath" />
-    <result column="FILETYPE" jdbcType="DECIMAL" property="filetype" />
+    <result column="FILETYPE" jdbcType="VARCHAR" property="filetype" />
     <result column="TITLE" jdbcType="VARCHAR" property="title" />
     <result column="TEXTNAME" jdbcType="VARCHAR" property="textname" />
     <result column="ATTACHNAME" jdbcType="VARCHAR" property="attachname" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
-    <result column="COMMONDATA" jdbcType="BLOB" property="commondata" />
-    <result column="CUSTOMIZEDDATA" jdbcType="BLOB" property="customizeddata" />
+    <result column="PARENTROOT" jdbcType="VARCHAR" property="parentroot" />
+    <result column="DATAID" jdbcType="VARCHAR" property="dataid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -80,21 +78,16 @@
   </sql>
   <sql id="Base_Column_List">
     ID, TASKID, DRAFTLOGIN, DRAFTNAME, STATUS, CREATETIME, MODIFYTIME, TEXTPATH, ATTACHPATH, 
-    FILETYPE, TITLE, TEXTNAME, ATTACHNAME
+    FILETYPE, TITLE, TEXTNAME, ATTACHNAME, PARENTROOT, DATAID
   </sql>
-  <sql id="Blob_Column_List">
-    COMMONDATA, CUSTOMIZEDDATA
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.itonglian.fms.entity.FMS_FILEExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_TASKExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from FMS_FILE
+    from FMS_TASK
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,55 +95,38 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_FILEExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from FMS_FILE
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from FMS_FILE
-    where ID = #{id,jdbcType=VARCHAR}
+    from FMS_TASK
+    where ID = #{id,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from FMS_FILE
-    where ID = #{id,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FMS_TASK
+    where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.FMS_FILEExample">
-    delete from FMS_FILE
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.FMS_TASKExample">
+    delete from FMS_TASK
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
-    insert into FMS_FILE (ID, TASKID, DRAFTLOGIN, 
+  <insert id="insert" parameterType="com.itonglian.fms.entity.FMS_TASK">
+    insert into FMS_TASK (ID, TASKID, DRAFTLOGIN, 
       DRAFTNAME, STATUS, CREATETIME, 
       MODIFYTIME, TEXTPATH, ATTACHPATH, 
       FILETYPE, TITLE, TEXTNAME, 
-      ATTACHNAME, COMMONDATA, CUSTOMIZEDDATA
+      ATTACHNAME, PARENTROOT, DATAID
       )
-    values (#{id,jdbcType=VARCHAR}, #{taskid,jdbcType=VARCHAR}, #{draftlogin,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=DECIMAL}, #{taskid,jdbcType=VARCHAR}, #{draftlogin,jdbcType=VARCHAR}, 
       #{draftname,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{createtime,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=VARCHAR}, #{textpath,jdbcType=VARCHAR}, #{attachpath,jdbcType=VARCHAR}, 
-      #{filetype,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{textname,jdbcType=VARCHAR}, 
-      #{attachname,jdbcType=VARCHAR}, #{commondata,jdbcType=BLOB}, #{customizeddata,jdbcType=BLOB}
+      #{filetype,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{textname,jdbcType=VARCHAR}, 
+      #{attachname,jdbcType=VARCHAR}, #{parentroot,jdbcType=VARCHAR}, #{dataid,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
-    insert into FMS_FILE
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_TASK">
+    insert into FMS_TASK
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         ID,
@@ -191,16 +167,16 @@
       <if test="attachname != null">
         ATTACHNAME,
       </if>
-      <if test="commondata != null">
-        COMMONDATA,
+      <if test="parentroot != null">
+        PARENTROOT,
       </if>
-      <if test="customizeddata != null">
-        CUSTOMIZEDDATA,
+      <if test="dataid != null">
+        DATAID,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=DECIMAL},
       </if>
       <if test="taskid != null">
         #{taskid,jdbcType=VARCHAR},
@@ -227,7 +203,7 @@
         #{attachpath,jdbcType=VARCHAR},
       </if>
       <if test="filetype != null">
-        #{filetype,jdbcType=DECIMAL},
+        #{filetype,jdbcType=VARCHAR},
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
@@ -238,25 +214,25 @@
       <if test="attachname != null">
         #{attachname,jdbcType=VARCHAR},
       </if>
-      <if test="commondata != null">
-        #{commondata,jdbcType=BLOB},
+      <if test="parentroot != null">
+        #{parentroot,jdbcType=VARCHAR},
       </if>
-      <if test="customizeddata != null">
-        #{customizeddata,jdbcType=BLOB},
+      <if test="dataid != null">
+        #{dataid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.itonglian.fms.entity.FMS_FILEExample" resultType="java.lang.Long">
-    select count(*) from FMS_FILE
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.FMS_TASKExample" resultType="java.lang.Long">
+    select count(*) from FMS_TASK
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update FMS_FILE
+    update FMS_TASK
     <set>
       <if test="record.id != null">
-        ID = #{record.id,jdbcType=VARCHAR},
+        ID = #{record.id,jdbcType=DECIMAL},
       </if>
       <if test="record.taskid != null">
         TASKID = #{record.taskid,jdbcType=VARCHAR},
@@ -283,7 +259,7 @@
         ATTACHPATH = #{record.attachpath,jdbcType=VARCHAR},
       </if>
       <if test="record.filetype != null">
-        FILETYPE = #{record.filetype,jdbcType=DECIMAL},
+        FILETYPE = #{record.filetype,jdbcType=VARCHAR},
       </if>
       <if test="record.title != null">
         TITLE = #{record.title,jdbcType=VARCHAR},
@@ -294,20 +270,20 @@
       <if test="record.attachname != null">
         ATTACHNAME = #{record.attachname,jdbcType=VARCHAR},
       </if>
-      <if test="record.commondata != null">
-        COMMONDATA = #{record.commondata,jdbcType=BLOB},
+      <if test="record.parentroot != null">
+        PARENTROOT = #{record.parentroot,jdbcType=VARCHAR},
       </if>
-      <if test="record.customizeddata != null">
-        CUSTOMIZEDDATA = #{record.customizeddata,jdbcType=BLOB},
+      <if test="record.dataid != null">
+        DATAID = #{record.dataid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update FMS_FILE
-    set ID = #{record.id,jdbcType=VARCHAR},
+  <update id="updateByExample" parameterType="map">
+    update FMS_TASK
+    set ID = #{record.id,jdbcType=DECIMAL},
       TASKID = #{record.taskid,jdbcType=VARCHAR},
       DRAFTLOGIN = #{record.draftlogin,jdbcType=VARCHAR},
       DRAFTNAME = #{record.draftname,jdbcType=VARCHAR},
@@ -316,37 +292,18 @@
       MODIFYTIME = #{record.modifytime,jdbcType=VARCHAR},
       TEXTPATH = #{record.textpath,jdbcType=VARCHAR},
       ATTACHPATH = #{record.attachpath,jdbcType=VARCHAR},
-      FILETYPE = #{record.filetype,jdbcType=DECIMAL},
+      FILETYPE = #{record.filetype,jdbcType=VARCHAR},
       TITLE = #{record.title,jdbcType=VARCHAR},
       TEXTNAME = #{record.textname,jdbcType=VARCHAR},
       ATTACHNAME = #{record.attachname,jdbcType=VARCHAR},
-      COMMONDATA = #{record.commondata,jdbcType=BLOB},
-      CUSTOMIZEDDATA = #{record.customizeddata,jdbcType=BLOB}
+      PARENTROOT = #{record.parentroot,jdbcType=VARCHAR},
+      DATAID = #{record.dataid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
-    update FMS_FILE
-    set ID = #{record.id,jdbcType=VARCHAR},
-      TASKID = #{record.taskid,jdbcType=VARCHAR},
-      DRAFTLOGIN = #{record.draftlogin,jdbcType=VARCHAR},
-      DRAFTNAME = #{record.draftname,jdbcType=VARCHAR},
-      STATUS = #{record.status,jdbcType=DECIMAL},
-      CREATETIME = #{record.createtime,jdbcType=VARCHAR},
-      MODIFYTIME = #{record.modifytime,jdbcType=VARCHAR},
-      TEXTPATH = #{record.textpath,jdbcType=VARCHAR},
-      ATTACHPATH = #{record.attachpath,jdbcType=VARCHAR},
-      FILETYPE = #{record.filetype,jdbcType=DECIMAL},
-      TITLE = #{record.title,jdbcType=VARCHAR},
-      TEXTNAME = #{record.textname,jdbcType=VARCHAR},
-      ATTACHNAME = #{record.attachname,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
-    update FMS_FILE
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.FMS_TASK">
+    update FMS_TASK
     <set>
       <if test="taskid != null">
         TASKID = #{taskid,jdbcType=VARCHAR},
@@ -373,7 +330,7 @@
         ATTACHPATH = #{attachpath,jdbcType=VARCHAR},
       </if>
       <if test="filetype != null">
-        FILETYPE = #{filetype,jdbcType=DECIMAL},
+        FILETYPE = #{filetype,jdbcType=VARCHAR},
       </if>
       <if test="title != null">
         TITLE = #{title,jdbcType=VARCHAR},
@@ -384,17 +341,17 @@
       <if test="attachname != null">
         ATTACHNAME = #{attachname,jdbcType=VARCHAR},
       </if>
-      <if test="commondata != null">
-        COMMONDATA = #{commondata,jdbcType=BLOB},
+      <if test="parentroot != null">
+        PARENTROOT = #{parentroot,jdbcType=VARCHAR},
       </if>
-      <if test="customizeddata != null">
-        CUSTOMIZEDDATA = #{customizeddata,jdbcType=BLOB},
+      <if test="dataid != null">
+        DATAID = #{dataid,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.itonglian.fms.entity.FMS_FILEWithBLOBs">
-    update FMS_FILE
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.FMS_TASK">
+    update FMS_TASK
     set TASKID = #{taskid,jdbcType=VARCHAR},
       DRAFTLOGIN = #{draftlogin,jdbcType=VARCHAR},
       DRAFTNAME = #{draftname,jdbcType=VARCHAR},
@@ -403,28 +360,12 @@
       MODIFYTIME = #{modifytime,jdbcType=VARCHAR},
       TEXTPATH = #{textpath,jdbcType=VARCHAR},
       ATTACHPATH = #{attachpath,jdbcType=VARCHAR},
-      FILETYPE = #{filetype,jdbcType=DECIMAL},
+      FILETYPE = #{filetype,jdbcType=VARCHAR},
       TITLE = #{title,jdbcType=VARCHAR},
       TEXTNAME = #{textname,jdbcType=VARCHAR},
       ATTACHNAME = #{attachname,jdbcType=VARCHAR},
-      COMMONDATA = #{commondata,jdbcType=BLOB},
-      CUSTOMIZEDDATA = #{customizeddata,jdbcType=BLOB}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.FMS_FILE">
-    update FMS_FILE
-    set TASKID = #{taskid,jdbcType=VARCHAR},
-      DRAFTLOGIN = #{draftlogin,jdbcType=VARCHAR},
-      DRAFTNAME = #{draftname,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=DECIMAL},
-      CREATETIME = #{createtime,jdbcType=VARCHAR},
-      MODIFYTIME = #{modifytime,jdbcType=VARCHAR},
-      TEXTPATH = #{textpath,jdbcType=VARCHAR},
-      ATTACHPATH = #{attachpath,jdbcType=VARCHAR},
-      FILETYPE = #{filetype,jdbcType=DECIMAL},
-      TITLE = #{title,jdbcType=VARCHAR},
-      TEXTNAME = #{textname,jdbcType=VARCHAR},
-      ATTACHNAME = #{attachname,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
+      PARENTROOT = #{parentroot,jdbcType=VARCHAR},
+      DATAID = #{dataid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
   </update>
 </mapper>
