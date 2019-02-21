@@ -29,4 +29,9 @@ public class FmsTaskServiceImpl implements FmsTaskService {
         return fmsTaskMapper.updateByExample(record,example);
     }
 
+    @Override
+    public int updateByPrimaryKey(FMS_TASK record) {
+        return fmsTaskMapper.updateByPrimaryKey(record);
+    }
+
 }

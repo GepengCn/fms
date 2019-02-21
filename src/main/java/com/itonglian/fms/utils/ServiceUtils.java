@@ -3,6 +3,7 @@ package com.itonglian.fms.utils;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.config.ftp.FtpUtil;
+import com.itonglian.fms.service.bean.FtpList;
 import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.service.common.impl.AttPieceTask;
 import lombok.extern.slf4j.Slf4j;
@@ -25,31 +26,36 @@ public class ServiceUtils {
     @Autowired
     FtpUtil ftpUtil;
 
+
     public String getPdfName(){
         return UUID.randomUUID().toString()+".pdf";
     }
 
-    public String getParentPath(String templatePath,Long ftpParent){
-        return File.separator+ftpParent+File.separator+templatePath+File.separator+ UUID.randomUUID().toString();
+    public String getParentPath(String parentRoot){
+        return File.separator+parentRoot+File.separator+ UUID.randomUUID().toString();
     }
 
-    public void word2PdfThenUploadFtp(ListeningExecutorService executorService, CountDownLatch countDownLatch,String templatePath,String ftpParentPath,String ftpFileName){
+    public FtpList.FtpDetail word2PdfThenUploadFtp(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot){
         //目录
+        FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
+        ftpDetail.setFileName(getPdfName());
+        ftpDetail.setFilePath(getParentPath(parentRoot));
         executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
                 String destPath = pdfPath+ File.separator+getPdfName();
                 File destFile = new File(destPath);
-                log.info(templatePath+File.separator+ftpFileName+"word转PDF...");
+                log.info(templatePath+File.separator+ftpDetail.getFileName()+"word转PDF...");
                 if(!wordUtils.word2Pdf(templatePath,destPath)){
                     throw new Exception("转换PDF出错");
                 }
                 log.info(destPath+"上传FTP...");
-                if(!ftpUtil.upload(ftpParentPath,ftpFileName,destFile)){
+                if(!ftpUtil.upload(ftpDetail.getFilePath(),ftpDetail.getFileName(),destFile)){
                     throw new Exception("上传FTP服务器出错");
                 }
             }
         }));
+        return ftpDetail;
     }
 
 

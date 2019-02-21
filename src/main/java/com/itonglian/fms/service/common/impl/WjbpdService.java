@@ -39,14 +39,6 @@ public class WjbpdService extends BaseService {
     private String formPath;
     @Autowired
     ServiceUtils serviceUtils;
-    private String coverParent;
-    private String coverFileName;
-    private String catalogParent;
-    private String catalogFileName;
-    private String refParent;
-    private String refFileName;
-    private String formParent;
-    private String formFileName;
 
     @Override
     public FileType getType() {
@@ -79,31 +71,20 @@ public class WjbpdService extends BaseService {
         }));
         FtpList ftpList = new FtpList();
         //封皮
-        coverParent = serviceUtils.getParentPath(coverPath,fmsTask.getId());
-        coverFileName = serviceUtils.getPdfName();
-        serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,coverPath,coverPath,catalogFileName);
+        ftpList.setCoverFtp(serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,coverPath,fmsTask.getParentroot()));
         //目录
-        catalogParent = serviceUtils.getParentPath(catalogPath,fmsTask.getId());
-        catalogFileName = serviceUtils.getPdfName();
-        serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, catalogPath, catalogParent, catalogFileName);
+        ftpList.setCatalogFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, catalogPath,fmsTask.getParentroot()));
         //备考表
-        refParent = serviceUtils.getParentPath(refPath,fmsTask.getId());
-        refFileName = serviceUtils.getPdfName();
-        serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, refPath, refParent, refFileName);
+        ftpList.setRefFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, refPath, fmsTask.getParentroot()));
         //公文表单
-        formParent = serviceUtils.getParentPath(formPath,fmsTask.getId());
-        formFileName = serviceUtils.getPdfName();
-        serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,formPath,formParent,formFileName);
-
+        ftpList.setFormFtp(serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,formPath,fmsTask.getParentroot()));
+        //正文
+        ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
+        //附件
+        ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
         if(!countDownLatch.await(15, TimeUnit.MINUTES)){
             throw new Exception("countDownLatch处理超时");
         }
-        ftpList.setCoverFtp(new FtpList.FtpDetail(coverParent,coverFileName));
-        ftpList.setCatalogFtp(new FtpList.FtpDetail(catalogParent,catalogFileName));
-        ftpList.setRefFtp(new FtpList.FtpDetail(refParent,refFileName));
-        ftpList.setFormFtp(new FtpList.FtpDetail(formParent,formFileName));
-        ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
-        ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
         param.setFtpList(ftpList);
         log.info("自定义任务执行完毕");
         return param;

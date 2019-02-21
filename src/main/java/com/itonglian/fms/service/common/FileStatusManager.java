@@ -18,7 +18,7 @@ public class FileStatusManager {
 
     public void setStatus(FMS_TASK fmsTask, FileStatus fileStatus){
         fmsTask.setStatus(fileStatus.getStatus());
-        int result = fmsTaskService.updateByExample(fmsTask,new FMS_TASKExample());
+        int result = fmsTaskService.updateByPrimaryKey(fmsTask);
         if(result!=-1){
             log.info("此公文归档状态修改为:"+fileStatus.getStatus());
         }

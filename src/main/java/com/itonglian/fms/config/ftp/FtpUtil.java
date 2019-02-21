@@ -1,5 +1,6 @@
 package com.itonglian.fms.config.ftp;
 
+import jdk.internal.util.xml.impl.Input;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
@@ -9,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.charset.Charset;
 
 @Component
 @Slf4j
@@ -48,10 +47,10 @@ public class FtpUtil {
                     log.info("成功创建目录:"+parentPath);
                     log.info("开始切换到目录:"+parentPath);
                     if(!ftpClient.changeWorkingDirectory(parentPath)){
-                        throw new RuntimeException("切换ftp目录失败");
+                        throw new Exception("切换ftp目录失败");
                     }
                 }else{
-                    throw new RuntimeException("创建ftp目录失败");
+                    throw new Exception("创建ftp目录失败");
                 }
             }
             if(!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())){
@@ -69,9 +68,16 @@ public class FtpUtil {
         FTPClient ftpClient = null;
         try {
             ftpClient = init(parentPath);
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.setCharset(Charset.forName("UTF-8"));
+            ftpClient.setControlEncoding("UTF-8");
             log.info("上传文件:"+fileName+"至"+parentPath);
-            ftpClient.storeFile(fileName,new FileInputStream(srcFile));
+            InputStream inputStream = new FileInputStream(srcFile);
+            if(!ftpClient.storeFile(fileName,inputStream)){
+                throw new Exception("上传文件失败...");
+            }
             log.info("上传文件成功");
+            inputStream.close();
             ftpClient.logout();
         }catch (Exception e){
             log.error("error",e);

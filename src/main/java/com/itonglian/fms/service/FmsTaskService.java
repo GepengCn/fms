@@ -14,6 +14,8 @@ public interface FmsTaskService {
 
     int updateByExample(@Param("record") FMS_TASK record, @Param("example") FMS_TASKExample example);
 
+    int updateByPrimaryKey(FMS_TASK record);
+
 
 }
 

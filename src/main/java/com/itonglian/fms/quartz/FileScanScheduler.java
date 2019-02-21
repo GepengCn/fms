@@ -77,7 +77,7 @@ public class FileScanScheduler {
                     fmsData.setCustomized(JSON.toJSONString(commonDatas.getCustomized()).getBytes());
                     fmsDataService.insert(fmsData);
                     fmsFile.setDataid(fmsData.getDataid());
-                    fmsTaskService.updateByExample(fmsFile,new FMS_TASKExample());
+                    fmsTaskService.updateByPrimaryKey(fmsFile);
                     log.info("归档任务执行结束");
                 }
 
