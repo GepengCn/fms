@@ -11,21 +11,22 @@ import org.springframework.stereotype.Component;
 public class WordUtils {
 
 
-    public void word2Pdf(String srcFile, String destFile){
+    public boolean word2Pdf(String srcFile, String destFile){
         Document doc;
         try {
             doc = new Document(srcFile);
-                doc.setWarningCallback(new IWarningCallback() {
-                    @Override
-                    public void warning(WarningInfo warningInfo) {
-                        log.warn(warningInfo.getDescription());
-                    }
-                });
+            doc.setWarningCallback(new IWarningCallback() {
+                @Override
+                public void warning(WarningInfo warningInfo) {
+                    log.warn(warningInfo.getDescription());
+                }
+            });
             doc.save(destFile);
         } catch (Exception e) {
             log.error("error",e);
+            return false;
         }
-
+        return true;
 
     }
 

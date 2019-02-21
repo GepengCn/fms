@@ -3,7 +3,6 @@ package com.itonglian.fms.service.common;
 import com.google.common.util.concurrent.*;
 import com.itonglian.fms.entity.FMS_FILE;
 import com.itonglian.fms.service.bean.FileType;
-import com.itonglian.fms.service.bean.FtpList;
 import com.itonglian.fms.service.bean.Param;
 import org.springframework.stereotype.Component;
 
@@ -32,9 +31,6 @@ public abstract class BaseService {
         param.setDrafter(fmsFile.getDraftlogin());
         param.setDrafterName(fmsFile.getDraftname());
         param.setTaskId(fmsFile.getTaskid());
-        FtpList ftpList = new FtpList();
-        ftpList.setDocFtp(new FtpList.FtpDetail(fmsFile.getTextpath(),fmsFile.getTextname()));
-        ftpList.setAttFtp(new FtpList.FtpDetail(fmsFile.getAttachpath(),fmsFile.getAttachname()));
         return param;
     }
 
@@ -44,17 +40,18 @@ public abstract class BaseService {
         private FMS_FILE fmsFile;
         public Task(FMS_FILE fmsFile) {
             this.fmsFile = fmsFile;
+            param = new Param();
         }
         @Override
         public Param call() throws Exception {
             //实现公共数据封装
             param = commonImpl(param,fmsFile);
             //延迟个性化数据实现
-            param = customizedImpl(param);
+            param = customizedImpl(param,fmsFile);
             return param;
         }
     }
 
-    public abstract Param customizedImpl(Param param) throws Exception;
+    public abstract Param customizedImpl(Param param,FMS_FILE fmsFile) throws Exception;
 
 }

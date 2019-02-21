@@ -1,5 +1,6 @@
 package com.itonglian.fms.quartz;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.util.concurrent.FutureCallback;
 import com.itonglian.fms.entity.FMS_FILE;
 import com.itonglian.fms.entity.FMS_FILEExample;
@@ -61,6 +62,7 @@ public class FileScanScheduler {
                 public void onSuccess(@Nullable Param s) {
                     log.info("taskId:"+s.getTaskId());
                     log.info("归档任务执行结束");
+                    log.info(JSON.toJSONString(s));
                     fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_102);
                 }
 
