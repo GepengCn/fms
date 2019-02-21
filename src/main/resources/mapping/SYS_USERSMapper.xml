@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.primary.SYS_USERSMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.SYS_USERS">
+    <id column="SU00" jdbcType="DECIMAL" property="su00" />
+    <result column="SU01" jdbcType="VARCHAR" property="su01" />
+    <result column="SU02" jdbcType="VARCHAR" property="su02" />
+    <result column="SU03" jdbcType="VARCHAR" property="su03" />
+    <result column="SU04" jdbcType="VARCHAR" property="su04" />
+    <result column="SU05" jdbcType="VARCHAR" property="su05" />
+    <result column="SU06" jdbcType="VARCHAR" property="su06" />
+    <result column="SU07" jdbcType="VARCHAR" property="su07" />
+    <result column="SU08" jdbcType="VARCHAR" property="su08" />
+    <result column="SU09" jdbcType="VARCHAR" property="su09" />
+    <result column="SU10" jdbcType="VARCHAR" property="su10" />
+    <result column="SU11" jdbcType="VARCHAR" property="su11" />
+    <result column="SU12" jdbcType="VARCHAR" property="su12" />
+    <result column="SU13" jdbcType="VARCHAR" property="su13" />
+    <result column="SU14" jdbcType="VARCHAR" property="su14" />
+    <result column="SU15" jdbcType="VARCHAR" property="su15" />
+    <result column="SU16" jdbcType="VARCHAR" property="su16" />
+    <result column="SU17" jdbcType="VARCHAR" property="su17" />
+    <result column="SU18" jdbcType="VARCHAR" property="su18" />
+    <result column="SU19" jdbcType="VARCHAR" property="su19" />
+    <result column="SU20" jdbcType="VARCHAR" property="su20" />
+    <result column="SU21" jdbcType="TIMESTAMP" property="su21" />
+    <result column="SU22" jdbcType="VARCHAR" property="su22" />
+    <result column="SU23" jdbcType="VARCHAR" property="su23" />
+    <result column="SU24" jdbcType="VARCHAR" property="su24" />
+    <result column="SU25" jdbcType="VARCHAR" property="su25" />
+    <result column="SU26" jdbcType="VARCHAR" property="su26" />
+    <result column="SU27" jdbcType="VARCHAR" property="su27" />
+    <result column="SU28" jdbcType="VARCHAR" property="su28" />
+    <result column="SU29" jdbcType="VARCHAR" property="su29" />
+    <result column="SU30" jdbcType="VARCHAR" property="su30" />
+    <result column="SU31" jdbcType="VARCHAR" property="su31" />
+    <result column="SU32" jdbcType="VARCHAR" property="su32" />
+    <result column="SU33" jdbcType="VARCHAR" property="su33" />
+    <result column="SU34" jdbcType="DECIMAL" property="su34" />
+    <result column="SU35" jdbcType="VARCHAR" property="su35" />
+    <result column="SU36" jdbcType="DECIMAL" property="su36" />
+    <result column="SU37" jdbcType="VARCHAR" property="su37" />
+    <result column="SU38" jdbcType="VARCHAR" property="su38" />
+    <result column="SU39" jdbcType="VARCHAR" property="su39" />
+    <result column="SU40" jdbcType="VARCHAR" property="su40" />
+    <result column="SU41" jdbcType="VARCHAR" property="su41" />
+    <result column="SU42" jdbcType="VARCHAR" property="su42" />
+    <result column="ZMV8CARDIDS" jdbcType="VARCHAR" property="zmv8cardids" />
+    <result column="COCALLS" jdbcType="VARCHAR" property="cocalls" />
+    <result column="SU43" jdbcType="VARCHAR" property="su43" />
+    <result column="SU44" jdbcType="VARCHAR" property="su44" />
+    <result column="SU45" jdbcType="VARCHAR" property="su45" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SU00, SU01, SU02, SU03, SU04, SU05, SU06, SU07, SU08, SU09, SU10, SU11, SU12, SU13, 
+    SU14, SU15, SU16, SU17, SU18, SU19, SU20, SU21, SU22, SU23, SU24, SU25, SU26, SU27, 
+    SU28, SU29, SU30, SU31, SU32, SU33, SU34, SU35, SU36, SU37, SU38, SU39, SU40, SU41, 
+    SU42, ZMV8CARDIDS, COCALLS, SU43, SU44, SU45
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.SYS_USERSExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_USERS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USERS
+    where SU00 = #{su00,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_USERS
+    where SU00 = #{su00,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.SYS_USERSExample">
+    delete from SYS_USERS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.SYS_USERS">
+    insert into SYS_USERS (SU00, SU01, SU02, 
+      SU03, SU04, SU05, SU06, 
+      SU07, SU08, SU09, SU10, 
+      SU11, SU12, SU13, SU14, 
+      SU15, SU16, SU17, SU18, 
+      SU19, SU20, SU21, 
+      SU22, SU23, SU24, SU25, 
+      SU26, SU27, SU28, SU29, 
+      SU30, SU31, SU32, SU33, 
+      SU34, SU35, SU36, SU37, 
+      SU38, SU39, SU40, SU41, 
+      SU42, ZMV8CARDIDS, COCALLS, 
+      SU43, SU44, SU45)
+    values (#{su00,jdbcType=DECIMAL}, #{su01,jdbcType=VARCHAR}, #{su02,jdbcType=VARCHAR}, 
+      #{su03,jdbcType=VARCHAR}, #{su04,jdbcType=VARCHAR}, #{su05,jdbcType=VARCHAR}, #{su06,jdbcType=VARCHAR}, 
+      #{su07,jdbcType=VARCHAR}, #{su08,jdbcType=VARCHAR}, #{su09,jdbcType=VARCHAR}, #{su10,jdbcType=VARCHAR}, 
+      #{su11,jdbcType=VARCHAR}, #{su12,jdbcType=VARCHAR}, #{su13,jdbcType=VARCHAR}, #{su14,jdbcType=VARCHAR}, 
+      #{su15,jdbcType=VARCHAR}, #{su16,jdbcType=VARCHAR}, #{su17,jdbcType=VARCHAR}, #{su18,jdbcType=VARCHAR}, 
+      #{su19,jdbcType=VARCHAR}, #{su20,jdbcType=VARCHAR}, #{su21,jdbcType=TIMESTAMP}, 
+      #{su22,jdbcType=VARCHAR}, #{su23,jdbcType=VARCHAR}, #{su24,jdbcType=VARCHAR}, #{su25,jdbcType=VARCHAR}, 
+      #{su26,jdbcType=VARCHAR}, #{su27,jdbcType=VARCHAR}, #{su28,jdbcType=VARCHAR}, #{su29,jdbcType=VARCHAR}, 
+      #{su30,jdbcType=VARCHAR}, #{su31,jdbcType=VARCHAR}, #{su32,jdbcType=VARCHAR}, #{su33,jdbcType=VARCHAR}, 
+      #{su34,jdbcType=DECIMAL}, #{su35,jdbcType=VARCHAR}, #{su36,jdbcType=DECIMAL}, #{su37,jdbcType=VARCHAR}, 
+      #{su38,jdbcType=VARCHAR}, #{su39,jdbcType=VARCHAR}, #{su40,jdbcType=VARCHAR}, #{su41,jdbcType=VARCHAR}, 
+      #{su42,jdbcType=VARCHAR}, #{zmv8cardids,jdbcType=VARCHAR}, #{cocalls,jdbcType=VARCHAR}, 
+      #{su43,jdbcType=VARCHAR}, #{su44,jdbcType=VARCHAR}, #{su45,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.SYS_USERS">
+    insert into SYS_USERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="su00 != null">
+        SU00,
+      </if>
+      <if test="su01 != null">
+        SU01,
+      </if>
+      <if test="su02 != null">
+        SU02,
+      </if>
+      <if test="su03 != null">
+        SU03,
+      </if>
+      <if test="su04 != null">
+        SU04,
+      </if>
+      <if test="su05 != null">
+        SU05,
+      </if>
+      <if test="su06 != null">
+        SU06,
+      </if>
+      <if test="su07 != null">
+        SU07,
+      </if>
+      <if test="su08 != null">
+        SU08,
+      </if>
+      <if test="su09 != null">
+        SU09,
+      </if>
+      <if test="su10 != null">
+        SU10,
+      </if>
+      <if test="su11 != null">
+        SU11,
+      </if>
+      <if test="su12 != null">
+        SU12,
+      </if>
+      <if test="su13 != null">
+        SU13,
+      </if>
+      <if test="su14 != null">
+        SU14,
+      </if>
+      <if test="su15 != null">
+        SU15,
+      </if>
+      <if test="su16 != null">
+        SU16,
+      </if>
+      <if test="su17 != null">
+        SU17,
+      </if>
+      <if test="su18 != null">
+        SU18,
+      </if>
+      <if test="su19 != null">
+        SU19,
+      </if>
+      <if test="su20 != null">
+        SU20,
+      </if>
+      <if test="su21 != null">
+        SU21,
+      </if>
+      <if test="su22 != null">
+        SU22,
+      </if>
+      <if test="su23 != null">
+        SU23,
+      </if>
+      <if test="su24 != null">
+        SU24,
+      </if>
+      <if test="su25 != null">
+        SU25,
+      </if>
+      <if test="su26 != null">
+        SU26,
+      </if>
+      <if test="su27 != null">
+        SU27,
+      </if>
+      <if test="su28 != null">
+        SU28,
+      </if>
+      <if test="su29 != null">
+        SU29,
+      </if>
+      <if test="su30 != null">
+        SU30,
+      </if>
+      <if test="su31 != null">
+        SU31,
+      </if>
+      <if test="su32 != null">
+        SU32,
+      </if>
+      <if test="su33 != null">
+        SU33,
+      </if>
+      <if test="su34 != null">
+        SU34,
+      </if>
+      <if test="su35 != null">
+        SU35,
+      </if>
+      <if test="su36 != null">
+        SU36,
+      </if>
+      <if test="su37 != null">
+        SU37,
+      </if>
+      <if test="su38 != null">
+        SU38,
+      </if>
+      <if test="su39 != null">
+        SU39,
+      </if>
+      <if test="su40 != null">
+        SU40,
+      </if>
+      <if test="su41 != null">
+        SU41,
+      </if>
+      <if test="su42 != null">
+        SU42,
+      </if>
+      <if test="zmv8cardids != null">
+        ZMV8CARDIDS,
+      </if>
+      <if test="cocalls != null">
+        COCALLS,
+      </if>
+      <if test="su43 != null">
+        SU43,
+      </if>
+      <if test="su44 != null">
+        SU44,
+      </if>
+      <if test="su45 != null">
+        SU45,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="su00 != null">
+        #{su00,jdbcType=DECIMAL},
+      </if>
+      <if test="su01 != null">
+        #{su01,jdbcType=VARCHAR},
+      </if>
+      <if test="su02 != null">
+        #{su02,jdbcType=VARCHAR},
+      </if>
+      <if test="su03 != null">
+        #{su03,jdbcType=VARCHAR},
+      </if>
+      <if test="su04 != null">
+        #{su04,jdbcType=VARCHAR},
+      </if>
+      <if test="su05 != null">
+        #{su05,jdbcType=VARCHAR},
+      </if>
+      <if test="su06 != null">
+        #{su06,jdbcType=VARCHAR},
+      </if>
+      <if test="su07 != null">
+        #{su07,jdbcType=VARCHAR},
+      </if>
+      <if test="su08 != null">
+        #{su08,jdbcType=VARCHAR},
+      </if>
+      <if test="su09 != null">
+        #{su09,jdbcType=VARCHAR},
+      </if>
+      <if test="su10 != null">
+        #{su10,jdbcType=VARCHAR},
+      </if>
+      <if test="su11 != null">
+        #{su11,jdbcType=VARCHAR},
+      </if>
+      <if test="su12 != null">
+        #{su12,jdbcType=VARCHAR},
+      </if>
+      <if test="su13 != null">
+        #{su13,jdbcType=VARCHAR},
+      </if>
+      <if test="su14 != null">
+        #{su14,jdbcType=VARCHAR},
+      </if>
+      <if test="su15 != null">
+        #{su15,jdbcType=VARCHAR},
+      </if>
+      <if test="su16 != null">
+        #{su16,jdbcType=VARCHAR},
+      </if>
+      <if test="su17 != null">
+        #{su17,jdbcType=VARCHAR},
+      </if>
+      <if test="su18 != null">
+        #{su18,jdbcType=VARCHAR},
+      </if>
+      <if test="su19 != null">
+        #{su19,jdbcType=VARCHAR},
+      </if>
+      <if test="su20 != null">
+        #{su20,jdbcType=VARCHAR},
+      </if>
+      <if test="su21 != null">
+        #{su21,jdbcType=TIMESTAMP},
+      </if>
+      <if test="su22 != null">
+        #{su22,jdbcType=VARCHAR},
+      </if>
+      <if test="su23 != null">
+        #{su23,jdbcType=VARCHAR},
+      </if>
+      <if test="su24 != null">
+        #{su24,jdbcType=VARCHAR},
+      </if>
+      <if test="su25 != null">
+        #{su25,jdbcType=VARCHAR},
+      </if>
+      <if test="su26 != null">
+        #{su26,jdbcType=VARCHAR},
+      </if>
+      <if test="su27 != null">
+        #{su27,jdbcType=VARCHAR},
+      </if>
+      <if test="su28 != null">
+        #{su28,jdbcType=VARCHAR},
+      </if>
+      <if test="su29 != null">
+        #{su29,jdbcType=VARCHAR},
+      </if>
+      <if test="su30 != null">
+        #{su30,jdbcType=VARCHAR},
+      </if>
+      <if test="su31 != null">
+        #{su31,jdbcType=VARCHAR},
+      </if>
+      <if test="su32 != null">
+        #{su32,jdbcType=VARCHAR},
+      </if>
+      <if test="su33 != null">
+        #{su33,jdbcType=VARCHAR},
+      </if>
+      <if test="su34 != null">
+        #{su34,jdbcType=DECIMAL},
+      </if>
+      <if test="su35 != null">
+        #{su35,jdbcType=VARCHAR},
+      </if>
+      <if test="su36 != null">
+        #{su36,jdbcType=DECIMAL},
+      </if>
+      <if test="su37 != null">
+        #{su37,jdbcType=VARCHAR},
+      </if>
+      <if test="su38 != null">
+        #{su38,jdbcType=VARCHAR},
+      </if>
+      <if test="su39 != null">
+        #{su39,jdbcType=VARCHAR},
+      </if>
+      <if test="su40 != null">
+        #{su40,jdbcType=VARCHAR},
+      </if>
+      <if test="su41 != null">
+        #{su41,jdbcType=VARCHAR},
+      </if>
+      <if test="su42 != null">
+        #{su42,jdbcType=VARCHAR},
+      </if>
+      <if test="zmv8cardids != null">
+        #{zmv8cardids,jdbcType=VARCHAR},
+      </if>
+      <if test="cocalls != null">
+        #{cocalls,jdbcType=VARCHAR},
+      </if>
+      <if test="su43 != null">
+        #{su43,jdbcType=VARCHAR},
+      </if>
+      <if test="su44 != null">
+        #{su44,jdbcType=VARCHAR},
+      </if>
+      <if test="su45 != null">
+        #{su45,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.SYS_USERSExample" resultType="java.lang.Long">
+    select count(*) from SYS_USERS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_USERS
+    <set>
+      <if test="record.su00 != null">
+        SU00 = #{record.su00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.su01 != null">
+        SU01 = #{record.su01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su02 != null">
+        SU02 = #{record.su02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su03 != null">
+        SU03 = #{record.su03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su04 != null">
+        SU04 = #{record.su04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su05 != null">
+        SU05 = #{record.su05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su06 != null">
+        SU06 = #{record.su06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su07 != null">
+        SU07 = #{record.su07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su08 != null">
+        SU08 = #{record.su08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su09 != null">
+        SU09 = #{record.su09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su10 != null">
+        SU10 = #{record.su10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su11 != null">
+        SU11 = #{record.su11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su12 != null">
+        SU12 = #{record.su12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su13 != null">
+        SU13 = #{record.su13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su14 != null">
+        SU14 = #{record.su14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su15 != null">
+        SU15 = #{record.su15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su16 != null">
+        SU16 = #{record.su16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su17 != null">
+        SU17 = #{record.su17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su18 != null">
+        SU18 = #{record.su18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su19 != null">
+        SU19 = #{record.su19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su20 != null">
+        SU20 = #{record.su20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su21 != null">
+        SU21 = #{record.su21,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.su22 != null">
+        SU22 = #{record.su22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su23 != null">
+        SU23 = #{record.su23,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su24 != null">
+        SU24 = #{record.su24,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su25 != null">
+        SU25 = #{record.su25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su26 != null">
+        SU26 = #{record.su26,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su27 != null">
+        SU27 = #{record.su27,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su28 != null">
+        SU28 = #{record.su28,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su29 != null">
+        SU29 = #{record.su29,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su30 != null">
+        SU30 = #{record.su30,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su31 != null">
+        SU31 = #{record.su31,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su32 != null">
+        SU32 = #{record.su32,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su33 != null">
+        SU33 = #{record.su33,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su34 != null">
+        SU34 = #{record.su34,jdbcType=DECIMAL},
+      </if>
+      <if test="record.su35 != null">
+        SU35 = #{record.su35,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su36 != null">
+        SU36 = #{record.su36,jdbcType=DECIMAL},
+      </if>
+      <if test="record.su37 != null">
+        SU37 = #{record.su37,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su38 != null">
+        SU38 = #{record.su38,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su39 != null">
+        SU39 = #{record.su39,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su40 != null">
+        SU40 = #{record.su40,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su41 != null">
+        SU41 = #{record.su41,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su42 != null">
+        SU42 = #{record.su42,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zmv8cardids != null">
+        ZMV8CARDIDS = #{record.zmv8cardids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cocalls != null">
+        COCALLS = #{record.cocalls,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su43 != null">
+        SU43 = #{record.su43,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su44 != null">
+        SU44 = #{record.su44,jdbcType=VARCHAR},
+      </if>
+      <if test="record.su45 != null">
+        SU45 = #{record.su45,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_USERS
+    set SU00 = #{record.su00,jdbcType=DECIMAL},
+      SU01 = #{record.su01,jdbcType=VARCHAR},
+      SU02 = #{record.su02,jdbcType=VARCHAR},
+      SU03 = #{record.su03,jdbcType=VARCHAR},
+      SU04 = #{record.su04,jdbcType=VARCHAR},
+      SU05 = #{record.su05,jdbcType=VARCHAR},
+      SU06 = #{record.su06,jdbcType=VARCHAR},
+      SU07 = #{record.su07,jdbcType=VARCHAR},
+      SU08 = #{record.su08,jdbcType=VARCHAR},
+      SU09 = #{record.su09,jdbcType=VARCHAR},
+      SU10 = #{record.su10,jdbcType=VARCHAR},
+      SU11 = #{record.su11,jdbcType=VARCHAR},
+      SU12 = #{record.su12,jdbcType=VARCHAR},
+      SU13 = #{record.su13,jdbcType=VARCHAR},
+      SU14 = #{record.su14,jdbcType=VARCHAR},
+      SU15 = #{record.su15,jdbcType=VARCHAR},
+      SU16 = #{record.su16,jdbcType=VARCHAR},
+      SU17 = #{record.su17,jdbcType=VARCHAR},
+      SU18 = #{record.su18,jdbcType=VARCHAR},
+      SU19 = #{record.su19,jdbcType=VARCHAR},
+      SU20 = #{record.su20,jdbcType=VARCHAR},
+      SU21 = #{record.su21,jdbcType=TIMESTAMP},
+      SU22 = #{record.su22,jdbcType=VARCHAR},
+      SU23 = #{record.su23,jdbcType=VARCHAR},
+      SU24 = #{record.su24,jdbcType=VARCHAR},
+      SU25 = #{record.su25,jdbcType=VARCHAR},
+      SU26 = #{record.su26,jdbcType=VARCHAR},
+      SU27 = #{record.su27,jdbcType=VARCHAR},
+      SU28 = #{record.su28,jdbcType=VARCHAR},
+      SU29 = #{record.su29,jdbcType=VARCHAR},
+      SU30 = #{record.su30,jdbcType=VARCHAR},
+      SU31 = #{record.su31,jdbcType=VARCHAR},
+      SU32 = #{record.su32,jdbcType=VARCHAR},
+      SU33 = #{record.su33,jdbcType=VARCHAR},
+      SU34 = #{record.su34,jdbcType=DECIMAL},
+      SU35 = #{record.su35,jdbcType=VARCHAR},
+      SU36 = #{record.su36,jdbcType=DECIMAL},
+      SU37 = #{record.su37,jdbcType=VARCHAR},
+      SU38 = #{record.su38,jdbcType=VARCHAR},
+      SU39 = #{record.su39,jdbcType=VARCHAR},
+      SU40 = #{record.su40,jdbcType=VARCHAR},
+      SU41 = #{record.su41,jdbcType=VARCHAR},
+      SU42 = #{record.su42,jdbcType=VARCHAR},
+      ZMV8CARDIDS = #{record.zmv8cardids,jdbcType=VARCHAR},
+      COCALLS = #{record.cocalls,jdbcType=VARCHAR},
+      SU43 = #{record.su43,jdbcType=VARCHAR},
+      SU44 = #{record.su44,jdbcType=VARCHAR},
+      SU45 = #{record.su45,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.SYS_USERS">
+    update SYS_USERS
+    <set>
+      <if test="su01 != null">
+        SU01 = #{su01,jdbcType=VARCHAR},
+      </if>
+      <if test="su02 != null">
+        SU02 = #{su02,jdbcType=VARCHAR},
+      </if>
+      <if test="su03 != null">
+        SU03 = #{su03,jdbcType=VARCHAR},
+      </if>
+      <if test="su04 != null">
+        SU04 = #{su04,jdbcType=VARCHAR},
+      </if>
+      <if test="su05 != null">
+        SU05 = #{su05,jdbcType=VARCHAR},
+      </if>
+      <if test="su06 != null">
+        SU06 = #{su06,jdbcType=VARCHAR},
+      </if>
+      <if test="su07 != null">
+        SU07 = #{su07,jdbcType=VARCHAR},
+      </if>
+      <if test="su08 != null">
+        SU08 = #{su08,jdbcType=VARCHAR},
+      </if>
+      <if test="su09 != null">
+        SU09 = #{su09,jdbcType=VARCHAR},
+      </if>
+      <if test="su10 != null">
+        SU10 = #{su10,jdbcType=VARCHAR},
+      </if>
+      <if test="su11 != null">
+        SU11 = #{su11,jdbcType=VARCHAR},
+      </if>
+      <if test="su12 != null">
+        SU12 = #{su12,jdbcType=VARCHAR},
+      </if>
+      <if test="su13 != null">
+        SU13 = #{su13,jdbcType=VARCHAR},
+      </if>
+      <if test="su14 != null">
+        SU14 = #{su14,jdbcType=VARCHAR},
+      </if>
+      <if test="su15 != null">
+        SU15 = #{su15,jdbcType=VARCHAR},
+      </if>
+      <if test="su16 != null">
+        SU16 = #{su16,jdbcType=VARCHAR},
+      </if>
+      <if test="su17 != null">
+        SU17 = #{su17,jdbcType=VARCHAR},
+      </if>
+      <if test="su18 != null">
+        SU18 = #{su18,jdbcType=VARCHAR},
+      </if>
+      <if test="su19 != null">
+        SU19 = #{su19,jdbcType=VARCHAR},
+      </if>
+      <if test="su20 != null">
+        SU20 = #{su20,jdbcType=VARCHAR},
+      </if>
+      <if test="su21 != null">
+        SU21 = #{su21,jdbcType=TIMESTAMP},
+      </if>
+      <if test="su22 != null">
+        SU22 = #{su22,jdbcType=VARCHAR},
+      </if>
+      <if test="su23 != null">
+        SU23 = #{su23,jdbcType=VARCHAR},
+      </if>
+      <if test="su24 != null">
+        SU24 = #{su24,jdbcType=VARCHAR},
+      </if>
+      <if test="su25 != null">
+        SU25 = #{su25,jdbcType=VARCHAR},
+      </if>
+      <if test="su26 != null">
+        SU26 = #{su26,jdbcType=VARCHAR},
+      </if>
+      <if test="su27 != null">
+        SU27 = #{su27,jdbcType=VARCHAR},
+      </if>
+      <if test="su28 != null">
+        SU28 = #{su28,jdbcType=VARCHAR},
+      </if>
+      <if test="su29 != null">
+        SU29 = #{su29,jdbcType=VARCHAR},
+      </if>
+      <if test="su30 != null">
+        SU30 = #{su30,jdbcType=VARCHAR},
+      </if>
+      <if test="su31 != null">
+        SU31 = #{su31,jdbcType=VARCHAR},
+      </if>
+      <if test="su32 != null">
+        SU32 = #{su32,jdbcType=VARCHAR},
+      </if>
+      <if test="su33 != null">
+        SU33 = #{su33,jdbcType=VARCHAR},
+      </if>
+      <if test="su34 != null">
+        SU34 = #{su34,jdbcType=DECIMAL},
+      </if>
+      <if test="su35 != null">
+        SU35 = #{su35,jdbcType=VARCHAR},
+      </if>
+      <if test="su36 != null">
+        SU36 = #{su36,jdbcType=DECIMAL},
+      </if>
+      <if test="su37 != null">
+        SU37 = #{su37,jdbcType=VARCHAR},
+      </if>
+      <if test="su38 != null">
+        SU38 = #{su38,jdbcType=VARCHAR},
+      </if>
+      <if test="su39 != null">
+        SU39 = #{su39,jdbcType=VARCHAR},
+      </if>
+      <if test="su40 != null">
+        SU40 = #{su40,jdbcType=VARCHAR},
+      </if>
+      <if test="su41 != null">
+        SU41 = #{su41,jdbcType=VARCHAR},
+      </if>
+      <if test="su42 != null">
+        SU42 = #{su42,jdbcType=VARCHAR},
+      </if>
+      <if test="zmv8cardids != null">
+        ZMV8CARDIDS = #{zmv8cardids,jdbcType=VARCHAR},
+      </if>
+      <if test="cocalls != null">
+        COCALLS = #{cocalls,jdbcType=VARCHAR},
+      </if>
+      <if test="su43 != null">
+        SU43 = #{su43,jdbcType=VARCHAR},
+      </if>
+      <if test="su44 != null">
+        SU44 = #{su44,jdbcType=VARCHAR},
+      </if>
+      <if test="su45 != null">
+        SU45 = #{su45,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SU00 = #{su00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.SYS_USERS">
+    update SYS_USERS
+    set SU01 = #{su01,jdbcType=VARCHAR},
+      SU02 = #{su02,jdbcType=VARCHAR},
+      SU03 = #{su03,jdbcType=VARCHAR},
+      SU04 = #{su04,jdbcType=VARCHAR},
+      SU05 = #{su05,jdbcType=VARCHAR},
+      SU06 = #{su06,jdbcType=VARCHAR},
+      SU07 = #{su07,jdbcType=VARCHAR},
+      SU08 = #{su08,jdbcType=VARCHAR},
+      SU09 = #{su09,jdbcType=VARCHAR},
+      SU10 = #{su10,jdbcType=VARCHAR},
+      SU11 = #{su11,jdbcType=VARCHAR},
+      SU12 = #{su12,jdbcType=VARCHAR},
+      SU13 = #{su13,jdbcType=VARCHAR},
+      SU14 = #{su14,jdbcType=VARCHAR},
+      SU15 = #{su15,jdbcType=VARCHAR},
+      SU16 = #{su16,jdbcType=VARCHAR},
+      SU17 = #{su17,jdbcType=VARCHAR},
+      SU18 = #{su18,jdbcType=VARCHAR},
+      SU19 = #{su19,jdbcType=VARCHAR},
+      SU20 = #{su20,jdbcType=VARCHAR},
+      SU21 = #{su21,jdbcType=TIMESTAMP},
+      SU22 = #{su22,jdbcType=VARCHAR},
+      SU23 = #{su23,jdbcType=VARCHAR},
+      SU24 = #{su24,jdbcType=VARCHAR},
+      SU25 = #{su25,jdbcType=VARCHAR},
+      SU26 = #{su26,jdbcType=VARCHAR},
+      SU27 = #{su27,jdbcType=VARCHAR},
+      SU28 = #{su28,jdbcType=VARCHAR},
+      SU29 = #{su29,jdbcType=VARCHAR},
+      SU30 = #{su30,jdbcType=VARCHAR},
+      SU31 = #{su31,jdbcType=VARCHAR},
+      SU32 = #{su32,jdbcType=VARCHAR},
+      SU33 = #{su33,jdbcType=VARCHAR},
+      SU34 = #{su34,jdbcType=DECIMAL},
+      SU35 = #{su35,jdbcType=VARCHAR},
+      SU36 = #{su36,jdbcType=DECIMAL},
+      SU37 = #{su37,jdbcType=VARCHAR},
+      SU38 = #{su38,jdbcType=VARCHAR},
+      SU39 = #{su39,jdbcType=VARCHAR},
+      SU40 = #{su40,jdbcType=VARCHAR},
+      SU41 = #{su41,jdbcType=VARCHAR},
+      SU42 = #{su42,jdbcType=VARCHAR},
+      ZMV8CARDIDS = #{zmv8cardids,jdbcType=VARCHAR},
+      COCALLS = #{cocalls,jdbcType=VARCHAR},
+      SU43 = #{su43,jdbcType=VARCHAR},
+      SU44 = #{su44,jdbcType=VARCHAR},
+      SU45 = #{su45,jdbcType=VARCHAR}
+    where SU00 = #{su00,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

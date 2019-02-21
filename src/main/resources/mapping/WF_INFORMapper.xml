@@ -1,0 +1,1446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.primary.WF_INFORMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.WF_INFOR">
+    <id column="WI00" jdbcType="DECIMAL" property="wi00" />
+    <result column="WI01" jdbcType="DECIMAL" property="wi01" />
+    <result column="WI02" jdbcType="VARCHAR" property="wi02" />
+    <result column="WI03" jdbcType="DECIMAL" property="wi03" />
+    <result column="WI04" jdbcType="VARCHAR" property="wi04" />
+    <result column="WI05" jdbcType="VARCHAR" property="wi05" />
+    <result column="WI06" jdbcType="VARCHAR" property="wi06" />
+    <result column="WI07" jdbcType="VARCHAR" property="wi07" />
+    <result column="WI08" jdbcType="TIMESTAMP" property="wi08" />
+    <result column="WI09" jdbcType="VARCHAR" property="wi09" />
+    <result column="WI10" jdbcType="VARCHAR" property="wi10" />
+    <result column="WI11" jdbcType="TIMESTAMP" property="wi11" />
+    <result column="WI12" jdbcType="VARCHAR" property="wi12" />
+    <result column="WI13" jdbcType="VARCHAR" property="wi13" />
+    <result column="WI14" jdbcType="DECIMAL" property="wi14" />
+    <result column="WI15" jdbcType="VARCHAR" property="wi15" />
+    <result column="WI16" jdbcType="VARCHAR" property="wi16" />
+    <result column="WI17" jdbcType="VARCHAR" property="wi17" />
+    <result column="WI18" jdbcType="VARCHAR" property="wi18" />
+    <result column="WI19" jdbcType="VARCHAR" property="wi19" />
+    <result column="WI20" jdbcType="VARCHAR" property="wi20" />
+    <result column="WI21" jdbcType="VARCHAR" property="wi21" />
+    <result column="WI22" jdbcType="VARCHAR" property="wi22" />
+    <result column="WI23" jdbcType="VARCHAR" property="wi23" />
+    <result column="WI24" jdbcType="VARCHAR" property="wi24" />
+    <result column="WI25" jdbcType="VARCHAR" property="wi25" />
+    <result column="WI26" jdbcType="VARCHAR" property="wi26" />
+    <result column="WI27" jdbcType="VARCHAR" property="wi27" />
+    <result column="WI28" jdbcType="VARCHAR" property="wi28" />
+    <result column="WI29" jdbcType="DECIMAL" property="wi29" />
+    <result column="WI30" jdbcType="VARCHAR" property="wi30" />
+    <result column="WI32" jdbcType="VARCHAR" property="wi32" />
+    <result column="WI33" jdbcType="VARCHAR" property="wi33" />
+    <result column="WI34" jdbcType="VARCHAR" property="wi34" />
+    <result column="WI35" jdbcType="VARCHAR" property="wi35" />
+    <result column="WI36" jdbcType="VARCHAR" property="wi36" />
+    <result column="WI37" jdbcType="VARCHAR" property="wi37" />
+    <result column="WI38" jdbcType="VARCHAR" property="wi38" />
+    <result column="WI39" jdbcType="VARCHAR" property="wi39" />
+    <result column="WI40" jdbcType="VARCHAR" property="wi40" />
+    <result column="WI41" jdbcType="VARCHAR" property="wi41" />
+    <result column="WI42" jdbcType="VARCHAR" property="wi42" />
+    <result column="WI43" jdbcType="VARCHAR" property="wi43" />
+    <result column="WI44" jdbcType="VARCHAR" property="wi44" />
+    <result column="WI45" jdbcType="VARCHAR" property="wi45" />
+    <result column="WI46" jdbcType="DECIMAL" property="wi46" />
+    <result column="WI47" jdbcType="DECIMAL" property="wi47" />
+    <result column="WI48" jdbcType="DECIMAL" property="wi48" />
+    <result column="WI49" jdbcType="DECIMAL" property="wi49" />
+    <result column="WI50" jdbcType="VARCHAR" property="wi50" />
+    <result column="WI51" jdbcType="TIMESTAMP" property="wi51" />
+    <result column="WI52" jdbcType="VARCHAR" property="wi52" />
+    <result column="WI53" jdbcType="VARCHAR" property="wi53" />
+    <result column="WI54" jdbcType="VARCHAR" property="wi54" />
+    <result column="WI55" jdbcType="VARCHAR" property="wi55" />
+    <result column="WI56" jdbcType="VARCHAR" property="wi56" />
+    <result column="WI57" jdbcType="VARCHAR" property="wi57" />
+    <result column="WI58" jdbcType="VARCHAR" property="wi58" />
+    <result column="WI59" jdbcType="VARCHAR" property="wi59" />
+    <result column="WI60" jdbcType="VARCHAR" property="wi60" />
+    <result column="WI61" jdbcType="VARCHAR" property="wi61" />
+    <result column="WI62" jdbcType="VARCHAR" property="wi62" />
+    <result column="WI31" jdbcType="VARCHAR" property="wi31" />
+    <result column="WI63" jdbcType="VARCHAR" property="wi63" />
+    <result column="WI64" jdbcType="VARCHAR" property="wi64" />
+    <result column="WI65" jdbcType="TIMESTAMP" property="wi65" />
+    <result column="WI66" jdbcType="VARCHAR" property="wi66" />
+    <result column="WI67" jdbcType="VARCHAR" property="wi67" />
+    <result column="WI68" jdbcType="VARCHAR" property="wi68" />
+    <result column="WI69" jdbcType="VARCHAR" property="wi69" />
+    <result column="WI70" jdbcType="VARCHAR" property="wi70" />
+    <result column="WI71" jdbcType="VARCHAR" property="wi71" />
+    <result column="WI72" jdbcType="VARCHAR" property="wi72" />
+    <result column="WI73" jdbcType="VARCHAR" property="wi73" />
+    <result column="WI74" jdbcType="VARCHAR" property="wi74" />
+    <result column="WI75" jdbcType="VARCHAR" property="wi75" />
+    <result column="WI76" jdbcType="VARCHAR" property="wi76" />
+    <result column="WI77" jdbcType="VARCHAR" property="wi77" />
+    <result column="SMSTRACKING" jdbcType="VARCHAR" property="smstracking" />
+    <result column="SENT_SEND_MORE_PEOPLE" jdbcType="VARCHAR" property="sentSendMorePeople" />
+    <result column="WI78" jdbcType="TIMESTAMP" property="wi78" />
+    <result column="WI79" jdbcType="VARCHAR" property="wi79" />
+    <result column="WI80" jdbcType="VARCHAR" property="wi80" />
+    <result column="HISTORY" jdbcType="VARCHAR" property="history" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    WI00, WI01, WI02, WI03, WI04, WI05, WI06, WI07, WI08, WI09, WI10, WI11, WI12, WI13, 
+    WI14, WI15, WI16, WI17, WI18, WI19, WI20, WI21, WI22, WI23, WI24, WI25, WI26, WI27, 
+    WI28, WI29, WI30, WI32, WI33, WI34, WI35, WI36, WI37, WI38, WI39, WI40, WI41, WI42, 
+    WI43, WI44, WI45, WI46, WI47, WI48, WI49, WI50, WI51, WI52, WI53, WI54, WI55, WI56, 
+    WI57, WI58, WI59, WI60, WI61, WI62, WI31, WI63, WI64, WI65, WI66, WI67, WI68, WI69, 
+    WI70, WI71, WI72, WI73, WI74, WI75, WI76, WI77, SMSTRACKING, SENT_SEND_MORE_PEOPLE, 
+    WI78, WI79, WI80, HISTORY
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.WF_INFORExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from WF_INFOR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from WF_INFOR
+    where WI00 = #{wi00,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from WF_INFOR
+    where WI00 = #{wi00,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.WF_INFORExample">
+    delete from WF_INFOR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.WF_INFOR">
+    insert into WF_INFOR (WI00, WI01, WI02, 
+      WI03, WI04, WI05, WI06, 
+      WI07, WI08, WI09, 
+      WI10, WI11, WI12, 
+      WI13, WI14, WI15, WI16, 
+      WI17, WI18, WI19, WI20, 
+      WI21, WI22, WI23, WI24, 
+      WI25, WI26, WI27, WI28, 
+      WI29, WI30, WI32, WI33, 
+      WI34, WI35, WI36, WI37, 
+      WI38, WI39, WI40, WI41, 
+      WI42, WI43, WI44, WI45, 
+      WI46, WI47, WI48, WI49, 
+      WI50, WI51, WI52, 
+      WI53, WI54, WI55, WI56, 
+      WI57, WI58, WI59, WI60, 
+      WI61, WI62, WI31, WI63, 
+      WI64, WI65, WI66, 
+      WI67, WI68, WI69, WI70, 
+      WI71, WI72, WI73, WI74, 
+      WI75, WI76, WI77, SMSTRACKING, 
+      SENT_SEND_MORE_PEOPLE, WI78, WI79, 
+      WI80, HISTORY)
+    values (#{wi00,jdbcType=DECIMAL}, #{wi01,jdbcType=DECIMAL}, #{wi02,jdbcType=VARCHAR}, 
+      #{wi03,jdbcType=DECIMAL}, #{wi04,jdbcType=VARCHAR}, #{wi05,jdbcType=VARCHAR}, #{wi06,jdbcType=VARCHAR}, 
+      #{wi07,jdbcType=VARCHAR}, #{wi08,jdbcType=TIMESTAMP}, #{wi09,jdbcType=VARCHAR}, 
+      #{wi10,jdbcType=VARCHAR}, #{wi11,jdbcType=TIMESTAMP}, #{wi12,jdbcType=VARCHAR}, 
+      #{wi13,jdbcType=VARCHAR}, #{wi14,jdbcType=DECIMAL}, #{wi15,jdbcType=VARCHAR}, #{wi16,jdbcType=VARCHAR}, 
+      #{wi17,jdbcType=VARCHAR}, #{wi18,jdbcType=VARCHAR}, #{wi19,jdbcType=VARCHAR}, #{wi20,jdbcType=VARCHAR}, 
+      #{wi21,jdbcType=VARCHAR}, #{wi22,jdbcType=VARCHAR}, #{wi23,jdbcType=VARCHAR}, #{wi24,jdbcType=VARCHAR}, 
+      #{wi25,jdbcType=VARCHAR}, #{wi26,jdbcType=VARCHAR}, #{wi27,jdbcType=VARCHAR}, #{wi28,jdbcType=VARCHAR}, 
+      #{wi29,jdbcType=DECIMAL}, #{wi30,jdbcType=VARCHAR}, #{wi32,jdbcType=VARCHAR}, #{wi33,jdbcType=VARCHAR}, 
+      #{wi34,jdbcType=VARCHAR}, #{wi35,jdbcType=VARCHAR}, #{wi36,jdbcType=VARCHAR}, #{wi37,jdbcType=VARCHAR}, 
+      #{wi38,jdbcType=VARCHAR}, #{wi39,jdbcType=VARCHAR}, #{wi40,jdbcType=VARCHAR}, #{wi41,jdbcType=VARCHAR}, 
+      #{wi42,jdbcType=VARCHAR}, #{wi43,jdbcType=VARCHAR}, #{wi44,jdbcType=VARCHAR}, #{wi45,jdbcType=VARCHAR}, 
+      #{wi46,jdbcType=DECIMAL}, #{wi47,jdbcType=DECIMAL}, #{wi48,jdbcType=DECIMAL}, #{wi49,jdbcType=DECIMAL}, 
+      #{wi50,jdbcType=VARCHAR}, #{wi51,jdbcType=TIMESTAMP}, #{wi52,jdbcType=VARCHAR}, 
+      #{wi53,jdbcType=VARCHAR}, #{wi54,jdbcType=VARCHAR}, #{wi55,jdbcType=VARCHAR}, #{wi56,jdbcType=VARCHAR}, 
+      #{wi57,jdbcType=VARCHAR}, #{wi58,jdbcType=VARCHAR}, #{wi59,jdbcType=VARCHAR}, #{wi60,jdbcType=VARCHAR}, 
+      #{wi61,jdbcType=VARCHAR}, #{wi62,jdbcType=VARCHAR}, #{wi31,jdbcType=VARCHAR}, #{wi63,jdbcType=VARCHAR}, 
+      #{wi64,jdbcType=VARCHAR}, #{wi65,jdbcType=TIMESTAMP}, #{wi66,jdbcType=VARCHAR}, 
+      #{wi67,jdbcType=VARCHAR}, #{wi68,jdbcType=VARCHAR}, #{wi69,jdbcType=VARCHAR}, #{wi70,jdbcType=VARCHAR}, 
+      #{wi71,jdbcType=VARCHAR}, #{wi72,jdbcType=VARCHAR}, #{wi73,jdbcType=VARCHAR}, #{wi74,jdbcType=VARCHAR}, 
+      #{wi75,jdbcType=VARCHAR}, #{wi76,jdbcType=VARCHAR}, #{wi77,jdbcType=VARCHAR}, #{smstracking,jdbcType=VARCHAR}, 
+      #{sentSendMorePeople,jdbcType=VARCHAR}, #{wi78,jdbcType=TIMESTAMP}, #{wi79,jdbcType=VARCHAR}, 
+      #{wi80,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.WF_INFOR">
+    insert into WF_INFOR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wi00 != null">
+        WI00,
+      </if>
+      <if test="wi01 != null">
+        WI01,
+      </if>
+      <if test="wi02 != null">
+        WI02,
+      </if>
+      <if test="wi03 != null">
+        WI03,
+      </if>
+      <if test="wi04 != null">
+        WI04,
+      </if>
+      <if test="wi05 != null">
+        WI05,
+      </if>
+      <if test="wi06 != null">
+        WI06,
+      </if>
+      <if test="wi07 != null">
+        WI07,
+      </if>
+      <if test="wi08 != null">
+        WI08,
+      </if>
+      <if test="wi09 != null">
+        WI09,
+      </if>
+      <if test="wi10 != null">
+        WI10,
+      </if>
+      <if test="wi11 != null">
+        WI11,
+      </if>
+      <if test="wi12 != null">
+        WI12,
+      </if>
+      <if test="wi13 != null">
+        WI13,
+      </if>
+      <if test="wi14 != null">
+        WI14,
+      </if>
+      <if test="wi15 != null">
+        WI15,
+      </if>
+      <if test="wi16 != null">
+        WI16,
+      </if>
+      <if test="wi17 != null">
+        WI17,
+      </if>
+      <if test="wi18 != null">
+        WI18,
+      </if>
+      <if test="wi19 != null">
+        WI19,
+      </if>
+      <if test="wi20 != null">
+        WI20,
+      </if>
+      <if test="wi21 != null">
+        WI21,
+      </if>
+      <if test="wi22 != null">
+        WI22,
+      </if>
+      <if test="wi23 != null">
+        WI23,
+      </if>
+      <if test="wi24 != null">
+        WI24,
+      </if>
+      <if test="wi25 != null">
+        WI25,
+      </if>
+      <if test="wi26 != null">
+        WI26,
+      </if>
+      <if test="wi27 != null">
+        WI27,
+      </if>
+      <if test="wi28 != null">
+        WI28,
+      </if>
+      <if test="wi29 != null">
+        WI29,
+      </if>
+      <if test="wi30 != null">
+        WI30,
+      </if>
+      <if test="wi32 != null">
+        WI32,
+      </if>
+      <if test="wi33 != null">
+        WI33,
+      </if>
+      <if test="wi34 != null">
+        WI34,
+      </if>
+      <if test="wi35 != null">
+        WI35,
+      </if>
+      <if test="wi36 != null">
+        WI36,
+      </if>
+      <if test="wi37 != null">
+        WI37,
+      </if>
+      <if test="wi38 != null">
+        WI38,
+      </if>
+      <if test="wi39 != null">
+        WI39,
+      </if>
+      <if test="wi40 != null">
+        WI40,
+      </if>
+      <if test="wi41 != null">
+        WI41,
+      </if>
+      <if test="wi42 != null">
+        WI42,
+      </if>
+      <if test="wi43 != null">
+        WI43,
+      </if>
+      <if test="wi44 != null">
+        WI44,
+      </if>
+      <if test="wi45 != null">
+        WI45,
+      </if>
+      <if test="wi46 != null">
+        WI46,
+      </if>
+      <if test="wi47 != null">
+        WI47,
+      </if>
+      <if test="wi48 != null">
+        WI48,
+      </if>
+      <if test="wi49 != null">
+        WI49,
+      </if>
+      <if test="wi50 != null">
+        WI50,
+      </if>
+      <if test="wi51 != null">
+        WI51,
+      </if>
+      <if test="wi52 != null">
+        WI52,
+      </if>
+      <if test="wi53 != null">
+        WI53,
+      </if>
+      <if test="wi54 != null">
+        WI54,
+      </if>
+      <if test="wi55 != null">
+        WI55,
+      </if>
+      <if test="wi56 != null">
+        WI56,
+      </if>
+      <if test="wi57 != null">
+        WI57,
+      </if>
+      <if test="wi58 != null">
+        WI58,
+      </if>
+      <if test="wi59 != null">
+        WI59,
+      </if>
+      <if test="wi60 != null">
+        WI60,
+      </if>
+      <if test="wi61 != null">
+        WI61,
+      </if>
+      <if test="wi62 != null">
+        WI62,
+      </if>
+      <if test="wi31 != null">
+        WI31,
+      </if>
+      <if test="wi63 != null">
+        WI63,
+      </if>
+      <if test="wi64 != null">
+        WI64,
+      </if>
+      <if test="wi65 != null">
+        WI65,
+      </if>
+      <if test="wi66 != null">
+        WI66,
+      </if>
+      <if test="wi67 != null">
+        WI67,
+      </if>
+      <if test="wi68 != null">
+        WI68,
+      </if>
+      <if test="wi69 != null">
+        WI69,
+      </if>
+      <if test="wi70 != null">
+        WI70,
+      </if>
+      <if test="wi71 != null">
+        WI71,
+      </if>
+      <if test="wi72 != null">
+        WI72,
+      </if>
+      <if test="wi73 != null">
+        WI73,
+      </if>
+      <if test="wi74 != null">
+        WI74,
+      </if>
+      <if test="wi75 != null">
+        WI75,
+      </if>
+      <if test="wi76 != null">
+        WI76,
+      </if>
+      <if test="wi77 != null">
+        WI77,
+      </if>
+      <if test="smstracking != null">
+        SMSTRACKING,
+      </if>
+      <if test="sentSendMorePeople != null">
+        SENT_SEND_MORE_PEOPLE,
+      </if>
+      <if test="wi78 != null">
+        WI78,
+      </if>
+      <if test="wi79 != null">
+        WI79,
+      </if>
+      <if test="wi80 != null">
+        WI80,
+      </if>
+      <if test="history != null">
+        HISTORY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wi00 != null">
+        #{wi00,jdbcType=DECIMAL},
+      </if>
+      <if test="wi01 != null">
+        #{wi01,jdbcType=DECIMAL},
+      </if>
+      <if test="wi02 != null">
+        #{wi02,jdbcType=VARCHAR},
+      </if>
+      <if test="wi03 != null">
+        #{wi03,jdbcType=DECIMAL},
+      </if>
+      <if test="wi04 != null">
+        #{wi04,jdbcType=VARCHAR},
+      </if>
+      <if test="wi05 != null">
+        #{wi05,jdbcType=VARCHAR},
+      </if>
+      <if test="wi06 != null">
+        #{wi06,jdbcType=VARCHAR},
+      </if>
+      <if test="wi07 != null">
+        #{wi07,jdbcType=VARCHAR},
+      </if>
+      <if test="wi08 != null">
+        #{wi08,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi09 != null">
+        #{wi09,jdbcType=VARCHAR},
+      </if>
+      <if test="wi10 != null">
+        #{wi10,jdbcType=VARCHAR},
+      </if>
+      <if test="wi11 != null">
+        #{wi11,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi12 != null">
+        #{wi12,jdbcType=VARCHAR},
+      </if>
+      <if test="wi13 != null">
+        #{wi13,jdbcType=VARCHAR},
+      </if>
+      <if test="wi14 != null">
+        #{wi14,jdbcType=DECIMAL},
+      </if>
+      <if test="wi15 != null">
+        #{wi15,jdbcType=VARCHAR},
+      </if>
+      <if test="wi16 != null">
+        #{wi16,jdbcType=VARCHAR},
+      </if>
+      <if test="wi17 != null">
+        #{wi17,jdbcType=VARCHAR},
+      </if>
+      <if test="wi18 != null">
+        #{wi18,jdbcType=VARCHAR},
+      </if>
+      <if test="wi19 != null">
+        #{wi19,jdbcType=VARCHAR},
+      </if>
+      <if test="wi20 != null">
+        #{wi20,jdbcType=VARCHAR},
+      </if>
+      <if test="wi21 != null">
+        #{wi21,jdbcType=VARCHAR},
+      </if>
+      <if test="wi22 != null">
+        #{wi22,jdbcType=VARCHAR},
+      </if>
+      <if test="wi23 != null">
+        #{wi23,jdbcType=VARCHAR},
+      </if>
+      <if test="wi24 != null">
+        #{wi24,jdbcType=VARCHAR},
+      </if>
+      <if test="wi25 != null">
+        #{wi25,jdbcType=VARCHAR},
+      </if>
+      <if test="wi26 != null">
+        #{wi26,jdbcType=VARCHAR},
+      </if>
+      <if test="wi27 != null">
+        #{wi27,jdbcType=VARCHAR},
+      </if>
+      <if test="wi28 != null">
+        #{wi28,jdbcType=VARCHAR},
+      </if>
+      <if test="wi29 != null">
+        #{wi29,jdbcType=DECIMAL},
+      </if>
+      <if test="wi30 != null">
+        #{wi30,jdbcType=VARCHAR},
+      </if>
+      <if test="wi32 != null">
+        #{wi32,jdbcType=VARCHAR},
+      </if>
+      <if test="wi33 != null">
+        #{wi33,jdbcType=VARCHAR},
+      </if>
+      <if test="wi34 != null">
+        #{wi34,jdbcType=VARCHAR},
+      </if>
+      <if test="wi35 != null">
+        #{wi35,jdbcType=VARCHAR},
+      </if>
+      <if test="wi36 != null">
+        #{wi36,jdbcType=VARCHAR},
+      </if>
+      <if test="wi37 != null">
+        #{wi37,jdbcType=VARCHAR},
+      </if>
+      <if test="wi38 != null">
+        #{wi38,jdbcType=VARCHAR},
+      </if>
+      <if test="wi39 != null">
+        #{wi39,jdbcType=VARCHAR},
+      </if>
+      <if test="wi40 != null">
+        #{wi40,jdbcType=VARCHAR},
+      </if>
+      <if test="wi41 != null">
+        #{wi41,jdbcType=VARCHAR},
+      </if>
+      <if test="wi42 != null">
+        #{wi42,jdbcType=VARCHAR},
+      </if>
+      <if test="wi43 != null">
+        #{wi43,jdbcType=VARCHAR},
+      </if>
+      <if test="wi44 != null">
+        #{wi44,jdbcType=VARCHAR},
+      </if>
+      <if test="wi45 != null">
+        #{wi45,jdbcType=VARCHAR},
+      </if>
+      <if test="wi46 != null">
+        #{wi46,jdbcType=DECIMAL},
+      </if>
+      <if test="wi47 != null">
+        #{wi47,jdbcType=DECIMAL},
+      </if>
+      <if test="wi48 != null">
+        #{wi48,jdbcType=DECIMAL},
+      </if>
+      <if test="wi49 != null">
+        #{wi49,jdbcType=DECIMAL},
+      </if>
+      <if test="wi50 != null">
+        #{wi50,jdbcType=VARCHAR},
+      </if>
+      <if test="wi51 != null">
+        #{wi51,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi52 != null">
+        #{wi52,jdbcType=VARCHAR},
+      </if>
+      <if test="wi53 != null">
+        #{wi53,jdbcType=VARCHAR},
+      </if>
+      <if test="wi54 != null">
+        #{wi54,jdbcType=VARCHAR},
+      </if>
+      <if test="wi55 != null">
+        #{wi55,jdbcType=VARCHAR},
+      </if>
+      <if test="wi56 != null">
+        #{wi56,jdbcType=VARCHAR},
+      </if>
+      <if test="wi57 != null">
+        #{wi57,jdbcType=VARCHAR},
+      </if>
+      <if test="wi58 != null">
+        #{wi58,jdbcType=VARCHAR},
+      </if>
+      <if test="wi59 != null">
+        #{wi59,jdbcType=VARCHAR},
+      </if>
+      <if test="wi60 != null">
+        #{wi60,jdbcType=VARCHAR},
+      </if>
+      <if test="wi61 != null">
+        #{wi61,jdbcType=VARCHAR},
+      </if>
+      <if test="wi62 != null">
+        #{wi62,jdbcType=VARCHAR},
+      </if>
+      <if test="wi31 != null">
+        #{wi31,jdbcType=VARCHAR},
+      </if>
+      <if test="wi63 != null">
+        #{wi63,jdbcType=VARCHAR},
+      </if>
+      <if test="wi64 != null">
+        #{wi64,jdbcType=VARCHAR},
+      </if>
+      <if test="wi65 != null">
+        #{wi65,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi66 != null">
+        #{wi66,jdbcType=VARCHAR},
+      </if>
+      <if test="wi67 != null">
+        #{wi67,jdbcType=VARCHAR},
+      </if>
+      <if test="wi68 != null">
+        #{wi68,jdbcType=VARCHAR},
+      </if>
+      <if test="wi69 != null">
+        #{wi69,jdbcType=VARCHAR},
+      </if>
+      <if test="wi70 != null">
+        #{wi70,jdbcType=VARCHAR},
+      </if>
+      <if test="wi71 != null">
+        #{wi71,jdbcType=VARCHAR},
+      </if>
+      <if test="wi72 != null">
+        #{wi72,jdbcType=VARCHAR},
+      </if>
+      <if test="wi73 != null">
+        #{wi73,jdbcType=VARCHAR},
+      </if>
+      <if test="wi74 != null">
+        #{wi74,jdbcType=VARCHAR},
+      </if>
+      <if test="wi75 != null">
+        #{wi75,jdbcType=VARCHAR},
+      </if>
+      <if test="wi76 != null">
+        #{wi76,jdbcType=VARCHAR},
+      </if>
+      <if test="wi77 != null">
+        #{wi77,jdbcType=VARCHAR},
+      </if>
+      <if test="smstracking != null">
+        #{smstracking,jdbcType=VARCHAR},
+      </if>
+      <if test="sentSendMorePeople != null">
+        #{sentSendMorePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="wi78 != null">
+        #{wi78,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi79 != null">
+        #{wi79,jdbcType=VARCHAR},
+      </if>
+      <if test="wi80 != null">
+        #{wi80,jdbcType=VARCHAR},
+      </if>
+      <if test="history != null">
+        #{history,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.WF_INFORExample" resultType="java.lang.Long">
+    select count(*) from WF_INFOR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update WF_INFOR
+    <set>
+      <if test="record.wi00 != null">
+        WI00 = #{record.wi00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi01 != null">
+        WI01 = #{record.wi01,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi02 != null">
+        WI02 = #{record.wi02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi03 != null">
+        WI03 = #{record.wi03,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi04 != null">
+        WI04 = #{record.wi04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi05 != null">
+        WI05 = #{record.wi05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi06 != null">
+        WI06 = #{record.wi06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi07 != null">
+        WI07 = #{record.wi07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi08 != null">
+        WI08 = #{record.wi08,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wi09 != null">
+        WI09 = #{record.wi09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi10 != null">
+        WI10 = #{record.wi10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi11 != null">
+        WI11 = #{record.wi11,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wi12 != null">
+        WI12 = #{record.wi12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi13 != null">
+        WI13 = #{record.wi13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi14 != null">
+        WI14 = #{record.wi14,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi15 != null">
+        WI15 = #{record.wi15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi16 != null">
+        WI16 = #{record.wi16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi17 != null">
+        WI17 = #{record.wi17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi18 != null">
+        WI18 = #{record.wi18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi19 != null">
+        WI19 = #{record.wi19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi20 != null">
+        WI20 = #{record.wi20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi21 != null">
+        WI21 = #{record.wi21,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi22 != null">
+        WI22 = #{record.wi22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi23 != null">
+        WI23 = #{record.wi23,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi24 != null">
+        WI24 = #{record.wi24,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi25 != null">
+        WI25 = #{record.wi25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi26 != null">
+        WI26 = #{record.wi26,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi27 != null">
+        WI27 = #{record.wi27,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi28 != null">
+        WI28 = #{record.wi28,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi29 != null">
+        WI29 = #{record.wi29,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi30 != null">
+        WI30 = #{record.wi30,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi32 != null">
+        WI32 = #{record.wi32,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi33 != null">
+        WI33 = #{record.wi33,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi34 != null">
+        WI34 = #{record.wi34,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi35 != null">
+        WI35 = #{record.wi35,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi36 != null">
+        WI36 = #{record.wi36,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi37 != null">
+        WI37 = #{record.wi37,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi38 != null">
+        WI38 = #{record.wi38,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi39 != null">
+        WI39 = #{record.wi39,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi40 != null">
+        WI40 = #{record.wi40,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi41 != null">
+        WI41 = #{record.wi41,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi42 != null">
+        WI42 = #{record.wi42,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi43 != null">
+        WI43 = #{record.wi43,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi44 != null">
+        WI44 = #{record.wi44,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi45 != null">
+        WI45 = #{record.wi45,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi46 != null">
+        WI46 = #{record.wi46,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi47 != null">
+        WI47 = #{record.wi47,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi48 != null">
+        WI48 = #{record.wi48,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi49 != null">
+        WI49 = #{record.wi49,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wi50 != null">
+        WI50 = #{record.wi50,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi51 != null">
+        WI51 = #{record.wi51,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wi52 != null">
+        WI52 = #{record.wi52,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi53 != null">
+        WI53 = #{record.wi53,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi54 != null">
+        WI54 = #{record.wi54,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi55 != null">
+        WI55 = #{record.wi55,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi56 != null">
+        WI56 = #{record.wi56,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi57 != null">
+        WI57 = #{record.wi57,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi58 != null">
+        WI58 = #{record.wi58,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi59 != null">
+        WI59 = #{record.wi59,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi60 != null">
+        WI60 = #{record.wi60,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi61 != null">
+        WI61 = #{record.wi61,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi62 != null">
+        WI62 = #{record.wi62,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi31 != null">
+        WI31 = #{record.wi31,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi63 != null">
+        WI63 = #{record.wi63,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi64 != null">
+        WI64 = #{record.wi64,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi65 != null">
+        WI65 = #{record.wi65,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wi66 != null">
+        WI66 = #{record.wi66,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi67 != null">
+        WI67 = #{record.wi67,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi68 != null">
+        WI68 = #{record.wi68,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi69 != null">
+        WI69 = #{record.wi69,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi70 != null">
+        WI70 = #{record.wi70,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi71 != null">
+        WI71 = #{record.wi71,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi72 != null">
+        WI72 = #{record.wi72,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi73 != null">
+        WI73 = #{record.wi73,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi74 != null">
+        WI74 = #{record.wi74,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi75 != null">
+        WI75 = #{record.wi75,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi76 != null">
+        WI76 = #{record.wi76,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi77 != null">
+        WI77 = #{record.wi77,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smstracking != null">
+        SMSTRACKING = #{record.smstracking,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sentSendMorePeople != null">
+        SENT_SEND_MORE_PEOPLE = #{record.sentSendMorePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi78 != null">
+        WI78 = #{record.wi78,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wi79 != null">
+        WI79 = #{record.wi79,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wi80 != null">
+        WI80 = #{record.wi80,jdbcType=VARCHAR},
+      </if>
+      <if test="record.history != null">
+        HISTORY = #{record.history,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update WF_INFOR
+    set WI00 = #{record.wi00,jdbcType=DECIMAL},
+      WI01 = #{record.wi01,jdbcType=DECIMAL},
+      WI02 = #{record.wi02,jdbcType=VARCHAR},
+      WI03 = #{record.wi03,jdbcType=DECIMAL},
+      WI04 = #{record.wi04,jdbcType=VARCHAR},
+      WI05 = #{record.wi05,jdbcType=VARCHAR},
+      WI06 = #{record.wi06,jdbcType=VARCHAR},
+      WI07 = #{record.wi07,jdbcType=VARCHAR},
+      WI08 = #{record.wi08,jdbcType=TIMESTAMP},
+      WI09 = #{record.wi09,jdbcType=VARCHAR},
+      WI10 = #{record.wi10,jdbcType=VARCHAR},
+      WI11 = #{record.wi11,jdbcType=TIMESTAMP},
+      WI12 = #{record.wi12,jdbcType=VARCHAR},
+      WI13 = #{record.wi13,jdbcType=VARCHAR},
+      WI14 = #{record.wi14,jdbcType=DECIMAL},
+      WI15 = #{record.wi15,jdbcType=VARCHAR},
+      WI16 = #{record.wi16,jdbcType=VARCHAR},
+      WI17 = #{record.wi17,jdbcType=VARCHAR},
+      WI18 = #{record.wi18,jdbcType=VARCHAR},
+      WI19 = #{record.wi19,jdbcType=VARCHAR},
+      WI20 = #{record.wi20,jdbcType=VARCHAR},
+      WI21 = #{record.wi21,jdbcType=VARCHAR},
+      WI22 = #{record.wi22,jdbcType=VARCHAR},
+      WI23 = #{record.wi23,jdbcType=VARCHAR},
+      WI24 = #{record.wi24,jdbcType=VARCHAR},
+      WI25 = #{record.wi25,jdbcType=VARCHAR},
+      WI26 = #{record.wi26,jdbcType=VARCHAR},
+      WI27 = #{record.wi27,jdbcType=VARCHAR},
+      WI28 = #{record.wi28,jdbcType=VARCHAR},
+      WI29 = #{record.wi29,jdbcType=DECIMAL},
+      WI30 = #{record.wi30,jdbcType=VARCHAR},
+      WI32 = #{record.wi32,jdbcType=VARCHAR},
+      WI33 = #{record.wi33,jdbcType=VARCHAR},
+      WI34 = #{record.wi34,jdbcType=VARCHAR},
+      WI35 = #{record.wi35,jdbcType=VARCHAR},
+      WI36 = #{record.wi36,jdbcType=VARCHAR},
+      WI37 = #{record.wi37,jdbcType=VARCHAR},
+      WI38 = #{record.wi38,jdbcType=VARCHAR},
+      WI39 = #{record.wi39,jdbcType=VARCHAR},
+      WI40 = #{record.wi40,jdbcType=VARCHAR},
+      WI41 = #{record.wi41,jdbcType=VARCHAR},
+      WI42 = #{record.wi42,jdbcType=VARCHAR},
+      WI43 = #{record.wi43,jdbcType=VARCHAR},
+      WI44 = #{record.wi44,jdbcType=VARCHAR},
+      WI45 = #{record.wi45,jdbcType=VARCHAR},
+      WI46 = #{record.wi46,jdbcType=DECIMAL},
+      WI47 = #{record.wi47,jdbcType=DECIMAL},
+      WI48 = #{record.wi48,jdbcType=DECIMAL},
+      WI49 = #{record.wi49,jdbcType=DECIMAL},
+      WI50 = #{record.wi50,jdbcType=VARCHAR},
+      WI51 = #{record.wi51,jdbcType=TIMESTAMP},
+      WI52 = #{record.wi52,jdbcType=VARCHAR},
+      WI53 = #{record.wi53,jdbcType=VARCHAR},
+      WI54 = #{record.wi54,jdbcType=VARCHAR},
+      WI55 = #{record.wi55,jdbcType=VARCHAR},
+      WI56 = #{record.wi56,jdbcType=VARCHAR},
+      WI57 = #{record.wi57,jdbcType=VARCHAR},
+      WI58 = #{record.wi58,jdbcType=VARCHAR},
+      WI59 = #{record.wi59,jdbcType=VARCHAR},
+      WI60 = #{record.wi60,jdbcType=VARCHAR},
+      WI61 = #{record.wi61,jdbcType=VARCHAR},
+      WI62 = #{record.wi62,jdbcType=VARCHAR},
+      WI31 = #{record.wi31,jdbcType=VARCHAR},
+      WI63 = #{record.wi63,jdbcType=VARCHAR},
+      WI64 = #{record.wi64,jdbcType=VARCHAR},
+      WI65 = #{record.wi65,jdbcType=TIMESTAMP},
+      WI66 = #{record.wi66,jdbcType=VARCHAR},
+      WI67 = #{record.wi67,jdbcType=VARCHAR},
+      WI68 = #{record.wi68,jdbcType=VARCHAR},
+      WI69 = #{record.wi69,jdbcType=VARCHAR},
+      WI70 = #{record.wi70,jdbcType=VARCHAR},
+      WI71 = #{record.wi71,jdbcType=VARCHAR},
+      WI72 = #{record.wi72,jdbcType=VARCHAR},
+      WI73 = #{record.wi73,jdbcType=VARCHAR},
+      WI74 = #{record.wi74,jdbcType=VARCHAR},
+      WI75 = #{record.wi75,jdbcType=VARCHAR},
+      WI76 = #{record.wi76,jdbcType=VARCHAR},
+      WI77 = #{record.wi77,jdbcType=VARCHAR},
+      SMSTRACKING = #{record.smstracking,jdbcType=VARCHAR},
+      SENT_SEND_MORE_PEOPLE = #{record.sentSendMorePeople,jdbcType=VARCHAR},
+      WI78 = #{record.wi78,jdbcType=TIMESTAMP},
+      WI79 = #{record.wi79,jdbcType=VARCHAR},
+      WI80 = #{record.wi80,jdbcType=VARCHAR},
+      HISTORY = #{record.history,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.WF_INFOR">
+    update WF_INFOR
+    <set>
+      <if test="wi01 != null">
+        WI01 = #{wi01,jdbcType=DECIMAL},
+      </if>
+      <if test="wi02 != null">
+        WI02 = #{wi02,jdbcType=VARCHAR},
+      </if>
+      <if test="wi03 != null">
+        WI03 = #{wi03,jdbcType=DECIMAL},
+      </if>
+      <if test="wi04 != null">
+        WI04 = #{wi04,jdbcType=VARCHAR},
+      </if>
+      <if test="wi05 != null">
+        WI05 = #{wi05,jdbcType=VARCHAR},
+      </if>
+      <if test="wi06 != null">
+        WI06 = #{wi06,jdbcType=VARCHAR},
+      </if>
+      <if test="wi07 != null">
+        WI07 = #{wi07,jdbcType=VARCHAR},
+      </if>
+      <if test="wi08 != null">
+        WI08 = #{wi08,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi09 != null">
+        WI09 = #{wi09,jdbcType=VARCHAR},
+      </if>
+      <if test="wi10 != null">
+        WI10 = #{wi10,jdbcType=VARCHAR},
+      </if>
+      <if test="wi11 != null">
+        WI11 = #{wi11,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi12 != null">
+        WI12 = #{wi12,jdbcType=VARCHAR},
+      </if>
+      <if test="wi13 != null">
+        WI13 = #{wi13,jdbcType=VARCHAR},
+      </if>
+      <if test="wi14 != null">
+        WI14 = #{wi14,jdbcType=DECIMAL},
+      </if>
+      <if test="wi15 != null">
+        WI15 = #{wi15,jdbcType=VARCHAR},
+      </if>
+      <if test="wi16 != null">
+        WI16 = #{wi16,jdbcType=VARCHAR},
+      </if>
+      <if test="wi17 != null">
+        WI17 = #{wi17,jdbcType=VARCHAR},
+      </if>
+      <if test="wi18 != null">
+        WI18 = #{wi18,jdbcType=VARCHAR},
+      </if>
+      <if test="wi19 != null">
+        WI19 = #{wi19,jdbcType=VARCHAR},
+      </if>
+      <if test="wi20 != null">
+        WI20 = #{wi20,jdbcType=VARCHAR},
+      </if>
+      <if test="wi21 != null">
+        WI21 = #{wi21,jdbcType=VARCHAR},
+      </if>
+      <if test="wi22 != null">
+        WI22 = #{wi22,jdbcType=VARCHAR},
+      </if>
+      <if test="wi23 != null">
+        WI23 = #{wi23,jdbcType=VARCHAR},
+      </if>
+      <if test="wi24 != null">
+        WI24 = #{wi24,jdbcType=VARCHAR},
+      </if>
+      <if test="wi25 != null">
+        WI25 = #{wi25,jdbcType=VARCHAR},
+      </if>
+      <if test="wi26 != null">
+        WI26 = #{wi26,jdbcType=VARCHAR},
+      </if>
+      <if test="wi27 != null">
+        WI27 = #{wi27,jdbcType=VARCHAR},
+      </if>
+      <if test="wi28 != null">
+        WI28 = #{wi28,jdbcType=VARCHAR},
+      </if>
+      <if test="wi29 != null">
+        WI29 = #{wi29,jdbcType=DECIMAL},
+      </if>
+      <if test="wi30 != null">
+        WI30 = #{wi30,jdbcType=VARCHAR},
+      </if>
+      <if test="wi32 != null">
+        WI32 = #{wi32,jdbcType=VARCHAR},
+      </if>
+      <if test="wi33 != null">
+        WI33 = #{wi33,jdbcType=VARCHAR},
+      </if>
+      <if test="wi34 != null">
+        WI34 = #{wi34,jdbcType=VARCHAR},
+      </if>
+      <if test="wi35 != null">
+        WI35 = #{wi35,jdbcType=VARCHAR},
+      </if>
+      <if test="wi36 != null">
+        WI36 = #{wi36,jdbcType=VARCHAR},
+      </if>
+      <if test="wi37 != null">
+        WI37 = #{wi37,jdbcType=VARCHAR},
+      </if>
+      <if test="wi38 != null">
+        WI38 = #{wi38,jdbcType=VARCHAR},
+      </if>
+      <if test="wi39 != null">
+        WI39 = #{wi39,jdbcType=VARCHAR},
+      </if>
+      <if test="wi40 != null">
+        WI40 = #{wi40,jdbcType=VARCHAR},
+      </if>
+      <if test="wi41 != null">
+        WI41 = #{wi41,jdbcType=VARCHAR},
+      </if>
+      <if test="wi42 != null">
+        WI42 = #{wi42,jdbcType=VARCHAR},
+      </if>
+      <if test="wi43 != null">
+        WI43 = #{wi43,jdbcType=VARCHAR},
+      </if>
+      <if test="wi44 != null">
+        WI44 = #{wi44,jdbcType=VARCHAR},
+      </if>
+      <if test="wi45 != null">
+        WI45 = #{wi45,jdbcType=VARCHAR},
+      </if>
+      <if test="wi46 != null">
+        WI46 = #{wi46,jdbcType=DECIMAL},
+      </if>
+      <if test="wi47 != null">
+        WI47 = #{wi47,jdbcType=DECIMAL},
+      </if>
+      <if test="wi48 != null">
+        WI48 = #{wi48,jdbcType=DECIMAL},
+      </if>
+      <if test="wi49 != null">
+        WI49 = #{wi49,jdbcType=DECIMAL},
+      </if>
+      <if test="wi50 != null">
+        WI50 = #{wi50,jdbcType=VARCHAR},
+      </if>
+      <if test="wi51 != null">
+        WI51 = #{wi51,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi52 != null">
+        WI52 = #{wi52,jdbcType=VARCHAR},
+      </if>
+      <if test="wi53 != null">
+        WI53 = #{wi53,jdbcType=VARCHAR},
+      </if>
+      <if test="wi54 != null">
+        WI54 = #{wi54,jdbcType=VARCHAR},
+      </if>
+      <if test="wi55 != null">
+        WI55 = #{wi55,jdbcType=VARCHAR},
+      </if>
+      <if test="wi56 != null">
+        WI56 = #{wi56,jdbcType=VARCHAR},
+      </if>
+      <if test="wi57 != null">
+        WI57 = #{wi57,jdbcType=VARCHAR},
+      </if>
+      <if test="wi58 != null">
+        WI58 = #{wi58,jdbcType=VARCHAR},
+      </if>
+      <if test="wi59 != null">
+        WI59 = #{wi59,jdbcType=VARCHAR},
+      </if>
+      <if test="wi60 != null">
+        WI60 = #{wi60,jdbcType=VARCHAR},
+      </if>
+      <if test="wi61 != null">
+        WI61 = #{wi61,jdbcType=VARCHAR},
+      </if>
+      <if test="wi62 != null">
+        WI62 = #{wi62,jdbcType=VARCHAR},
+      </if>
+      <if test="wi31 != null">
+        WI31 = #{wi31,jdbcType=VARCHAR},
+      </if>
+      <if test="wi63 != null">
+        WI63 = #{wi63,jdbcType=VARCHAR},
+      </if>
+      <if test="wi64 != null">
+        WI64 = #{wi64,jdbcType=VARCHAR},
+      </if>
+      <if test="wi65 != null">
+        WI65 = #{wi65,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi66 != null">
+        WI66 = #{wi66,jdbcType=VARCHAR},
+      </if>
+      <if test="wi67 != null">
+        WI67 = #{wi67,jdbcType=VARCHAR},
+      </if>
+      <if test="wi68 != null">
+        WI68 = #{wi68,jdbcType=VARCHAR},
+      </if>
+      <if test="wi69 != null">
+        WI69 = #{wi69,jdbcType=VARCHAR},
+      </if>
+      <if test="wi70 != null">
+        WI70 = #{wi70,jdbcType=VARCHAR},
+      </if>
+      <if test="wi71 != null">
+        WI71 = #{wi71,jdbcType=VARCHAR},
+      </if>
+      <if test="wi72 != null">
+        WI72 = #{wi72,jdbcType=VARCHAR},
+      </if>
+      <if test="wi73 != null">
+        WI73 = #{wi73,jdbcType=VARCHAR},
+      </if>
+      <if test="wi74 != null">
+        WI74 = #{wi74,jdbcType=VARCHAR},
+      </if>
+      <if test="wi75 != null">
+        WI75 = #{wi75,jdbcType=VARCHAR},
+      </if>
+      <if test="wi76 != null">
+        WI76 = #{wi76,jdbcType=VARCHAR},
+      </if>
+      <if test="wi77 != null">
+        WI77 = #{wi77,jdbcType=VARCHAR},
+      </if>
+      <if test="smstracking != null">
+        SMSTRACKING = #{smstracking,jdbcType=VARCHAR},
+      </if>
+      <if test="sentSendMorePeople != null">
+        SENT_SEND_MORE_PEOPLE = #{sentSendMorePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="wi78 != null">
+        WI78 = #{wi78,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wi79 != null">
+        WI79 = #{wi79,jdbcType=VARCHAR},
+      </if>
+      <if test="wi80 != null">
+        WI80 = #{wi80,jdbcType=VARCHAR},
+      </if>
+      <if test="history != null">
+        HISTORY = #{history,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WI00 = #{wi00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.WF_INFOR">
+    update WF_INFOR
+    set WI01 = #{wi01,jdbcType=DECIMAL},
+      WI02 = #{wi02,jdbcType=VARCHAR},
+      WI03 = #{wi03,jdbcType=DECIMAL},
+      WI04 = #{wi04,jdbcType=VARCHAR},
+      WI05 = #{wi05,jdbcType=VARCHAR},
+      WI06 = #{wi06,jdbcType=VARCHAR},
+      WI07 = #{wi07,jdbcType=VARCHAR},
+      WI08 = #{wi08,jdbcType=TIMESTAMP},
+      WI09 = #{wi09,jdbcType=VARCHAR},
+      WI10 = #{wi10,jdbcType=VARCHAR},
+      WI11 = #{wi11,jdbcType=TIMESTAMP},
+      WI12 = #{wi12,jdbcType=VARCHAR},
+      WI13 = #{wi13,jdbcType=VARCHAR},
+      WI14 = #{wi14,jdbcType=DECIMAL},
+      WI15 = #{wi15,jdbcType=VARCHAR},
+      WI16 = #{wi16,jdbcType=VARCHAR},
+      WI17 = #{wi17,jdbcType=VARCHAR},
+      WI18 = #{wi18,jdbcType=VARCHAR},
+      WI19 = #{wi19,jdbcType=VARCHAR},
+      WI20 = #{wi20,jdbcType=VARCHAR},
+      WI21 = #{wi21,jdbcType=VARCHAR},
+      WI22 = #{wi22,jdbcType=VARCHAR},
+      WI23 = #{wi23,jdbcType=VARCHAR},
+      WI24 = #{wi24,jdbcType=VARCHAR},
+      WI25 = #{wi25,jdbcType=VARCHAR},
+      WI26 = #{wi26,jdbcType=VARCHAR},
+      WI27 = #{wi27,jdbcType=VARCHAR},
+      WI28 = #{wi28,jdbcType=VARCHAR},
+      WI29 = #{wi29,jdbcType=DECIMAL},
+      WI30 = #{wi30,jdbcType=VARCHAR},
+      WI32 = #{wi32,jdbcType=VARCHAR},
+      WI33 = #{wi33,jdbcType=VARCHAR},
+      WI34 = #{wi34,jdbcType=VARCHAR},
+      WI35 = #{wi35,jdbcType=VARCHAR},
+      WI36 = #{wi36,jdbcType=VARCHAR},
+      WI37 = #{wi37,jdbcType=VARCHAR},
+      WI38 = #{wi38,jdbcType=VARCHAR},
+      WI39 = #{wi39,jdbcType=VARCHAR},
+      WI40 = #{wi40,jdbcType=VARCHAR},
+      WI41 = #{wi41,jdbcType=VARCHAR},
+      WI42 = #{wi42,jdbcType=VARCHAR},
+      WI43 = #{wi43,jdbcType=VARCHAR},
+      WI44 = #{wi44,jdbcType=VARCHAR},
+      WI45 = #{wi45,jdbcType=VARCHAR},
+      WI46 = #{wi46,jdbcType=DECIMAL},
+      WI47 = #{wi47,jdbcType=DECIMAL},
+      WI48 = #{wi48,jdbcType=DECIMAL},
+      WI49 = #{wi49,jdbcType=DECIMAL},
+      WI50 = #{wi50,jdbcType=VARCHAR},
+      WI51 = #{wi51,jdbcType=TIMESTAMP},
+      WI52 = #{wi52,jdbcType=VARCHAR},
+      WI53 = #{wi53,jdbcType=VARCHAR},
+      WI54 = #{wi54,jdbcType=VARCHAR},
+      WI55 = #{wi55,jdbcType=VARCHAR},
+      WI56 = #{wi56,jdbcType=VARCHAR},
+      WI57 = #{wi57,jdbcType=VARCHAR},
+      WI58 = #{wi58,jdbcType=VARCHAR},
+      WI59 = #{wi59,jdbcType=VARCHAR},
+      WI60 = #{wi60,jdbcType=VARCHAR},
+      WI61 = #{wi61,jdbcType=VARCHAR},
+      WI62 = #{wi62,jdbcType=VARCHAR},
+      WI31 = #{wi31,jdbcType=VARCHAR},
+      WI63 = #{wi63,jdbcType=VARCHAR},
+      WI64 = #{wi64,jdbcType=VARCHAR},
+      WI65 = #{wi65,jdbcType=TIMESTAMP},
+      WI66 = #{wi66,jdbcType=VARCHAR},
+      WI67 = #{wi67,jdbcType=VARCHAR},
+      WI68 = #{wi68,jdbcType=VARCHAR},
+      WI69 = #{wi69,jdbcType=VARCHAR},
+      WI70 = #{wi70,jdbcType=VARCHAR},
+      WI71 = #{wi71,jdbcType=VARCHAR},
+      WI72 = #{wi72,jdbcType=VARCHAR},
+      WI73 = #{wi73,jdbcType=VARCHAR},
+      WI74 = #{wi74,jdbcType=VARCHAR},
+      WI75 = #{wi75,jdbcType=VARCHAR},
+      WI76 = #{wi76,jdbcType=VARCHAR},
+      WI77 = #{wi77,jdbcType=VARCHAR},
+      SMSTRACKING = #{smstracking,jdbcType=VARCHAR},
+      SENT_SEND_MORE_PEOPLE = #{sentSendMorePeople,jdbcType=VARCHAR},
+      WI78 = #{wi78,jdbcType=TIMESTAMP},
+      WI79 = #{wi79,jdbcType=VARCHAR},
+      WI80 = #{wi80,jdbcType=VARCHAR},
+      HISTORY = #{history,jdbcType=VARCHAR}
+    where WI00 = #{wi00,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

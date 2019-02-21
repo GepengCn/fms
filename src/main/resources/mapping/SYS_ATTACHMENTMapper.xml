@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.primary.SYS_ATTACHMENTMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    <id column="SA00" jdbcType="DECIMAL" property="sa00" />
+    <result column="SA01" jdbcType="VARCHAR" property="sa01" />
+    <result column="SA02" jdbcType="VARCHAR" property="sa02" />
+    <result column="SA03" jdbcType="VARCHAR" property="sa03" />
+    <result column="SA04" jdbcType="VARCHAR" property="sa04" />
+    <result column="SA05" jdbcType="TIMESTAMP" property="sa05" />
+    <result column="SA06" jdbcType="VARCHAR" property="sa06" />
+    <result column="SA07" jdbcType="VARCHAR" property="sa07" />
+    <result column="SA08" jdbcType="VARCHAR" property="sa08" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    <result column="SA09" jdbcType="CLOB" property="sa09" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SA00, SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA08
+  </sql>
+  <sql id="Blob_Column_List">
+    SA09
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENTExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_ATTACHMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENTExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_ATTACHMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_ATTACHMENT
+    where SA00 = #{sa00,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_ATTACHMENT
+    where SA00 = #{sa00,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENTExample">
+    delete from SYS_ATTACHMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    insert into SYS_ATTACHMENT (SA00, SA01, SA02, 
+      SA03, SA04, SA05, 
+      SA06, SA07, SA08, SA09
+      )
+    values (#{sa00,jdbcType=DECIMAL}, #{sa01,jdbcType=VARCHAR}, #{sa02,jdbcType=VARCHAR}, 
+      #{sa03,jdbcType=VARCHAR}, #{sa04,jdbcType=VARCHAR}, #{sa05,jdbcType=TIMESTAMP}, 
+      #{sa06,jdbcType=VARCHAR}, #{sa07,jdbcType=VARCHAR}, #{sa08,jdbcType=VARCHAR}, #{sa09,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    insert into SYS_ATTACHMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sa00 != null">
+        SA00,
+      </if>
+      <if test="sa01 != null">
+        SA01,
+      </if>
+      <if test="sa02 != null">
+        SA02,
+      </if>
+      <if test="sa03 != null">
+        SA03,
+      </if>
+      <if test="sa04 != null">
+        SA04,
+      </if>
+      <if test="sa05 != null">
+        SA05,
+      </if>
+      <if test="sa06 != null">
+        SA06,
+      </if>
+      <if test="sa07 != null">
+        SA07,
+      </if>
+      <if test="sa08 != null">
+        SA08,
+      </if>
+      <if test="sa09 != null">
+        SA09,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sa00 != null">
+        #{sa00,jdbcType=DECIMAL},
+      </if>
+      <if test="sa01 != null">
+        #{sa01,jdbcType=VARCHAR},
+      </if>
+      <if test="sa02 != null">
+        #{sa02,jdbcType=VARCHAR},
+      </if>
+      <if test="sa03 != null">
+        #{sa03,jdbcType=VARCHAR},
+      </if>
+      <if test="sa04 != null">
+        #{sa04,jdbcType=VARCHAR},
+      </if>
+      <if test="sa05 != null">
+        #{sa05,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sa06 != null">
+        #{sa06,jdbcType=VARCHAR},
+      </if>
+      <if test="sa07 != null">
+        #{sa07,jdbcType=VARCHAR},
+      </if>
+      <if test="sa08 != null">
+        #{sa08,jdbcType=VARCHAR},
+      </if>
+      <if test="sa09 != null">
+        #{sa09,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENTExample" resultType="java.lang.Long">
+    select count(*) from SYS_ATTACHMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_ATTACHMENT
+    <set>
+      <if test="record.sa00 != null">
+        SA00 = #{record.sa00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sa01 != null">
+        SA01 = #{record.sa01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa02 != null">
+        SA02 = #{record.sa02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa03 != null">
+        SA03 = #{record.sa03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa04 != null">
+        SA04 = #{record.sa04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa05 != null">
+        SA05 = #{record.sa05,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sa06 != null">
+        SA06 = #{record.sa06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa07 != null">
+        SA07 = #{record.sa07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa08 != null">
+        SA08 = #{record.sa08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sa09 != null">
+        SA09 = #{record.sa09,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update SYS_ATTACHMENT
+    set SA00 = #{record.sa00,jdbcType=DECIMAL},
+      SA01 = #{record.sa01,jdbcType=VARCHAR},
+      SA02 = #{record.sa02,jdbcType=VARCHAR},
+      SA03 = #{record.sa03,jdbcType=VARCHAR},
+      SA04 = #{record.sa04,jdbcType=VARCHAR},
+      SA05 = #{record.sa05,jdbcType=TIMESTAMP},
+      SA06 = #{record.sa06,jdbcType=VARCHAR},
+      SA07 = #{record.sa07,jdbcType=VARCHAR},
+      SA08 = #{record.sa08,jdbcType=VARCHAR},
+      SA09 = #{record.sa09,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_ATTACHMENT
+    set SA00 = #{record.sa00,jdbcType=DECIMAL},
+      SA01 = #{record.sa01,jdbcType=VARCHAR},
+      SA02 = #{record.sa02,jdbcType=VARCHAR},
+      SA03 = #{record.sa03,jdbcType=VARCHAR},
+      SA04 = #{record.sa04,jdbcType=VARCHAR},
+      SA05 = #{record.sa05,jdbcType=TIMESTAMP},
+      SA06 = #{record.sa06,jdbcType=VARCHAR},
+      SA07 = #{record.sa07,jdbcType=VARCHAR},
+      SA08 = #{record.sa08,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    update SYS_ATTACHMENT
+    <set>
+      <if test="sa01 != null">
+        SA01 = #{sa01,jdbcType=VARCHAR},
+      </if>
+      <if test="sa02 != null">
+        SA02 = #{sa02,jdbcType=VARCHAR},
+      </if>
+      <if test="sa03 != null">
+        SA03 = #{sa03,jdbcType=VARCHAR},
+      </if>
+      <if test="sa04 != null">
+        SA04 = #{sa04,jdbcType=VARCHAR},
+      </if>
+      <if test="sa05 != null">
+        SA05 = #{sa05,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sa06 != null">
+        SA06 = #{sa06,jdbcType=VARCHAR},
+      </if>
+      <if test="sa07 != null">
+        SA07 = #{sa07,jdbcType=VARCHAR},
+      </if>
+      <if test="sa08 != null">
+        SA08 = #{sa08,jdbcType=VARCHAR},
+      </if>
+      <if test="sa09 != null">
+        SA09 = #{sa09,jdbcType=CLOB},
+      </if>
+    </set>
+    where SA00 = #{sa00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    update SYS_ATTACHMENT
+    set SA01 = #{sa01,jdbcType=VARCHAR},
+      SA02 = #{sa02,jdbcType=VARCHAR},
+      SA03 = #{sa03,jdbcType=VARCHAR},
+      SA04 = #{sa04,jdbcType=VARCHAR},
+      SA05 = #{sa05,jdbcType=TIMESTAMP},
+      SA06 = #{sa06,jdbcType=VARCHAR},
+      SA07 = #{sa07,jdbcType=VARCHAR},
+      SA08 = #{sa08,jdbcType=VARCHAR},
+      SA09 = #{sa09,jdbcType=CLOB}
+    where SA00 = #{sa00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.SYS_ATTACHMENT">
+    update SYS_ATTACHMENT
+    set SA01 = #{sa01,jdbcType=VARCHAR},
+      SA02 = #{sa02,jdbcType=VARCHAR},
+      SA03 = #{sa03,jdbcType=VARCHAR},
+      SA04 = #{sa04,jdbcType=VARCHAR},
+      SA05 = #{sa05,jdbcType=TIMESTAMP},
+      SA06 = #{sa06,jdbcType=VARCHAR},
+      SA07 = #{sa07,jdbcType=VARCHAR},
+      SA08 = #{sa08,jdbcType=VARCHAR}
+    where SA00 = #{sa00,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

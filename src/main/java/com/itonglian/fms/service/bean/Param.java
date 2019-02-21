@@ -28,6 +28,8 @@ public class Param {
 
     private Customized customized;
 
+    private List<HandlerDetail> handlerDetailList;
+
     private int type;
 
 
