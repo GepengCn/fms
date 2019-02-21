@@ -93,7 +93,7 @@
     | 2 | 任务id | TASKID |varchar(64)||
     | 3 | 拟稿人登录名 | DRAFTLOGIN |varchar(64)||
     | 4 | 拟稿人姓名 | DRAFTNAME |varchar(64)||
-    | 5 | 归档状态 | STATUS |NUMBER(16)|100:待归档 101:正在归档 102:已归档 103:归档执行失败 200:已成功发送 201:发送失败 300:成功归档 301:归档失败|
+    | 5 | 归档状态 | STATUS |NUMBER(16)|100:待归档<br> 101:正在归档 <br>102:已归档<br> 103:归档执行失败 <br>200:已成功发送 <br>201:发送失败 <br>300:成功归档 <br>301:归档失败|
     | 6 | 创建时间 | CREATETIME |varchar(64)||
     | 7 | 修改时间 | MODIFYTIME |varchar(64)||
     | 8 | 正文FTP路径 | TEXTPATH |varchar(256)||

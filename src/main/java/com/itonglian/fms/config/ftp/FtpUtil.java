@@ -1,6 +1,5 @@
 package com.itonglian.fms.config.ftp;
 
-import jdk.internal.util.xml.impl.Input;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
