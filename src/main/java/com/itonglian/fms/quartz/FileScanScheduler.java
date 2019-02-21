@@ -11,7 +11,7 @@ import com.itonglian.fms.service.bean.FileType;
 import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FileStatusManager;
-import com.itonglian.fms.service.common.FmsDataService;
+import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.common.ServiceRouter;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
