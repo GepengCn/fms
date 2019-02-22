@@ -1,5 +1,7 @@
 package com.itonglian.fms.service.common.impl;
 
+import com.aspose.words.Range;
+import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.*;
 import com.itonglian.fms.service.bean.*;
@@ -7,6 +9,8 @@ import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.utils.ServiceUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -53,7 +57,7 @@ public class WjbpdService extends BaseService {
     @Override
     public Param customizedImpl (Param param, FMS_TASK fmsTask) throws Exception{
 
-        int taskSize = 5;
+        int taskSize = 6;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
         executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
@@ -114,8 +118,8 @@ public class WjbpdService extends BaseService {
                     handlerDetail.setHandlerComment(wfInfor.getWi20());
                     handlerDetail.setHandlerStatus(wfInfor.getWi13());
                     Date date = wfInfor.getWi11();
-                    handlerDetail.setHandlerTime(date==null?"":date.toString());
-                    handlerDetail.setSendTime(wfInfor.getWi08()==null?"":wfInfor.getWi08().toString());
+                    handlerDetail.setHandlerTime(new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
+                    handlerDetail.setSendTime(new DateTime(wfInfor.getWi08()).toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
                     handlerDetailList.add(handlerDetail);
                 }
                 param.setHandlerDetailList(handlerDetailList);
@@ -129,7 +133,16 @@ public class WjbpdService extends BaseService {
         //备考表
         ftpList.setRefFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, refPath, fmsTask.getParentroot()));
         //公文表单
-        ftpList.setFormFtp(serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,formPath,fmsTask.getParentroot()));
+        ftpList.setFormFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, formPath, fmsTask.getParentroot(), new WordUtils.FillCallBack() {
+            @Override
+            public void execute(Range range) {
+                try {
+//                    range.replace("${}","",false,true);
+                } catch (Exception e) {
+                   log.error("error",e);
+                }
+            }
+        }));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件

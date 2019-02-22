@@ -22,6 +22,11 @@
  | 13 | 文档类型 | type |int|是|1:文件报批单<br> 2:自由行文<br> 3:单位发文<br> 4:党组发文<br> 5:院发文<br> 6:收文登记<br> 7:阅件发送|
  | 14 | 关联文档 | refDocList |字符型|否|数组|
  | 15 | 办理详情 | handlingList |字符型|否|数组|
+ | 16 | 办理状态 | handlerStatus |字符型|否|0:已办 1:已收在办 2:未收未办 3:终止 4:冻结|
+ | 17 | 办理时间 | handlerTime |字符型|否|`yyyy-MM-dd hh:mm:ss`|
+ | 18 | 当前办理用户 | handlerUser |字符型|否|用户姓名 如:张三|
+ | 19 | 上一办理用户 | lastHandlerUser |字符型|否|用户姓名 如:张三|
+ | 20 | 送达时间 | sendTime |字符型|否|`yyyy-MM-dd hh:mm:ss`|
 
 
 > `json`范例如下

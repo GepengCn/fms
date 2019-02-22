@@ -58,5 +58,28 @@ public class ServiceUtils {
         return ftpDetail;
     }
 
+    public FtpList.FtpDetail word2PdfThenUploadFtp(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, WordUtils.FillCallBack fillCallBack){
+        //目录
+        FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
+        ftpDetail.setFileName(getPdfName());
+        ftpDetail.setFilePath(getParentPath(parentRoot));
+        executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
+            @Override
+            public void callback() throws Exception {
+                String destPath = pdfPath+ File.separator+getPdfName();
+                File destFile = new File(destPath);
+                log.info(templatePath+File.separator+ftpDetail.getFileName()+"word转PDF...");
+                if(!wordUtils.fillThenWord2Pdf(templatePath,destPath,fillCallBack)){
+                    throw new Exception("转换PDF出错");
+                }
+                log.info(destPath+"上传FTP...");
+                if(!ftpUtil.upload(ftpDetail.getFilePath(),ftpDetail.getFileName(),destFile)){
+                    throw new Exception("上传FTP服务器出错");
+                }
+            }
+        }));
+        return ftpDetail;
+    }
+
 
 }
