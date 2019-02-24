@@ -3,6 +3,7 @@ package com.itonglian.fms.utils;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.config.ftp.FtpUtil;
+import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.bean.FtpList;
 import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.service.common.impl.AttPieceTask;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
@@ -58,7 +60,7 @@ public class ServiceUtils {
         return ftpDetail;
     }
 
-    public FtpList.FtpDetail word2PdfThenUploadFtp(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, WordUtils.FillCallBack fillCallBack){
+    public FtpList.FtpDetail word2PdfThenUploadFtp(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents){
         //目录
         FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
         ftpDetail.setFileName(getPdfName());
@@ -69,7 +71,7 @@ public class ServiceUtils {
                 String destPath = pdfPath+ File.separator+getPdfName();
                 File destFile = new File(destPath);
                 log.info(templatePath+File.separator+ftpDetail.getFileName()+"word转PDF...");
-                if(!wordUtils.fillThenWord2Pdf(templatePath,destPath,fillCallBack)){
+                if(!wordUtils.fillThenWord2Pdf(templatePath,destPath,contentFilling,contents)){
                     throw new Exception("转换PDF出错");
                 }
                 log.info(destPath+"上传FTP...");

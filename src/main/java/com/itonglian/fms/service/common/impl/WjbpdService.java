@@ -1,12 +1,11 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.aspose.words.Range;
-import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.*;
 import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FuturePieceTask;
+import com.itonglian.fms.service.common.range.WjbpdContentFilling;
 import com.itonglian.fms.utils.ServiceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -15,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -44,10 +40,12 @@ public class WjbpdService extends BaseService {
     private String catalogPath;
     @Value(value = "${template.refPath}")
     private String refPath;
-    @Value(value = "${template.formPath}")
+    @Value(value = "${template.wjbpdFormPath}")
     private String formPath;
     @Autowired
     ServiceUtils serviceUtils;
+    @Autowired
+    WjbpdContentFilling wjbpdContentFilling;
 
     @Override
     public FileType getType() {
@@ -117,7 +115,6 @@ public class WjbpdService extends BaseService {
                     handlerDetail.setLastHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi15())).getSu02());
                     handlerDetail.setHandlerComment(wfInfor.getWi20());
                     handlerDetail.setHandlerStatus(wfInfor.getWi13());
-                    Date date = wfInfor.getWi11();
                     handlerDetail.setHandlerTime(new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
                     handlerDetail.setSendTime(new DateTime(wfInfor.getWi08()).toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
                     handlerDetailList.add(handlerDetail);
@@ -125,6 +122,9 @@ public class WjbpdService extends BaseService {
                 param.setHandlerDetailList(handlerDetailList);
             }
         }));
+        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
+            throw new Exception("countDownLatch处理超时");
+        }
         FtpList ftpList = new FtpList();
         //封皮
         ftpList.setCoverFtp(serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,coverPath,fmsTask.getParentroot()));
@@ -133,23 +133,22 @@ public class WjbpdService extends BaseService {
         //备考表
         ftpList.setRefFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, refPath, fmsTask.getParentroot()));
         //公文表单
-        ftpList.setFormFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, formPath, fmsTask.getParentroot(), new WordUtils.FillCallBack() {
-            @Override
-            public void execute(Range range) {
-                try {
-//                    range.replace("${}","",false,true);
-                } catch (Exception e) {
-                   log.error("error",e);
-                }
-            }
-        }));
+        Map<String,String> contents = new HashMap<>();
+        WjbpdCustomized wjbpdCustomized = (WjbpdCustomized)param.getCustomized();
+        contents.put("FF03",wjbpdCustomized.getFF03());
+        contents.put("FF04",wjbpdCustomized.getFF04());
+        contents.put("FF53",wjbpdCustomized.getFF53());
+        contents.put("FF12",wjbpdCustomized.getFF12());
+        contents.put("FF31",wjbpdCustomized.getFF31());
+        contents.put("FF32",wjbpdCustomized.getFF32());
+        contents.put("FF36",wjbpdCustomized.getFF36());
+        contents.put("FF30",wjbpdCustomized.getFF30());
+        ftpList.setFormFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, formPath, fmsTask.getParentroot(),wjbpdContentFilling,contents));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件
         ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
-        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
-            throw new Exception("countDownLatch处理超时");
-        }
+
         param.setFtpList(ftpList);
         log.info("自定义任务执行完毕");
         return param;
