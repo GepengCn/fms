@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>归档数据列表</title>
 </head>
 <body>
-<h1>test</h1>
+<h1>归档数据列表</h1>
+<table>
+    <thead>
+    <tr>
+        <th>流程id</th>
+        <th>标题</th>
+        <th>拟稿人</th>
+        <th>归档状态</th>
+        <th>查看详情</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="fmsTask: ${datas}">
+        <td th:text="${fmsTask.taskid}">0.99</td>
+        <td th:text="${fmsTask.title}">0.99</td>
+        <td th:text="${fmsTask.draftname}">0.99</td>
+        <td th:text="${fmsTask.status}">0.99</td>
+        <td><a th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}">查看详情</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

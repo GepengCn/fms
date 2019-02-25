@@ -16,6 +16,7 @@ public interface FmsTaskService {
 
     int updateByPrimaryKey(FMS_TASK record);
 
+    FMS_TASK selectByPrimaryKey(Long id);
 
 }
 

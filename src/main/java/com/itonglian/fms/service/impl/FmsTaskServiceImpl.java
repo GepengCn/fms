@@ -34,4 +34,9 @@ public class FmsTaskServiceImpl implements FmsTaskService {
         return fmsTaskMapper.updateByPrimaryKey(record);
     }
 
+    @Override
+    public FMS_TASK selectByPrimaryKey(Long id) {
+        return fmsTaskMapper.selectByPrimaryKey(id);
+    }
+
 }

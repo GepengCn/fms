@@ -33,4 +33,9 @@ public class FmsDataServiceImpl implements FmsDataService {
     public int updateByPrimaryKey(FMS_DATA record) {
         return fmsDataMapper.updateByPrimaryKey(record);
     }
+
+    @Override
+    public FMS_DATAWithBLOBs selectByPrimaryKey(String dataid) {
+        return fmsDataMapper.selectByPrimaryKey(dataid);
+    }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>归档详情</title>
+</head>
+<body>
+<h1>归档详情</h1>
+<table>
+    <thead>
+    <tr>
+        <th>属性名</th>
+        <th>属性值</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>任务id</td>
+            <td th:text="${params.taskId}"></td>
+        </tr>
+        <tr>
+            <td>标题</td>
+            <td th:text="${params.title}"></td>
+        </tr>
+        <tr>
+            <td>公文类型</td>
+            <td th:text="${params.type}"></td>
+        </tr>
+        <tr>
+            <td>拟稿时间</td>
+            <td th:text="${params.draftTime}"></td>
+        </tr>
+        <tr>
+            <td>拟稿人登录名</td>
+            <td th:text="${params.drafter}"></td>
+        </tr>
+        <tr>
+            <td>拟稿人姓名</td>
+            <td th:text="${params.drafterName}"></td>
+        </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

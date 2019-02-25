@@ -15,4 +15,7 @@ public interface FmsDataService {
 
     int updateByPrimaryKey(FMS_DATA record);
 
+    FMS_DATAWithBLOBs selectByPrimaryKey(String dataid);
+
+
 }
