@@ -18,6 +18,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
 
 @Component
 @Slf4j
@@ -112,7 +113,7 @@ public class FileManager {
         String fileName = getRandomFileName();
         ftpDetail.setFileName(fileName);
         ftpDetail.setFilePath(getParentPath(parentDir));
-        executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
+        Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
                 String tempDestPath = pdfPath+ File.separator+fileName;
@@ -128,15 +129,18 @@ public class FileManager {
                 }
             }
         }));
+        if(!future.get()){
+            throw new Exception("转换PDF出错");
+        }
         return ftpDetail;
     }
 
-    public FtpList.FtpDetail handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents){
+    public FtpList.FtpDetail handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents) throws Exception {
         //目录
         FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
         ftpDetail.setFileName(getRandomFileName());
         ftpDetail.setFilePath(getParentPath(parentRoot));
-        executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
+        Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
                 String destPath = pdfPath+ File.separator+getRandomFileName();
@@ -151,6 +155,9 @@ public class FileManager {
                 }
             }
         }));
+        if(!future.get()){
+            throw new Exception("转换PDF出错");
+        }
         return ftpDetail;
     }
 

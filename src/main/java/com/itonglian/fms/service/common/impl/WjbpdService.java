@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -53,7 +54,7 @@ public class WjbpdService extends BaseService {
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
         FFGL ffgl = ffglService.selectByPrimaryKey(wfTask.getWt04());
-        executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
+        Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
                 WjbpdCustomized wjbpdCustomized = new WjbpdCustomized();
@@ -94,7 +95,7 @@ public class WjbpdService extends BaseService {
 
             }
         }));
-        executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
+        Future<Boolean> future1 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
                 WF_INFORExample wfInforExample = new WF_INFORExample();
@@ -140,10 +141,13 @@ public class WjbpdService extends BaseService {
         //附件
         ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
         if(!countDownLatch.await(15, TimeUnit.MINUTES)){
-            throw new Exception("countDownLatch处理超时");
+            throw new Exception("countDownLatch处理超时...");
+        }
+        if(!future.get()||!future1.get()){
+            throw new Exception("业务处理出错...");
         }
         param.setFtpList(ftpList);
-        log.info("自定义任务执行完毕");
+        log.info("自定义任务执行完毕...");
         return param;
     }
 
