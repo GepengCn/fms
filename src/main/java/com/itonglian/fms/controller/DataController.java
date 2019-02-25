@@ -98,6 +98,7 @@ public class DataController {
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataId);
         WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName("UTF-8")), WjbpdParam.class);
         model.addAttribute("params",params);
+        model.addAttribute("common",JSON.toJSONString(params));
         WjbpdCustomized wjbpdCustomized = params.getCustomized();
         model.addAttribute("customized", JSON.toJSONString(wjbpdCustomized));
         model.addAttribute("ftpList", JSON.toJSONString(params.getFtpList()));

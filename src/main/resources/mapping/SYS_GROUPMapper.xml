@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.primary.SYS_GROUPMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.SYS_GROUP">
+    <id column="SG00" jdbcType="DECIMAL" property="sg00" />
+    <result column="SG01" jdbcType="VARCHAR" property="sg01" />
+    <result column="SG02" jdbcType="VARCHAR" property="sg02" />
+    <result column="SG03" jdbcType="VARCHAR" property="sg03" />
+    <result column="SG04" jdbcType="VARCHAR" property="sg04" />
+    <result column="SG05" jdbcType="VARCHAR" property="sg05" />
+    <result column="SG06" jdbcType="VARCHAR" property="sg06" />
+    <result column="SG07" jdbcType="DECIMAL" property="sg07" />
+    <result column="SG08" jdbcType="VARCHAR" property="sg08" />
+    <result column="SG09" jdbcType="VARCHAR" property="sg09" />
+    <result column="SG10" jdbcType="VARCHAR" property="sg10" />
+    <result column="SG11" jdbcType="VARCHAR" property="sg11" />
+    <result column="SG12" jdbcType="VARCHAR" property="sg12" />
+    <result column="SG13" jdbcType="VARCHAR" property="sg13" />
+    <result column="SG14" jdbcType="VARCHAR" property="sg14" />
+    <result column="SG15" jdbcType="VARCHAR" property="sg15" />
+    <result column="SG16" jdbcType="VARCHAR" property="sg16" />
+    <result column="SG17" jdbcType="VARCHAR" property="sg17" />
+    <result column="SG18" jdbcType="VARCHAR" property="sg18" />
+    <result column="SG19" jdbcType="VARCHAR" property="sg19" />
+    <result column="SG20" jdbcType="VARCHAR" property="sg20" />
+    <result column="SG21" jdbcType="VARCHAR" property="sg21" />
+    <result column="SG22" jdbcType="VARCHAR" property="sg22" />
+    <result column="SG23" jdbcType="VARCHAR" property="sg23" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SG00, SG01, SG02, SG03, SG04, SG05, SG06, SG07, SG08, SG09, SG10, SG11, SG12, SG13, 
+    SG14, SG15, SG16, SG17, SG18, SG19, SG20, SG21, SG22, SG23
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.SYS_GROUPExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GROUP
+    where SG00 = #{sg00,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_GROUP
+    where SG00 = #{sg00,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.SYS_GROUPExample">
+    delete from SYS_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.SYS_GROUP">
+    insert into SYS_GROUP (SG00, SG01, SG02, 
+      SG03, SG04, SG05, SG06, 
+      SG07, SG08, SG09, SG10, 
+      SG11, SG12, SG13, SG14, 
+      SG15, SG16, SG17, SG18, 
+      SG19, SG20, SG21, SG22, 
+      SG23)
+    values (#{sg00,jdbcType=DECIMAL}, #{sg01,jdbcType=VARCHAR}, #{sg02,jdbcType=VARCHAR}, 
+      #{sg03,jdbcType=VARCHAR}, #{sg04,jdbcType=VARCHAR}, #{sg05,jdbcType=VARCHAR}, #{sg06,jdbcType=VARCHAR}, 
+      #{sg07,jdbcType=DECIMAL}, #{sg08,jdbcType=VARCHAR}, #{sg09,jdbcType=VARCHAR}, #{sg10,jdbcType=VARCHAR}, 
+      #{sg11,jdbcType=VARCHAR}, #{sg12,jdbcType=VARCHAR}, #{sg13,jdbcType=VARCHAR}, #{sg14,jdbcType=VARCHAR}, 
+      #{sg15,jdbcType=VARCHAR}, #{sg16,jdbcType=VARCHAR}, #{sg17,jdbcType=VARCHAR}, #{sg18,jdbcType=VARCHAR}, 
+      #{sg19,jdbcType=VARCHAR}, #{sg20,jdbcType=VARCHAR}, #{sg21,jdbcType=VARCHAR}, #{sg22,jdbcType=VARCHAR}, 
+      #{sg23,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.SYS_GROUP">
+    insert into SYS_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sg00 != null">
+        SG00,
+      </if>
+      <if test="sg01 != null">
+        SG01,
+      </if>
+      <if test="sg02 != null">
+        SG02,
+      </if>
+      <if test="sg03 != null">
+        SG03,
+      </if>
+      <if test="sg04 != null">
+        SG04,
+      </if>
+      <if test="sg05 != null">
+        SG05,
+      </if>
+      <if test="sg06 != null">
+        SG06,
+      </if>
+      <if test="sg07 != null">
+        SG07,
+      </if>
+      <if test="sg08 != null">
+        SG08,
+      </if>
+      <if test="sg09 != null">
+        SG09,
+      </if>
+      <if test="sg10 != null">
+        SG10,
+      </if>
+      <if test="sg11 != null">
+        SG11,
+      </if>
+      <if test="sg12 != null">
+        SG12,
+      </if>
+      <if test="sg13 != null">
+        SG13,
+      </if>
+      <if test="sg14 != null">
+        SG14,
+      </if>
+      <if test="sg15 != null">
+        SG15,
+      </if>
+      <if test="sg16 != null">
+        SG16,
+      </if>
+      <if test="sg17 != null">
+        SG17,
+      </if>
+      <if test="sg18 != null">
+        SG18,
+      </if>
+      <if test="sg19 != null">
+        SG19,
+      </if>
+      <if test="sg20 != null">
+        SG20,
+      </if>
+      <if test="sg21 != null">
+        SG21,
+      </if>
+      <if test="sg22 != null">
+        SG22,
+      </if>
+      <if test="sg23 != null">
+        SG23,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sg00 != null">
+        #{sg00,jdbcType=DECIMAL},
+      </if>
+      <if test="sg01 != null">
+        #{sg01,jdbcType=VARCHAR},
+      </if>
+      <if test="sg02 != null">
+        #{sg02,jdbcType=VARCHAR},
+      </if>
+      <if test="sg03 != null">
+        #{sg03,jdbcType=VARCHAR},
+      </if>
+      <if test="sg04 != null">
+        #{sg04,jdbcType=VARCHAR},
+      </if>
+      <if test="sg05 != null">
+        #{sg05,jdbcType=VARCHAR},
+      </if>
+      <if test="sg06 != null">
+        #{sg06,jdbcType=VARCHAR},
+      </if>
+      <if test="sg07 != null">
+        #{sg07,jdbcType=DECIMAL},
+      </if>
+      <if test="sg08 != null">
+        #{sg08,jdbcType=VARCHAR},
+      </if>
+      <if test="sg09 != null">
+        #{sg09,jdbcType=VARCHAR},
+      </if>
+      <if test="sg10 != null">
+        #{sg10,jdbcType=VARCHAR},
+      </if>
+      <if test="sg11 != null">
+        #{sg11,jdbcType=VARCHAR},
+      </if>
+      <if test="sg12 != null">
+        #{sg12,jdbcType=VARCHAR},
+      </if>
+      <if test="sg13 != null">
+        #{sg13,jdbcType=VARCHAR},
+      </if>
+      <if test="sg14 != null">
+        #{sg14,jdbcType=VARCHAR},
+      </if>
+      <if test="sg15 != null">
+        #{sg15,jdbcType=VARCHAR},
+      </if>
+      <if test="sg16 != null">
+        #{sg16,jdbcType=VARCHAR},
+      </if>
+      <if test="sg17 != null">
+        #{sg17,jdbcType=VARCHAR},
+      </if>
+      <if test="sg18 != null">
+        #{sg18,jdbcType=VARCHAR},
+      </if>
+      <if test="sg19 != null">
+        #{sg19,jdbcType=VARCHAR},
+      </if>
+      <if test="sg20 != null">
+        #{sg20,jdbcType=VARCHAR},
+      </if>
+      <if test="sg21 != null">
+        #{sg21,jdbcType=VARCHAR},
+      </if>
+      <if test="sg22 != null">
+        #{sg22,jdbcType=VARCHAR},
+      </if>
+      <if test="sg23 != null">
+        #{sg23,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.SYS_GROUPExample" resultType="java.lang.Long">
+    select count(*) from SYS_GROUP
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_GROUP
+    <set>
+      <if test="record.sg00 != null">
+        SG00 = #{record.sg00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sg01 != null">
+        SG01 = #{record.sg01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg02 != null">
+        SG02 = #{record.sg02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg03 != null">
+        SG03 = #{record.sg03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg04 != null">
+        SG04 = #{record.sg04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg05 != null">
+        SG05 = #{record.sg05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg06 != null">
+        SG06 = #{record.sg06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg07 != null">
+        SG07 = #{record.sg07,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sg08 != null">
+        SG08 = #{record.sg08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg09 != null">
+        SG09 = #{record.sg09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg10 != null">
+        SG10 = #{record.sg10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg11 != null">
+        SG11 = #{record.sg11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg12 != null">
+        SG12 = #{record.sg12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg13 != null">
+        SG13 = #{record.sg13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg14 != null">
+        SG14 = #{record.sg14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg15 != null">
+        SG15 = #{record.sg15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg16 != null">
+        SG16 = #{record.sg16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg17 != null">
+        SG17 = #{record.sg17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg18 != null">
+        SG18 = #{record.sg18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg19 != null">
+        SG19 = #{record.sg19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg20 != null">
+        SG20 = #{record.sg20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg21 != null">
+        SG21 = #{record.sg21,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg22 != null">
+        SG22 = #{record.sg22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sg23 != null">
+        SG23 = #{record.sg23,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_GROUP
+    set SG00 = #{record.sg00,jdbcType=DECIMAL},
+      SG01 = #{record.sg01,jdbcType=VARCHAR},
+      SG02 = #{record.sg02,jdbcType=VARCHAR},
+      SG03 = #{record.sg03,jdbcType=VARCHAR},
+      SG04 = #{record.sg04,jdbcType=VARCHAR},
+      SG05 = #{record.sg05,jdbcType=VARCHAR},
+      SG06 = #{record.sg06,jdbcType=VARCHAR},
+      SG07 = #{record.sg07,jdbcType=DECIMAL},
+      SG08 = #{record.sg08,jdbcType=VARCHAR},
+      SG09 = #{record.sg09,jdbcType=VARCHAR},
+      SG10 = #{record.sg10,jdbcType=VARCHAR},
+      SG11 = #{record.sg11,jdbcType=VARCHAR},
+      SG12 = #{record.sg12,jdbcType=VARCHAR},
+      SG13 = #{record.sg13,jdbcType=VARCHAR},
+      SG14 = #{record.sg14,jdbcType=VARCHAR},
+      SG15 = #{record.sg15,jdbcType=VARCHAR},
+      SG16 = #{record.sg16,jdbcType=VARCHAR},
+      SG17 = #{record.sg17,jdbcType=VARCHAR},
+      SG18 = #{record.sg18,jdbcType=VARCHAR},
+      SG19 = #{record.sg19,jdbcType=VARCHAR},
+      SG20 = #{record.sg20,jdbcType=VARCHAR},
+      SG21 = #{record.sg21,jdbcType=VARCHAR},
+      SG22 = #{record.sg22,jdbcType=VARCHAR},
+      SG23 = #{record.sg23,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.SYS_GROUP">
+    update SYS_GROUP
+    <set>
+      <if test="sg01 != null">
+        SG01 = #{sg01,jdbcType=VARCHAR},
+      </if>
+      <if test="sg02 != null">
+        SG02 = #{sg02,jdbcType=VARCHAR},
+      </if>
+      <if test="sg03 != null">
+        SG03 = #{sg03,jdbcType=VARCHAR},
+      </if>
+      <if test="sg04 != null">
+        SG04 = #{sg04,jdbcType=VARCHAR},
+      </if>
+      <if test="sg05 != null">
+        SG05 = #{sg05,jdbcType=VARCHAR},
+      </if>
+      <if test="sg06 != null">
+        SG06 = #{sg06,jdbcType=VARCHAR},
+      </if>
+      <if test="sg07 != null">
+        SG07 = #{sg07,jdbcType=DECIMAL},
+      </if>
+      <if test="sg08 != null">
+        SG08 = #{sg08,jdbcType=VARCHAR},
+      </if>
+      <if test="sg09 != null">
+        SG09 = #{sg09,jdbcType=VARCHAR},
+      </if>
+      <if test="sg10 != null">
+        SG10 = #{sg10,jdbcType=VARCHAR},
+      </if>
+      <if test="sg11 != null">
+        SG11 = #{sg11,jdbcType=VARCHAR},
+      </if>
+      <if test="sg12 != null">
+        SG12 = #{sg12,jdbcType=VARCHAR},
+      </if>
+      <if test="sg13 != null">
+        SG13 = #{sg13,jdbcType=VARCHAR},
+      </if>
+      <if test="sg14 != null">
+        SG14 = #{sg14,jdbcType=VARCHAR},
+      </if>
+      <if test="sg15 != null">
+        SG15 = #{sg15,jdbcType=VARCHAR},
+      </if>
+      <if test="sg16 != null">
+        SG16 = #{sg16,jdbcType=VARCHAR},
+      </if>
+      <if test="sg17 != null">
+        SG17 = #{sg17,jdbcType=VARCHAR},
+      </if>
+      <if test="sg18 != null">
+        SG18 = #{sg18,jdbcType=VARCHAR},
+      </if>
+      <if test="sg19 != null">
+        SG19 = #{sg19,jdbcType=VARCHAR},
+      </if>
+      <if test="sg20 != null">
+        SG20 = #{sg20,jdbcType=VARCHAR},
+      </if>
+      <if test="sg21 != null">
+        SG21 = #{sg21,jdbcType=VARCHAR},
+      </if>
+      <if test="sg22 != null">
+        SG22 = #{sg22,jdbcType=VARCHAR},
+      </if>
+      <if test="sg23 != null">
+        SG23 = #{sg23,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SG00 = #{sg00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.SYS_GROUP">
+    update SYS_GROUP
+    set SG01 = #{sg01,jdbcType=VARCHAR},
+      SG02 = #{sg02,jdbcType=VARCHAR},
+      SG03 = #{sg03,jdbcType=VARCHAR},
+      SG04 = #{sg04,jdbcType=VARCHAR},
+      SG05 = #{sg05,jdbcType=VARCHAR},
+      SG06 = #{sg06,jdbcType=VARCHAR},
+      SG07 = #{sg07,jdbcType=DECIMAL},
+      SG08 = #{sg08,jdbcType=VARCHAR},
+      SG09 = #{sg09,jdbcType=VARCHAR},
+      SG10 = #{sg10,jdbcType=VARCHAR},
+      SG11 = #{sg11,jdbcType=VARCHAR},
+      SG12 = #{sg12,jdbcType=VARCHAR},
+      SG13 = #{sg13,jdbcType=VARCHAR},
+      SG14 = #{sg14,jdbcType=VARCHAR},
+      SG15 = #{sg15,jdbcType=VARCHAR},
+      SG16 = #{sg16,jdbcType=VARCHAR},
+      SG17 = #{sg17,jdbcType=VARCHAR},
+      SG18 = #{sg18,jdbcType=VARCHAR},
+      SG19 = #{sg19,jdbcType=VARCHAR},
+      SG20 = #{sg20,jdbcType=VARCHAR},
+      SG21 = #{sg21,jdbcType=VARCHAR},
+      SG22 = #{sg22,jdbcType=VARCHAR},
+      SG23 = #{sg23,jdbcType=VARCHAR}
+    where SG00 = #{sg00,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

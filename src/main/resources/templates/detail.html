@@ -42,6 +42,15 @@
         <tr>
             <td>拟稿人姓名</td>
             <td th:text="${params.drafterName}"></td>
+
+        </tr>
+        <tr>
+            <td>
+                全部数据
+            </td>
+            <td>
+                <pre th:text="${common}"></pre>
+            </td>
         </tr>
         <tr>
             <td>
@@ -53,7 +62,7 @@
         </tr>
         <tr>
             <td>
-                各种文件
+                ftp文件
             </td>
             <td>
                 <pre th:text="${ftpList}"></pre>

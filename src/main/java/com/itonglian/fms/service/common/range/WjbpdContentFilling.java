@@ -27,10 +27,10 @@ public class WjbpdContentFilling implements ContentFilling {
         builder.moveToSection(section.getDocument().indexOf(section));
         builder.moveToHeaderFooter(HeaderFooterType.HEADER_PRIMARY);
         builder.getParagraphFormat().setAlignment(ParagraphAlignment.RIGHT);
-        String barcode = barcodeUtils.generate(contents.get("FF00"));
+        String barcode = barcodeUtils.generate(contents.get("FF02"));
         Shape shape = builder.insertImage(barcode);
         shape.setAspectRatioLocked(true);
-        shape.setHeight(50);
+        shape.setHeight(75);
         FindReplaceOptions findReplaceOptions = new FindReplaceOptions();
         findReplaceOptions.setMatchCase(true);
         findReplaceOptions.setReplacingCallback(new IReplacingCallback() {

@@ -1,5 +1,6 @@
 package com.itonglian.fms.service.common.impl;
 
+import com.google.common.base.Strings;
 import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.*;
 import com.itonglian.fms.service.bean.*;
@@ -41,6 +42,9 @@ public class WjbpdService extends BaseService {
     FileManager fileManager;
     @Autowired
     WjbpdContentFilling wjbpdContentFilling;
+
+    @Autowired
+    SysGroupService sysGroupService;
 
     @Override
     public FileType getType() {
@@ -131,10 +135,25 @@ public class WjbpdService extends BaseService {
         contents.put("FF53",ffgl.getFf53());
         contents.put("FF12",ffgl.getFf12());
         contents.put("FF31",ffgl.getFf31());
-        contents.put("FF32",ffgl.getFf32());
-        contents.put("FF36",ffgl.getFf36());
-        contents.put("FF30",ffgl.getFf30());
-        contents.put("FF00",ffgl.getFf00()+"");
+        String draftGroup = "";
+        if(!Strings.isNullOrEmpty(ffgl.getFf32())){
+            SYS_GROUP sysGroup = sysGroupService.selectByPrimaryKey(Long.parseLong(ffgl.getFf32()));
+            draftGroup = sysGroup.getSg02();
+        }
+        contents.put("FF32",draftGroup);
+        String draftName = "";
+        if(!Strings.isNullOrEmpty(ffgl.getFf30())){
+            SYS_USERS draftUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf30()));
+            draftName = draftUser.getSu02();
+        }
+        contents.put("FF30",draftName);
+        String validateName = "";
+        if(!Strings.isNullOrEmpty(ffgl.getFf36())){
+            SYS_USERS validateUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf30()));
+            validateName = validateUser.getSu02();
+        }
+        contents.put("FF36",validateName);
+        contents.put("FF02",ffgl.getFf02());
         ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),wjbpdContentFilling,contents));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
