@@ -1,6 +1,7 @@
 package com.itonglian.fms.service.common.range;
 
 import com.aspose.words.*;
+import com.google.common.base.Strings;
 import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.utils.BarcodeUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ public class WjbpdContentFilling implements ContentFilling {
         builder.moveToHeaderFooter(HeaderFooterType.HEADER_PRIMARY);
         builder.getParagraphFormat().setAlignment(ParagraphAlignment.RIGHT);
 
-        Shape shape = builder.insertImage(barcodeUtils.generate(""));
+        Shape shape = builder.insertImage(barcodeUtils.generate(contents.get("FF00")));
         shape.setAspectRatioLocked(true);
         shape.setHeight(50);
         FindReplaceOptions findReplaceOptions = new FindReplaceOptions();
@@ -40,7 +41,11 @@ public class WjbpdContentFilling implements ContentFilling {
             }
         });
         for (Map.Entry<String, String> entry : contents.entrySet()) {
-            range.replace(Pattern.compile("\\["+entry.getKey()+"\\]"),entry.getValue(),findReplaceOptions);
+            String value = entry.getValue();
+            if(Strings.isNullOrEmpty(value)){
+                value = "";
+            }
+            range.replace(Pattern.compile("\\["+entry.getKey()+"\\]"),value,findReplaceOptions);
         }
     }
 }

@@ -6,7 +6,7 @@ import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.service.common.range.WjbpdContentFilling;
-import com.itonglian.fms.utils.ServiceUtils;
+import com.itonglian.fms.utils.FileManager;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -34,16 +34,10 @@ public class WjbpdService extends BaseService {
     @Autowired
     SysUsersService sysUsersService;
 
-    @Value(value = "${template.coverPath}")
-    private String coverPath;
-    @Value(value = "${template.catalogPath}")
-    private String catalogPath;
-    @Value(value = "${template.refPath}")
-    private String refPath;
     @Value(value = "${template.wjbpdFormPath}")
     private String formPath;
     @Autowired
-    ServiceUtils serviceUtils;
+    FileManager fileManager;
     @Autowired
     WjbpdContentFilling wjbpdContentFilling;
 
@@ -57,11 +51,11 @@ public class WjbpdService extends BaseService {
 
         int taskSize = 6;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
+        WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
+        FFGL ffgl = ffglService.selectByPrimaryKey(wfTask.getWt04());
         executorService.execute(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
-                FFGL ffgl = ffglService.selectByPrimaryKey(wfTask.getWt04());
                 WjbpdCustomized wjbpdCustomized = new WjbpdCustomized();
                 wjbpdCustomized.setFF03(ffgl.getFf03());
                 wjbpdCustomized.setFF04(ffgl.getFf04());
@@ -122,36 +116,36 @@ public class WjbpdService extends BaseService {
                 param.setHandlerDetailList(handlerDetailList);
             }
         }));
-        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
-            throw new Exception("countDownLatch处理超时");
-        }
         FtpList ftpList = new FtpList();
         //封皮
-        ftpList.setCoverFtp(serviceUtils.word2PdfThenUploadFtp(executorService,countDownLatch,coverPath,fmsTask.getParentroot()));
+        ftpList.setCoverFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.cover,FileType.WJPBD));
         //目录
-        ftpList.setCatalogFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, catalogPath,fmsTask.getParentroot()));
+        ftpList.setCatalogFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.catalog,FileType.WJPBD));
         //备考表
-        ftpList.setRefFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, refPath, fmsTask.getParentroot()));
+        ftpList.setRefFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.ref,FileType.WJPBD));
         //公文表单
         Map<String,String> contents = new HashMap<>();
-        WjbpdCustomized wjbpdCustomized = (WjbpdCustomized)param.getCustomized();
-        contents.put("FF03",wjbpdCustomized.getFF03());
-        contents.put("FF04",wjbpdCustomized.getFF04());
-        contents.put("FF53",wjbpdCustomized.getFF53());
-        contents.put("FF12",wjbpdCustomized.getFF12());
-        contents.put("FF31",wjbpdCustomized.getFF31());
-        contents.put("FF32",wjbpdCustomized.getFF32());
-        contents.put("FF36",wjbpdCustomized.getFF36());
-        contents.put("FF30",wjbpdCustomized.getFF30());
-        ftpList.setFormFtp(serviceUtils.word2PdfThenUploadFtp(executorService, countDownLatch, formPath, fmsTask.getParentroot(),wjbpdContentFilling,contents));
+        contents.put("FF03",ffgl.getFf03());
+        contents.put("FF04",ffgl.getFf04());
+        contents.put("FF53",ffgl.getFf53());
+        contents.put("FF12",ffgl.getFf12());
+        contents.put("FF31",ffgl.getFf31());
+        contents.put("FF32",ffgl.getFf32());
+        contents.put("FF36",ffgl.getFf36());
+        contents.put("FF30",ffgl.getFf30());
+        contents.put("FF00",ffgl.getFf00()+"");
+        ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),wjbpdContentFilling,contents));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件
         ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
-
+        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
+            throw new Exception("countDownLatch处理超时");
+        }
         param.setFtpList(ftpList);
         log.info("自定义任务执行完毕");
         return param;
     }
+
 
 }

@@ -53,18 +53,4 @@ public class WordUtils {
 
     }
 
-  /*  public static void main(String[] args) {
-        License lic = new License();
-        try {
-            lic.setLicense(new FileInputStream(ResourceUtils.getFile("classpath:Aspose.Words18.lic")));
-            log.info("已注册Aspose证书...");
-        } catch (Exception e) {
-            log.error("error",e);
-        }
-        String srcFile = "/Users/gepeng/Downloads/range/文件报批单.doc";
-        String destFile = "/Users/gepeng/Downloads/range/文件报批单.pdf";
-
-//        new WordUtils().fillThenWord2Pdf(srcFile,destFile,new WjbpdRange());
-    }*/
-
 }
