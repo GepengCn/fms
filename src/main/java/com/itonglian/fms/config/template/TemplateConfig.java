@@ -13,10 +13,6 @@ public class TemplateConfig {
 
     private String formPath;
 
-    private String docPath;
-
-    private String attPath;
-
     private String coverPath;
 
     private String catalogPath;

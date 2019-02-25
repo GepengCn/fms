@@ -51,10 +51,6 @@ public class FileManager {
     private String catalogPath;
     @Value(value = "${template.refPath}")
     private String refPath;
-    @Value(value = "${template.docPath}")
-    private String docPath;
-    @Value(value = "${template.attPath}")
-    private String attPath;
 
 
     public String getRandomFileName(){
@@ -88,10 +84,6 @@ public class FileManager {
 
     public String getCustomizedTemplatePath(TemplateType templateType) throws Exception {
         switch (templateType){
-            case doc:
-                return docPath;
-            case att:
-                return attPath;
             case cover:
                 return coverPath;
             case catalog:
