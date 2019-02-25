@@ -109,8 +109,8 @@ public class WjbpdService extends BaseService {
                     handlerDetail.setLastHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi15())).getSu02());
                     handlerDetail.setHandlerComment(wfInfor.getWi20());
                     handlerDetail.setHandlerStatus(wfInfor.getWi13());
-                    handlerDetail.setHandlerTime(new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
-                    handlerDetail.setSendTime(new DateTime(wfInfor.getWi08()).toString(DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss")));
+                    handlerDetail.setHandlerTime(new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+                    handlerDetail.setSendTime(new DateTime(wfInfor.getWi08()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
                     handlerDetailList.add(handlerDetail);
                 }
                 param.setHandlerDetailList(handlerDetailList);
