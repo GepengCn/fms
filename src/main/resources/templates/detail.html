@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>归档详情</title>
+    <script type="text/javascript" th:src="@{/static/js/jquery.slim.min.js}"></script>
 </head>
 <body>
 <h1>归档详情</h1>
 <table>
     <thead>
     <tr>
-        <th>属性名</th>
+        <th th:width="100">属性名</th>
         <th>属性值</th>
 
     </tr>
@@ -39,8 +40,33 @@
             <td>拟稿人姓名</td>
             <td th:text="${params.drafterName}"></td>
         </tr>
+        <tr>
+            <td>
+               个性化数据
+            </td>
+            <td>
+            <td>
+                <code th:text="${customized}"></code>
+            </td>
+            </td>
 
+        </tr>
+        <tr>
+            <td>
+                各种文件
+            </td>
+            <td>
+            <td>
+                <code th:text="${ftpList}"></code>
+            </td>
+            </td>
+
+        </tr>
     </tbody>
 </table>
+<script>
+    console.info('loading...');
+
+</script>
 </body>
 </html>

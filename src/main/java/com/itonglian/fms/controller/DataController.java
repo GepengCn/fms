@@ -1,5 +1,6 @@
 package com.itonglian.fms.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.itonglian.fms.entity.FMS_DATAExample;
 import com.itonglian.fms.entity.FMS_DATAWithBLOBs;
@@ -7,8 +8,7 @@ import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.FmsTaskService;
-import com.itonglian.fms.service.bean.FileStatus;
-import com.itonglian.fms.service.bean.Param;
+import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.FileStatusManager;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -96,8 +96,11 @@ public class DataController {
         FMS_DATAExample fmsDataExample = new FMS_DATAExample();
         fmsDataExample.or().andDataidEqualTo(dataId);
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataId);
-        Param params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName("UTF-8")), Param.class);
+        WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName("UTF-8")), WjbpdParam.class);
         model.addAttribute("params",params);
+        WjbpdCustomized wjbpdCustomized = params.getCustomized();
+        model.addAttribute("customized", JSON.toJSONString(wjbpdCustomized));
+        model.addAttribute("ftpList", JSON.toJSONString(params.getFtpList()));
         return "detail";
     }
 }
