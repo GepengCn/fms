@@ -20,15 +20,15 @@ public class WjbpdContentFilling implements ContentFilling {
     BarcodeUtils barcodeUtils;
 
     @Override
-    public void execute(Document document, Range range, Map<String, String> contents) throws Exception {
+    public String execute(Document document, Range range, Map<String, String> contents) throws Exception {
         DocumentBuilder builder = new DocumentBuilder(document);
 
         Section section = document.getFirstSection();
         builder.moveToSection(section.getDocument().indexOf(section));
         builder.moveToHeaderFooter(HeaderFooterType.HEADER_PRIMARY);
         builder.getParagraphFormat().setAlignment(ParagraphAlignment.RIGHT);
-
-        Shape shape = builder.insertImage(barcodeUtils.generate(contents.get("FF00")));
+        String barcode = barcodeUtils.generate(contents.get("FF00"));
+        Shape shape = builder.insertImage(barcode);
         shape.setAspectRatioLocked(true);
         shape.setHeight(50);
         FindReplaceOptions findReplaceOptions = new FindReplaceOptions();
@@ -47,5 +47,6 @@ public class WjbpdContentFilling implements ContentFilling {
             }
             range.replace(Pattern.compile("\\["+entry.getKey()+"\\]"),value,findReplaceOptions);
         }
+        return barcode;
     }
 }

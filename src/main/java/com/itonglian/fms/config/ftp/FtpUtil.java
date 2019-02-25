@@ -89,6 +89,11 @@ public class FtpUtil {
                     log.error("error",e);
                 }
             }
+            try {
+                FileUtils.forceDelete(srcFile);
+            } catch (IOException e) {
+                log.error("error",e);
+            }
         }
         return true;
 
