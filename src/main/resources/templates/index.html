@@ -31,6 +31,7 @@
             <a th:case="102" th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}">归档成功</a>
             <span th:case="101">归档处理中</span>
             <span th:case="103">归档出错</span>
+            <span th:case="100">未归档</span>
         </td>
     </tr>
     </tbody>
