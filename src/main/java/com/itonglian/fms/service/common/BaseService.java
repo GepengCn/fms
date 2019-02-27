@@ -31,6 +31,7 @@ public abstract class BaseService {
         param.setDrafter(fmsTask.getDraftlogin());
         param.setDrafterName(fmsTask.getDraftname());
         param.setTaskId(fmsTask.getTaskid());
+        param.setDraftTime(fmsTask.getCreatetime());
         return param;
     }
 

@@ -159,11 +159,11 @@ public class WjbpdService extends BaseService {
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件
         ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
-        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
-            throw new Exception("countDownLatch处理超时...");
-        }
         if(!future.get()||!future1.get()){
             throw new Exception("业务处理出错...");
+        }
+        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
+            throw new Exception("countDownLatch处理超时...");
         }
         param.setFtpList(ftpList);
         log.info("自定义任务执行完毕...");

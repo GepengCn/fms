@@ -12,7 +12,7 @@
  | 3 | 拟稿人 | drafter |字符型|是|使用平台登录名,比如张三的登录名:zs|
  | 4 | 拟稿人姓名 | drafterName |字符型|是|张三|
  | 5 | 拟稿时间 | draftTime |字符型|是|`yyyy-MM-dd HH:mm:ss`|
- | 6 | 公文表单ftp地址(pdf文件)| formFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
+ | 6 | 公文表单ftp地址(pdf文件)| formFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
  | 7 | 公文正文ftp地址)| docFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
  | 8 | 附件ftp地址| attFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
  | 9 | 卷皮ftp地址| coverFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
