@@ -27,5 +27,20 @@ public class FtpList {
 
         private String fileName;
 
+        private int fileSort;
+
+        public FtpDetail(String filePath, String fileName) {
+            this.filePath = filePath;
+            this.fileName = fileName;
+        }
+    }
+
+    public void sort(){
+        coverFtp.setFileSort(0);
+        catalogFtp.setFileSort(1);
+        formFtp.setFileSort(2);
+        docFtp.setFileSort(3);
+        attFtp.setFileSort(4);
+        refFtp.setFileSort(6);
     }
 }

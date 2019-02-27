@@ -165,6 +165,7 @@ public class WjbpdService extends BaseService {
         if(!countDownLatch.await(15, TimeUnit.MINUTES)){
             throw new Exception("countDownLatch处理超时...");
         }
+        ftpList.sort();
         param.setFtpList(ftpList);
         log.info("自定义任务执行完毕...");
         return param;
