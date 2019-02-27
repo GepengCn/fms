@@ -13,11 +13,11 @@
  | 4 | 拟稿人姓名 | drafterName |字符型|是|张三|
  | 5 | 拟稿时间 | draftTime |字符型|是|`yyyy-MM-dd HH:mm:ss`|
  | 6 | 公文表单ftp地址(pdf文件)| formFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 7 | 公文正文ftp地址)| docFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
- | 8 | 附件ftp地址| attFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
- | 9 | 卷皮ftp地址| coverFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
- | 10 | 目录ftp地址| catalogFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
- | 11 | 备考表ftp地址| refFtp |字符型|是|`filePath:远程目录;fileName:文件名`|
+ | 7 | 公文正文ftp地址)| docFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
+ | 8 | 附件ftp地址| attFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
+ | 9 | 卷皮ftp地址| coverFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
+ | 10 | 目录ftp地址| catalogFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
+ | 11 | 备考表ftp地址| refFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
  | 12 | 个性化数据 | customized |字符型|是|不同公文不同字段,参考个性化字段表|
  | 13 | 文档类型 | type |int|是|1:文件报批单<br> 2:自由行文<br> 3:单位发文<br> 4:党组发文<br> 5:院发文<br> 6:收文登记<br> 7:阅件发送|
  | 14 | 关联文档 | refDocList |字符型|否|数组|
