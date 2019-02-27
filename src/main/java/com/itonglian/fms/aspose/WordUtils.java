@@ -1,6 +1,9 @@
 package com.itonglian.fms.aspose;
 
-import com.aspose.words.*;
+import com.aspose.words.Document;
+import com.aspose.words.IWarningCallback;
+import com.aspose.words.Range;
+import com.aspose.words.WarningInfo;
 import com.itonglian.fms.service.ContentFilling;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -14,7 +17,7 @@ import java.util.Map;
 @Slf4j
 public class WordUtils {
 
-    public boolean word2Pdf(String srcFile, String destFile){
+    public synchronized boolean word2Pdf(String srcFile, String destFile){
         Document doc;
         try {
             doc = new Document(srcFile);
@@ -35,10 +38,9 @@ public class WordUtils {
             return false;
         }
         return true;
-
     }
-    public boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents){
-        Document doc = null;
+    public synchronized boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents){
+        Document doc;
         String barcode ="";
         try {
             doc = new Document(srcFile);
@@ -50,18 +52,11 @@ public class WordUtils {
                     log.warn(warningInfo.getDescription());
                 }
             });
-            SaveOutputParameters saveOutputParameters = doc.save(destFile);
+            doc.save(destFile);
         } catch (Exception e) {
             log.error("error",e);
             return false;
         }finally {
-            if(doc!=null){
-                try {
-                    doc.cleanup();
-                } catch (Exception e) {
-                    log.error("error",e);
-                }
-            }
             try {
                 FileUtils.forceDelete(new File(barcode));
             } catch (IOException e) {
