@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface ContentFilling {
 
-    String execute(Document document, Range range, Map<String,String> contents) throws Exception;
+    String execute(Document document, Range range, Map<String,String> contents,long taskId) throws Exception;
 
 }

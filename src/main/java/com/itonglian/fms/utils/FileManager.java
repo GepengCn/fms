@@ -127,7 +127,7 @@ public class FileManager {
         return ftpDetail;
     }
 
-    public FtpList.FtpDetail handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents) throws Exception {
+    public FtpList.FtpDetail handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents,long taskId) throws Exception {
         //目录
         FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
         ftpDetail.setFileName(getRandomFileName());
@@ -138,7 +138,7 @@ public class FileManager {
                 String destPath = pdfPath+ File.separator+getRandomFileName();
                 File destFile = new File(destPath);
                 log.info(templatePath+File.separator+ftpDetail.getFileName()+"word转PDF...");
-                if(!wordUtils.fillThenWord2Pdf(templatePath,destPath,contentFilling,contents)){
+                if(!wordUtils.fillThenWord2Pdf(templatePath,destPath,contentFilling,contents,taskId)){
                     throw new Exception("转换PDF出错");
                 }
                 log.info(destPath+"上传FTP...");

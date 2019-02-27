@@ -154,7 +154,7 @@ public class WjbpdService extends BaseService {
         }
         contents.put("FF36",validateName);
         contents.put("FF02",ffgl.getFf02());
-        ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),wjbpdContentFilling,contents));
+        ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),wjbpdContentFilling,contents,wfTask.getWt00()));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件

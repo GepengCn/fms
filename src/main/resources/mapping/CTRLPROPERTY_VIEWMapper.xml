@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.primary.CTRLPROPERTY_VIEWMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.CTRLPROPERTY_VIEW">
+    <result column="SI00" jdbcType="DECIMAL" property="si00" />
+    <result column="SI01" jdbcType="DECIMAL" property="si01" />
+    <result column="SI02" jdbcType="VARCHAR" property="si02" />
+    <result column="SI03" jdbcType="VARCHAR" property="si03" />
+    <result column="SI04" jdbcType="VARCHAR" property="si04" />
+    <result column="SI05" jdbcType="DECIMAL" property="si05" />
+    <result column="SI06" jdbcType="DECIMAL" property="si06" />
+    <result column="SI07" jdbcType="DECIMAL" property="si07" />
+    <result column="SI08" jdbcType="DECIMAL" property="si08" />
+    <result column="SI09" jdbcType="VARCHAR" property="si09" />
+    <result column="SI10" jdbcType="VARCHAR" property="si10" />
+    <result column="SI11" jdbcType="DECIMAL" property="si11" />
+    <result column="SP01" jdbcType="VARCHAR" property="sp01" />
+    <result column="SP02" jdbcType="VARCHAR" property="sp02" />
+    <result column="SP13" jdbcType="VARCHAR" property="sp13" />
+    <result column="SP03" jdbcType="VARCHAR" property="sp03" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SI00, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11, SP01, SP02, 
+    SP13, SP03
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.CTRLPROPERTY_VIEWExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from CTRLPROPERTY_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.CTRLPROPERTY_VIEWExample">
+    delete from CTRLPROPERTY_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.CTRLPROPERTY_VIEW">
+    insert into CTRLPROPERTY_VIEW (SI00, SI01, SI02, 
+      SI03, SI04, SI05, SI06, 
+      SI07, SI08, SI09, SI10, 
+      SI11, SP01, SP02, SP13, 
+      SP03)
+    values (#{si00,jdbcType=DECIMAL}, #{si01,jdbcType=DECIMAL}, #{si02,jdbcType=VARCHAR}, 
+      #{si03,jdbcType=VARCHAR}, #{si04,jdbcType=VARCHAR}, #{si05,jdbcType=DECIMAL}, #{si06,jdbcType=DECIMAL}, 
+      #{si07,jdbcType=DECIMAL}, #{si08,jdbcType=DECIMAL}, #{si09,jdbcType=VARCHAR}, #{si10,jdbcType=VARCHAR}, 
+      #{si11,jdbcType=DECIMAL}, #{sp01,jdbcType=VARCHAR}, #{sp02,jdbcType=VARCHAR}, #{sp13,jdbcType=VARCHAR}, 
+      #{sp03,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.CTRLPROPERTY_VIEW">
+    insert into CTRLPROPERTY_VIEW
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="si00 != null">
+        SI00,
+      </if>
+      <if test="si01 != null">
+        SI01,
+      </if>
+      <if test="si02 != null">
+        SI02,
+      </if>
+      <if test="si03 != null">
+        SI03,
+      </if>
+      <if test="si04 != null">
+        SI04,
+      </if>
+      <if test="si05 != null">
+        SI05,
+      </if>
+      <if test="si06 != null">
+        SI06,
+      </if>
+      <if test="si07 != null">
+        SI07,
+      </if>
+      <if test="si08 != null">
+        SI08,
+      </if>
+      <if test="si09 != null">
+        SI09,
+      </if>
+      <if test="si10 != null">
+        SI10,
+      </if>
+      <if test="si11 != null">
+        SI11,
+      </if>
+      <if test="sp01 != null">
+        SP01,
+      </if>
+      <if test="sp02 != null">
+        SP02,
+      </if>
+      <if test="sp13 != null">
+        SP13,
+      </if>
+      <if test="sp03 != null">
+        SP03,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="si00 != null">
+        #{si00,jdbcType=DECIMAL},
+      </if>
+      <if test="si01 != null">
+        #{si01,jdbcType=DECIMAL},
+      </if>
+      <if test="si02 != null">
+        #{si02,jdbcType=VARCHAR},
+      </if>
+      <if test="si03 != null">
+        #{si03,jdbcType=VARCHAR},
+      </if>
+      <if test="si04 != null">
+        #{si04,jdbcType=VARCHAR},
+      </if>
+      <if test="si05 != null">
+        #{si05,jdbcType=DECIMAL},
+      </if>
+      <if test="si06 != null">
+        #{si06,jdbcType=DECIMAL},
+      </if>
+      <if test="si07 != null">
+        #{si07,jdbcType=DECIMAL},
+      </if>
+      <if test="si08 != null">
+        #{si08,jdbcType=DECIMAL},
+      </if>
+      <if test="si09 != null">
+        #{si09,jdbcType=VARCHAR},
+      </if>
+      <if test="si10 != null">
+        #{si10,jdbcType=VARCHAR},
+      </if>
+      <if test="si11 != null">
+        #{si11,jdbcType=DECIMAL},
+      </if>
+      <if test="sp01 != null">
+        #{sp01,jdbcType=VARCHAR},
+      </if>
+      <if test="sp02 != null">
+        #{sp02,jdbcType=VARCHAR},
+      </if>
+      <if test="sp13 != null">
+        #{sp13,jdbcType=VARCHAR},
+      </if>
+      <if test="sp03 != null">
+        #{sp03,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.CTRLPROPERTY_VIEWExample" resultType="java.lang.Long">
+    select count(*) from CTRLPROPERTY_VIEW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CTRLPROPERTY_VIEW
+    <set>
+      <if test="record.si00 != null">
+        SI00 = #{record.si00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.si01 != null">
+        SI01 = #{record.si01,jdbcType=DECIMAL},
+      </if>
+      <if test="record.si02 != null">
+        SI02 = #{record.si02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.si03 != null">
+        SI03 = #{record.si03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.si04 != null">
+        SI04 = #{record.si04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.si05 != null">
+        SI05 = #{record.si05,jdbcType=DECIMAL},
+      </if>
+      <if test="record.si06 != null">
+        SI06 = #{record.si06,jdbcType=DECIMAL},
+      </if>
+      <if test="record.si07 != null">
+        SI07 = #{record.si07,jdbcType=DECIMAL},
+      </if>
+      <if test="record.si08 != null">
+        SI08 = #{record.si08,jdbcType=DECIMAL},
+      </if>
+      <if test="record.si09 != null">
+        SI09 = #{record.si09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.si10 != null">
+        SI10 = #{record.si10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.si11 != null">
+        SI11 = #{record.si11,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sp01 != null">
+        SP01 = #{record.sp01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sp02 != null">
+        SP02 = #{record.sp02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sp13 != null">
+        SP13 = #{record.sp13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sp03 != null">
+        SP03 = #{record.sp03,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CTRLPROPERTY_VIEW
+    set SI00 = #{record.si00,jdbcType=DECIMAL},
+      SI01 = #{record.si01,jdbcType=DECIMAL},
+      SI02 = #{record.si02,jdbcType=VARCHAR},
+      SI03 = #{record.si03,jdbcType=VARCHAR},
+      SI04 = #{record.si04,jdbcType=VARCHAR},
+      SI05 = #{record.si05,jdbcType=DECIMAL},
+      SI06 = #{record.si06,jdbcType=DECIMAL},
+      SI07 = #{record.si07,jdbcType=DECIMAL},
+      SI08 = #{record.si08,jdbcType=DECIMAL},
+      SI09 = #{record.si09,jdbcType=VARCHAR},
+      SI10 = #{record.si10,jdbcType=VARCHAR},
+      SI11 = #{record.si11,jdbcType=DECIMAL},
+      SP01 = #{record.sp01,jdbcType=VARCHAR},
+      SP02 = #{record.sp02,jdbcType=VARCHAR},
+      SP13 = #{record.sp13,jdbcType=VARCHAR},
+      SP03 = #{record.sp03,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+</mapper>

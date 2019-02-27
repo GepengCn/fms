@@ -39,13 +39,13 @@ public class WordUtils {
         }
         return true;
     }
-    public synchronized boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents){
+    public synchronized boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents,long taskId){
         Document doc;
         String barcode ="";
         try {
             doc = new Document(srcFile);
             Range range = doc.getRange();
-            barcode = contentFilling.execute(doc,range,contents);
+            barcode = contentFilling.execute(doc,range,contents,taskId);
             doc.setWarningCallback(new IWarningCallback() {
                 @Override
                 public void warning(WarningInfo warningInfo) {
