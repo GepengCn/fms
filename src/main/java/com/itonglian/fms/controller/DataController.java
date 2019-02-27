@@ -9,6 +9,7 @@ import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.FmsTaskService;
+import com.itonglian.fms.service.bean.FileStatus;
 import com.itonglian.fms.service.bean.WjbpdCustomized;
 import com.itonglian.fms.service.bean.WjbpdParam;
 import com.itonglian.fms.service.common.FileStatusManager;
@@ -37,18 +38,18 @@ public class DataController {
     FmsTaskService fmsTaskService;
 
     @ApiOperation(value="待归档数据查询接口", notes="调用后，归档状态为200(已发送)" ,httpMethod="POST")
-    @RequestMapping("findThenUpdate")
-    public List<String> findThenUpdate(String startDate,String endDate) {
+    @RequestMapping("findList")
+    public List<String> findList(String startDate,String endDate) {
         FMS_DATAExample fmsDataExample = new FMS_DATAExample();
-        fmsDataExample.or().andDrEqualTo("N");
+        FMS_DATAExample.Criteria criteria = fmsDataExample.or().andDrEqualTo("N");
         if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
-            fmsDataExample.or().andTsBetween(startDate,endDate);
+            criteria.andTsBetween(startDate,endDate);
         }
         if(!Strings.isNullOrEmpty(startDate)&&Strings.isNullOrEmpty(endDate)){
-            fmsDataExample.or().andTsGreaterThanOrEqualTo(startDate);
+            criteria.andTsGreaterThanOrEqualTo(startDate);
         }
         if(Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
-            fmsDataExample.or().andTsLessThanOrEqualTo(endDate);
+            criteria.andTsLessThanOrEqualTo(endDate);
         }
         List<FMS_DATAWithBLOBs> fmsDataList = fmsDataService.selectByExampleWithBLOBs(fmsDataExample);
         List<String> resultList = new ArrayList<>();
@@ -56,7 +57,7 @@ public class DataController {
         while(iterator.hasNext()){
             FMS_DATAWithBLOBs fmsData = iterator.next();
             resultList.add(new String(fmsData.getCommon(), Charset.forName("UTF-8")));
-            /*FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
+            FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
             fmsTaskExample.or().andDataidEqualTo(fmsData.getDataid());
             List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
             Iterator<FMS_TASK> iterator1 = fmsTaskList.iterator();
@@ -71,7 +72,7 @@ public class DataController {
                     log.error("error",e);
                     fmsTask.setStatus(FileStatus.STATUS_201.getStatus());
                 }
-            }*/
+            }
         }
 
         return resultList;

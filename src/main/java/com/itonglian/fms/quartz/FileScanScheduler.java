@@ -16,6 +16,7 @@ import com.itonglian.fms.service.common.ServiceRouter;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -72,7 +73,7 @@ public class FileScanScheduler {
                     FMS_DATAWithBLOBs fmsData = new FMS_DATAWithBLOBs();
                     fmsData.setDataid(UUID.randomUUID().toString());
                     fmsData.setDr("N");
-                    fmsData.setTs(DateTime.now().toString());
+                    fmsData.setTs(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
                     fmsData.setCommon(JSON.toJSONString(commonDatas).getBytes());
                     fmsData.setCustomized(JSON.toJSONString(commonDatas.getCustomized()).getBytes());
                     fmsDataService.insert(fmsData);
