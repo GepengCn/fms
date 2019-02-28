@@ -123,6 +123,7 @@ public class DataController {
         WjbpdCustomized wjbpdCustomized = params.getCustomized();
         modelAndView.addObject("customized", JSON.toJSONString(wjbpdCustomized));
         modelAndView.addObject("ftpList", JSON.toJSONString(params.getFtpList()));
+//        modelAndView.addObject("ftpList", params.getFtpList());
         modelAndView.setViewName("detail");
         return modelAndView;
     }

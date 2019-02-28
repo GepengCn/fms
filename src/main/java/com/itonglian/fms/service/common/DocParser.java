@@ -42,7 +42,8 @@ public class DocParser {
         File[] files = new File(downloadPath).listFiles();
 
         if(files.length==0){
-            throw new Exception("正文不存在...");
+            log.warn("ftp上没找到此公文的正文...");
+            return;
         }
         //word转成pdf
         if(!wordUtils.word2Pdf(files[0].getAbsolutePath(),pdfAbsPath,false)){
