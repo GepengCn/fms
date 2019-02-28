@@ -64,12 +64,24 @@ public class FtpUtil {
         }
     }
     public boolean upload(String parentPath, String fileName, File srcFile){
+       return upload(parentPath,fileName,srcFile,false);
+    }
+    public boolean upload(String parentPath, String fileName, File srcFile,boolean clearAll){
         FTPClient ftpClient = null;
         try {
             ftpClient = init(parentPath);
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftpClient.setCharset(Charset.forName("UTF-8"));
             ftpClient.setControlEncoding("UTF-8");
+            if(clearAll){
+                FTPFile[] ftpFiles = ftpClient.listFiles();
+                for(int i=0;i<ftpFiles.length;i++){
+                    String toDelFileName = ftpFiles[i].getName();
+                    if(!ftpClient.deleteFile(new String(toDelFileName.getBytes("UTF-8"), "iso-8859-1"))){
+                        throw new Exception("删除ftp文件失败..");
+                    }
+                }
+            }
             log.info("上传文件:"+fileName+"至"+parentPath);
             InputStream inputStream = new FileInputStream(srcFile);
             if(!ftpClient.storeFile(fileName,inputStream)){
@@ -105,15 +117,19 @@ public class FtpUtil {
         FTPClient ftpClient = new FTPClient();
         try {
             ftpClient = init(parentPath);
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.setCharset(Charset.forName("UTF-8"));
+            ftpClient.setControlEncoding("UTF-8");
+            ftpClient.enterLocalPassiveMode();
             FTPFile[] ftpFiles=ftpClient.listFiles();
+            ftpClient.listFiles(parentPath);
             for (int i = 0; i <ftpFiles.length ; i++) {
                 FTPFile ftpFile = ftpFiles[i];
-                File temp =new File(destPath);
-                FileUtils.forceMkdir(temp);
                 if(!ftpFile.isDirectory()){
                     File file = new File(destPath+"/"+ftpFile.getName());
                     OutputStream outputStream = new FileOutputStream(file);
-                    ftpClient.retrieveFile(ftpFile.getName(),outputStream);
+                    String localFileName = new String(ftpFile.getName().getBytes("UTF-8"), "ISO-8859-1");
+                    ftpClient.retrieveFile(localFileName,outputStream);
                     outputStream.close();
                 }
             }

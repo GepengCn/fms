@@ -5,6 +5,7 @@ import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.*;
 import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.BaseService;
+import com.itonglian.fms.service.common.DocParser;
 import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.service.common.range.WjbpdContentFilling;
 import com.itonglian.fms.utils.FileManager;
@@ -46,6 +47,9 @@ public class WjbpdService extends BaseService {
     @Autowired
     SysGroupService sysGroupService;
 
+    @Autowired
+    DocParser docParser;
+
     @Override
     public FileType getType() {
         return FileType.WJPBD;
@@ -54,7 +58,7 @@ public class WjbpdService extends BaseService {
     @Override
     public Param customizedImpl (Param param, FMS_TASK fmsTask) throws Exception{
 
-        int taskSize = 6;
+        int taskSize = 7;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
         FFGL ffgl = ffglService.selectByPrimaryKey(wfTask.getWt04());
@@ -159,7 +163,15 @@ public class WjbpdService extends BaseService {
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件
         ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
-        if(!future.get()||!future1.get()){
+
+        Future<Boolean> future2 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
+            @Override
+            public void callback() throws Exception {
+                docParser.execute(ftpList.getDocFtp());
+            }
+        }));
+
+        if(!future.get()||!future1.get()||!future2.get()){
             throw new Exception("业务处理出错...");
         }
         if(!countDownLatch.await(15, TimeUnit.MINUTES)){
@@ -167,6 +179,7 @@ public class WjbpdService extends BaseService {
         }
         ftpList.sort();
         param.setFtpList(ftpList);
+
         log.info("自定义任务执行完毕...");
         return param;
     }

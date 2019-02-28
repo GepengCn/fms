@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 public class WordUtils {
 
-    public synchronized boolean word2Pdf(String srcFile, String destFile){
+    public synchronized boolean word2Pdf(String srcFile, String destFile,boolean delete){
         Document doc;
         try {
             doc = new Document(srcFile);
@@ -30,14 +30,19 @@ public class WordUtils {
             doc.save(destFile);
         } catch (Exception e) {
             log.error("error",e);
-            try {
-                FileUtils.forceDelete(new File(srcFile));
-            } catch (IOException e1) {
-                log.error("error",e1);
+            if(delete){
+                try {
+                    FileUtils.forceDelete(new File(srcFile));
+                } catch (IOException e1) {
+                    log.error("error",e1);
+                }
             }
             return false;
         }
         return true;
+    }
+    public synchronized boolean word2Pdf(String srcFile, String destFile){
+        return word2Pdf(srcFile,destFile,true);
     }
     public synchronized boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents,long taskId){
         Document doc;
