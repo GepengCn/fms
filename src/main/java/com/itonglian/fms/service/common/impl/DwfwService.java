@@ -7,7 +7,7 @@ import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.DocParser;
 import com.itonglian.fms.service.common.FuturePieceTask;
-import com.itonglian.fms.service.common.range.ZyxwContentFilling;
+import com.itonglian.fms.service.common.range.DwfwContentFilling;
 import com.itonglian.fms.utils.FileManager;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -20,10 +20,9 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
 @Slf4j
 @Component
-public class ZyxwService extends BaseService {
+public class DwfwService extends BaseService {
     @Autowired
     FFGLService ffglService;
     @Autowired
@@ -35,26 +34,25 @@ public class ZyxwService extends BaseService {
     @Autowired
     SysUsersService sysUsersService;
 
-    @Value(value = "${template.zyxwFormPath}")
+    @Value(value = "${template.dwfwFormPath}")
     private String formPath;
     @Autowired
     FileManager fileManager;
     @Autowired
-    ZyxwContentFilling zyxwContentFilling;
+    DwfwContentFilling dwfwContentFilling;
 
     @Autowired
     SysGroupService sysGroupService;
 
     @Autowired
     DocParser docParser;
-
     @Override
     public FileType getType() {
-        return FileType.ZYXW;
+        return FileType.DWFW;
     }
 
     @Override
-    public Param customizedImpl(Param param,final FMS_TASK fmsTask) throws Exception {
+    public Param customizedImpl(Param param, FMS_TASK fmsTask) throws Exception {
         int taskSize = 7;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
@@ -62,17 +60,23 @@ public class ZyxwService extends BaseService {
         Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                ZyxwCustomized zyxwCustomized = new ZyxwCustomized();
-                zyxwCustomized.setFF03(ffgl.getFf03());
-                zyxwCustomized.setFF04(ffgl.getFf04());
-                zyxwCustomized.setFF02(ffgl.getFf02());
-                zyxwCustomized.setFF12(ffgl.getFf12());
-                zyxwCustomized.setFF14(ffgl.getFf14());
-                zyxwCustomized.setFF15(ffgl.getFf15());
-                zyxwCustomized.setFF30(ffgl.getFf30());
-                zyxwCustomized.setFF31(ffgl.getFf31());
-                zyxwCustomized.setFF32(ffgl.getFf32());
-                zyxwCustomized.setFF36(ffgl.getFf36());
+                DwfwCustomized dwfwCustomized = new DwfwCustomized();
+                dwfwCustomized.setFF02(ffgl.getFf02());
+                dwfwCustomized.setFF03(ffgl.getFf03());
+                dwfwCustomized.setFF04(ffgl.getFf04());
+                dwfwCustomized.setFF07(ffgl.getFf07());
+                dwfwCustomized.setFF11(ffgl.getFf11());
+                dwfwCustomized.setFF12(ffgl.getFf12());
+                dwfwCustomized.setFF14(ffgl.getFf14());
+                dwfwCustomized.setFF15(ffgl.getFf15());
+                dwfwCustomized.setFF16(ffgl.getFf16());
+                dwfwCustomized.setFF17(ffgl.getFf17());
+                dwfwCustomized.setFF18(ffgl.getFf18());
+                dwfwCustomized.setFF25(ffgl.getFf25()==null?0:ffgl.getFf25());
+                dwfwCustomized.setFF30(ffgl.getFf30());
+                dwfwCustomized.setFF32(ffgl.getFf32());
+                dwfwCustomized.setFF35(ffgl.getFf35());
+
                 /*SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
                 sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
                 List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
@@ -95,7 +99,7 @@ public class ZyxwService extends BaseService {
                     refDocList.add(ff52);
                     zyxwCustomized.setRefDocList(refDocList);
                 }*/
-                param.setCustomized(zyxwCustomized);
+                param.setCustomized(dwfwCustomized);
 
 
             }
@@ -111,7 +115,9 @@ public class ZyxwService extends BaseService {
                 while(iterator.hasNext()){
                     WF_INFOR wfInfor = iterator.next();
                     HandlerDetail handlerDetail = new HandlerDetail();
-                    handlerDetail.setHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi05())).getSu02());
+                    if(wfInfor.getWi05()!=null){
+                        handlerDetail.setHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi05())).getSu02());
+                    }
                     handlerDetail.setLastHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi15())).getSu02());
                     handlerDetail.setHandlerComment(wfInfor.getWi20());
                     handlerDetail.setHandlerStatus(wfInfor.getWi13());
@@ -154,7 +160,7 @@ public class ZyxwService extends BaseService {
         }
         contents.put("FF36",validateName);
         contents.put("FF02",ffgl.getFf02());
-        ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),zyxwContentFilling,contents,wfTask.getWt00()));
+        ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),dwfwContentFilling,contents,wfTask.getWt00()));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
         //附件
