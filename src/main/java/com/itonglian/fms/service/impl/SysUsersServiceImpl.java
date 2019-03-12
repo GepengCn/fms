@@ -14,4 +14,13 @@ public class SysUsersServiceImpl implements SysUsersService {
     public SYS_USERS selectByPrimaryKey(Long su00) {
         return sysUsersMapper.selectByPrimaryKey(su00);
     }
+
+    @Override
+    public String findNameByPrimaryKey(Long su00) {
+        SYS_USERS sysUsers = sysUsersMapper.selectByPrimaryKey(su00);
+        if(sysUsers==null){
+            return null;
+        }
+        return sysUsers.getSu02();
+    }
 }

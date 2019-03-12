@@ -137,9 +137,16 @@ public class DwfwService extends BaseService {
         ftpList.setRefFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.ref,FileType.WJPBD));
         //公文表单
         Map<String,String> contents = new HashMap<>();
+        contents.put("FF02",ffgl.getFf02());
         contents.put("FF03",ffgl.getFf03());
         contents.put("FF04",ffgl.getFf04());
+        contents.put("FF07",ffgl.getFf07());
+        contents.put("FF11",ffgl.getFf11());
         contents.put("FF12",ffgl.getFf12());
+        contents.put("FF16",ffgl.getFf16());
+        contents.put("FF17",ffgl.getFf17());
+        contents.put("FF18",ffgl.getFf18());
+        contents.put("FF25",ffgl.getFf25()==null?"0":ffgl.getFf25()+"");
         contents.put("FF31",ffgl.getFf31());
         String draftGroup = "";
         if(!Strings.isNullOrEmpty(ffgl.getFf32())){
@@ -153,13 +160,20 @@ public class DwfwService extends BaseService {
             draftName = draftUser.getSu02();
         }
         contents.put("FF30",draftName);
+        String FF35Name = "";
+        if(!Strings.isNullOrEmpty(ffgl.getFf35())){
+            SYS_USERS validateUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf35()));
+            FF35Name = validateUser.getSu02();
+        }
+        contents.put("FF35",FF35Name);
         String validateName = "";
         if(!Strings.isNullOrEmpty(ffgl.getFf36())){
             SYS_USERS validateUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf30()));
             validateName = validateUser.getSu02();
         }
         contents.put("FF36",validateName);
-        contents.put("FF02",ffgl.getFf02());
+
+
         ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),dwfwContentFilling,contents,wfTask.getWt00()));
         //正文
         ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));

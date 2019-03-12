@@ -76,7 +76,7 @@ public class WjbpdService extends BaseService {
                 wjbpdCustomized.setFF31(ffgl.getFf31());
                 wjbpdCustomized.setFF32(ffgl.getFf32());
                 wjbpdCustomized.setFF36(ffgl.getFf36());
-                SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
+                /*SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
                 sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
                 List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
                 Iterator<SYS_ATTACHMENT> iterator = sysAttachmentList.iterator();
@@ -97,7 +97,7 @@ public class WjbpdService extends BaseService {
                     List<WjbpdCustomized.FF52> refDocList = new ArrayList<>();
                     refDocList.add(ff52);
                     wjbpdCustomized.setRefDocList(refDocList);
-                }
+                }*/
                 param.setCustomized(wjbpdCustomized);
 
 
