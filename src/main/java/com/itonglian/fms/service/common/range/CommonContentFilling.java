@@ -3,11 +3,12 @@ package com.itonglian.fms.service.common.range;
 import com.aspose.words.*;
 import com.google.common.base.Strings;
 import com.itonglian.fms.service.ContentFilling;
-import com.itonglian.fms.service.CtrlPropertyViewService;
-import com.itonglian.fms.service.SysUsersService;
-import com.itonglian.fms.service.WfInforService;
+import com.itonglian.fms.service.common.CommentTypeParser;
 import com.itonglian.fms.service.common.HtmlParser;
 import com.itonglian.fms.utils.BarcodeUtils;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,15 +20,15 @@ public abstract class CommonContentFilling implements ContentFilling {
 
     @Autowired
     BarcodeUtils barcodeUtils;
+
     @Autowired
-    WfInforService wfInforService;
-    @Autowired
-    CtrlPropertyViewService ctrlPropertyViewService;
-    @Autowired
-    SysUsersService sysUsersService;
+    CommentTypeParser commentTypeParser;
 
     @Autowired
     HtmlParser htmlParser;
+
+
+
 
 
     @Override
@@ -44,7 +45,7 @@ public abstract class CommonContentFilling implements ContentFilling {
         findReplaceOptions.setReplacingCallback(new IReplacingCallback() {
             @Override
             public int replacing(ReplacingArgs replacingArgs) throws Exception {
-                log.info(replacingArgs.getReplacement());
+//                log.info(replacingArgs.getReplacement());
                 return 0;
             }
         });
@@ -54,11 +55,25 @@ public abstract class CommonContentFilling implements ContentFilling {
             if(Strings.isNullOrEmpty(value)){
                 value = "";
             }
-            range.replace(Pattern.compile("\\["+entry.getKey()+"\\]"),value,findReplaceOptions);
+            range.replace(Pattern.compile("\\["+entry.getKey()+"]"),value,findReplaceOptions);
 
         }
         return barcode;
     }
 
-    public abstract void fill(long taskId,DocumentBuilder builder,Range range) throws Exception;
+    public abstract void fill(long taskId, DocumentBuilder builder, Range range) throws Exception;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    protected class ReplaceBuilder{
+
+        private String key;
+
+        private StringBuilder stringBuilder;
+
+        private boolean used;
+
+
+    }
 }

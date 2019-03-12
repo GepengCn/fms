@@ -11,10 +11,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public abstract class FFGLContentFilling extends CommonContentFilling {
@@ -35,14 +34,10 @@ public abstract class FFGLContentFilling extends CommonContentFilling {
         wfInforExample.setOrderByClause("wi08 desc");
         List<WF_INFOR> wfInforList = wfInforService.selectByExample(wfInforExample);
         Iterator<WF_INFOR> iterator = wfInforList.iterator();
-
-        Map<String,StringBuilder> builderMap = new HashMap<>();
+        List<ReplaceBuilder> replaceBuilderList = init();
         while(iterator.hasNext()){
             WF_INFOR wfInfor = iterator.next();
-            String commentStr = wfInfor.getWi20();
-            if(Strings.isNullOrEmpty(commentStr)){
-                continue;
-            }
+
             long formId = Long.parseLong(wfInfor.getWi27());
 
             CommentTypeParser.TypeChooser typeChooser = commentTypeParser.build(formId);
@@ -50,34 +45,53 @@ public abstract class FFGLContentFilling extends CommonContentFilling {
                 break;
             }
             CommentTypeParser.TypeResult typeResult = typeChooser.selectType(wfInfor.getWi71());
+            ReplaceBuilder replaceBuilder = new ReplaceBuilder();
+            replaceBuilder.setKey(typeResult.getType());
+            if(replaceBuilderList.contains(replaceBuilder)){
+                replaceBuilderList.remove(replaceBuilder);
+            }
             if(!typeResult.isHasType()){
+                replaceBuilderList.add(replaceBuilder);
                 continue;
             }
-            if(builderMap.containsKey(typeResult.getType())){
-                StringBuilder stringBuilder = builderMap.get(typeResult.getType());
+            String commentStr = wfInfor.getWi20();
+            if(Strings.isNullOrEmpty(commentStr)){
+                replaceBuilderList.add(replaceBuilder);
+                continue;
+            }
+            if(replaceBuilderList.contains(typeResult.getType())){
+                StringBuilder stringBuilder = replaceBuilder.getStringBuilder();
                 stringBuilder.append(htmlParser.parseWjbpd(commentStr,new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")),sysUsersService.findNameByPrimaryKey(Long.parseLong(wfInfor.getWi05()))));
-                builderMap.replace(typeResult.getType(),stringBuilder);
+                replaceBuilder.setStringBuilder(stringBuilder);
+                replaceBuilder.setUsed(true);
             }else{
                 StringBuilder stringBuilder = new StringBuilder(htmlParser.parseWjbpd(commentStr,new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")),sysUsersService.findNameByPrimaryKey(Long.parseLong(wfInfor.getWi05()))));
-                builderMap.put(typeResult.getType(),stringBuilder);
+                replaceBuilder.setStringBuilder(stringBuilder);
+                replaceBuilder.setUsed(true);
             }
+            replaceBuilderList.add(replaceBuilder);
         }
 
-        for (Map.Entry<String, StringBuilder> map : builderMap.entrySet()) {
+        Iterator<ReplaceBuilder> replaceBuilderIterator = replaceBuilderList.iterator();
+        while(replaceBuilderIterator.hasNext()){
+            ReplaceBuilder replaceBuilder = replaceBuilderIterator.next();
             FindReplaceOptions findReplaceOptions = new FindReplaceOptions();
             findReplaceOptions.setReplacingCallback(new IReplacingCallback() {
                 @Override
                 public int replacing(ReplacingArgs replacingArgs) throws Exception {
+                    if(!replaceBuilder.isUsed()){
+                        return 0;
+                    }
                     builder.moveTo(replacingArgs.getMatchNode());
-                    builder.insertHtml(map.getValue().toString());
-                    replacingArgs.setReplacement("");
+                    builder.insertHtml(replaceBuilder.getStringBuilder().toString());
                     return 0;
                 }
             });
-            range.replace(Pattern.compile("\\["+map.getKey()+"]"),"",findReplaceOptions);
-
+            range.replace(Pattern.compile("\\["+replaceBuilder.getKey()+"]"),"",findReplaceOptions);
         }
     }
+
+    public abstract List<ReplaceBuilder> init();
 
 
 }

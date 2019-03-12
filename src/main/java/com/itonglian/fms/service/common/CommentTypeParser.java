@@ -1,12 +1,13 @@
 package com.itonglian.fms.service.common;
 
+import com.aspose.words.FindReplaceOptions;
+import com.aspose.words.Range;
 import com.itonglian.fms.entity.CTRLPROPERTY_VIEW;
 import com.itonglian.fms.entity.CTRLPROPERTY_VIEWExample;
 import com.itonglian.fms.service.CtrlPropertyViewService;
 import com.itonglian.fms.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @Component
 @Slf4j
@@ -34,6 +36,16 @@ public class CommentTypeParser {
             datas.put(ctrlpropertyView.getSi03(), StringUtils.strRoles(ctrlpropertyView.getSp02()));
         }
         return new TypeChooser();
+    }
+
+    public Map<String,List<String>> findAll(){
+        return datas;
+    }
+
+    public void clearAll(Map<String,List<String>> maps, Range range) throws Exception{
+        for (Map.Entry<String, List<String>> entry : maps.entrySet()) {
+            range.replace(Pattern.compile("\\["+entry.getKey()+"]"),"",new FindReplaceOptions());
+        }
     }
 
     public class TypeChooser{
