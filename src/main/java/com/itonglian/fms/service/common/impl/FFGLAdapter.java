@@ -1,6 +1,5 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.google.common.base.Strings;
 import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.*;
 import com.itonglian.fms.service.bean.*;
@@ -13,16 +12,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
 @Slf4j
 @Component
-public class DwfwService extends BaseService {
+public abstract class FFGLAdapter extends BaseService {
+
     @Autowired
     FFGLService ffglService;
     @Autowired
@@ -34,7 +37,6 @@ public class DwfwService extends BaseService {
     @Autowired
     SysUsersService sysUsersService;
 
-    @Value(value = "${template.dwfwFormPath}")
     private String formPath;
     @Autowired
     FileManager fileManager;
@@ -46,13 +48,14 @@ public class DwfwService extends BaseService {
 
     @Autowired
     DocParser docParser;
-    @Override
-    public FileType getType() {
-        return FileType.DWFW;
-    }
 
+    public abstract  ContentFilling getContentFilling();
+    public abstract String getFormPath();
+
+    public abstract Map<String,String> getContents(FFGL ffgl);
     @Override
     public Param customizedImpl(Param param, FMS_TASK fmsTask) throws Exception {
+        this.formPath = getFormPath();
         int taskSize = 7;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
@@ -128,62 +131,29 @@ public class DwfwService extends BaseService {
                 param.setHandlerDetailList(handlerDetailList);
             }
         }));
-        FtpList ftpList = new FtpList();
+        List<FtpFile> ftpFileList = new ArrayList<>();
         //封皮
-        ftpList.setCoverFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.cover,FileType.WJPBD));
+        ftpFileList.add(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.cover,FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),0,0)));
         //目录
-        ftpList.setCatalogFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.catalog,FileType.WJPBD));
+        ftpFileList.add(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.catalog,FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),1,1)));
         //备考表
-        ftpList.setRefFtp(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.ref,FileType.WJPBD));
+        ftpFileList.add(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.ref,FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),5,5)));
         //公文表单
-        Map<String,String> contents = new HashMap<>();
+        Map<String,String> contents = getContents(ffgl);
+
         contents.put("FF02",ffgl.getFf02());
-        contents.put("FF03",ffgl.getFf03());
-        contents.put("FF04",ffgl.getFf04());
-        contents.put("FF07",ffgl.getFf07());
-        contents.put("FF11",ffgl.getFf11());
-        contents.put("FF12",ffgl.getFf12());
-        contents.put("FF16",ffgl.getFf16());
-        contents.put("FF17",ffgl.getFf17());
-        contents.put("FF18",ffgl.getFf18());
-        contents.put("FF25",ffgl.getFf25()==null?"0":ffgl.getFf25()+"");
-        contents.put("FF31",ffgl.getFf31());
-        String draftGroup = "";
-        if(!Strings.isNullOrEmpty(ffgl.getFf32())){
-            SYS_GROUP sysGroup = sysGroupService.selectByPrimaryKey(Long.parseLong(ffgl.getFf32()));
-            draftGroup = sysGroup.getSg02();
-        }
-        contents.put("FF32",draftGroup);
-        String draftName = "";
-        if(!Strings.isNullOrEmpty(ffgl.getFf30())){
-            SYS_USERS draftUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf30()));
-            draftName = draftUser.getSu02();
-        }
-        contents.put("FF30",draftName);
-        String FF35Name = "";
-        if(!Strings.isNullOrEmpty(ffgl.getFf35())){
-            SYS_USERS validateUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf35()));
-            FF35Name = validateUser.getSu02();
-        }
-        contents.put("FF35",FF35Name);
-        String validateName = "";
-        if(!Strings.isNullOrEmpty(ffgl.getFf36())){
-            SYS_USERS validateUser = sysUsersService.selectByPrimaryKey(Long.parseLong(ffgl.getFf30()));
-            validateName = validateUser.getSu02();
-        }
-        contents.put("FF36",validateName);
 
-
-        ftpList.setFormFtp(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),dwfwContentFilling,contents,wfTask.getWt00()));
+        ftpFileList.add(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),getContentFilling(),contents,wfTask.getWt00(),FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),2,2)));
         //正文
-        ftpList.setDocFtp(new FtpList.FtpDetail(fmsTask.getTextpath(),fmsTask.getTextname()));
+        FtpFile docFtpFile = new FtpFile(fmsTask.getTextpath(),fmsTask.getTextname(),3,3);
+        ftpFileList.add(docFtpFile);
         //附件
-        ftpList.setAttFtp(new FtpList.FtpDetail(fmsTask.getAttachpath(),fmsTask.getAttachname()));
+        ftpFileList.add(new FtpFile(fmsTask.getAttachpath(),fmsTask.getAttachname(),4,4));
 
         Future<Boolean> future2 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                docParser.execute(ftpList.getDocFtp());
+                docParser.execute(docFtpFile);
             }
         }));
 
@@ -193,8 +163,7 @@ public class DwfwService extends BaseService {
         if(!countDownLatch.await(15, TimeUnit.MINUTES)){
             throw new Exception("countDownLatch处理超时...");
         }
-        ftpList.sort();
-        param.setFtpList(ftpList);
+        param.setFtpList(ftpFileList);
 
         log.info("自定义任务执行完毕...");
         return param;

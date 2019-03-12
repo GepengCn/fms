@@ -5,7 +5,7 @@ import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.config.ftp.FtpUtil;
 import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.bean.FileType;
-import com.itonglian.fms.service.bean.FtpList;
+import com.itonglian.fms.service.bean.FtpFile;
 import com.itonglian.fms.service.bean.TemplateType;
 import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.service.common.impl.AttPieceTask;
@@ -100,11 +100,10 @@ public class FileManager {
         return File.separator+parentRoot+File.separator+ UUID.randomUUID().toString();
     }
 
-    public FtpList.FtpDetail handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String parentDir,TemplateType templateType,FileType fileType) throws Exception {
-        FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
+    public FtpFile handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String parentDir, TemplateType templateType, FtpFile ftpFile) throws Exception {
         String fileName = getRandomFileName();
-        ftpDetail.setFileName(fileName);
-        ftpDetail.setFilePath(getParentPath(parentDir));
+        ftpFile.setFileName(fileName);
+        ftpFile.setFilePath(getParentPath(parentDir));
         Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
@@ -116,7 +115,7 @@ public class FileManager {
                     throw new Exception("转换PDF出错");
                 }
                 log.info(tempDestPath+"上传FTP...");
-                if(!ftpUtil.upload(ftpDetail.getFilePath(),ftpDetail.getFileName(),destFile)){
+                if(!ftpUtil.upload(ftpFile.getFilePath(),ftpFile.getFileName(),destFile)){
                     throw new Exception("上传FTP服务器出错");
                 }
             }
@@ -124,25 +123,24 @@ public class FileManager {
         if(!future.get()){
             throw new Exception("转换PDF出错");
         }
-        return ftpDetail;
+        return ftpFile;
     }
 
-    public FtpList.FtpDetail handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents,long taskId) throws Exception {
+    public FtpFile handler(ListeningExecutorService executorService, CountDownLatch countDownLatch, String templatePath, String parentRoot, ContentFilling contentFilling, Map<String,String> contents, long taskId,FtpFile ftpFile) throws Exception {
         //目录
-        FtpList.FtpDetail ftpDetail = new FtpList.FtpDetail();
-        ftpDetail.setFileName(getRandomFileName());
-        ftpDetail.setFilePath(getParentPath(parentRoot));
+        ftpFile.setFileName(getRandomFileName());
+        ftpFile.setFilePath(getParentPath(parentRoot));
         Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
                 String destPath = pdfPath+ File.separator+getRandomFileName();
                 File destFile = new File(destPath);
-                log.info(templatePath+File.separator+ftpDetail.getFileName()+"word转PDF...");
+                log.info(templatePath+File.separator+ftpFile.getFileName()+"word转PDF...");
                 if(!wordUtils.fillThenWord2Pdf(templatePath,destPath,contentFilling,contents,taskId)){
                     throw new Exception("转换PDF出错");
                 }
                 log.info(destPath+"上传FTP...");
-                if(!ftpUtil.upload(ftpDetail.getFilePath(),ftpDetail.getFileName(),destFile)){
+                if(!ftpUtil.upload(ftpFile.getFilePath(),ftpFile.getFileName(),destFile)){
                     throw new Exception("上传FTP服务器出错");
                 }
             }
@@ -150,7 +148,7 @@ public class FileManager {
         if(!future.get()){
             throw new Exception("转换PDF出错");
         }
-        return ftpDetail;
+        return ftpFile;
     }
 
 

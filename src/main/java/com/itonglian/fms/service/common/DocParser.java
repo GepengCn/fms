@@ -2,7 +2,7 @@ package com.itonglian.fms.service.common;
 
 import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.config.ftp.FtpUtil;
-import com.itonglian.fms.service.bean.FtpList;
+import com.itonglian.fms.service.bean.FtpFile;
 import com.itonglian.fms.utils.FileManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
 @Component
@@ -28,14 +27,14 @@ public class DocParser {
     @Autowired
     FileManager fileManager;
 
-    public void execute(FtpList.FtpDetail ftpDetail) throws Exception {
+    public void execute(FtpFile ftpFile) throws Exception {
 
         //临时下载目录
         String downloadPath = pdfPath+ File.separator+ UUID.randomUUID().toString();
         //创建目录
         FileUtils.forceMkdir(new File(downloadPath));
         //下载正文
-        ftpUtil.download(ftpDetail.getFilePath(),downloadPath);
+        ftpUtil.download(ftpFile.getFilePath(),downloadPath);
         //pdf文件目录
         String pdfAbsPath = downloadPath+ File.separator+fileManager.getRandomFileName();
 
@@ -58,7 +57,7 @@ public class DocParser {
         //删除临时下载目录
         FileUtils.deleteDirectory(new File(downloadPath));
         //上传zip包
-        ftpUtil.upload(ftpDetail.getFilePath(),zipFile.getName(),zipFile,true);
+        ftpUtil.upload(ftpFile.getFilePath(),zipFile.getName(),zipFile,true);
     }
 
 }

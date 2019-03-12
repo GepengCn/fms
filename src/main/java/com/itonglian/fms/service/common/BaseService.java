@@ -27,6 +27,7 @@ public abstract class BaseService {
         param.setTaskId(fmsTask.getTaskid());
         int type = Integer.parseInt(fmsTask.getFiletype());
         param.setType(type);
+        param.setCourt(0);
         param.setTitle(fmsTask.getTitle());
         param.setDrafter(fmsTask.getDraftlogin());
         param.setDrafterName(fmsTask.getDraftname());

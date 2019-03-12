@@ -28,4 +28,9 @@ public interface SysGroupService {
     int updateByPrimaryKeySelective(SYS_GROUP record);
 
     int updateByPrimaryKey(SYS_GROUP record);
+
+    String selectNameByPrimaryKey(Long sg00);
+
+    String selectNameByPrimaryKey(String sg00);
+
 }

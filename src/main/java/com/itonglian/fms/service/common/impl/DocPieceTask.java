@@ -15,11 +15,7 @@ public class DocPieceTask extends PieceTask{
 
     @Override
     protected void apply() throws Exception {
-        log.info("DocPieceTask start");
-        long start = System.currentTimeMillis();
         futurePieceTask.callback();
-        log.info("耗时:"+(System.currentTimeMillis()-start)+"秒");
-        log.info("DocPieceTask over");
     }
 
 }

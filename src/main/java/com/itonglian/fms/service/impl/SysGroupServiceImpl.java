@@ -1,8 +1,10 @@
 package com.itonglian.fms.service.impl;
 
+import com.google.common.base.Strings;
 import com.itonglian.fms.dao.primary.SYS_GROUPMapper;
 import com.itonglian.fms.entity.SYS_GROUP;
 import com.itonglian.fms.entity.SYS_GROUPExample;
+import com.itonglian.fms.entity.SYS_USERS;
 import com.itonglian.fms.service.SysGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -67,5 +69,23 @@ public class SysGroupServiceImpl implements SysGroupService {
     @Override
     public int updateByPrimaryKey(SYS_GROUP record) {
         return sysGroupMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public String selectNameByPrimaryKey(Long sg00) {
+        SYS_GROUP sysGroup = sysGroupMapper.selectByPrimaryKey(sg00);
+        if(sysGroup==null||sysGroup.getSg02()==null){
+            return "";
+        }
+        return sysGroup.getSg02();
+    }
+
+    @Override
+    public String selectNameByPrimaryKey(String sg00) {
+        if(Strings.isNullOrEmpty(sg00)){
+            return "";
+        }
+        Long sg00Long = Long.parseLong(sg00);
+        return selectNameByPrimaryKey(sg00Long);
     }
 }
