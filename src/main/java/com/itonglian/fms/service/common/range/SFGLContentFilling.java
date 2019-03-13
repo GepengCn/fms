@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public abstract class FFGLContentFilling extends CommonContentFilling {
+public abstract class SFGLContentFilling extends CommonContentFilling {
 
     @Autowired
     WfInforService wfInforService;
@@ -91,6 +91,5 @@ public abstract class FFGLContentFilling extends CommonContentFilling {
     }
 
     public abstract List<ReplaceBuilder> init();
-
 
 }

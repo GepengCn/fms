@@ -6,4 +6,6 @@ public interface SysUsersService {
     SYS_USERS selectByPrimaryKey(Long su00);
 
     String findNameByPrimaryKey(Long su00);
+
+    String findNameByPrimaryKey(String su00);
 }

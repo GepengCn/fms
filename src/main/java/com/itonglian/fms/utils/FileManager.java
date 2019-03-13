@@ -74,8 +74,6 @@ public class FileManager {
                 return getPdfSuffix(YFW);
             case SWDJ:
                 return getPdfSuffix(SWDJ);
-            case YJFS:
-                return getPdfSuffix(YJFS);
             default:
                 throw new Exception("未知公文");
         }

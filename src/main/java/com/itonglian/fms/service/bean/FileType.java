@@ -7,8 +7,7 @@ public enum FileType {
     DWFW(3),
     DZFW(4),
     YFW(5),
-    SWDJ(6),
-    YJFS(7)
+    SWDJ(6)
     ;
     private int type;
 
@@ -31,8 +30,6 @@ public enum FileType {
                 return FileType.YFW;
             case 6:
                 return FileType.SWDJ;
-            case 7:
-                return FileType.YJFS;
             default:
                 throw new Exception("不识别的类型");
         }

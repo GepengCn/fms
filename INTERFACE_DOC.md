@@ -12,88 +12,109 @@
  | 3 | 拟稿人 | drafter |字符型|是|使用平台登录名,比如张三的登录名:zs|
  | 4 | 拟稿人姓名 | drafterName |字符型|是|张三|
  | 5 | 拟稿时间 | draftTime |字符型|是|`yyyy-MM-dd HH:mm:ss`|
- | 6 | 公文表单ftp地址(pdf文件)| formFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 7 | 公文正文ftp地址)| docFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 8 | 附件ftp地址| attFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 9 | 卷皮ftp地址| coverFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 10 | 目录ftp地址| catalogFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 11 | 备考表ftp地址| refFtp |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int)`|
- | 12 | 个性化数据 | customized |字符型|是|不同公文不同字段,参考个性化字段表|
- | 13 | 文档类型 | type |int|是|1:文件报批单<br> 2:自由行文<br> 3:单位发文<br> 4:党组发文<br> 5:院发文<br> 6:收文登记<br> 7:阅件发送|
- | 14 | 关联文档 | refDocList |字符型|否|数组|
- | 15 | 办理详情 | handlingList |字符型|否|数组|
- | 16 | 办理状态 | handlerStatus |字符型|否|0:已办 1:已收在办 2:未收未办 3:终止 4:冻结|
- | 17 | 办理时间 | handlerTime |字符型|否|`yyyy-MM-dd hh:mm:ss`|
- | 18 | 当前办理用户 | handlerUser |字符型|否|用户姓名 如:张三|
- | 19 | 上一办理用户 | lastHandlerUser |字符型|否|用户姓名 如:张三|
- | 20 | 送达时间 | sendTime |字符型|否|`yyyy-MM-dd hh:mm:ss`|
+ | 6 | FTP文件| ftpList |字符型|是|`filePath:远程目录;fileName:文件名;fileSort:顺序号(int);fileType:文件类型(int)`|
+ | 7 | 经办法院 | court |数字型|是|0|
+ | 8 | 个性化数据 | customized |字符型|是|不同公文不同字段,参考个性化字段表|
+ | 9 | 文档类型 | type |int|是|1:文件报批单<br> 2:自由行文<br> 3:单位发文<br> 4:党组发文<br> 5:院发文<br> 6:收文登记<br> 7:阅件发送|
+ | 10 | 关联文档 | refDocList |字符型|否|数组|
+ | 11 | 办理详情 | handlingList |字符型|否|数组|
+ | 12 | 办理状态 | handlerStatus |字符型|否|0:已办 1:已收在办 2:未收未办 3:终止 4:冻结|
+ | 13 | 办理时间 | handlerTime |字符型|否|`yyyy-MM-dd hh:mm:ss`|
+ | 14 | 当前办理用户 | handlerUser |字符型|否|用户姓名 如:张三|
+ | 15 | 上一办理用户 | lastHandlerUser |字符型|否|用户姓名 如:张三|
+ | 16 | 送达时间 | sendTime |字符型|否|`yyyy-MM-dd hh:mm:ss`|
 
 
 > `json`范例如下
 
 ```metadata json
 {
-  "customized": {
-    "fF02": "FB2018000005",
-    "fF03": "平件",
-    "fF04": "内部",
-    "fF12": "办理日期屏蔽测试",
-    "fF14": "2018051835150100",
-    "fF15": "2018051835150200",
-    "fF30": "4577",
-    "fF31": "2018/5/18",
-    "fF32": "902",
-    "fF36": "",
-    "fF53": "办公平台",
-    "refDocList": [
-      {
-        "fF02": "FB2018000006",
-        "fF12": "有关办理日志屏蔽测试的相关资料",
-        "fF30": "4576",
-        "fF31": "2018/5/19",
-        "fF32": "902"
-      },
-      {
-        "fF02": "FB2018000008",
-        "fF12": "有关办理日志屏蔽测试的相关资料1",
-        "fF30": "4577",
-        "fF31": "2018/5/20",
-        "fF32": "902"
-      }
-    ]
-  },
-  "draftTime": "2019-02-20 10:14:32",
-  "drafter": "zs",
-  "drafterName": "张三",
-  "ftpList": {
-    "attFtp": {
-      "fileName": "att.zip",
-      "filePath": "/513f9001-a494-43d6-8de1-d0e5efaddf1d/"
+    "court": 0,
+    "customized": {
+        "fF02": "FB2019000009",
+        "fF03": "平件",
+        "fF12": "管理gray accord",
+        "fF14": "2019030534340101",
+        "fF15": "2019030534340201",
+        "fF30": "4481",
+        "fF31": "2019-03-05",
+        "fF32": "902",
+        "refDocList": [
+            {
+                "fF02": "FB2019000008",
+                "fF12": "gray accord",
+                "fF30": "4481",
+                "fF31": "2019-03-05",
+                "fF32": "902"
+            }
+        ]
     },
-    "catalogFtp": {
-      "fileName": "目录.pdf",
-      "filePath": "/cab90ff9-bd9f-40fb-bda1-d4b7d07033dd/"
-    },
-    "coverFtp": {
-      "fileName": "卷皮.pdf",
-      "filePath": "/44373cc4-f81c-497e-86fb-d08b9948e0db/"
-    },
-    "docFtp": {
-      "fileName": "正文.pdf",
-      "filePath": "/56582b68-4c1d-48d2-aab5-a4ab0d9d0118/"
-    },
-    "formFtp": {
-      "fileName": "表单.pdf",
-      "filePath": "/7dad9768-7ef9-4b6f-809d-ad0dbf2325fa/"
-    },
-    "refFtp": {
-      "fileName": "备考表.pdf",
-      "filePath": "/e9356557-095b-4543-a352-e7a3b0c51ab0/"
-    }
-  },
-  "taskId": "13464",
-  "title": "全国政协委员马全林：保护生态就是保护民生",
-  "type": 1
+    "draftTime": "2019-03-12 19:11:11",
+    "drafter": "400",
+    "drafterName": "测试用400",
+    "ftpList": [
+        {
+            "fileName": "51b2e468-02bf-4c8f-b35a-8a3b52a8841b.pdf",
+            "filePath": "/a1f2d51c-9e26-4b3c-be63-4e201e874de6/75306c30-8294-497d-8e5e-57e0c1b1a84b",
+            "fileSort": 0,
+            "fileType": 0
+        },
+        {
+            "fileName": "00fc2c7a-1b31-41d7-bf7c-2bf6b0e12d4e.pdf",
+            "filePath": "/a1f2d51c-9e26-4b3c-be63-4e201e874de6/3bd74667-5195-4fce-8c21-5a44d0cec70c",
+            "fileSort": 1,
+            "fileType": 1
+        },
+        {
+            "fileName": "c6da7d98-f8d2-4134-9354-9e832c5374da.pdf",
+            "filePath": "/a1f2d51c-9e26-4b3c-be63-4e201e874de6/fca3eb74-79c4-441c-aba9-a1c42f939cff",
+            "fileSort": 5,
+            "fileType": 5
+        },
+        {
+            "fileName": "5f76d222-636e-435b-8234-09802dd0f27f.pdf",
+            "filePath": "/a1f2d51c-9e26-4b3c-be63-4e201e874de6/909669a9-1673-4b72-8a11-392ef0f1ab57",
+            "fileSort": 2,
+            "fileType": 2
+        },
+        {
+            "fileName": "默认模板.doc",
+            "filePath": "/a1f2d51c-9e26-4b3c-be63-4e201e874de6/1e0cc19f-da37-4e27-a04c-ba31203600f1",
+            "fileSort": 3,
+            "fileType": 3
+        },
+        {
+            "filePath": "/a1f2d51c-9e26-4b3c-be63-4e201e874de6/237a0dae-5e00-4669-8611-6c43bf7bf3d9",
+            "fileSort": 4,
+            "fileType": 4
+        }
+    ],
+    "handlerDetailList": [
+        {
+            "handlerStatus": "0",
+            "handlerTime": "2019-03-05 10:35:45",
+            "handlerUser": "测试用400",
+            "lastHandlerUser": "测试用400",
+            "sendTime": "2019-03-05 10:35:45"
+        },
+        {
+            "handlerStatus": "0",
+            "handlerTime": "2019-03-05 17:36:11",
+            "handlerUser": "测试用400",
+            "lastHandlerUser": "测试用400",
+            "sendTime": "2019-03-05 10:35:45"
+        },
+        {
+            "handlerStatus": "2",
+            "handlerTime": "2019-03-13 10:25:30",
+            "handlerUser": "唐文博",
+            "lastHandlerUser": "测试用400",
+            "sendTime": "2019-03-05 10:35:45"
+        }
+    ],
+    "taskId": "290387",
+    "title": "管理gray accord",
+    "type": 1
 }
 
 
@@ -111,6 +132,7 @@
 
 
 
+
 [wjbpd]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/wjbpd.png
 [zyxw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/zyxw.png
 [dwfw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/dwfw.png
@@ -118,3 +140,4 @@
 [yfw]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/yfw.png
 [yjfs]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/yjfs.png
 [swdj]:https://github.com/GepengCn/fms/blob/master/src/main/resources/static/png/swdj.png
+

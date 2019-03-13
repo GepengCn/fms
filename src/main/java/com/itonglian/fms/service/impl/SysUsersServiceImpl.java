@@ -1,5 +1,6 @@
 package com.itonglian.fms.service.impl;
 
+import com.google.common.base.Strings;
 import com.itonglian.fms.dao.primary.SYS_USERSMapper;
 import com.itonglian.fms.entity.SYS_USERS;
 import com.itonglian.fms.service.SysUsersService;
@@ -22,5 +23,13 @@ public class SysUsersServiceImpl implements SysUsersService {
             return null;
         }
         return sysUsers.getSu02();
+    }
+
+    @Override
+    public String findNameByPrimaryKey(String su00) {
+        if(Strings.isNullOrEmpty(su00)){
+            return "";
+        }
+        return findNameByPrimaryKey(Long.parseLong(su00));
     }
 }

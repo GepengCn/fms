@@ -78,6 +78,7 @@ public class ZyxwService extends FFGLAdapter {
         sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
         List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
         Iterator<SYS_ATTACHMENT> iterator = sysAttachmentList.iterator();
+        List<ZyxwCustomized.FF52> refDocList = new ArrayList<>();
         while(iterator.hasNext()){
             SYS_ATTACHMENT sysAttachment = iterator.next();
             String taskId = sysAttachment.getSa02();
@@ -92,10 +93,9 @@ public class ZyxwService extends FFGLAdapter {
             ff52.setFF30(ffgl1.getFf30());
             ff52.setFF31(ffgl1.getFf31());
             ff52.setFF32(ffgl1.getFf32());
-            List<ZyxwCustomized.FF52> refDocList = new ArrayList<>();
             refDocList.add(ff52);
-            zyxwCustomized.setRefDocList(refDocList);
         }
+        zyxwCustomized.setRefDocList(refDocList);
         return zyxwCustomized;
     }
 }
