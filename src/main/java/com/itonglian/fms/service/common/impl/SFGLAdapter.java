@@ -102,7 +102,7 @@ public abstract class SFGLAdapter extends BaseService {
         //公文表单
         Map<String,String> contents = getContents(sfgl);
 
-        contents.put("FF02",sfgl.getSf02());
+        contents.put("SF02",sfgl.getSf02());
 
         ftpFileList.add(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),getContentFilling(),contents,wfTask.getWt00(),FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),2,2)));
         //正文

@@ -120,10 +120,6 @@ public class DataController {
         WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName("UTF-8")), WjbpdParam.class);
         modelAndView.addObject("params",params);
         modelAndView.addObject("common",JSON.toJSONString(params));
-        WjbpdCustomized wjbpdCustomized = params.getCustomized();
-        modelAndView.addObject("customized", JSON.toJSONString(wjbpdCustomized));
-        modelAndView.addObject("ftpList", JSON.toJSONString(params.getFtpList()));
-//        modelAndView.addObject("ftpList", params.getFtpList());
         modelAndView.setViewName("detail");
         return modelAndView;
     }
