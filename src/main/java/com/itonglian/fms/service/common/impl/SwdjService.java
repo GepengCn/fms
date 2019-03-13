@@ -1,9 +1,6 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.itonglian.fms.entity.SFGL;
-import com.itonglian.fms.entity.SYS_ATTACHMENT;
-import com.itonglian.fms.entity.SYS_ATTACHMENTExample;
-import com.itonglian.fms.entity.WfTask;
+import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.bean.Customized;
 import com.itonglian.fms.service.bean.FileType;
@@ -72,17 +69,25 @@ public class SwdjService extends SFGLAdapter {
             SYS_ATTACHMENT sysAttachment = iterator.next();
             String taskId = sysAttachment.getSa02();
             WfTask wfTask1 =  wfTaskService.selectByPrimaryKey(Long.parseLong(taskId));
-            if(!"FE_APP5.SFGL".equalsIgnoreCase(wfTask1.getWt03())){
-                continue;
+            if("FE_APP5.SFGL".equalsIgnoreCase(wfTask1.getWt03())){
+                SFGL sfgl1 = sfglService.selectByPrimaryKey(wfTask1.getWt04());
+                SwdjCustomized.SF56 sf56 = new SwdjCustomized.SF56();
+                sf56.setSF02(sfgl1.getSf02());
+                sf56.setSF13(sfgl1.getSf13());
+                sf56.setSF26(sfgl1.getSf26());
+                sf56.setSF32(sfgl1.getSf32());
+                sf56.setSF33(sfgl1.getSf33());
+                refDocList.add(sf56);
+            }else if("FE_APP5.FFGL".equalsIgnoreCase(wfTask1.getWt03())){
+                FFGL ffgl = ffglService.selectByPrimaryKey(wfTask1.getWt04());
+                SwdjCustomized.SF56 sf56 = new SwdjCustomized.SF56();
+                sf56.setSF02(ffgl.getFf02());
+                sf56.setSF13(ffgl.getFf12());
+                sf56.setSF26(ffgl.getFf31());
+                sf56.setSF32(ffgl.getFf32());
+                sf56.setSF33(ffgl.getFf30());
+                refDocList.add(sf56);
             }
-            SFGL sfgl1 = sfglService.selectByPrimaryKey(wfTask1.getWt04());
-            SwdjCustomized.SF56 sf56 = new SwdjCustomized.SF56();
-            sf56.setSF02(sfgl1.getSf02());
-            sf56.setSF13(sfgl1.getSf13());
-            sf56.setSF26(sfgl1.getSf26());
-            sf56.setSF32(sfgl1.getSf32());
-            sf56.setSF33(sfgl1.getSf33());
-            refDocList.add(sf56);
         }
         swdjCustomized.setRefDocList(refDocList);
         return swdjCustomized;

@@ -43,6 +43,9 @@ public abstract class SFGLAdapter extends BaseService {
     SFGLService sfglService;
 
     @Autowired
+    FFGLService ffglService;
+
+    @Autowired
     DocParser docParser;
 
     @Autowired

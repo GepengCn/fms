@@ -6,6 +6,7 @@ import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.DocParser;
 import com.itonglian.fms.service.common.FuturePieceTask;
+import com.itonglian.fms.service.common.SFGLService;
 import com.itonglian.fms.service.common.range.DwfwContentFilling;
 import com.itonglian.fms.utils.FileManager;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,8 @@ public abstract class FFGLAdapter extends BaseService {
 
     @Autowired
     FFGLService ffglService;
+    @Autowired
+    SFGLService sfglService;
     @Autowired
     WfTaskService wfTaskService;
     @Autowired

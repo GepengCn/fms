@@ -1,9 +1,6 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.itonglian.fms.entity.FFGL;
-import com.itonglian.fms.entity.SYS_ATTACHMENT;
-import com.itonglian.fms.entity.SYS_ATTACHMENTExample;
-import com.itonglian.fms.entity.WfTask;
+import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.SysUsersService;
 import com.itonglian.fms.service.bean.Customized;
@@ -83,17 +80,26 @@ public class ZyxwService extends FFGLAdapter {
             SYS_ATTACHMENT sysAttachment = iterator.next();
             String taskId = sysAttachment.getSa02();
             WfTask wfTask1 =  wfTaskService.selectByPrimaryKey(Long.parseLong(taskId));
-            if(!"FE_APP5.FFGL".equalsIgnoreCase(wfTask1.getWt03())){
-                continue;
+            if("FE_APP5.FFGL".equalsIgnoreCase(wfTask1.getWt03())){
+                FFGL ffgl1 = ffglService.selectByPrimaryKey(wfTask1.getWt04());
+                ZyxwCustomized.FF52 ff52 = new ZyxwCustomized.FF52();
+                ff52.setFF02(ffgl1.getFf02());
+                ff52.setFF12(ffgl1.getFf12());
+                ff52.setFF30(ffgl1.getFf30());
+                ff52.setFF31(ffgl1.getFf31());
+                ff52.setFF32(ffgl1.getFf32());
+                refDocList.add(ff52);
+            }else if("FE_APP5.SFGL".equalsIgnoreCase(wfTask1.getWt03())){
+                SFGL sfgl1 = sfglService.selectByPrimaryKey(wfTask1.getWt04());
+                ZyxwCustomized.FF52 ff52 = new ZyxwCustomized.FF52();
+                ff52.setFF02(sfgl1.getSf02());
+                ff52.setFF12(sfgl1.getSf13());
+                ff52.setFF30(sfgl1.getSf33());
+                ff52.setFF31(sfgl1.getSf26());
+                ff52.setFF32(sfgl1.getSf32());
+                refDocList.add(ff52);
             }
-            FFGL ffgl1 = ffglService.selectByPrimaryKey(wfTask1.getWt04());
-            ZyxwCustomized.FF52 ff52 = new ZyxwCustomized.FF52();
-            ff52.setFF02(ffgl1.getFf02());
-            ff52.setFF12(ffgl1.getFf12());
-            ff52.setFF30(ffgl1.getFf30());
-            ff52.setFF31(ffgl1.getFf31());
-            ff52.setFF32(ffgl1.getFf32());
-            refDocList.add(ff52);
+
         }
         zyxwCustomized.setRefDocList(refDocList);
         return zyxwCustomized;
