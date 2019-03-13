@@ -45,7 +45,10 @@ public class ResultScheduler {
 
         //cron表达式，每天0时执行一次
         cronTriggerFactoryBean.setCronExpression("0 0 0 * * ?");
+//        cronTriggerFactoryBean.setCronExpression(" 0/10 * * * * ? *");
+
         cronTriggerFactoryBean.setName("resultTrigger");
+
         return cronTriggerFactoryBean;
     }
 

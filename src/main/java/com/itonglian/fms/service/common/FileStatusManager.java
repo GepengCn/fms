@@ -1,7 +1,6 @@
 package com.itonglian.fms.service.common;
 
 import com.itonglian.fms.entity.FMS_TASK;
-import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.service.FmsTaskService;
 import com.itonglian.fms.service.bean.FileStatus;
 import lombok.extern.slf4j.Slf4j;

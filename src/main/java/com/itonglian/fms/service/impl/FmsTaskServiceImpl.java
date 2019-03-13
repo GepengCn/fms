@@ -39,4 +39,15 @@ public class FmsTaskServiceImpl implements FmsTaskService {
         return fmsTaskMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public FMS_TASK selectByTaskId(String taskId) {
+        FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
+        fmsTaskExample.or().andTaskidEqualTo(taskId);
+        List<FMS_TASK> fmsTaskList = fmsTaskMapper.selectByExample(fmsTaskExample);
+        if(fmsTaskList!=null&&fmsTaskList.size()>0){
+            return fmsTaskList.get(0);
+        }
+        return null;
+    }
+
 }

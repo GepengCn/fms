@@ -73,7 +73,7 @@ public class DwfwService extends FFGLAdapter {
         dwfwCustomized.setFF18(ffgl.getFf18());
         dwfwCustomized.setFF32(ffgl.getFf32());
         dwfwCustomized.setFF30(ffgl.getFf30());
-        dwfwCustomized.setFF25(ffgl.getFf25());
+        dwfwCustomized.setFF25(ffgl.getFf25()==null?0:ffgl.getFf25());
         dwfwCustomized.setFF11(ffgl.getFf11());
         dwfwCustomized.setFF35(ffgl.getFf35());
         dwfwCustomized.setFF16(ffgl.getFf16());

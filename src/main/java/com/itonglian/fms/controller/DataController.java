@@ -11,7 +11,6 @@ import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.FmsTaskService;
 import com.itonglian.fms.service.bean.FileStatus;
-import com.itonglian.fms.service.bean.WjbpdCustomized;
 import com.itonglian.fms.service.bean.WjbpdParam;
 import com.itonglian.fms.service.common.FileStatusManager;
 import io.swagger.annotations.ApiOperation;
@@ -37,6 +36,7 @@ public class DataController {
     FileStatusManager fileStatusManager;
     @Autowired
     FmsTaskService fmsTaskService;
+
 
     @ApiOperation(value="待归档数据查询接口", notes="调用后，归档状态为200(已发送)" ,httpMethod="POST")
     @RequestMapping("findList")
@@ -105,7 +105,7 @@ public class DataController {
 
     @RequestMapping("dataIndex")
     public ModelAndView dataIndex() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("list");
         List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(new FMS_TASKExample());
         modelAndView.addObject("datas",fmsTaskList);
         return modelAndView;
@@ -122,5 +122,15 @@ public class DataController {
         modelAndView.addObject("common",JSON.toJSONString(params));
         modelAndView.setViewName("detail");
         return modelAndView;
+    }
+
+
+    @RequestMapping("retry")
+    public ModelAndView retry(Long id) {
+        FMS_TASK fmsTask = fmsTaskService.selectByPrimaryKey(id);
+        if(fmsTask!=null){
+            fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_100);
+        }
+        return new ModelAndView("redirect:/dataController/dataIndex");
     }
 }

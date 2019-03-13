@@ -22,6 +22,7 @@
             <th>公文类型</th>
             <th>归档状态标识</th>
             <th>归档状态</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@
                 <span th:case="300">已归档</span>
                 <span th:case="301">归档失败</span>
             </td>
+            <td><a th:href="@{'/dataController/retry?id='+${fmsTask.id}}">重新归档</a></td>
         </tr>
         </tbody>
     </table>

@@ -18,5 +18,7 @@ public interface FmsTaskService {
 
     FMS_TASK selectByPrimaryKey(Long id);
 
+    FMS_TASK selectByTaskId(String taskId);
+
 }
 
