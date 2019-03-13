@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.feapp5.SFGLMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.SFGL">
+    <id column="SF00" jdbcType="DECIMAL" property="sf00" />
+    <result column="SF01" jdbcType="VARCHAR" property="sf01" />
+    <result column="SF02" jdbcType="VARCHAR" property="sf02" />
+    <result column="SF03" jdbcType="VARCHAR" property="sf03" />
+    <result column="SF04" jdbcType="VARCHAR" property="sf04" />
+    <result column="SF05" jdbcType="VARCHAR" property="sf05" />
+    <result column="SF06" jdbcType="VARCHAR" property="sf06" />
+    <result column="SF07" jdbcType="VARCHAR" property="sf07" />
+    <result column="SF08" jdbcType="VARCHAR" property="sf08" />
+    <result column="SF09" jdbcType="VARCHAR" property="sf09" />
+    <result column="SF10" jdbcType="VARCHAR" property="sf10" />
+    <result column="SF11" jdbcType="VARCHAR" property="sf11" />
+    <result column="SF12" jdbcType="VARCHAR" property="sf12" />
+    <result column="SF13" jdbcType="VARCHAR" property="sf13" />
+    <result column="SF14" jdbcType="VARCHAR" property="sf14" />
+    <result column="SF15" jdbcType="VARCHAR" property="sf15" />
+    <result column="SF16" jdbcType="VARCHAR" property="sf16" />
+    <result column="SF17" jdbcType="VARCHAR" property="sf17" />
+    <result column="SF18" jdbcType="VARCHAR" property="sf18" />
+    <result column="SF19" jdbcType="VARCHAR" property="sf19" />
+    <result column="SF20" jdbcType="VARCHAR" property="sf20" />
+    <result column="SF21" jdbcType="VARCHAR" property="sf21" />
+    <result column="SF22" jdbcType="VARCHAR" property="sf22" />
+    <result column="SF23" jdbcType="VARCHAR" property="sf23" />
+    <result column="SF24" jdbcType="VARCHAR" property="sf24" />
+    <result column="SF25" jdbcType="VARCHAR" property="sf25" />
+    <result column="SF26" jdbcType="VARCHAR" property="sf26" />
+    <result column="SF27" jdbcType="DECIMAL" property="sf27" />
+    <result column="SF28" jdbcType="DECIMAL" property="sf28" />
+    <result column="SF29" jdbcType="DECIMAL" property="sf29" />
+    <result column="SF30" jdbcType="VARCHAR" property="sf30" />
+    <result column="SF31" jdbcType="VARCHAR" property="sf31" />
+    <result column="SF32" jdbcType="VARCHAR" property="sf32" />
+    <result column="SF33" jdbcType="VARCHAR" property="sf33" />
+    <result column="SF34" jdbcType="VARCHAR" property="sf34" />
+    <result column="SF35" jdbcType="VARCHAR" property="sf35" />
+    <result column="SF36" jdbcType="VARCHAR" property="sf36" />
+    <result column="SF37" jdbcType="VARCHAR" property="sf37" />
+    <result column="SF38" jdbcType="VARCHAR" property="sf38" />
+    <result column="SF39" jdbcType="VARCHAR" property="sf39" />
+    <result column="SF40" jdbcType="VARCHAR" property="sf40" />
+    <result column="SF41" jdbcType="VARCHAR" property="sf41" />
+    <result column="SF42" jdbcType="VARCHAR" property="sf42" />
+    <result column="SF43" jdbcType="VARCHAR" property="sf43" />
+    <result column="SF44" jdbcType="VARCHAR" property="sf44" />
+    <result column="SF45" jdbcType="VARCHAR" property="sf45" />
+    <result column="SF46" jdbcType="VARCHAR" property="sf46" />
+    <result column="SF47" jdbcType="VARCHAR" property="sf47" />
+    <result column="SF48" jdbcType="VARCHAR" property="sf48" />
+    <result column="SF49" jdbcType="VARCHAR" property="sf49" />
+    <result column="SF50" jdbcType="TIMESTAMP" property="sf50" />
+    <result column="SF51" jdbcType="VARCHAR" property="sf51" />
+    <result column="SF52" jdbcType="VARCHAR" property="sf52" />
+    <result column="SF53" jdbcType="VARCHAR" property="sf53" />
+    <result column="SF54" jdbcType="VARCHAR" property="sf54" />
+    <result column="ISFILE" jdbcType="VARCHAR" property="isfile" />
+    <result column="FILEDATE" jdbcType="VARCHAR" property="filedate" />
+    <result column="SF55" jdbcType="VARCHAR" property="sf55" />
+    <result column="SF56" jdbcType="VARCHAR" property="sf56" />
+    <result column="WF_TASKID" jdbcType="VARCHAR" property="wfTaskid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SF00, SF01, SF02, SF03, SF04, SF05, SF06, SF07, SF08, SF09, SF10, SF11, SF12, SF13, 
+    SF14, SF15, SF16, SF17, SF18, SF19, SF20, SF21, SF22, SF23, SF24, SF25, SF26, SF27, 
+    SF28, SF29, SF30, SF31, SF32, SF33, SF34, SF35, SF36, SF37, SF38, SF39, SF40, SF41, 
+    SF42, SF43, SF44, SF45, SF46, SF47, SF48, SF49, SF50, SF51, SF52, SF53, SF54, ISFILE, 
+    FILEDATE, SF55, SF56, WF_TASKID
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.SFGLExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SFGL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SFGL
+    where SF00 = #{sf00,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SFGL
+    where SF00 = #{sf00,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.SFGLExample">
+    delete from SFGL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.SFGL">
+    insert into SFGL (SF00, SF01, SF02, 
+      SF03, SF04, SF05, SF06, 
+      SF07, SF08, SF09, SF10, 
+      SF11, SF12, SF13, SF14, 
+      SF15, SF16, SF17, SF18, 
+      SF19, SF20, SF21, SF22, 
+      SF23, SF24, SF25, SF26, 
+      SF27, SF28, SF29, SF30, 
+      SF31, SF32, SF33, SF34, 
+      SF35, SF36, SF37, SF38, 
+      SF39, SF40, SF41, SF42, 
+      SF43, SF44, SF45, SF46, 
+      SF47, SF48, SF49, SF50, 
+      SF51, SF52, SF53, SF54, 
+      ISFILE, FILEDATE, SF55, 
+      SF56, WF_TASKID)
+    values (#{sf00,jdbcType=DECIMAL}, #{sf01,jdbcType=VARCHAR}, #{sf02,jdbcType=VARCHAR}, 
+      #{sf03,jdbcType=VARCHAR}, #{sf04,jdbcType=VARCHAR}, #{sf05,jdbcType=VARCHAR}, #{sf06,jdbcType=VARCHAR}, 
+      #{sf07,jdbcType=VARCHAR}, #{sf08,jdbcType=VARCHAR}, #{sf09,jdbcType=VARCHAR}, #{sf10,jdbcType=VARCHAR}, 
+      #{sf11,jdbcType=VARCHAR}, #{sf12,jdbcType=VARCHAR}, #{sf13,jdbcType=VARCHAR}, #{sf14,jdbcType=VARCHAR}, 
+      #{sf15,jdbcType=VARCHAR}, #{sf16,jdbcType=VARCHAR}, #{sf17,jdbcType=VARCHAR}, #{sf18,jdbcType=VARCHAR}, 
+      #{sf19,jdbcType=VARCHAR}, #{sf20,jdbcType=VARCHAR}, #{sf21,jdbcType=VARCHAR}, #{sf22,jdbcType=VARCHAR}, 
+      #{sf23,jdbcType=VARCHAR}, #{sf24,jdbcType=VARCHAR}, #{sf25,jdbcType=VARCHAR}, #{sf26,jdbcType=VARCHAR}, 
+      #{sf27,jdbcType=DECIMAL}, #{sf28,jdbcType=DECIMAL}, #{sf29,jdbcType=DECIMAL}, #{sf30,jdbcType=VARCHAR}, 
+      #{sf31,jdbcType=VARCHAR}, #{sf32,jdbcType=VARCHAR}, #{sf33,jdbcType=VARCHAR}, #{sf34,jdbcType=VARCHAR}, 
+      #{sf35,jdbcType=VARCHAR}, #{sf36,jdbcType=VARCHAR}, #{sf37,jdbcType=VARCHAR}, #{sf38,jdbcType=VARCHAR}, 
+      #{sf39,jdbcType=VARCHAR}, #{sf40,jdbcType=VARCHAR}, #{sf41,jdbcType=VARCHAR}, #{sf42,jdbcType=VARCHAR}, 
+      #{sf43,jdbcType=VARCHAR}, #{sf44,jdbcType=VARCHAR}, #{sf45,jdbcType=VARCHAR}, #{sf46,jdbcType=VARCHAR}, 
+      #{sf47,jdbcType=VARCHAR}, #{sf48,jdbcType=VARCHAR}, #{sf49,jdbcType=VARCHAR}, #{sf50,jdbcType=TIMESTAMP}, 
+      #{sf51,jdbcType=VARCHAR}, #{sf52,jdbcType=VARCHAR}, #{sf53,jdbcType=VARCHAR}, #{sf54,jdbcType=VARCHAR}, 
+      #{isfile,jdbcType=VARCHAR}, #{filedate,jdbcType=VARCHAR}, #{sf55,jdbcType=VARCHAR}, 
+      #{sf56,jdbcType=VARCHAR}, #{wfTaskid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.SFGL">
+    insert into SFGL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sf00 != null">
+        SF00,
+      </if>
+      <if test="sf01 != null">
+        SF01,
+      </if>
+      <if test="sf02 != null">
+        SF02,
+      </if>
+      <if test="sf03 != null">
+        SF03,
+      </if>
+      <if test="sf04 != null">
+        SF04,
+      </if>
+      <if test="sf05 != null">
+        SF05,
+      </if>
+      <if test="sf06 != null">
+        SF06,
+      </if>
+      <if test="sf07 != null">
+        SF07,
+      </if>
+      <if test="sf08 != null">
+        SF08,
+      </if>
+      <if test="sf09 != null">
+        SF09,
+      </if>
+      <if test="sf10 != null">
+        SF10,
+      </if>
+      <if test="sf11 != null">
+        SF11,
+      </if>
+      <if test="sf12 != null">
+        SF12,
+      </if>
+      <if test="sf13 != null">
+        SF13,
+      </if>
+      <if test="sf14 != null">
+        SF14,
+      </if>
+      <if test="sf15 != null">
+        SF15,
+      </if>
+      <if test="sf16 != null">
+        SF16,
+      </if>
+      <if test="sf17 != null">
+        SF17,
+      </if>
+      <if test="sf18 != null">
+        SF18,
+      </if>
+      <if test="sf19 != null">
+        SF19,
+      </if>
+      <if test="sf20 != null">
+        SF20,
+      </if>
+      <if test="sf21 != null">
+        SF21,
+      </if>
+      <if test="sf22 != null">
+        SF22,
+      </if>
+      <if test="sf23 != null">
+        SF23,
+      </if>
+      <if test="sf24 != null">
+        SF24,
+      </if>
+      <if test="sf25 != null">
+        SF25,
+      </if>
+      <if test="sf26 != null">
+        SF26,
+      </if>
+      <if test="sf27 != null">
+        SF27,
+      </if>
+      <if test="sf28 != null">
+        SF28,
+      </if>
+      <if test="sf29 != null">
+        SF29,
+      </if>
+      <if test="sf30 != null">
+        SF30,
+      </if>
+      <if test="sf31 != null">
+        SF31,
+      </if>
+      <if test="sf32 != null">
+        SF32,
+      </if>
+      <if test="sf33 != null">
+        SF33,
+      </if>
+      <if test="sf34 != null">
+        SF34,
+      </if>
+      <if test="sf35 != null">
+        SF35,
+      </if>
+      <if test="sf36 != null">
+        SF36,
+      </if>
+      <if test="sf37 != null">
+        SF37,
+      </if>
+      <if test="sf38 != null">
+        SF38,
+      </if>
+      <if test="sf39 != null">
+        SF39,
+      </if>
+      <if test="sf40 != null">
+        SF40,
+      </if>
+      <if test="sf41 != null">
+        SF41,
+      </if>
+      <if test="sf42 != null">
+        SF42,
+      </if>
+      <if test="sf43 != null">
+        SF43,
+      </if>
+      <if test="sf44 != null">
+        SF44,
+      </if>
+      <if test="sf45 != null">
+        SF45,
+      </if>
+      <if test="sf46 != null">
+        SF46,
+      </if>
+      <if test="sf47 != null">
+        SF47,
+      </if>
+      <if test="sf48 != null">
+        SF48,
+      </if>
+      <if test="sf49 != null">
+        SF49,
+      </if>
+      <if test="sf50 != null">
+        SF50,
+      </if>
+      <if test="sf51 != null">
+        SF51,
+      </if>
+      <if test="sf52 != null">
+        SF52,
+      </if>
+      <if test="sf53 != null">
+        SF53,
+      </if>
+      <if test="sf54 != null">
+        SF54,
+      </if>
+      <if test="isfile != null">
+        ISFILE,
+      </if>
+      <if test="filedate != null">
+        FILEDATE,
+      </if>
+      <if test="sf55 != null">
+        SF55,
+      </if>
+      <if test="sf56 != null">
+        SF56,
+      </if>
+      <if test="wfTaskid != null">
+        WF_TASKID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sf00 != null">
+        #{sf00,jdbcType=DECIMAL},
+      </if>
+      <if test="sf01 != null">
+        #{sf01,jdbcType=VARCHAR},
+      </if>
+      <if test="sf02 != null">
+        #{sf02,jdbcType=VARCHAR},
+      </if>
+      <if test="sf03 != null">
+        #{sf03,jdbcType=VARCHAR},
+      </if>
+      <if test="sf04 != null">
+        #{sf04,jdbcType=VARCHAR},
+      </if>
+      <if test="sf05 != null">
+        #{sf05,jdbcType=VARCHAR},
+      </if>
+      <if test="sf06 != null">
+        #{sf06,jdbcType=VARCHAR},
+      </if>
+      <if test="sf07 != null">
+        #{sf07,jdbcType=VARCHAR},
+      </if>
+      <if test="sf08 != null">
+        #{sf08,jdbcType=VARCHAR},
+      </if>
+      <if test="sf09 != null">
+        #{sf09,jdbcType=VARCHAR},
+      </if>
+      <if test="sf10 != null">
+        #{sf10,jdbcType=VARCHAR},
+      </if>
+      <if test="sf11 != null">
+        #{sf11,jdbcType=VARCHAR},
+      </if>
+      <if test="sf12 != null">
+        #{sf12,jdbcType=VARCHAR},
+      </if>
+      <if test="sf13 != null">
+        #{sf13,jdbcType=VARCHAR},
+      </if>
+      <if test="sf14 != null">
+        #{sf14,jdbcType=VARCHAR},
+      </if>
+      <if test="sf15 != null">
+        #{sf15,jdbcType=VARCHAR},
+      </if>
+      <if test="sf16 != null">
+        #{sf16,jdbcType=VARCHAR},
+      </if>
+      <if test="sf17 != null">
+        #{sf17,jdbcType=VARCHAR},
+      </if>
+      <if test="sf18 != null">
+        #{sf18,jdbcType=VARCHAR},
+      </if>
+      <if test="sf19 != null">
+        #{sf19,jdbcType=VARCHAR},
+      </if>
+      <if test="sf20 != null">
+        #{sf20,jdbcType=VARCHAR},
+      </if>
+      <if test="sf21 != null">
+        #{sf21,jdbcType=VARCHAR},
+      </if>
+      <if test="sf22 != null">
+        #{sf22,jdbcType=VARCHAR},
+      </if>
+      <if test="sf23 != null">
+        #{sf23,jdbcType=VARCHAR},
+      </if>
+      <if test="sf24 != null">
+        #{sf24,jdbcType=VARCHAR},
+      </if>
+      <if test="sf25 != null">
+        #{sf25,jdbcType=VARCHAR},
+      </if>
+      <if test="sf26 != null">
+        #{sf26,jdbcType=VARCHAR},
+      </if>
+      <if test="sf27 != null">
+        #{sf27,jdbcType=DECIMAL},
+      </if>
+      <if test="sf28 != null">
+        #{sf28,jdbcType=DECIMAL},
+      </if>
+      <if test="sf29 != null">
+        #{sf29,jdbcType=DECIMAL},
+      </if>
+      <if test="sf30 != null">
+        #{sf30,jdbcType=VARCHAR},
+      </if>
+      <if test="sf31 != null">
+        #{sf31,jdbcType=VARCHAR},
+      </if>
+      <if test="sf32 != null">
+        #{sf32,jdbcType=VARCHAR},
+      </if>
+      <if test="sf33 != null">
+        #{sf33,jdbcType=VARCHAR},
+      </if>
+      <if test="sf34 != null">
+        #{sf34,jdbcType=VARCHAR},
+      </if>
+      <if test="sf35 != null">
+        #{sf35,jdbcType=VARCHAR},
+      </if>
+      <if test="sf36 != null">
+        #{sf36,jdbcType=VARCHAR},
+      </if>
+      <if test="sf37 != null">
+        #{sf37,jdbcType=VARCHAR},
+      </if>
+      <if test="sf38 != null">
+        #{sf38,jdbcType=VARCHAR},
+      </if>
+      <if test="sf39 != null">
+        #{sf39,jdbcType=VARCHAR},
+      </if>
+      <if test="sf40 != null">
+        #{sf40,jdbcType=VARCHAR},
+      </if>
+      <if test="sf41 != null">
+        #{sf41,jdbcType=VARCHAR},
+      </if>
+      <if test="sf42 != null">
+        #{sf42,jdbcType=VARCHAR},
+      </if>
+      <if test="sf43 != null">
+        #{sf43,jdbcType=VARCHAR},
+      </if>
+      <if test="sf44 != null">
+        #{sf44,jdbcType=VARCHAR},
+      </if>
+      <if test="sf45 != null">
+        #{sf45,jdbcType=VARCHAR},
+      </if>
+      <if test="sf46 != null">
+        #{sf46,jdbcType=VARCHAR},
+      </if>
+      <if test="sf47 != null">
+        #{sf47,jdbcType=VARCHAR},
+      </if>
+      <if test="sf48 != null">
+        #{sf48,jdbcType=VARCHAR},
+      </if>
+      <if test="sf49 != null">
+        #{sf49,jdbcType=VARCHAR},
+      </if>
+      <if test="sf50 != null">
+        #{sf50,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sf51 != null">
+        #{sf51,jdbcType=VARCHAR},
+      </if>
+      <if test="sf52 != null">
+        #{sf52,jdbcType=VARCHAR},
+      </if>
+      <if test="sf53 != null">
+        #{sf53,jdbcType=VARCHAR},
+      </if>
+      <if test="sf54 != null">
+        #{sf54,jdbcType=VARCHAR},
+      </if>
+      <if test="isfile != null">
+        #{isfile,jdbcType=VARCHAR},
+      </if>
+      <if test="filedate != null">
+        #{filedate,jdbcType=VARCHAR},
+      </if>
+      <if test="sf55 != null">
+        #{sf55,jdbcType=VARCHAR},
+      </if>
+      <if test="sf56 != null">
+        #{sf56,jdbcType=VARCHAR},
+      </if>
+      <if test="wfTaskid != null">
+        #{wfTaskid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.SFGLExample" resultType="java.lang.Long">
+    select count(*) from SFGL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SFGL
+    <set>
+      <if test="record.sf00 != null">
+        SF00 = #{record.sf00,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sf01 != null">
+        SF01 = #{record.sf01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf02 != null">
+        SF02 = #{record.sf02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf03 != null">
+        SF03 = #{record.sf03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf04 != null">
+        SF04 = #{record.sf04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf05 != null">
+        SF05 = #{record.sf05,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf06 != null">
+        SF06 = #{record.sf06,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf07 != null">
+        SF07 = #{record.sf07,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf08 != null">
+        SF08 = #{record.sf08,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf09 != null">
+        SF09 = #{record.sf09,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf10 != null">
+        SF10 = #{record.sf10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf11 != null">
+        SF11 = #{record.sf11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf12 != null">
+        SF12 = #{record.sf12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf13 != null">
+        SF13 = #{record.sf13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf14 != null">
+        SF14 = #{record.sf14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf15 != null">
+        SF15 = #{record.sf15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf16 != null">
+        SF16 = #{record.sf16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf17 != null">
+        SF17 = #{record.sf17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf18 != null">
+        SF18 = #{record.sf18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf19 != null">
+        SF19 = #{record.sf19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf20 != null">
+        SF20 = #{record.sf20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf21 != null">
+        SF21 = #{record.sf21,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf22 != null">
+        SF22 = #{record.sf22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf23 != null">
+        SF23 = #{record.sf23,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf24 != null">
+        SF24 = #{record.sf24,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf25 != null">
+        SF25 = #{record.sf25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf26 != null">
+        SF26 = #{record.sf26,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf27 != null">
+        SF27 = #{record.sf27,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sf28 != null">
+        SF28 = #{record.sf28,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sf29 != null">
+        SF29 = #{record.sf29,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sf30 != null">
+        SF30 = #{record.sf30,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf31 != null">
+        SF31 = #{record.sf31,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf32 != null">
+        SF32 = #{record.sf32,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf33 != null">
+        SF33 = #{record.sf33,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf34 != null">
+        SF34 = #{record.sf34,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf35 != null">
+        SF35 = #{record.sf35,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf36 != null">
+        SF36 = #{record.sf36,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf37 != null">
+        SF37 = #{record.sf37,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf38 != null">
+        SF38 = #{record.sf38,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf39 != null">
+        SF39 = #{record.sf39,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf40 != null">
+        SF40 = #{record.sf40,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf41 != null">
+        SF41 = #{record.sf41,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf42 != null">
+        SF42 = #{record.sf42,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf43 != null">
+        SF43 = #{record.sf43,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf44 != null">
+        SF44 = #{record.sf44,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf45 != null">
+        SF45 = #{record.sf45,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf46 != null">
+        SF46 = #{record.sf46,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf47 != null">
+        SF47 = #{record.sf47,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf48 != null">
+        SF48 = #{record.sf48,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf49 != null">
+        SF49 = #{record.sf49,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf50 != null">
+        SF50 = #{record.sf50,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sf51 != null">
+        SF51 = #{record.sf51,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf52 != null">
+        SF52 = #{record.sf52,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf53 != null">
+        SF53 = #{record.sf53,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf54 != null">
+        SF54 = #{record.sf54,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfile != null">
+        ISFILE = #{record.isfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filedate != null">
+        FILEDATE = #{record.filedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf55 != null">
+        SF55 = #{record.sf55,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sf56 != null">
+        SF56 = #{record.sf56,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wfTaskid != null">
+        WF_TASKID = #{record.wfTaskid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SFGL
+    set SF00 = #{record.sf00,jdbcType=DECIMAL},
+      SF01 = #{record.sf01,jdbcType=VARCHAR},
+      SF02 = #{record.sf02,jdbcType=VARCHAR},
+      SF03 = #{record.sf03,jdbcType=VARCHAR},
+      SF04 = #{record.sf04,jdbcType=VARCHAR},
+      SF05 = #{record.sf05,jdbcType=VARCHAR},
+      SF06 = #{record.sf06,jdbcType=VARCHAR},
+      SF07 = #{record.sf07,jdbcType=VARCHAR},
+      SF08 = #{record.sf08,jdbcType=VARCHAR},
+      SF09 = #{record.sf09,jdbcType=VARCHAR},
+      SF10 = #{record.sf10,jdbcType=VARCHAR},
+      SF11 = #{record.sf11,jdbcType=VARCHAR},
+      SF12 = #{record.sf12,jdbcType=VARCHAR},
+      SF13 = #{record.sf13,jdbcType=VARCHAR},
+      SF14 = #{record.sf14,jdbcType=VARCHAR},
+      SF15 = #{record.sf15,jdbcType=VARCHAR},
+      SF16 = #{record.sf16,jdbcType=VARCHAR},
+      SF17 = #{record.sf17,jdbcType=VARCHAR},
+      SF18 = #{record.sf18,jdbcType=VARCHAR},
+      SF19 = #{record.sf19,jdbcType=VARCHAR},
+      SF20 = #{record.sf20,jdbcType=VARCHAR},
+      SF21 = #{record.sf21,jdbcType=VARCHAR},
+      SF22 = #{record.sf22,jdbcType=VARCHAR},
+      SF23 = #{record.sf23,jdbcType=VARCHAR},
+      SF24 = #{record.sf24,jdbcType=VARCHAR},
+      SF25 = #{record.sf25,jdbcType=VARCHAR},
+      SF26 = #{record.sf26,jdbcType=VARCHAR},
+      SF27 = #{record.sf27,jdbcType=DECIMAL},
+      SF28 = #{record.sf28,jdbcType=DECIMAL},
+      SF29 = #{record.sf29,jdbcType=DECIMAL},
+      SF30 = #{record.sf30,jdbcType=VARCHAR},
+      SF31 = #{record.sf31,jdbcType=VARCHAR},
+      SF32 = #{record.sf32,jdbcType=VARCHAR},
+      SF33 = #{record.sf33,jdbcType=VARCHAR},
+      SF34 = #{record.sf34,jdbcType=VARCHAR},
+      SF35 = #{record.sf35,jdbcType=VARCHAR},
+      SF36 = #{record.sf36,jdbcType=VARCHAR},
+      SF37 = #{record.sf37,jdbcType=VARCHAR},
+      SF38 = #{record.sf38,jdbcType=VARCHAR},
+      SF39 = #{record.sf39,jdbcType=VARCHAR},
+      SF40 = #{record.sf40,jdbcType=VARCHAR},
+      SF41 = #{record.sf41,jdbcType=VARCHAR},
+      SF42 = #{record.sf42,jdbcType=VARCHAR},
+      SF43 = #{record.sf43,jdbcType=VARCHAR},
+      SF44 = #{record.sf44,jdbcType=VARCHAR},
+      SF45 = #{record.sf45,jdbcType=VARCHAR},
+      SF46 = #{record.sf46,jdbcType=VARCHAR},
+      SF47 = #{record.sf47,jdbcType=VARCHAR},
+      SF48 = #{record.sf48,jdbcType=VARCHAR},
+      SF49 = #{record.sf49,jdbcType=VARCHAR},
+      SF50 = #{record.sf50,jdbcType=TIMESTAMP},
+      SF51 = #{record.sf51,jdbcType=VARCHAR},
+      SF52 = #{record.sf52,jdbcType=VARCHAR},
+      SF53 = #{record.sf53,jdbcType=VARCHAR},
+      SF54 = #{record.sf54,jdbcType=VARCHAR},
+      ISFILE = #{record.isfile,jdbcType=VARCHAR},
+      FILEDATE = #{record.filedate,jdbcType=VARCHAR},
+      SF55 = #{record.sf55,jdbcType=VARCHAR},
+      SF56 = #{record.sf56,jdbcType=VARCHAR},
+      WF_TASKID = #{record.wfTaskid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.SFGL">
+    update SFGL
+    <set>
+      <if test="sf01 != null">
+        SF01 = #{sf01,jdbcType=VARCHAR},
+      </if>
+      <if test="sf02 != null">
+        SF02 = #{sf02,jdbcType=VARCHAR},
+      </if>
+      <if test="sf03 != null">
+        SF03 = #{sf03,jdbcType=VARCHAR},
+      </if>
+      <if test="sf04 != null">
+        SF04 = #{sf04,jdbcType=VARCHAR},
+      </if>
+      <if test="sf05 != null">
+        SF05 = #{sf05,jdbcType=VARCHAR},
+      </if>
+      <if test="sf06 != null">
+        SF06 = #{sf06,jdbcType=VARCHAR},
+      </if>
+      <if test="sf07 != null">
+        SF07 = #{sf07,jdbcType=VARCHAR},
+      </if>
+      <if test="sf08 != null">
+        SF08 = #{sf08,jdbcType=VARCHAR},
+      </if>
+      <if test="sf09 != null">
+        SF09 = #{sf09,jdbcType=VARCHAR},
+      </if>
+      <if test="sf10 != null">
+        SF10 = #{sf10,jdbcType=VARCHAR},
+      </if>
+      <if test="sf11 != null">
+        SF11 = #{sf11,jdbcType=VARCHAR},
+      </if>
+      <if test="sf12 != null">
+        SF12 = #{sf12,jdbcType=VARCHAR},
+      </if>
+      <if test="sf13 != null">
+        SF13 = #{sf13,jdbcType=VARCHAR},
+      </if>
+      <if test="sf14 != null">
+        SF14 = #{sf14,jdbcType=VARCHAR},
+      </if>
+      <if test="sf15 != null">
+        SF15 = #{sf15,jdbcType=VARCHAR},
+      </if>
+      <if test="sf16 != null">
+        SF16 = #{sf16,jdbcType=VARCHAR},
+      </if>
+      <if test="sf17 != null">
+        SF17 = #{sf17,jdbcType=VARCHAR},
+      </if>
+      <if test="sf18 != null">
+        SF18 = #{sf18,jdbcType=VARCHAR},
+      </if>
+      <if test="sf19 != null">
+        SF19 = #{sf19,jdbcType=VARCHAR},
+      </if>
+      <if test="sf20 != null">
+        SF20 = #{sf20,jdbcType=VARCHAR},
+      </if>
+      <if test="sf21 != null">
+        SF21 = #{sf21,jdbcType=VARCHAR},
+      </if>
+      <if test="sf22 != null">
+        SF22 = #{sf22,jdbcType=VARCHAR},
+      </if>
+      <if test="sf23 != null">
+        SF23 = #{sf23,jdbcType=VARCHAR},
+      </if>
+      <if test="sf24 != null">
+        SF24 = #{sf24,jdbcType=VARCHAR},
+      </if>
+      <if test="sf25 != null">
+        SF25 = #{sf25,jdbcType=VARCHAR},
+      </if>
+      <if test="sf26 != null">
+        SF26 = #{sf26,jdbcType=VARCHAR},
+      </if>
+      <if test="sf27 != null">
+        SF27 = #{sf27,jdbcType=DECIMAL},
+      </if>
+      <if test="sf28 != null">
+        SF28 = #{sf28,jdbcType=DECIMAL},
+      </if>
+      <if test="sf29 != null">
+        SF29 = #{sf29,jdbcType=DECIMAL},
+      </if>
+      <if test="sf30 != null">
+        SF30 = #{sf30,jdbcType=VARCHAR},
+      </if>
+      <if test="sf31 != null">
+        SF31 = #{sf31,jdbcType=VARCHAR},
+      </if>
+      <if test="sf32 != null">
+        SF32 = #{sf32,jdbcType=VARCHAR},
+      </if>
+      <if test="sf33 != null">
+        SF33 = #{sf33,jdbcType=VARCHAR},
+      </if>
+      <if test="sf34 != null">
+        SF34 = #{sf34,jdbcType=VARCHAR},
+      </if>
+      <if test="sf35 != null">
+        SF35 = #{sf35,jdbcType=VARCHAR},
+      </if>
+      <if test="sf36 != null">
+        SF36 = #{sf36,jdbcType=VARCHAR},
+      </if>
+      <if test="sf37 != null">
+        SF37 = #{sf37,jdbcType=VARCHAR},
+      </if>
+      <if test="sf38 != null">
+        SF38 = #{sf38,jdbcType=VARCHAR},
+      </if>
+      <if test="sf39 != null">
+        SF39 = #{sf39,jdbcType=VARCHAR},
+      </if>
+      <if test="sf40 != null">
+        SF40 = #{sf40,jdbcType=VARCHAR},
+      </if>
+      <if test="sf41 != null">
+        SF41 = #{sf41,jdbcType=VARCHAR},
+      </if>
+      <if test="sf42 != null">
+        SF42 = #{sf42,jdbcType=VARCHAR},
+      </if>
+      <if test="sf43 != null">
+        SF43 = #{sf43,jdbcType=VARCHAR},
+      </if>
+      <if test="sf44 != null">
+        SF44 = #{sf44,jdbcType=VARCHAR},
+      </if>
+      <if test="sf45 != null">
+        SF45 = #{sf45,jdbcType=VARCHAR},
+      </if>
+      <if test="sf46 != null">
+        SF46 = #{sf46,jdbcType=VARCHAR},
+      </if>
+      <if test="sf47 != null">
+        SF47 = #{sf47,jdbcType=VARCHAR},
+      </if>
+      <if test="sf48 != null">
+        SF48 = #{sf48,jdbcType=VARCHAR},
+      </if>
+      <if test="sf49 != null">
+        SF49 = #{sf49,jdbcType=VARCHAR},
+      </if>
+      <if test="sf50 != null">
+        SF50 = #{sf50,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sf51 != null">
+        SF51 = #{sf51,jdbcType=VARCHAR},
+      </if>
+      <if test="sf52 != null">
+        SF52 = #{sf52,jdbcType=VARCHAR},
+      </if>
+      <if test="sf53 != null">
+        SF53 = #{sf53,jdbcType=VARCHAR},
+      </if>
+      <if test="sf54 != null">
+        SF54 = #{sf54,jdbcType=VARCHAR},
+      </if>
+      <if test="isfile != null">
+        ISFILE = #{isfile,jdbcType=VARCHAR},
+      </if>
+      <if test="filedate != null">
+        FILEDATE = #{filedate,jdbcType=VARCHAR},
+      </if>
+      <if test="sf55 != null">
+        SF55 = #{sf55,jdbcType=VARCHAR},
+      </if>
+      <if test="sf56 != null">
+        SF56 = #{sf56,jdbcType=VARCHAR},
+      </if>
+      <if test="wfTaskid != null">
+        WF_TASKID = #{wfTaskid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SF00 = #{sf00,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.SFGL">
+    update SFGL
+    set SF01 = #{sf01,jdbcType=VARCHAR},
+      SF02 = #{sf02,jdbcType=VARCHAR},
+      SF03 = #{sf03,jdbcType=VARCHAR},
+      SF04 = #{sf04,jdbcType=VARCHAR},
+      SF05 = #{sf05,jdbcType=VARCHAR},
+      SF06 = #{sf06,jdbcType=VARCHAR},
+      SF07 = #{sf07,jdbcType=VARCHAR},
+      SF08 = #{sf08,jdbcType=VARCHAR},
+      SF09 = #{sf09,jdbcType=VARCHAR},
+      SF10 = #{sf10,jdbcType=VARCHAR},
+      SF11 = #{sf11,jdbcType=VARCHAR},
+      SF12 = #{sf12,jdbcType=VARCHAR},
+      SF13 = #{sf13,jdbcType=VARCHAR},
+      SF14 = #{sf14,jdbcType=VARCHAR},
+      SF15 = #{sf15,jdbcType=VARCHAR},
+      SF16 = #{sf16,jdbcType=VARCHAR},
+      SF17 = #{sf17,jdbcType=VARCHAR},
+      SF18 = #{sf18,jdbcType=VARCHAR},
+      SF19 = #{sf19,jdbcType=VARCHAR},
+      SF20 = #{sf20,jdbcType=VARCHAR},
+      SF21 = #{sf21,jdbcType=VARCHAR},
+      SF22 = #{sf22,jdbcType=VARCHAR},
+      SF23 = #{sf23,jdbcType=VARCHAR},
+      SF24 = #{sf24,jdbcType=VARCHAR},
+      SF25 = #{sf25,jdbcType=VARCHAR},
+      SF26 = #{sf26,jdbcType=VARCHAR},
+      SF27 = #{sf27,jdbcType=DECIMAL},
+      SF28 = #{sf28,jdbcType=DECIMAL},
+      SF29 = #{sf29,jdbcType=DECIMAL},
+      SF30 = #{sf30,jdbcType=VARCHAR},
+      SF31 = #{sf31,jdbcType=VARCHAR},
+      SF32 = #{sf32,jdbcType=VARCHAR},
+      SF33 = #{sf33,jdbcType=VARCHAR},
+      SF34 = #{sf34,jdbcType=VARCHAR},
+      SF35 = #{sf35,jdbcType=VARCHAR},
+      SF36 = #{sf36,jdbcType=VARCHAR},
+      SF37 = #{sf37,jdbcType=VARCHAR},
+      SF38 = #{sf38,jdbcType=VARCHAR},
+      SF39 = #{sf39,jdbcType=VARCHAR},
+      SF40 = #{sf40,jdbcType=VARCHAR},
+      SF41 = #{sf41,jdbcType=VARCHAR},
+      SF42 = #{sf42,jdbcType=VARCHAR},
+      SF43 = #{sf43,jdbcType=VARCHAR},
+      SF44 = #{sf44,jdbcType=VARCHAR},
+      SF45 = #{sf45,jdbcType=VARCHAR},
+      SF46 = #{sf46,jdbcType=VARCHAR},
+      SF47 = #{sf47,jdbcType=VARCHAR},
+      SF48 = #{sf48,jdbcType=VARCHAR},
+      SF49 = #{sf49,jdbcType=VARCHAR},
+      SF50 = #{sf50,jdbcType=TIMESTAMP},
+      SF51 = #{sf51,jdbcType=VARCHAR},
+      SF52 = #{sf52,jdbcType=VARCHAR},
+      SF53 = #{sf53,jdbcType=VARCHAR},
+      SF54 = #{sf54,jdbcType=VARCHAR},
+      ISFILE = #{isfile,jdbcType=VARCHAR},
+      FILEDATE = #{filedate,jdbcType=VARCHAR},
+      SF55 = #{sf55,jdbcType=VARCHAR},
+      SF56 = #{sf56,jdbcType=VARCHAR},
+      WF_TASKID = #{wfTaskid,jdbcType=VARCHAR}
+    where SF00 = #{sf00,jdbcType=DECIMAL}
+  </update>
+</mapper>

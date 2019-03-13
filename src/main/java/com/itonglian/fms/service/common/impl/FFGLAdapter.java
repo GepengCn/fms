@@ -53,6 +53,9 @@ public abstract class FFGLAdapter extends BaseService {
     public abstract String getFormPath();
 
     public abstract Map<String,String> getContents(FFGL ffgl);
+
+    public abstract Customized getCustomized(FFGL ffgl);
+
     @Override
     public Param customizedImpl(Param param, FMS_TASK fmsTask) throws Exception {
         this.formPath = getFormPath();
@@ -63,48 +66,7 @@ public abstract class FFGLAdapter extends BaseService {
         Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                DwfwCustomized dwfwCustomized = new DwfwCustomized();
-                dwfwCustomized.setFF02(ffgl.getFf02());
-                dwfwCustomized.setFF03(ffgl.getFf03());
-                dwfwCustomized.setFF04(ffgl.getFf04());
-                dwfwCustomized.setFF07(ffgl.getFf07());
-                dwfwCustomized.setFF11(ffgl.getFf11());
-                dwfwCustomized.setFF12(ffgl.getFf12());
-                dwfwCustomized.setFF14(ffgl.getFf14());
-                dwfwCustomized.setFF15(ffgl.getFf15());
-                dwfwCustomized.setFF16(ffgl.getFf16());
-                dwfwCustomized.setFF17(ffgl.getFf17());
-                dwfwCustomized.setFF18(ffgl.getFf18());
-                dwfwCustomized.setFF25(ffgl.getFf25()==null?0:ffgl.getFf25());
-                dwfwCustomized.setFF30(ffgl.getFf30());
-                dwfwCustomized.setFF32(ffgl.getFf32());
-                dwfwCustomized.setFF35(ffgl.getFf35());
-
-                /*SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
-                sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
-                List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
-                Iterator<SYS_ATTACHMENT> iterator = sysAttachmentList.iterator();
-                while(iterator.hasNext()){
-                    SYS_ATTACHMENT sysAttachment = iterator.next();
-                    String taskId = sysAttachment.getSa02();
-                    WfTask wfTask1 =  wfTaskService.selectByPrimaryKey(Long.parseLong(taskId));
-                    if(!"FE_APP5.FFGL".equalsIgnoreCase(wfTask1.getWt03())){
-                        continue;
-                    }
-                    FFGL ffgl1 = ffglService.selectByPrimaryKey(wfTask1.getWt04());
-                    WjbpdCustomized.FF52 ff52 = new WjbpdCustomized.FF52();
-                    ff52.setFF02(ffgl1.getFf02());
-                    ff52.setFF12(ffgl1.getFf12());
-                    ff52.setFF30(ffgl1.getFf30());
-                    ff52.setFF31(ffgl1.getFf31());
-                    ff52.setFF32(ffgl1.getFf32());
-                    List<WjbpdCustomized.FF52> refDocList = new ArrayList<>();
-                    refDocList.add(ff52);
-                    zyxwCustomized.setRefDocList(refDocList);
-                }*/
-                param.setCustomized(dwfwCustomized);
-
-
+                param.setCustomized(getCustomized(ffgl));
             }
         }));
         Future<Boolean> future1 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {

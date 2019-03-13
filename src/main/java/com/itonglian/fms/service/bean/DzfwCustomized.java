@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class DwfwCustomized extends Customized {
+public class DzfwCustomized extends Customized {
+
+
+    private String FF12;
 
     private String FF07;
 
@@ -27,38 +28,17 @@ public class DwfwCustomized extends Customized {
 
     private String FF30;
 
-    private int FF25;
+    private Integer FF25;
 
-    private String FF11;
+    private String FF22;
 
     private String FF35;
 
-    private String FF16;
-
-    private String FF12;
+    private String FF23;
 
     private String FF02;
 
     private String FF14;
 
     private String FF15;
-
-    private List<FF52> refDocList;
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class FF52{
-
-        private String FF12;
-
-        private String FF32;
-
-        private String FF31;
-
-        private String FF30;
-
-        private String FF02;
-
-    }
 }

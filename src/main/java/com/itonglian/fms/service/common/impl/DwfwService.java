@@ -7,30 +7,37 @@ import com.itonglian.fms.entity.WfTask;
 import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.SysUsersService;
 import com.itonglian.fms.service.bean.Customized;
+import com.itonglian.fms.service.bean.DwfwCustomized;
 import com.itonglian.fms.service.bean.FileType;
-import com.itonglian.fms.service.bean.YfwCustomized;
-import com.itonglian.fms.service.common.range.YfwContentFilling;
+import com.itonglian.fms.service.common.range.DwfwContentFilling;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Slf4j
 @Component
-public class YfwService extends FFGLAdapter {
-
+public class DwfwService extends FFGLAdapter {
 
     @Autowired
     SysUsersService sysUsersService;
 
-    @Value(value = "${template.yfwFormPath}")
+    @Value(value = "${template.dwfwFormPath}")
     private String formPath;
 
     @Autowired
-    YfwContentFilling yfwContentFilling;
+    DwfwContentFilling dwfwContentFilling;
+
+    @Override
+    public FileType getType() {
+        return FileType.DWFW;
+    }
+
     @Override
     public ContentFilling getContentFilling() {
-        return yfwContentFilling;
+        return dwfwContentFilling;
     }
 
     @Override
@@ -50,31 +57,32 @@ public class YfwService extends FFGLAdapter {
         contents.put("FF17",ffgl.getFf17());
         contents.put("FF18",ffgl.getFf18());
         contents.put("FF25",ffgl.getFf25()==null?"0":ffgl.getFf25()+"");
+        contents.put("FF31",ffgl.getFf31());
         contents.put("FF32",sysGroupService.selectNameByPrimaryKey(ffgl.getFf32()));
         contents.put("FF30",sysGroupService.selectNameByPrimaryKey(ffgl.getFf30()));
         contents.put("FF35",sysGroupService.selectNameByPrimaryKey(ffgl.getFf35()));
-
+        contents.put("FF36",sysGroupService.selectNameByPrimaryKey(ffgl.getFf36()));
         return contents;
     }
 
     @Override
     public Customized getCustomized(FFGL ffgl) {
-        YfwCustomized yfwCustomized = new YfwCustomized();
-        yfwCustomized.setFF07(ffgl.getFf07());
-        yfwCustomized.setFF03(ffgl.getFf03());
-        yfwCustomized.setFF04(ffgl.getFf04());
-        yfwCustomized.setFF17(ffgl.getFf17());
-        yfwCustomized.setFF18(ffgl.getFf18());
-        yfwCustomized.setFF32(ffgl.getFf32());
-        yfwCustomized.setFF30(ffgl.getFf30());
-        yfwCustomized.setFF25(ffgl.getFf25());
-        yfwCustomized.setFF11(ffgl.getFf11());
-        yfwCustomized.setFF35(ffgl.getFf35());
-        yfwCustomized.setFF16(ffgl.getFf16());
-        yfwCustomized.setFF12(ffgl.getFf12());
-        yfwCustomized.setFF02(ffgl.getFf02());
-        yfwCustomized.setFF14(ffgl.getFf14());
-        yfwCustomized.setFF15(ffgl.getFf15());
+        DwfwCustomized dwfwCustomized = new DwfwCustomized();
+        dwfwCustomized.setFF07(ffgl.getFf07());
+        dwfwCustomized.setFF03(ffgl.getFf03());
+        dwfwCustomized.setFF04(ffgl.getFf04());
+        dwfwCustomized.setFF17(ffgl.getFf17());
+        dwfwCustomized.setFF18(ffgl.getFf18());
+        dwfwCustomized.setFF32(ffgl.getFf32());
+        dwfwCustomized.setFF30(ffgl.getFf30());
+        dwfwCustomized.setFF25(ffgl.getFf25());
+        dwfwCustomized.setFF11(ffgl.getFf11());
+        dwfwCustomized.setFF35(ffgl.getFf35());
+        dwfwCustomized.setFF16(ffgl.getFf16());
+        dwfwCustomized.setFF12(ffgl.getFf12());
+        dwfwCustomized.setFF02(ffgl.getFf02());
+        dwfwCustomized.setFF14(ffgl.getFf14());
+        dwfwCustomized.setFF15(ffgl.getFf15());
         SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
         sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
         List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
@@ -87,22 +95,17 @@ public class YfwService extends FFGLAdapter {
                 continue;
             }
             FFGL ffgl1 = ffglService.selectByPrimaryKey(wfTask1.getWt04());
-            YfwCustomized.FF52 ff52 = new YfwCustomized.FF52();
+            DwfwCustomized.FF52 ff52 = new DwfwCustomized.FF52();
             ff52.setFF02(ffgl1.getFf02());
             ff52.setFF12(ffgl1.getFf12());
             ff52.setFF30(ffgl1.getFf30());
             ff52.setFF31(ffgl1.getFf31());
             ff52.setFF32(ffgl1.getFf32());
-            List<YfwCustomized.FF52> refDocList = new ArrayList<>();
+            List<DwfwCustomized.FF52> refDocList = new ArrayList<>();
             refDocList.add(ff52);
-            yfwCustomized.setRefDocList(refDocList);
+            dwfwCustomized.setRefDocList(refDocList);
         }
-        return yfwCustomized;
+        return dwfwCustomized;
     }
 
-    @Override
-    public FileType getType() {
-
-        return FileType.YFW;
-    }
 }

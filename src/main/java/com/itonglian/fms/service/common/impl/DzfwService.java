@@ -3,6 +3,8 @@ package com.itonglian.fms.service.common.impl;
 import com.itonglian.fms.entity.FFGL;
 import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.SysUsersService;
+import com.itonglian.fms.service.bean.Customized;
+import com.itonglian.fms.service.bean.DzfwCustomized;
 import com.itonglian.fms.service.bean.FileType;
 import com.itonglian.fms.service.common.range.DzfwContentFilling;
 import lombok.extern.slf4j.Slf4j;
@@ -61,5 +63,26 @@ public class DzfwService extends FFGLAdapter {
         contents.put("FF35",sysGroupService.selectNameByPrimaryKey(ffgl.getFf35()));
         contents.put("FF36",sysGroupService.selectNameByPrimaryKey(ffgl.getFf36()));
         return contents;
+    }
+
+    @Override
+    public Customized getCustomized(FFGL ffgl) {
+        DzfwCustomized dzfwCustomized = new DzfwCustomized();
+        dzfwCustomized.setFF02(ffgl.getFf02());
+        dzfwCustomized.setFF03(ffgl.getFf03());
+        dzfwCustomized.setFF04(ffgl.getFf04());
+        dzfwCustomized.setFF07(ffgl.getFf07());
+        dzfwCustomized.setFF12(ffgl.getFf12());
+        dzfwCustomized.setFF14(ffgl.getFf14());
+        dzfwCustomized.setFF15(ffgl.getFf15());
+        dzfwCustomized.setFF17(ffgl.getFf17());
+        dzfwCustomized.setFF18(ffgl.getFf18());
+        dzfwCustomized.setFF22(ffgl.getFf22());
+        dzfwCustomized.setFF23(ffgl.getFf23());
+        dzfwCustomized.setFF25(ffgl.getFf25());
+        dzfwCustomized.setFF30(ffgl.getFf30());
+        dzfwCustomized.setFF32(ffgl.getFf32());
+        dzfwCustomized.setFF35(ffgl.getFf35());
+        return dzfwCustomized;
     }
 }
