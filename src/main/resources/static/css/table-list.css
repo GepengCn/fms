@@ -86,10 +86,11 @@ ul {
 .fms-content .fms-table-part .fms-table-title{
   max-width: 350px;
 }
-.fms-content .fms-table-part .success {
+.fms-content .fms-table-part .final {
   color: #2AC566;
-  text-decoration: none;
-  cursor: pointer;
+}
+.fms-content .fms-table-part .success {
+  color: dodgerblue;
 }
 .fms-content .fms-table-part .failure {
   color: red;

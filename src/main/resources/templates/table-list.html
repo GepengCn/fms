@@ -57,12 +57,21 @@
             </td>
             <td th:text="${fmsTask.status}">102</td>
             <td th:switch="${fmsTask.status}">
-              <span class="waiting" th:case="100"><span class="glyphicon glyphicon-exclamation-sign icon-title "></span>待归档处理</span>
+              <span class="waiting" th:case="100"><span class="glyphicon glyphicon-exclamation-sign icon-title "></span>待处理</span>
               <span class="waiting" th:case="101"><span class="glyphicon glyphicon-retweet icon-title "></span>正在处理</span>
-              <span class="failure" th:case="103"><span class="glyphicon glyphicon-remove icon-title "></span>归档处理失败</span>
-              <a class="success" th:case="102" th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-ok icon-title "></span>归档处理成功</a>
+              <span class="failure" th:case="103"><span class="glyphicon glyphicon-remove icon-title "></span>处理失败</span>
+              <a class="success" th:case="102" ><span class="glyphicon glyphicon-play icon-title "></span>处理成功</a>
+              <span class="waiting" th:case="200"><span class="glyphicon glyphicon-sort icon-title "></span>正在归档</span>
+              <span class="failure" th:case="201"><span class="glyphicon glyphicon-remove icon-title "></span>归档提交失败</span>
+              <span class="final" th:case="300"><span class="glyphicon glyphicon-ok icon-title "></span>归档成功</span>
+              <span class="failure" th:case="301"><span class="glyphicon glyphicon-remove icon-title "></span>归档失败</span>
+
+
             </td>
-            <td><a th:href="@{'/dataController/retry?id='+${fmsTask.id}}">重新归档</a></td>
+            <td>
+              <a th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-th-list icon-title"></span></a>
+              <a th:href="@{'/dataController/retry?id='+${fmsTask.id}}"><span class="glyphicon glyphicon-refresh icon-title"></span></a>
+            </td>
           </tr>
           </tbody>
         </table>
