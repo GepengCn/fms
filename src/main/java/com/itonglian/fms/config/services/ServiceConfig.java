@@ -12,4 +12,8 @@ import org.springframework.stereotype.Component;
 public class ServiceConfig {
 
     private String url;
+
+    private String encoding;
+
+    private String localUrl;
 }

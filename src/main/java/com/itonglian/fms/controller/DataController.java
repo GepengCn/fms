@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.itonglian.fms.bean.FindListResult;
 import com.itonglian.fms.config.ftp.FtpUtil;
+import com.itonglian.fms.config.services.ServiceConfig;
 import com.itonglian.fms.entity.FMS_DATAExample;
 import com.itonglian.fms.entity.FMS_DATAWithBLOBs;
 import com.itonglian.fms.entity.FMS_TASK;
@@ -53,10 +54,13 @@ public class DataController {
     @Value(value = "${template.pdfPath}")
     private String pdfPath;
 
+    @Autowired
+    ServiceConfig serviceConfig;
+
 
     @ApiOperation(value="待归档数据查询接口", notes="调用后，归档状态为200(已发送)" ,httpMethod="POST")
-    @RequestMapping("findList")
-    public FindListResult findList(String startDate,String endDate) {
+    @RequestMapping("findThenUpdate")
+    public FindListResult findThenUpdate(String startDate,String endDate) {
         FindListResult findListResult = new FindListResult();
         List<String> resultList = new ArrayList<>();
         try {
@@ -75,7 +79,7 @@ public class DataController {
             Iterator<FMS_DATAWithBLOBs> iterator = fmsDataList.iterator();
             while(iterator.hasNext()){
                 FMS_DATAWithBLOBs fmsData = iterator.next();
-                resultList.add(new String(fmsData.getCommon(), Charset.forName("UTF-8")));
+                resultList.add(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())));
                 FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
                 fmsTaskExample.or().andDataidEqualTo(fmsData.getDataid());
                 List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
@@ -110,7 +114,7 @@ public class DataController {
         Iterator<FMS_DATAWithBLOBs> iterator = fmsDataList.iterator();
         while(iterator.hasNext()){
             FMS_DATAWithBLOBs fmsData = iterator.next();
-            resultList.add(new String(fmsData.getCommon(), Charset.forName("UTF-8")));
+            resultList.add(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())));
         }
 
         return resultList;
@@ -131,7 +135,7 @@ public class DataController {
         FMS_DATAExample fmsDataExample = new FMS_DATAExample();
         fmsDataExample.or().andDataidEqualTo(dataId);
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataId);
-        WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName("UTF-8")), WjbpdParam.class);
+        WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName(serviceConfig.getEncoding())), WjbpdParam.class);
         modelAndView.addObject("params",params);
         modelAndView.addObject("common",JSON.toJSONString(params));
         modelAndView.addObject("ftpList",params.getFtpList());
@@ -154,7 +158,8 @@ public class DataController {
     @ResponseBody
     public String jsonPretty(String dataid) {
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataid);
-        String common = new String(fmsData.getCommon(),Charset.forName("UTF-8"));
+
+        String common = new String(fmsData.getCommon(),Charset.forName(serviceConfig.getEncoding()));
         return JSON.toJSONString(common);
     }
 

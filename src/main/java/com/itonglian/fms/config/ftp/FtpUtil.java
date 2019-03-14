@@ -1,5 +1,6 @@
 package com.itonglian.fms.config.ftp;
 
+import com.itonglian.fms.config.services.ServiceConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
@@ -27,6 +28,8 @@ public class FtpUtil {
     private String username;
     @Value("${ftp.password}")
     private String password;
+    @Autowired
+    ServiceConfig serviceConfig;
 
 
 
@@ -71,8 +74,8 @@ public class FtpUtil {
         try {
             ftpClient = init(parentPath);
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            ftpClient.setCharset(Charset.forName("UTF-8"));
-            ftpClient.setControlEncoding("UTF-8");
+            ftpClient.setCharset(Charset.forName(serviceConfig.getEncoding()));
+            ftpClient.setControlEncoding(serviceConfig.getEncoding());
             if(clearAll){
                 FTPFile[] ftpFiles = ftpClient.listFiles();
                 for(int i=0;i<ftpFiles.length;i++){
@@ -118,8 +121,8 @@ public class FtpUtil {
         try {
             ftpClient = init(parentPath);
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            ftpClient.setCharset(Charset.forName("UTF-8"));
-            ftpClient.setControlEncoding("UTF-8");
+            ftpClient.setCharset(Charset.forName(serviceConfig.getEncoding()));
+            ftpClient.setControlEncoding(serviceConfig.getEncoding());
             ftpClient.enterLocalPassiveMode();
             FTPFile[] ftpFiles=ftpClient.listFiles();
             ftpClient.listFiles(parentPath);
