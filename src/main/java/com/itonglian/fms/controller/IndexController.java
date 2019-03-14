@@ -11,4 +11,9 @@ public class IndexController {
     public ModelAndView index(){
         return new ModelAndView("redirect:/dataController/dataIndex");
     }
+
+    @RequestMapping(value = "/demo")
+    public String demo(){
+        return "table-list";
+    }
 }

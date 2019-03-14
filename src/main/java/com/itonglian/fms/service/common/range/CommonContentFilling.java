@@ -36,7 +36,7 @@ public abstract class CommonContentFilling implements ContentFilling {
         DocumentBuilder builder = new DocumentBuilder(document);
         builder.moveToDocumentEnd();
         builder.getParagraphFormat().setAlignment(ParagraphAlignment.RIGHT);
-        String barcode = barcodeUtils.generate(contents.get("FF02"));
+        String barcode = barcodeUtils.generate(contents.get("BARCODE"));
         Shape shape = builder.insertImage(barcode);
         shape.setAspectRatioLocked(true);
         shape.setHeight(75);

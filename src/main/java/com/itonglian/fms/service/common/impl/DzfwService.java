@@ -55,6 +55,7 @@ public class DzfwService extends FFGLAdapter {
         contents.put("FF17",ffgl.getFf17());
         contents.put("FF18",ffgl.getFf18());
         contents.put("FF22",ffgl.getFf22());
+        contents.put("FF06",ffgl.getFf06());
         contents.put("FF23",ffgl.getFf23());
         contents.put("FF25",ffgl.getFf25()==null?"0":ffgl.getFf25()+"");
         contents.put("FF31",ffgl.getFf31());

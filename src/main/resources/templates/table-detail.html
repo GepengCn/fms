@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>表格列表</title>
+<!--
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link th:href="@{/static/css/table-list.css}" rel="stylesheet" type="text/css"  />
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+
+</head>
+<body>
+<div class="fms">
+    <div class="fms-menu">
+        <ul>
+<!--
+            <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表1</li>
+-->
+            <!--选中的左侧菜单在li上加class类名为‘active’-->
+            <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档详情</li>
+<!--
+            <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表3</li>
+-->
+        </ul>
+    </div>
+    <div class="fms-content fade-in">
+        <!--详情区域代码  start-->
+        <ol class="breadcrumb">
+            <li><a href="#">归档数据列表</a></li>
+            <li class="active">归档详情</li>
+        </ol>
+        <div class="fms-detail-part">
+            <dl>
+                <dt class="fms-detail-item">
+                    <div class="fms-detail-left">属性名</div>
+                    <div class="fms-detail-content">属性值</div>
+                </dt>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">任务id</div>
+                    <div class="fms-detail-content" th:text="${params.taskId}">290387</div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">标题</div>
+                    <div class="fms-detail-content" th:text="${params.title}">管理gray accord</div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">公文类型</div>
+                    <div class="fms-detail-content" th:text="${params.type}">1</div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">拟稿时间</div>
+                    <div class="fms-detail-content" th:text="${params.draftTime}">2019-03-12 19:11:11</div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">拟稿人登录名</div>
+                    <div class="fms-detail-content" th:text="${params.drafter}">400</div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">拟稿人姓名</div>
+                    <div class="fms-detail-content" th:text="${params.drafterName}">测试用400</div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">json数据</div>
+                    <div class="fms-detail-content"><pre id="code" th:text="${common}"></pre></div>
+                </dd>
+                <dd class="fms-detail-item">
+                    <div class="fms-detail-left">ftpList数据</div>
+                    <div class="fms-detail-list">
+                        <div class="fms-detail-file" th:each="ftpFile: ${ftpList}">
+                            <ul>
+                                <li class="fms-detail-file-item">
+                                    <span class="file-title">文件名称:</span>
+                                    <span class="file-name" th:text="${ftpFile.fileName}">abef834-3483-38393930-3-0r3r3u9r3r3r3i9ri30ri3.pdf</span>
+                                </li>
+                                <li class="fms-detail-file-item">
+                                    <span class="file-title">文件路径:</span>
+                                    <span class="file-name" th:text="${ftpFile.filePath}">aaaaaaaaaaaaaaa</span>
+                                </li>
+                                <li class="fms-detail-file-item">
+                                    <span class="file-title">文件顺序:</span>
+                                    <span class="file-name" th:text="${ftpFile.fileSort}">1</span>
+                                </li>
+                                <li class="fms-detail-file-item">
+                                    <span class="file-title">文件类型:</span>
+                                    <span class="file-name" th:text="${ftpFile.fileType}">公文表单</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+        <!--详情区域代码 end-->
+    </div>
+</div>
+
+</body>
+</html>

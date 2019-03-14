@@ -1,0 +1,178 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+ul {
+  list-style: none;
+}
+.fms {
+  background: #f8f8f8;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 5px 20px 10px 150px;
+  box-sizing: border-box;
+}
+.icon-title {
+  margin-right: 5px;
+}
+/*左侧导航区*/
+.fms-menu {
+  width: 130px;
+  height: 100%;
+  background: white;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
+.fms-menu-title {
+  list-style: none;
+  height: 60px;
+  line-height: 60px;
+  font-size: 14px;
+  color: #373737;
+  text-align: center;
+}
+.fms-menu-title:hover {
+  color: #42c57a;
+  cursor: pointer;
+}
+.fms-menu-title.active {
+  color: #373737;
+  background: #f8f8f8;
+}
+.fms-menu-title.active:hover {
+  color: #42c57a;
+  cursor: pointer;
+}
+
+/*淡入淡出动画*/
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+  /*右侧内容区*/
+.fms-content {
+  width: 100%;
+  background: #fff;
+  height: 100%;
+  animation: fade-in 0.3s;
+  overflow-y: hidden;
+}
+.breadcrumb a {
+  color: #42c57a;
+}
+
+/* 表格列表区域样式代码 start */
+.fms-content .fms-table-part {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+  padding: 0px 20px 20px;
+  box-sizing: border-box;
+  margin-top: -10px;
+}
+.fms-content .fms-table-part th,td {
+  text-align: center;
+}
+.fms-content .fms-table-part .fms-table-title{
+  max-width: 350px;
+}
+.fms-content .fms-table-part .success {
+  color: #2AC566;
+  text-decoration: none;
+  cursor: pointer;
+}
+.fms-content .fms-table-part .failure {
+  color: red;
+}
+.fms-content .fms-table-part .waiting {
+  color: #ec8710;
+}
+.fms-content .fms-table-part .fms-page {
+  float: right;
+  margin-right: 20px;
+
+}
+.fms-content .fms-table-part .pagination a{
+  color: #2AC566;
+  font-weight: bold;
+}
+/* 表格列表区域样式代码 end */
+
+/* 详情区域样式代码 start */
+.fms-content .fms-detail-part {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+  padding: 0px 20px 20px;
+  box-sizing: border-box;
+  margin-top: -10px;
+}
+.fms-detail-item {
+  min-height: 40px;
+  font-size: 16px;
+  position: relative;
+  line-height: 30px;
+  border-bottom: 1px solid #ccc;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.fms-detail-item .fms-detail-left{
+  width:130px;
+  position: absolute;
+  left: 0px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  color: #42c57a;
+  padding-top: 0px;
+  top: 50%;
+  transform: translate(0,-50%);
+}
+
+.fms-detail-item .fms-detail-content {
+  width: 100%;
+  padding-left: 140px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  color: #606266;
+  overflow-y: auto;
+  max-height: 63px;
+}
+.fms-detail-item .fms-detail-list {
+  width: 100%;
+  padding-left: 140px;
+  box-sizing: border-box;
+  color: #606266;
+  padding-top: 5px;
+}
+.fms-detail-item .fms-detail-list .fms-detail-file{
+  background: #f5f5f5;
+  padding-left: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.fms-detail-item .fms-detail-list .fms-detail-file .fms-detail-file-item {
+  position: relative;
+}
+.fms-detail-item .fms-detail-list .fms-detail-file  .fms-detail-file-item .file-title {
+  width: 70px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.fms-detail-item .fms-detail-list .fms-detail-file  .fms-detail-file-item .file-name {
+  word-wrap: break-word;
+  padding-right: 10px;
+  padding-left: 75px;
+  display: block;
+}
+/* 详情区域样式代码 end */

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>表格列表</title>
+<!--
+  <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link th:href="@{/static/css/table-list.css}" rel="stylesheet" type="text/css"  />
+  <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+</head>
+<body>
+  <div class="fms">
+    <div class="fms-menu">
+      <ul>
+<!--
+        <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表1</li>
+-->
+        <!--选中的左侧菜单在li上加class类名为‘active’-->
+        <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表</li>
+<!--
+        <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表3</li>
+-->
+      </ul>
+    </div>
+    <div class="fms-content fade-in">
+      <ol class="breadcrumb">
+        <li class="active">归档数据列表</li>
+      </ol>
+      <div class="fms-table-part">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>流程ID</th>
+            <th>标题</th>
+            <th>拟稿人</th>
+            <th>公文类型</th>
+            <th>归档状态标识</th>
+            <th>归档状态</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="fmsTask: ${datas}">
+            <td th:text="${fmsTask.taskid}">290387</td>
+            <td class="fms-table-title" th:text="${fmsTask.title}">管理gray accord</td>
+            <td th:text="${fmsTask.draftname}">测试用400</td>
+            <td th:text="${fmsTask.filetype}">1</td>
+            <td th:text="${fmsTask.status}">102</td>
+            <td th:switch="${fmsTask.status}">
+              <span class="waiting" th:case="100"><span class="glyphicon glyphicon-exclamation-sign icon-title "></span>待归档处理</span>
+              <span class="failure" th:case="103"><span class="glyphicon glyphicon-remove icon-title "></span>归档处理失败</span>
+              <a class="success" th:case="102" th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-ok icon-title "></span>归档处理成功</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="fms-page">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li>
+                <a href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li>
+                <a href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

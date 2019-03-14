@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -105,7 +106,7 @@ public class DataController {
 
     @RequestMapping("dataIndex")
     public ModelAndView dataIndex() {
-        ModelAndView modelAndView = new ModelAndView("list");
+        ModelAndView modelAndView = new ModelAndView("table-list");
         List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(new FMS_TASKExample());
         modelAndView.addObject("datas",fmsTaskList);
         return modelAndView;
@@ -120,7 +121,9 @@ public class DataController {
         WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName("UTF-8")), WjbpdParam.class);
         modelAndView.addObject("params",params);
         modelAndView.addObject("common",JSON.toJSONString(params));
-        modelAndView.setViewName("detail");
+        modelAndView.addObject("ftpList",params.getFtpList());
+        modelAndView.addObject("dataid",fmsData.getDataid());
+        modelAndView.setViewName("table-detail");
         return modelAndView;
     }
 
@@ -132,5 +135,13 @@ public class DataController {
             fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_100);
         }
         return new ModelAndView("redirect:/dataController/dataIndex");
+    }
+
+    @RequestMapping("jsonPretty")
+    @ResponseBody
+    public String jsonPretty(String dataid) {
+        FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataid);
+        String common = new String(fmsData.getCommon(),Charset.forName("UTF-8"));
+        return JSON.toJSONString(common);
     }
 }

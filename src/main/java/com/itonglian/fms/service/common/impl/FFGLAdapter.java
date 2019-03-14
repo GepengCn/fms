@@ -107,6 +107,7 @@ public abstract class FFGLAdapter extends BaseService {
         Map<String,String> contents = getContents(ffgl);
 
         contents.put("FF02",ffgl.getFf02());
+        contents.put("BARCODE",ffgl.getFf02());
 
         ftpFileList.add(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),getContentFilling(),contents,wfTask.getWt00(),FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),2,2)));
         //正文

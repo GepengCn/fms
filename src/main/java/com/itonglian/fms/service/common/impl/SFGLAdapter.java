@@ -106,6 +106,7 @@ public abstract class SFGLAdapter extends BaseService {
         Map<String,String> contents = getContents(sfgl);
 
         contents.put("SF02",sfgl.getSf02());
+        contents.put("BARCODE",sfgl.getSf02());
 
         ftpFileList.add(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),getContentFilling(),contents,wfTask.getWt00(),FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),2,2)));
         //正文
