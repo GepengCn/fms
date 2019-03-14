@@ -87,8 +87,6 @@ public class DataController {
                     fmsData.setDr("Y");
                     fmsDataService.updateByPrimaryKey(fmsData);
                 }
-                int i=1/0;
-                System.out.println(i);
             }
         }catch (Exception e){
             log.error("error",e);
