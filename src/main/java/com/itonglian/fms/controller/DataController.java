@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.itonglian.fms.bean.FindListResult;
+import com.itonglian.fms.config.ftp.FtpUtil;
 import com.itonglian.fms.entity.FMS_DATAExample;
 import com.itonglian.fms.entity.FMS_DATAWithBLOBs;
 import com.itonglian.fms.entity.FMS_TASK;
@@ -15,16 +16,26 @@ import com.itonglian.fms.service.bean.WjbpdParam;
 import com.itonglian.fms.service.common.FileStatusManager;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.zeroturnaround.zip.ZipUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("dataController")
@@ -37,6 +48,10 @@ public class DataController {
     FileStatusManager fileStatusManager;
     @Autowired
     FmsTaskService fmsTaskService;
+    @Autowired
+    FtpUtil ftpUtil;
+    @Value(value = "${template.pdfPath}")
+    private String pdfPath;
 
 
     @ApiOperation(value="待归档数据查询接口", notes="调用后，归档状态为200(已发送)" ,httpMethod="POST")
@@ -143,5 +158,44 @@ public class DataController {
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataid);
         String common = new String(fmsData.getCommon(),Charset.forName("UTF-8"));
         return JSON.toJSONString(common);
+    }
+
+    @RequestMapping("download")
+    @ResponseBody
+    public ResponseEntity<byte[]> download(String filePath) {
+        String temp = pdfPath+File.separator+ UUID.randomUUID().toString();
+        File tempFile = new File(temp);
+        File zip = new File(pdfPath+File.separator+UUID.randomUUID().toString()+".zip");
+        try {
+
+            FileUtils.forceMkdir(tempFile);
+            ftpUtil.download(filePath,temp);
+
+            if(tempFile.listFiles().length==0){
+                return null;
+            }
+            ZipUtil.pack(tempFile,zip);
+
+            HttpHeaders headers = new HttpHeaders();
+
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+
+            headers.setContentDispositionFormData("attachment", zip.getName());
+
+
+            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(zip),
+                    headers, HttpStatus.CREATED);
+        } catch (IOException e) {
+            log.error("IOException",e);
+        }finally {
+            try {
+                FileUtils.deleteDirectory(tempFile);
+                FileUtils.forceDelete(zip);
+            } catch (IOException e) {
+                log.error("IOException",e);
+            }
+
+        }
+        return null;
     }
 }

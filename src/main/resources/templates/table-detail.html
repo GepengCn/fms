@@ -73,11 +73,11 @@
                             <ul>
                                 <li class="fms-detail-file-item">
                                     <span class="file-title">文件名称:</span>
-                                    <span class="file-name" th:text="${ftpFile.fileName}">abef834-3483-38393930-3-0r3r3u9r3r3r3i9ri30ri3.pdf</span>
+                                    <span class="file-name" th:text="${ftpFile.fileName==null?'无':ftpFile.fileName}">abef834-3483-38393930-3-0r3r3u9r3r3r3i9ri30ri3.pdf</span>
                                 </li>
                                 <li class="fms-detail-file-item">
                                     <span class="file-title">文件路径:</span>
-                                    <span class="file-name" th:text="${ftpFile.filePath}">aaaaaaaaaaaaaaa</span>
+                                    <a class="file-name" th:text="${ftpFile.filePath}" th:href="@{'/dataController/download?filePath='+${ftpFile.filePath}}"></a>
                                 </li>
                                 <li class="fms-detail-file-item">
                                     <span class="file-title">文件顺序:</span>

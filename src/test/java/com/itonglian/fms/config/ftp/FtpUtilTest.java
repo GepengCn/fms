@@ -17,13 +17,16 @@ public class FtpUtilTest {
 
     @Autowired
     FtpUtil ftpUtil;
-    @Test
+/*//    @Test
     public void upload() {
         String fileName = "test.pdf";
         ftpUtil.upload(UUID.randomUUID().toString(),fileName,new File("/Users/gepeng/Downloads/template/",fileName));
-    }
+    }*/
 
     @Test
     public void download() {
+        String ftpPath = "/104e1557-9b4d-4c2f-bb3b-d2a9d36d6b65/069b0cad-a29f-44df-873e-63acb3ec4b3d/";
+        String destPath = "/Users/gepeng/Downloads/template";
+        ftpUtil.download(ftpPath,destPath);
     }
 }
