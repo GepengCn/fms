@@ -29,7 +29,7 @@
     <div class="fms-content fade-in">
         <!--详情区域代码  start-->
         <ol class="breadcrumb">
-            <li><a href="#">归档数据列表</a></li>
+            <li><a th:href="@{'/dataController/dataIndex'}">归档数据列表</a></li>
             <li class="active">归档详情</li>
         </ol>
         <div class="fms-detail-part">
@@ -67,7 +67,7 @@
                     <div class="fms-detail-content"><pre id="code" th:text="${common}"></pre></div>
                 </dd>
                 <dd class="fms-detail-item">
-                    <div class="fms-detail-left">ftpList数据</div>
+                    <div class="fms-detail-left">FTP文件列表</div>
                     <div class="fms-detail-list">
                         <div class="fms-detail-file" th:each="ftpFile: ${ftpList}">
                             <ul>
@@ -83,9 +83,20 @@
                                     <span class="file-title">文件顺序:</span>
                                     <span class="file-name" th:text="${ftpFile.fileSort}">1</span>
                                 </li>
-                                <li class="fms-detail-file-item">
+                                <!--<li class="fms-detail-file-item">
                                     <span class="file-title">文件类型:</span>
                                     <span class="file-name" th:text="${ftpFile.fileType}">公文表单</span>
+                                </li>-->
+                                <li class="fms-detail-file-item">
+                                    <span class="file-title">文件类型:</span>
+                                    <span class="file-name" th:switch="${ftpFile.fileType}">
+                                        <span th:case="0">封皮</span>
+                                        <span th:case="1">目录</span>
+                                        <span th:case="2">表单</span>
+                                        <span th:case="3">正文</span>
+                                        <span th:case="4">附件</span>
+                                        <span th:case="5">备考表</span>
+                                    </span>
                                 </li>
                             </ul>
                         </div>

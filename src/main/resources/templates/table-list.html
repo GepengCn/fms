@@ -39,6 +39,7 @@
             <th>公文类型</th>
             <th>归档状态标识</th>
             <th>归档状态</th>
+            <th>操作</th>
           </tr>
           </thead>
           <tbody>
@@ -46,13 +47,22 @@
             <td th:text="${fmsTask.taskid}">290387</td>
             <td class="fms-table-title" th:text="${fmsTask.title}">管理gray accord</td>
             <td th:text="${fmsTask.draftname}">测试用400</td>
-            <td th:text="${fmsTask.filetype}">1</td>
+            <td th:switch="${fmsTask.filetype}">
+              <span th:case="1">文件报批单</span>
+              <span th:case="2">自由行问</span>
+              <span th:case="3">单位发文</span>
+              <span th:case="4">党组发文</span>
+              <span th:case="5">院发文</span>
+              <span th:case="6">收文登记</span>
+            </td>
             <td th:text="${fmsTask.status}">102</td>
             <td th:switch="${fmsTask.status}">
               <span class="waiting" th:case="100"><span class="glyphicon glyphicon-exclamation-sign icon-title "></span>待归档处理</span>
+              <span class="waiting" th:case="101"><span class="glyphicon glyphicon-retweet icon-title "></span>正在处理</span>
               <span class="failure" th:case="103"><span class="glyphicon glyphicon-remove icon-title "></span>归档处理失败</span>
               <a class="success" th:case="102" th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-ok icon-title "></span>归档处理成功</a>
             </td>
+            <td><a th:href="@{'/dataController/retry?id='+${fmsTask.id}}">重新归档</a></td>
           </tr>
           </tbody>
         </table>
@@ -80,5 +90,11 @@
       </div>
     </div>
   </div>
+  <script>
+    setTimeout(function () {
+      window.location.reload();
+    },5000);
+
+  </script>
 </body>
 </html>

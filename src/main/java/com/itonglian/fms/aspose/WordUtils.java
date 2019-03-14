@@ -18,6 +18,9 @@ import java.util.Map;
 public class WordUtils {
 
     public synchronized boolean word2Pdf(String srcFile, String destFile,boolean delete){
+        if(srcFile.indexOf(".zip")!=-1){
+            return true;
+        }
         Document doc;
         try {
             doc = new Document(srcFile);
@@ -45,6 +48,9 @@ public class WordUtils {
         return word2Pdf(srcFile,destFile,true);
     }
     public synchronized boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents,long taskId){
+        if(srcFile.indexOf(".zip")!=-1){
+            return true;
+        }
         Document doc;
         String barcode ="";
         try {

@@ -46,7 +46,8 @@ public class DocParser {
         }
         //word转成pdf
         if(!wordUtils.word2Pdf(files[0].getAbsolutePath(),pdfAbsPath,false)){
-            throw new Exception("word转pdf出错...");
+//            throw new Exception("word转pdf出错...");
+            return;
         }
         //压缩包目录
         String zipPath = pdfPath+File.separator+UUID.randomUUID().toString()+".zip";
