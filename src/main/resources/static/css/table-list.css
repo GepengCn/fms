@@ -98,6 +98,9 @@ ul {
 .fms-content .fms-table-part .waiting {
   color: #ec8710;
 }
+.fms-content .fms-table-part .filing {
+  color: #1b6d85!important;
+}
 .fms-content .fms-table-part .fms-page {
   float: right;
   margin-right: 20px;

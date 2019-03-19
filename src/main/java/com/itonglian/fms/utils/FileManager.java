@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
@@ -147,6 +149,19 @@ public class FileManager {
             throw new Exception("转换PDF出错");
         }
         return ftpFile;
+    }
+
+    public FtpFile parseFileList(List<FtpFile> ftpList,int fileType){
+
+        Iterator<FtpFile> iterator = ftpList.iterator();
+
+        while(iterator.hasNext()){
+            FtpFile ftpFile = iterator.next();
+            if(ftpFile.getFileType()==fileType){
+                return ftpFile;
+            }
+        }
+        return null;
     }
 
 

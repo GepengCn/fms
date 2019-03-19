@@ -13,8 +13,10 @@ import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.FmsTaskService;
 import com.itonglian.fms.service.bean.FileStatus;
-import com.itonglian.fms.service.bean.WjbpdParam;
+import com.itonglian.fms.service.bean.FtpFile;
+import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.FileStatusManager;
+import com.itonglian.fms.utils.FileManager;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -57,6 +59,9 @@ public class DataController {
     @Autowired
     ServiceConfig serviceConfig;
 
+    @Autowired
+    FileManager fileManager;
+
 
     @ApiOperation(value="待归档数据查询接口", notes="调用后，归档状态为200(已发送)" ,httpMethod="POST")
     @RequestMapping("findThenUpdate")
@@ -80,7 +85,7 @@ public class DataController {
             while(iterator.hasNext()){
                 FMS_DATAWithBLOBs fmsData = iterator.next();
                 resultList.add(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())));
-                FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
+                /*FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
                 fmsTaskExample.or().andDataidEqualTo(fmsData.getDataid());
                 List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
                 Iterator<FMS_TASK> iterator1 = fmsTaskList.iterator();
@@ -90,7 +95,7 @@ public class DataController {
                     fmsTaskService.updateByPrimaryKey(fmsTask);
                     fmsData.setDr("Y");
                     fmsDataService.updateByPrimaryKey(fmsData);
-                }
+                }*/
             }
         }catch (Exception e){
             log.error("error",e);
@@ -129,13 +134,20 @@ public class DataController {
         return modelAndView;
     }
 
+    @RequestMapping("refresh")
+    @ResponseBody
+    public List<FMS_TASK> refresh() {
+        List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(new FMS_TASKExample());
+        return fmsTaskList;
+    }
+
     @RequestMapping("detail")
     public ModelAndView detail(String dataId) {
         ModelAndView modelAndView = new ModelAndView();
         FMS_DATAExample fmsDataExample = new FMS_DATAExample();
         fmsDataExample.or().andDataidEqualTo(dataId);
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataId);
-        WjbpdParam params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName(serviceConfig.getEncoding())), WjbpdParam.class);
+        Param params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName(serviceConfig.getEncoding())), Param.class);
         modelAndView.addObject("params",params);
         modelAndView.addObject("common",JSON.toJSONString(params));
         modelAndView.addObject("ftpList",params.getFtpList());
@@ -165,12 +177,25 @@ public class DataController {
 
     @RequestMapping("download")
     @ResponseBody
-    public ResponseEntity<byte[]> download(String filePath) {
+    public ResponseEntity<byte[]> download(int fileType,String dataId) {
+        FMS_DATAExample fmsDataExample = new FMS_DATAExample();
+        fmsDataExample.or().andDataidEqualTo(dataId);
+
+        FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataId);
+
+        Param params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName(serviceConfig.getEncoding())), Param.class);
+
+        FtpFile ftpFile = fileManager.parseFileList(params.getFtpList(),fileType);
+
+        if(ftpFile==null){
+            log.error("解析不到此类型的公文...");
+            return null;
+        }
+        String filePath = ftpFile.getFilePath();
         String temp = pdfPath+File.separator+ UUID.randomUUID().toString();
         File tempFile = new File(temp);
         File zip = new File(pdfPath+File.separator+UUID.randomUUID().toString()+".zip");
         try {
-
             FileUtils.forceMkdir(tempFile);
             ftpUtil.download(filePath,temp);
 

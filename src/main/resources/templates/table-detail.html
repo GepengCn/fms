@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>表格列表</title>
+    <title>归档详情</title>
     <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
 <!--
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -73,11 +73,11 @@
                             <ul>
                                 <li class="fms-detail-file-item">
                                     <span class="file-title">文件名称:</span>
-                                    <span class="file-name" th:text="${ftpFile.fileName==null?'无':ftpFile.fileName}">abef834-3483-38393930-3-0r3r3u9r3r3r3i9ri30ri3.pdf</span>
+                                    <span class="file-name" th:text="${ftpFile.fileName==null?'无':ftpFile.fileName}"></span>
                                 </li>
                                 <li class="fms-detail-file-item">
                                     <span class="file-title">文件路径:</span>
-                                    <a class="file-name" th:text="${ftpFile.filePath}" th:href="@{'/dataController/download?filePath='+${ftpFile.filePath}}"></a>
+                                    <a class="file-name" th:text="${ftpFile.filePath}" th:href="@{'/dataController/download?fileType='+${ftpFile.fileType}+'&dataId='+${dataid}}"></a>
                                 </li>
                                 <li class="fms-detail-file-item">
                                     <span class="file-title">文件顺序:</span>
