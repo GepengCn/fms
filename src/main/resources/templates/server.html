@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>归档列表</title>
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <!--
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    -->
+
+    <link th:href="@{/static/css/table-list.css}" rel="stylesheet" type="text/css"  />
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+</head>
+<body>
+<div class="fms">
+    <div class="fms-menu">
+        <ul>
+            <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/dataController/dataIndex'}">归档列表</a></li>
+
+            <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/server/serverIndex'}">归档操作</a></li>
+
+        </ul>
+    </div>
+    <div class="fms-content fade-in">
+        <ol class="breadcrumb">
+            <li class="active">归档数据列表</li>
+        </ol>
+        <div class="fms-table-part">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th>状态</th>
+                    <th>参数</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="fms-table-title"><a onclick="getResult()" href="javascript:void(0)">获取归档结果</a></td>
+                    <td><span id="getResultStatus"></span></td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="fms-table-title"><a onclick="getResultBetween()" href="javascript:void(0)">获取归档结果</a></td>
+                    <td><span id="getResultBetweenStatus"></span></td>
+                    <td>startDate:<input type="text" id="startDate"/>
+                        endDate:<input type="text" id="endDate"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    function getResultBetween(){
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        $("#getResultBetweenStatus").text("执行中");
+        $.ajax({
+            type:"POST",
+            url:"/fms/server/getResultBetween",
+            data:{
+                startDate:startDate,
+                endDate:endDate
+            },
+            success:function(status){
+                if(status==0){
+                    $("#getResultBetweenStatus").text("执行成功");
+                }else{
+                    $("#getResultBetweenStatus").text("执行出错");
+                }
+            },
+            error:function (e) {
+                $("#getResultBetweenStatus").text("执行出错");
+                console.error(e);
+            }
+        });
+    }
+    function getResult(){
+        $("#getResultStatus").text("执行中");
+        $.ajax({
+            type:"POST",
+            url:"/fms/server/getResult",
+            success:function(status){
+                if(status==0){
+                    $("#getResultStatus").text("执行成功");
+                }else{
+                    $("#getResultStatus").text("执行出错");
+                }
+            },
+            error:function (e) {
+                $("#getResultStatus").text("执行出错");
+                console.error(e);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

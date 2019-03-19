@@ -19,10 +19,13 @@
         <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表1</li>
 -->
         <!--选中的左侧菜单在li上加class类名为‘active’-->
-        <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表</li>
-<!--
-        <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表3</li>
--->
+        <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/dataController/dataIndex'}">归档列表</a></li>
+
+        <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/server/serverIndex'}">归档操作</a></li>
+
+        <!--
+                <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表3</li>
+        -->
       </ul>
     </div>
     <div class="fms-content fade-in">
@@ -91,6 +94,9 @@
   </div>
   <script>
 
+    $(".get-result").click(function () {
+
+    });
     function refresh(){
       $.ajax({
         type:"POST",
@@ -99,6 +105,14 @@
           for(var i=0;i<fmsTaskList.length;i++){
             setStatusAndName(fmsTaskList[i]);
           }
+        }
+      });
+    }
+    function getResult(){
+      $.ajax({
+        type:"POST",
+        url:"/fms/server/getResult",
+        success:function(){
         }
       });
     }

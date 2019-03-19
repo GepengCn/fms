@@ -34,50 +34,44 @@ public class HttpServerImpl implements HttpServer {
 
 
     @Override
-    public void getResult(DateTime startDate, DateTime endDate) {
+    public void getResult(DateTime startDate, DateTime endDate) throws Exception{
         getResult(DateUtils.toStringDate(startDate),DateUtils.toStringDate(endDate));
 
     }
 
     @Override
-    public void getResult() {
+    public void getResult() throws Exception{
         DateTime endDate = DateTime.now();
         DateTime startDate = endDate.minusDays(1);
         getResult(DateUtils.toStringDate(startDate),DateUtils.toStringDate(endDate));
     }
 
     @Override
-    public void getResult(String startDate, String endDate) {
+    public void getResult(String startDate, String endDate) throws Exception{
         log.info("执行业务处理逻辑:"+new Date());
-        try {
-            String result = serviceManager.execute(startDate,endDate);
-            BackResult backResult = JSON.parseObject(result,BackResult.class);
-            if(backResult.getCode()!=0){
-                throw new Exception(backResult.getCodeInfo());
+        String result = serviceManager.execute(startDate,endDate);
+        BackResult backResult = JSON.parseObject(result,BackResult.class);
+        if(backResult.getCode()!=0){
+            throw new Exception(backResult.getCodeInfo());
+        }
+        List<BackResult.DataBean> dataBeanList = backResult.getDataList();
+
+        if(dataBeanList==null||dataBeanList.size()==0){
+            return;
+        }
+        Iterator<BackResult.DataBean> iterator = dataBeanList.iterator();
+
+        while(iterator.hasNext()){
+            BackResult.DataBean dataBean = iterator.next();
+
+            FMS_TASK fmsTask = fmsTaskService.selectByTaskId(dataBean.getId());
+
+            if(dataBean.getGdzt()==0){
+                fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_300);
+            }else{
+                fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_301);
             }
-            List<BackResult.DataBean> dataBeanList = backResult.getDataList();
 
-            if(dataBeanList==null||dataBeanList.size()==0){
-                return;
-            }
-            Iterator<BackResult.DataBean> iterator = dataBeanList.iterator();
-
-            while(iterator.hasNext()){
-                BackResult.DataBean dataBean = iterator.next();
-
-                FMS_TASK fmsTask = fmsTaskService.selectByTaskId(dataBean.getId());
-
-                if(dataBean.getGdzt()==0){
-                    fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_300);
-                }else{
-                    fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_301);
-                }
-
-            }
-        } catch (IOException e) {
-            log.error("IOException",e);
-        } catch (Exception e) {
-            log.error("Exception",e);
         }
     }
 }

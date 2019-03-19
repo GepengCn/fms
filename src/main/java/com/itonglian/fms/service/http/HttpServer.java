@@ -4,10 +4,10 @@ import org.joda.time.DateTime;
 
 public interface HttpServer {
 
-    void getResult(DateTime startDate, DateTime endDate);
+    void getResult(DateTime startDate, DateTime endDate) throws Exception;
 
-    void getResult();
+    void getResult() throws Exception;
 
-    void getResult(String startDate, String endDate);
+    void getResult(String startDate, String endDate) throws Exception;
 
 }
