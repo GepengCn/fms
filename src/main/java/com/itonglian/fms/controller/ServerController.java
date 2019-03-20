@@ -39,4 +39,16 @@ public class ServerController {
         return modelAndView;
     }
 
+    @RequestMapping("/findThenUpdate")
+    @ResponseBody
+    public int findThenUpdate(String startDate,String endDate) {
+        try {
+            httpServer.findThenUpdate(startDate,endDate);
+        } catch (Exception e) {
+            log.error("Exception",e);
+            return -1;
+        }
+        return 0;
+    }
+
 }

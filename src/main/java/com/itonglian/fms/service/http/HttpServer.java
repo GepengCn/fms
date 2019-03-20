@@ -10,4 +10,6 @@ public interface HttpServer {
 
     void getResult(String startDate, String endDate) throws Exception;
 
+    void findThenUpdate(String startDate, String endDate);
+
 }

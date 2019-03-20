@@ -42,33 +42,41 @@ public class FileScanScheduler {
     @Autowired
     FmsDataService fmsDataService;
 
+    private boolean debug = log.isDebugEnabled();
+
     @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
     public void execute() throws Exception {
         FMS_TASKExample fmsFileExample = new FMS_TASKExample();
         fmsFileExample.or().andStatusEqualTo(100l);
         long count = fmsTaskService.countByExample(fmsFileExample);
-        log.info("查询到待归档数据数量:"+count);
-        if(count==0){
-            log.info("不必执行归档...");
-            return;
+        if(debug){
+            log.debug("查询到待归档数据数量:[{}]",count);
+            log.debug("开始执行归档...");
+        }else {
+            if(count==0){
+                return;
+            }
         }
-        log.info("开始执行归档...");
-
         List<FMS_TASK> fmsFiles = fmsTaskService.selectByExample(fmsFileExample);
 
         Iterator<FMS_TASK> iterator = fmsFiles.iterator();
 
         while(iterator.hasNext()){
             FMS_TASK fmsFile = iterator.next();
-            log.info("正在归档的公文:taskId=["+fmsFile.getTaskid()+"]");
-            log.info("正在归档的公文类型:fileType=["+fmsFile.getFiletype()+"]");
+            if(debug){
+                log.debug("正在归档的公文:taskId=[{}]",fmsFile.getTaskid());
+                log.debug("正在归档的公文类型:fileType=[{}]",fmsFile.getFiletype());
+            }
             fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_101);
             BaseService baseService = serviceRouter.getBean(FileType.parse(Integer.parseInt(fmsFile.getFiletype())));
             baseService.execute(fmsFile,new FutureCallback<Param>() {
                 @Override
                 public void onSuccess(@Nullable Param commonDatas) {
-                    log.info("taskId:"+commonDatas.getTaskId());
-                    log.info(JSON.toJSONString(commonDatas));
+                    if(debug){
+                        log.debug("taskId:[{}]",commonDatas.getTaskId());
+                        log.info("json:[{}]",JSON.toJSONString(commonDatas));
+                    }
+
                     fileStatusManager.setStatus(fmsFile, FileStatus.STATUS_102);
                     FMS_DATAWithBLOBs fmsData = new FMS_DATAWithBLOBs();
                     fmsData.setDataid(UUID.randomUUID().toString());
@@ -79,7 +87,9 @@ public class FileScanScheduler {
                     fmsDataService.insert(fmsData);
                     fmsFile.setDataid(fmsData.getDataid());
                     fmsTaskService.updateByPrimaryKey(fmsFile);
-                    log.info("归档任务执行结束");
+                    if(debug){
+                        log.debug("归档任务执行结束");
+                    }
                 }
 
                 @Override

@@ -48,6 +48,16 @@
                     <td><span id="getResultBetweenStatus"></span></td>
                     <td>startDate:<input type="text" id="startDate"/>
                         endDate:<input type="text" id="endDate"/>
+                        格式:yyyy-MM-dd hh:mm:ss
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="fms-table-title"><a onclick="findThenUpdate()" href="javascript:void(0)">findThenUpdate</a></td>
+                    <td><span id="findThenUpdateStatus"></span></td>
+                    <td>startDate:<input type="text" id="ftu_startDate"/>
+                        endDate:<input type="text" id="ftu_endDate"/>
+                        格式:yyyy-MM-dd
                     </td>
                 </tr>
                 </tbody>
@@ -58,6 +68,33 @@
 </div>
 <script>
 
+    function findThenUpdate() {
+        var startDate = $("#ftu_startDate").val();
+        var endDate = $("#ftu_endDate").val();
+        $("#findThenUpdateStatus").text("执行中");
+        setTimeout(function () {
+            $.ajax({
+                type:"POST",
+                url:"/fms/server/findThenUpdate",
+                data:{
+                    startDate:startDate,
+                    endDate:endDate
+                },
+                success:function(status){
+                    if(status==0){
+                        $("#findThenUpdateStatus").text("执行成功");
+                    }else{
+                        $("#findThenUpdateStatus").text("执行出错");
+                    }
+                },
+                error:function (e) {
+                    $("#findThenUpdateStatus").text("执行出错");
+                    console.error(e);
+                }
+            });
+        },2000)
+
+    }
     function getResultBetween(){
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
