@@ -68,7 +68,7 @@ public class DataController {
 
     @ApiOperation(value="待归档数据查询接口", notes="调用后，归档状态为200(已发送)" ,httpMethod="POST")
     @RequestMapping("findThenUpdate")
-    public FindListResult findThenUpdate(String startDate,String endDate) {
+    public FindListResult findThenUpdate(String startDate,String endDate,@RequestParam(required = false,defaultValue = "true") boolean debug) {
         FindListResult findListResult = new FindListResult();
         List<String> resultList = new ArrayList<>();
         try {
@@ -88,17 +88,19 @@ public class DataController {
             while(iterator.hasNext()){
                 FMS_DATAWithBLOBs fmsData = iterator.next();
                 resultList.add(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())));
-                /*FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
-                fmsTaskExample.or().andDataidEqualTo(fmsData.getDataid());
-                List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
-                Iterator<FMS_TASK> iterator1 = fmsTaskList.iterator();
-                while(iterator1.hasNext()){
-                    FMS_TASK fmsTask = iterator1.next();
-                    fmsTask.setStatus(FileStatus.STATUS_200.getStatus());
-                    fmsTaskService.updateByPrimaryKey(fmsTask);
-                    fmsData.setDr("Y");
-                    fmsDataService.updateByPrimaryKey(fmsData);
-                }*/
+                if(!debug){
+                    FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
+                    fmsTaskExample.or().andDataidEqualTo(fmsData.getDataid());
+                    List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
+                    Iterator<FMS_TASK> iterator1 = fmsTaskList.iterator();
+                    while(iterator1.hasNext()){
+                        FMS_TASK fmsTask = iterator1.next();
+                        fmsTask.setStatus(FileStatus.STATUS_200.getStatus());
+                        fmsTaskService.updateByPrimaryKey(fmsTask);
+                        fmsData.setDr("Y");
+                        fmsDataService.updateByPrimaryKey(fmsData);
+                    }
+                }
             }
         }catch (Exception e){
             log.error("error",e);
@@ -130,10 +132,16 @@ public class DataController {
 
 
     @RequestMapping("dataIndex")
-    public ModelAndView dataIndex(@RequestParam(required = false,defaultValue = "1") int pageNum) {
+    public ModelAndView dataIndex(@RequestParam(required = false,defaultValue = "1") int pageNum,
+                                  @RequestParam(required = false,defaultValue = "") String taskId) {
         PageHelper.startPage(pageNum, 10);
         ModelAndView modelAndView = new ModelAndView("table-list");
-        List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(new FMS_TASKExample());
+        FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
+        fmsTaskExample.setOrderByClause("CREATETIME DESC");
+        if(!Strings.isNullOrEmpty(taskId)){
+            fmsTaskExample.or().andTaskidLike(taskId);
+        }
+        List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
         PageInfo<FMS_TASK> pageInfo = new PageInfo<>(fmsTaskList);
         modelAndView.addObject("datas",fmsTaskList);
         modelAndView.addObject("pageInfo",pageInfo);

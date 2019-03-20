@@ -21,13 +21,23 @@
         <!--选中的左侧菜单在li上加class类名为‘active’-->
         <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/dataController/dataIndex'}">归档列表</a></li>
 
-        <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/server/serverIndex'}">归档操作</a></li>
+        <li class="fms-menu-title"><span class="glyphicon glyphicon-cog icon-title" aria-hidden="true"></span><a th:href="@{'/server/serverIndex'}">归档操作</a></li>
 
         <!--
                 <li class="fms-menu-title"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span>归档列表3</li>
         -->
       </ul>
     </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <input type="text" class="form-control" id="searchFilter" placeholder="输入taskId搜索">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="search()">搜索</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
     <div class="fms-content fade-in">
       <ol class="breadcrumb">
         <li class="active">归档数据列表</li>
@@ -68,7 +78,7 @@
             <td th:id="${fmsTask.taskid}+_name">
             </td>
             <td>
-              <a th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-th-list icon-title"></span></a>
+              <a th:id="${fmsTask.taskid}+_href" th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-th-list icon-title"></span></a>
               <a th:href="@{'/dataController/retry?id='+${fmsTask.id}}"><span class="glyphicon glyphicon-refresh icon-title"></span></a>
             </td>
           </tr>
@@ -85,7 +95,7 @@
               <th:block th:each="i:${#numbers.sequence(1,pageInfo.pages)}">
                 <li><a th:href="@{'/dataController/dataIndex?pageNum='+${i}}" th:text="${i}">1</a></li>
               </th:block>
-
+              <input type="hidden" id="pageNum" th:value="${pageInfo.pageNum}"/>
               <!--<li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
@@ -101,11 +111,16 @@
       </div>
     </div>
   </div>
+
   <script>
 
-    $(".get-result").click(function () {
+    function search(){
+      var taskId = $("#searchFilter").val();
+      var pageNum = $("#pageNum").val();
+      console.info(taskId,pageNum);
+      window.location.href="/fms/dataController/dataIndex?pageNum="+pageNum+"&taskId="+taskId;
+    }
 
-    });
     function refresh(){
       $.ajax({
         type:"POST",
@@ -117,14 +132,7 @@
         }
       });
     }
-    function getResult(){
-      $.ajax({
-        type:"POST",
-        url:"/fms/server/getResult",
-        success:function(){
-        }
-      });
-    }
+
     function dataToHtml(fmsTask,color,icon,name){
       $("#"+fmsTask.taskid).text(fmsTask.status);
       $("#"+fmsTask.taskid+"_name").html("<span class=\""+color+"\"><span class=\""+icon+" icon-title \"></span>"+name+"</span>");
@@ -139,6 +147,7 @@
           break;
         case 102:
           dataToHtml(fmsTask,"success","glyphicon glyphicon-play","处理成功");
+          $("#"+fmsTask.taskid+"_href").attr("href","/fms/dataController/detail?dataId="+fmsTask.dataid);
           break;
         case 103:
           dataToHtml(fmsTask,"failure","glyphicon glyphicon-remove","处理失败");

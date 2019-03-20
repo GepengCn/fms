@@ -51,7 +51,6 @@ public class FileScanScheduler {
         long count = fmsTaskService.countByExample(fmsFileExample);
         if(debug){
             log.debug("查询到待归档数据数量:[{}]",count);
-            log.debug("开始执行归档...");
         }else {
             if(count==0){
                 return;
@@ -64,6 +63,7 @@ public class FileScanScheduler {
         while(iterator.hasNext()){
             FMS_TASK fmsFile = iterator.next();
             if(debug){
+                log.debug("开始执行归档...");
                 log.debug("正在归档的公文:taskId=[{}]",fmsFile.getTaskid());
                 log.debug("正在归档的公文类型:fileType=[{}]",fmsFile.getFiletype());
             }

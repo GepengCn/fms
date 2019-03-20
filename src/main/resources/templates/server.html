@@ -17,7 +17,7 @@
         <ul>
             <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/dataController/dataIndex'}">归档列表</a></li>
 
-            <li class="fms-menu-title active"><span class="glyphicon glyphicon-th-list icon-title" aria-hidden="true"></span><a th:href="@{'/server/serverIndex'}">归档操作</a></li>
+            <li class="fms-menu-title"><span class="glyphicon glyphicon-cog icon-title" aria-hidden="true"></span><a th:href="@{'/server/serverIndex'}">归档操作</a></li>
 
         </ul>
     </div>
@@ -67,6 +67,8 @@
     </div>
 </div>
 <script>
+
+
 
     function findThenUpdate() {
         var startDate = $("#ftu_startDate").val();

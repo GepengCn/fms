@@ -36,6 +36,35 @@ public class DocParser {
         //下载正文
         ftpUtil.download(ftpFile.getFilePath(),downloadPath);
         //pdf文件目录
+
+        String pdfName = fileManager.getRandomFileName();
+
+        String pdfAbsPath = downloadPath+ File.separator+pdfName;
+
+        File[] files = new File(downloadPath).listFiles();
+
+        if(files.length==0){
+            log.warn("ftp上没找到此公文的正文...");
+            return;
+        }
+        //word转成pdf
+        if(!wordUtils.word2Pdf(files[0].getAbsolutePath(),pdfAbsPath,false)){
+//            throw new Exception("word转pdf出错...");
+            return;
+        }
+        //上传zip包
+        ftpUtil.upload(ftpFile.getFilePath(),pdfName,new File(pdfAbsPath),false);
+    }
+
+    public void executeZip(FtpFile ftpFile) throws Exception {
+
+        //临时下载目录
+        String downloadPath = pdfPath+ File.separator+ UUID.randomUUID().toString();
+        //创建目录
+        FileUtils.forceMkdir(new File(downloadPath));
+        //下载正文
+        ftpUtil.download(ftpFile.getFilePath(),downloadPath);
+        //pdf文件目录
         String pdfAbsPath = downloadPath+ File.separator+fileManager.getRandomFileName();
 
         File[] files = new File(downloadPath).listFiles();
