@@ -39,6 +39,9 @@
             <th>流程ID</th>
             <th>标题</th>
             <th>拟稿人</th>
+            <th>归档人登录名</th>
+            <th>归档人姓名</th>
+            <th>请求归档时间</th>
             <th>公文类型</th>
             <th>归档状态标识</th>
             <th>归档状态</th>
@@ -50,6 +53,9 @@
             <td th:text="${fmsTask.taskid}">290387</td>
             <td class="fms-table-title" th:text="${fmsTask.title}">管理gray accord</td>
             <td th:text="${fmsTask.draftname}">测试用400</td>
+            <td th:text="${fmsTask.prologin}">测试用400</td>
+            <td th:text="${fmsTask.proname}">测试用400</td>
+            <td th:text="${fmsTask.protime}">测试用400</td>
             <td th:switch="${fmsTask.filetype}">
               <span th:case="1">文件报批单</span>
               <span th:case="2">自由行问</span>
@@ -76,11 +82,14 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
+              <th:block th:each="i:${#numbers.sequence(1,pageInfo.pages)}">
+                <li><a th:href="@{'/dataController/dataIndex?pageNum='+${i}}" th:text="${i}">1</a></li>
+              </th:block>
+
+              <!--<li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><a href="#">5</a></li>-->
               <li>
                 <a href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
@@ -129,7 +138,7 @@
           dataToHtml(fmsTask,"waiting","glyphicon glyphicon-retweet","正在处理");
           break;
         case 102:
-          dataToHtml(fmsTask,"success","glyphicon glyphicon-playn","处理成功");
+          dataToHtml(fmsTask,"success","glyphicon glyphicon-play","处理成功");
           break;
         case 103:
           dataToHtml(fmsTask,"failure","glyphicon glyphicon-remove","处理失败");

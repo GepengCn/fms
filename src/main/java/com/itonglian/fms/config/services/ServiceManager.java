@@ -28,7 +28,7 @@ public class ServiceManager {
         String url = serviceConfig.getUrl();
 
         log.info("url="+url);
-        RequestBody body = RequestBody.create(JSON,startDate+"%20"+endDate);
+        RequestBody body = RequestBody.create(JSON,startDate+"/"+endDate);
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)

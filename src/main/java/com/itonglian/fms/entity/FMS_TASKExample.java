@@ -1133,6 +1133,216 @@ public class FMS_TASKExample {
             addCriterion("DATAID not between", value1, value2, "dataid");
             return (Criteria) this;
         }
+
+        public Criteria andProloginIsNull() {
+            addCriterion("PROLOGIN is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginIsNotNull() {
+            addCriterion("PROLOGIN is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginEqualTo(String value) {
+            addCriterion("PROLOGIN =", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginNotEqualTo(String value) {
+            addCriterion("PROLOGIN <>", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginGreaterThan(String value) {
+            addCriterion("PROLOGIN >", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginGreaterThanOrEqualTo(String value) {
+            addCriterion("PROLOGIN >=", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginLessThan(String value) {
+            addCriterion("PROLOGIN <", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginLessThanOrEqualTo(String value) {
+            addCriterion("PROLOGIN <=", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginLike(String value) {
+            addCriterion("PROLOGIN like", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginNotLike(String value) {
+            addCriterion("PROLOGIN not like", value, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginIn(List<String> values) {
+            addCriterion("PROLOGIN in", values, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginNotIn(List<String> values) {
+            addCriterion("PROLOGIN not in", values, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginBetween(String value1, String value2) {
+            addCriterion("PROLOGIN between", value1, value2, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andProloginNotBetween(String value1, String value2) {
+            addCriterion("PROLOGIN not between", value1, value2, "prologin");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameIsNull() {
+            addCriterion("PRONAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameIsNotNull() {
+            addCriterion("PRONAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameEqualTo(String value) {
+            addCriterion("PRONAME =", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameNotEqualTo(String value) {
+            addCriterion("PRONAME <>", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameGreaterThan(String value) {
+            addCriterion("PRONAME >", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameGreaterThanOrEqualTo(String value) {
+            addCriterion("PRONAME >=", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameLessThan(String value) {
+            addCriterion("PRONAME <", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameLessThanOrEqualTo(String value) {
+            addCriterion("PRONAME <=", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameLike(String value) {
+            addCriterion("PRONAME like", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameNotLike(String value) {
+            addCriterion("PRONAME not like", value, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameIn(List<String> values) {
+            addCriterion("PRONAME in", values, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameNotIn(List<String> values) {
+            addCriterion("PRONAME not in", values, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameBetween(String value1, String value2) {
+            addCriterion("PRONAME between", value1, value2, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andPronameNotBetween(String value1, String value2) {
+            addCriterion("PRONAME not between", value1, value2, "proname");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeIsNull() {
+            addCriterion("PROTIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeIsNotNull() {
+            addCriterion("PROTIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeEqualTo(String value) {
+            addCriterion("PROTIME =", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeNotEqualTo(String value) {
+            addCriterion("PROTIME <>", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeGreaterThan(String value) {
+            addCriterion("PROTIME >", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeGreaterThanOrEqualTo(String value) {
+            addCriterion("PROTIME >=", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeLessThan(String value) {
+            addCriterion("PROTIME <", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeLessThanOrEqualTo(String value) {
+            addCriterion("PROTIME <=", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeLike(String value) {
+            addCriterion("PROTIME like", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeNotLike(String value) {
+            addCriterion("PROTIME not like", value, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeIn(List<String> values) {
+            addCriterion("PROTIME in", values, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeNotIn(List<String> values) {
+            addCriterion("PROTIME not in", values, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeBetween(String value1, String value2) {
+            addCriterion("PROTIME between", value1, value2, "protime");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtimeNotBetween(String value1, String value2) {
+            addCriterion("PROTIME not between", value1, value2, "protime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

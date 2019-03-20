@@ -41,20 +41,20 @@ public class HttpServerImpl implements HttpServer {
 
 
     @Override
-    public void getResult(DateTime startDate, DateTime endDate) throws Exception{
-        getResult(DateUtils.toStringDate(startDate),DateUtils.toStringDate(endDate));
+    public String getResult(DateTime startDate, DateTime endDate) throws Exception{
+        return getResult(DateUtils.toStringDate(startDate),DateUtils.toStringDate(endDate));
 
     }
 
     @Override
-    public void getResult() throws Exception{
+    public String getResult() throws Exception{
         DateTime endDate = DateTime.now();
         DateTime startDate = endDate.minusDays(1);
-        getResult(DateUtils.toStringDate(startDate),DateUtils.toStringDate(endDate));
+        return getResult(DateUtils.toStringDate(startDate),DateUtils.toStringDate(endDate));
     }
 
     @Override
-    public void getResult(String startDate, String endDate) throws Exception{
+    public String getResult(String startDate, String endDate) throws Exception{
         String result = serviceManager.execute(startDate,endDate);
 
         if(debug){
@@ -67,7 +67,7 @@ public class HttpServerImpl implements HttpServer {
         List<BackResult.DataBean> dataBeanList = backResult.getDataList();
 
         if(dataBeanList==null||dataBeanList.size()==0){
-            return;
+            return null;
         }
         Iterator<BackResult.DataBean> iterator = dataBeanList.iterator();
 
@@ -83,10 +83,11 @@ public class HttpServerImpl implements HttpServer {
             }
 
         }
+        return result;
     }
 
     @Override
-    public void findThenUpdate(String startDate, String endDate) {
+    public String findThenUpdate(String startDate, String endDate) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         String url = serviceConfig.getLocalUrl();
@@ -105,17 +106,11 @@ public class HttpServerImpl implements HttpServer {
                 .post(formBody)
                 .build();
         Call call=client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                log.error("failure",e);
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if(debug){
-                    log.debug("findThenUpdate结果:[{}]",response.body().string());
-                }
-            }
-        });
+        Response response = call.execute();
+        String result = response.body().string();
+        if(debug){
+            log.debug("findThenUpdate结果:[{}]",result);
+        }
+        return result;
     }
 }

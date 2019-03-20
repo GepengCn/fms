@@ -80,8 +80,9 @@
                     startDate:startDate,
                     endDate:endDate
                 },
-                success:function(status){
-                    if(status==0){
+                success:function(result){
+                    console.info("method:[getResult]",result);
+                    if(result.code==0){
                         $("#findThenUpdateStatus").text("执行成功");
                     }else{
                         $("#findThenUpdateStatus").text("执行出错");
@@ -106,8 +107,9 @@
                 startDate:startDate,
                 endDate:endDate
             },
-            success:function(status){
-                if(status==0){
+            success:function(result){
+                console.info("method:[getResult]",result);
+                if(result.code==0){
                     $("#getResultBetweenStatus").text("执行成功");
                 }else{
                     $("#getResultBetweenStatus").text("执行出错");
@@ -124,8 +126,9 @@
         $.ajax({
             type:"POST",
             url:"/fms/server/getResult",
-            success:function(status){
-                if(status==0){
+            success:function(result){
+                console.info("method:[getResult]",result);
+                if(result.code==0){
                     $("#getResultStatus").text("执行成功");
                 }else{
                     $("#getResultStatus").text("执行出错");

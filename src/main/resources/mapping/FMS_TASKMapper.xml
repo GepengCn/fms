@@ -17,6 +17,9 @@
     <result column="ATTACHNAME" jdbcType="VARCHAR" property="attachname" />
     <result column="PARENTROOT" jdbcType="VARCHAR" property="parentroot" />
     <result column="DATAID" jdbcType="VARCHAR" property="dataid" />
+    <result column="PROLOGIN" jdbcType="VARCHAR" property="prologin" />
+    <result column="PRONAME" jdbcType="VARCHAR" property="proname" />
+    <result column="PROTIME" jdbcType="VARCHAR" property="protime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +81,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, TASKID, DRAFTLOGIN, DRAFTNAME, STATUS, CREATETIME, MODIFYTIME, TEXTPATH, ATTACHPATH, 
-    FILETYPE, TITLE, TEXTNAME, ATTACHNAME, PARENTROOT, DATAID
+    FILETYPE, TITLE, TEXTNAME, ATTACHNAME, PARENTROOT, DATAID, PROLOGIN, PRONAME, PROTIME
   </sql>
   <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_TASKExample" resultMap="BaseResultMap">
     select
@@ -116,13 +119,15 @@
       DRAFTNAME, STATUS, CREATETIME, 
       MODIFYTIME, TEXTPATH, ATTACHPATH, 
       FILETYPE, TITLE, TEXTNAME, 
-      ATTACHNAME, PARENTROOT, DATAID
+      ATTACHNAME, PARENTROOT, DATAID, 
+      PROLOGIN, PRONAME, PROTIME
       )
     values (#{id,jdbcType=DECIMAL}, #{taskid,jdbcType=VARCHAR}, #{draftlogin,jdbcType=VARCHAR}, 
       #{draftname,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{createtime,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=VARCHAR}, #{textpath,jdbcType=VARCHAR}, #{attachpath,jdbcType=VARCHAR}, 
       #{filetype,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{textname,jdbcType=VARCHAR}, 
-      #{attachname,jdbcType=VARCHAR}, #{parentroot,jdbcType=VARCHAR}, #{dataid,jdbcType=VARCHAR}
+      #{attachname,jdbcType=VARCHAR}, #{parentroot,jdbcType=VARCHAR}, #{dataid,jdbcType=VARCHAR}, 
+      #{prologin,jdbcType=VARCHAR}, #{proname,jdbcType=VARCHAR}, #{protime,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_TASK">
@@ -173,6 +178,15 @@
       <if test="dataid != null">
         DATAID,
       </if>
+      <if test="prologin != null">
+        PROLOGIN,
+      </if>
+      <if test="proname != null">
+        PRONAME,
+      </if>
+      <if test="protime != null">
+        PROTIME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -219,6 +233,15 @@
       </if>
       <if test="dataid != null">
         #{dataid,jdbcType=VARCHAR},
+      </if>
+      <if test="prologin != null">
+        #{prologin,jdbcType=VARCHAR},
+      </if>
+      <if test="proname != null">
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="protime != null">
+        #{protime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -276,6 +299,15 @@
       <if test="record.dataid != null">
         DATAID = #{record.dataid,jdbcType=VARCHAR},
       </if>
+      <if test="record.prologin != null">
+        PROLOGIN = #{record.prologin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proname != null">
+        PRONAME = #{record.proname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protime != null">
+        PROTIME = #{record.protime,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -297,7 +329,10 @@
       TEXTNAME = #{record.textname,jdbcType=VARCHAR},
       ATTACHNAME = #{record.attachname,jdbcType=VARCHAR},
       PARENTROOT = #{record.parentroot,jdbcType=VARCHAR},
-      DATAID = #{record.dataid,jdbcType=VARCHAR}
+      DATAID = #{record.dataid,jdbcType=VARCHAR},
+      PROLOGIN = #{record.prologin,jdbcType=VARCHAR},
+      PRONAME = #{record.proname,jdbcType=VARCHAR},
+      PROTIME = #{record.protime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -347,6 +382,15 @@
       <if test="dataid != null">
         DATAID = #{dataid,jdbcType=VARCHAR},
       </if>
+      <if test="prologin != null">
+        PROLOGIN = #{prologin,jdbcType=VARCHAR},
+      </if>
+      <if test="proname != null">
+        PRONAME = #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="protime != null">
+        PROTIME = #{protime,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
@@ -365,7 +409,10 @@
       TEXTNAME = #{textname,jdbcType=VARCHAR},
       ATTACHNAME = #{attachname,jdbcType=VARCHAR},
       PARENTROOT = #{parentroot,jdbcType=VARCHAR},
-      DATAID = #{dataid,jdbcType=VARCHAR}
+      DATAID = #{dataid,jdbcType=VARCHAR},
+      PROLOGIN = #{prologin,jdbcType=VARCHAR},
+      PRONAME = #{proname,jdbcType=VARCHAR},
+      PROTIME = #{protime,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
 </mapper>

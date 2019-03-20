@@ -31,6 +31,12 @@ public class FMS_TASK {
 
     private String dataid;
 
+    private String prologin;
+
+    private String proname;
+
+    private String protime;
+
     public Long getId() {
         return id;
     }
@@ -149,5 +155,29 @@ public class FMS_TASK {
 
     public void setDataid(String dataid) {
         this.dataid = dataid == null ? null : dataid.trim();
+    }
+
+    public String getPrologin() {
+        return prologin;
+    }
+
+    public void setPrologin(String prologin) {
+        this.prologin = prologin == null ? null : prologin.trim();
+    }
+
+    public String getProname() {
+        return proname;
+    }
+
+    public void setProname(String proname) {
+        this.proname = proname == null ? null : proname.trim();
+    }
+
+    public String getProtime() {
+        return protime;
+    }
+
+    public void setProtime(String protime) {
+        this.protime = protime == null ? null : protime.trim();
     }
 }

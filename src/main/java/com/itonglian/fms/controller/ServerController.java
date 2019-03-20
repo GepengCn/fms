@@ -1,6 +1,8 @@
 package com.itonglian.fms.controller;
 
 import com.itonglian.fms.service.http.HttpServer;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,20 +19,26 @@ public class ServerController {
     HttpServer httpServer;
     @RequestMapping("/getResult")
     @ResponseBody
-    public void getResult() throws Exception {
-        httpServer.getResult();
+    public Result getResult() {
+        try {
+            String info = httpServer.getResult();
+            return new Result(0,info);
+        } catch (Exception e) {
+            log.error("Exception",e);
+            return new Result(-1,e.getMessage());
+        }
     }
 
     @RequestMapping("/getResultBetween")
     @ResponseBody
-    public int getResultBetween(String startDate,String endDate) {
+    public Result getResultBetween(String startDate,String endDate) {
         try {
-            httpServer.getResult(startDate,endDate);
+            String info = httpServer.getResult(startDate,endDate);
+            return new Result(0,info);
         } catch (Exception e) {
             log.error("Exception",e);
-            return -1;
+            return new Result(-1,e.getMessage());
         }
-        return 0;
     }
 
     @RequestMapping("serverIndex")
@@ -41,14 +49,21 @@ public class ServerController {
 
     @RequestMapping("/findThenUpdate")
     @ResponseBody
-    public int findThenUpdate(String startDate,String endDate) {
+    public Result findThenUpdate(String startDate,String endDate) {
         try {
-            httpServer.findThenUpdate(startDate,endDate);
+            String info = httpServer.findThenUpdate(startDate,endDate);
+            return new Result(0,info);
         } catch (Exception e) {
             log.error("Exception",e);
-            return -1;
+            return new Result(-1,e.getMessage());
         }
-        return 0;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public class Result{
+        private int code;
+        private String info;
     }
 
 }

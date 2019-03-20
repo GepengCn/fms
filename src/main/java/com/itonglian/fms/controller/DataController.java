@@ -2,6 +2,8 @@ package com.itonglian.fms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
 import com.itonglian.fms.bean.FindListResult;
 import com.itonglian.fms.config.ftp.FtpUtil;
@@ -27,6 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -127,10 +130,13 @@ public class DataController {
 
 
     @RequestMapping("dataIndex")
-    public ModelAndView dataIndex() {
+    public ModelAndView dataIndex(@RequestParam(required = false,defaultValue = "1") int pageNum) {
+        PageHelper.startPage(pageNum, 10);
         ModelAndView modelAndView = new ModelAndView("table-list");
         List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(new FMS_TASKExample());
+        PageInfo<FMS_TASK> pageInfo = new PageInfo<>(fmsTaskList);
         modelAndView.addObject("datas",fmsTaskList);
+        modelAndView.addObject("pageInfo",pageInfo);
         return modelAndView;
     }
 
