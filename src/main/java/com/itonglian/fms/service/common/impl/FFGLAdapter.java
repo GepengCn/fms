@@ -119,7 +119,7 @@ public abstract class FFGLAdapter extends BaseService {
         Future<Boolean> future2 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                docParser.execute(docFtpFile);
+                docParser.executeZip(docFtpFile);
             }
         }));
 

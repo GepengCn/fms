@@ -5,8 +5,10 @@ import com.aspose.words.IWarningCallback;
 import com.aspose.words.Range;
 import com.aspose.words.WarningInfo;
 import com.itonglian.fms.service.ContentFilling;
+import com.itonglian.fms.utils.PdfUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -16,6 +18,9 @@ import java.util.Map;
 @Component
 @Slf4j
 public class WordUtils {
+
+    @Autowired
+    PdfUtils pdfUtils;
 
     public synchronized boolean word2Pdf(String srcFile, String destFile,boolean delete){
         if(srcFile.indexOf(".zip")!=-1){
@@ -33,6 +38,8 @@ public class WordUtils {
             doc.save(destFile);
         } catch (Exception e) {
             log.error("error",e);
+            return pdfUtils.word2Pdf(srcFile,destFile,delete);
+        }finally {
             if(delete){
                 try {
                     FileUtils.forceDelete(new File(srcFile));
@@ -40,7 +47,6 @@ public class WordUtils {
                     log.error("error",e1);
                 }
             }
-            return false;
         }
         return true;
     }
@@ -66,7 +72,7 @@ public class WordUtils {
             doc.save(destFile);
         } catch (Exception e) {
             log.error("error",e);
-            return false;
+            return pdfUtils.word2Pdf(srcFile,destFile,false);
         }finally {
             try {
                 FileUtils.forceDelete(new File(barcode));

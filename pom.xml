@@ -239,8 +239,6 @@
 			<version>4.0.1</version>
 		</dependency>
 
-
-
 		<!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
 		<dependency>
 			<groupId>com.itextpdf</groupId>
@@ -265,10 +263,6 @@
 			<artifactId>pagehelper</artifactId>
 			<version>5.1.8</version>
 		</dependency>
-
-
-
-
 
 	</dependencies>
 

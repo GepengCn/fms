@@ -139,7 +139,7 @@ public class DataController {
         FMS_TASKExample fmsTaskExample = new FMS_TASKExample();
         fmsTaskExample.setOrderByClause("CREATETIME DESC");
         if(!Strings.isNullOrEmpty(taskId)){
-            fmsTaskExample.or().andTaskidLike(taskId);
+            fmsTaskExample.or().andTaskidLike("%"+taskId+"%");
         }
         List<FMS_TASK> fmsTaskList = fmsTaskService.selectByExample(fmsTaskExample);
         PageInfo<FMS_TASK> pageInfo = new PageInfo<>(fmsTaskList);

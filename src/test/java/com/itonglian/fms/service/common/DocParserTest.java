@@ -16,7 +16,7 @@ public class DocParserTest {
     @Test
     public void execute() {
         try {
-            docParser.execute(new FtpFile("/20f6a355-4c41-465e-9c94-bb66f678c1b4/98ee3478-8c42-4151-bea5-97d2c729236b","引入正文.doc",3,3));
+            docParser.executeZip(new FtpFile("/abc/1f152b02-9571-42d2-a7e1-e10a932d829d","springmvc_day1",3,3));
         } catch (Exception e) {
             e.printStackTrace();
         }

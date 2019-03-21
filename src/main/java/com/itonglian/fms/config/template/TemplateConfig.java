@@ -20,4 +20,5 @@ public class TemplateConfig {
     private String refFtpPath;
 
     private String wjbpdFormPath;
+
 }
