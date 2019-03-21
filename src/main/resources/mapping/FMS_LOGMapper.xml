@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itonglian.fms.dao.feapp5.FMS_LOGMapper">
+  <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.FMS_LOG">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="TASKID" jdbcType="VARCHAR" property="taskid" />
+    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="CLASSNAME" jdbcType="VARCHAR" property="classname" />
+    <result column="METHODNAME" jdbcType="VARCHAR" property="methodname" />
+    <result column="ARGUMENTS" jdbcType="VARCHAR" property="arguments" />
+    <result column="RESULT" jdbcType="VARCHAR" property="result" />
+    <result column="STARTTIME" jdbcType="VARCHAR" property="starttime" />
+    <result column="ENDTIME" jdbcType="VARCHAR" property="endtime" />
+    <result column="EXECTime" jdbcType="VARCHAR" property="exectime" />
+    <result column="EXCEPTION" jdbcType="VARCHAR" property="exception" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, TASKID, LOCATION, DESCRIPTION, CLASSNAME, METHODNAME, ARGUMENTS, RESULT, STARTTIME, 
+    ENDTIME, EXECTime, EXCEPTION
+  </sql>
+  <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_LOGExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from FMS_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FMS_LOG
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from FMS_LOG
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itonglian.fms.entity.FMS_LOGExample">
+    delete from FMS_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itonglian.fms.entity.FMS_LOG">
+    insert into FMS_LOG (ID, TASKID, LOCATION, 
+      DESCRIPTION, CLASSNAME, METHODNAME, 
+      ARGUMENTS, RESULT, STARTTIME, 
+      ENDTIME, EXECTime, EXCEPTION
+      )
+    values (#{id,jdbcType=VARCHAR}, #{taskid,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{methodname,jdbcType=VARCHAR}, 
+      #{arguments,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, 
+      #{endtime,jdbcType=VARCHAR}, #{exectime,jdbcType=VARCHAR}, #{exception,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_LOG">
+    insert into FMS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="taskid != null">
+        TASKID,
+      </if>
+      <if test="location != null">
+        LOCATION,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="classname != null">
+        CLASSNAME,
+      </if>
+      <if test="methodname != null">
+        METHODNAME,
+      </if>
+      <if test="arguments != null">
+        ARGUMENTS,
+      </if>
+      <if test="result != null">
+        RESULT,
+      </if>
+      <if test="starttime != null">
+        STARTTIME,
+      </if>
+      <if test="endtime != null">
+        ENDTIME,
+      </if>
+      <if test="exectime != null">
+        EXECTime,
+      </if>
+      <if test="exception != null">
+        EXCEPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="taskid != null">
+        #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null">
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null">
+        #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="arguments != null">
+        #{arguments,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="exectime != null">
+        #{exectime,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        #{exception,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itonglian.fms.entity.FMS_LOGExample" resultType="java.lang.Long">
+    select count(*) from FMS_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update FMS_LOG
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskid != null">
+        TASKID = #{record.taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.location != null">
+        LOCATION = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classname != null">
+        CLASSNAME = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.methodname != null">
+        METHODNAME = #{record.methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arguments != null">
+        ARGUMENTS = #{record.arguments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null">
+        RESULT = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        STARTTIME = #{record.starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null">
+        ENDTIME = #{record.endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exectime != null">
+        EXECTime = #{record.exectime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exception != null">
+        EXCEPTION = #{record.exception,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update FMS_LOG
+    set ID = #{record.id,jdbcType=VARCHAR},
+      TASKID = #{record.taskid,jdbcType=VARCHAR},
+      LOCATION = #{record.location,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      CLASSNAME = #{record.classname,jdbcType=VARCHAR},
+      METHODNAME = #{record.methodname,jdbcType=VARCHAR},
+      ARGUMENTS = #{record.arguments,jdbcType=VARCHAR},
+      RESULT = #{record.result,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=VARCHAR},
+      EXECTime = #{record.exectime,jdbcType=VARCHAR},
+      EXCEPTION = #{record.exception,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itonglian.fms.entity.FMS_LOG">
+    update FMS_LOG
+    <set>
+      <if test="taskid != null">
+        TASKID = #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        LOCATION = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null">
+        CLASSNAME = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="methodname != null">
+        METHODNAME = #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="arguments != null">
+        ARGUMENTS = #{arguments,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        RESULT = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        STARTTIME = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        ENDTIME = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="exectime != null">
+        EXECTime = #{exectime,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        EXCEPTION = #{exception,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.FMS_LOG">
+    update FMS_LOG
+    set TASKID = #{taskid,jdbcType=VARCHAR},
+      LOCATION = #{location,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CLASSNAME = #{classname,jdbcType=VARCHAR},
+      METHODNAME = #{methodname,jdbcType=VARCHAR},
+      ARGUMENTS = #{arguments,jdbcType=VARCHAR},
+      RESULT = #{result,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=VARCHAR},
+      ENDTIME = #{endtime,jdbcType=VARCHAR},
+      EXECTime = #{exectime,jdbcType=VARCHAR},
+      EXCEPTION = #{exception,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

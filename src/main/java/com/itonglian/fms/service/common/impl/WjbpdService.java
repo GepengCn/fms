@@ -73,7 +73,7 @@ public class WjbpdService extends FFGLAdapter {
         wjbpdCustomized.setFF14(ffgl.getFf14());
         wjbpdCustomized.setFF15(ffgl.getFf15());
 
-        SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
+        /*SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
         sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
         List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
         Iterator<SYS_ATTACHMENT> iterator = sysAttachmentList.iterator();
@@ -102,7 +102,7 @@ public class WjbpdService extends FFGLAdapter {
                 refDocList.add(ff52);
             }
         }
-        wjbpdCustomized.setRefDocList(refDocList);
+        wjbpdCustomized.setRefDocList(refDocList);*/
         return wjbpdCustomized;
     }
 

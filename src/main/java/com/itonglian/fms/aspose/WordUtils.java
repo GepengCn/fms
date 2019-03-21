@@ -51,7 +51,7 @@ public class WordUtils {
         return true;
     }
     public synchronized boolean word2Pdf(String srcFile, String destFile){
-        return word2Pdf(srcFile,destFile,true);
+        return word2Pdf(srcFile,destFile,false);
     }
     public synchronized boolean fillThenWord2Pdf(String srcFile, String destFile,ContentFilling contentFilling, Map<String,String> contents,long taskId){
         if(srcFile.indexOf(".zip")!=-1){

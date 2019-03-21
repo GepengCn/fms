@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.itonglian.fms.entity.FMS_DATAWithBLOBs;
 import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.FMS_TASKExample;
+import com.itonglian.fms.log.OperationLog;
 import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.FmsTaskService;
 import com.itonglian.fms.service.bean.FileStatus;
@@ -45,6 +46,7 @@ public class FileScanScheduler {
     private boolean debug = log.isDebugEnabled();
 
     @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
+
     public void execute() throws Exception {
         FMS_TASKExample fmsFileExample = new FMS_TASKExample();
         fmsFileExample.or().andStatusEqualTo(100l);
