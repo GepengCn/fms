@@ -2,6 +2,7 @@ package com.itonglian.fms.log;
 
 import com.alibaba.fastjson.JSON;
 import com.itonglian.fms.entity.FMS_LOG;
+import com.itonglian.fms.service.FmsLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -10,6 +11,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -20,6 +22,8 @@ import java.lang.reflect.Parameter;
 @Component
 public class LogAspect {
 
+    @Autowired
+    FmsLogService fmsLogService;
     @Pointcut("@annotation(com.itonglian.fms.log.OperationLog)")
     public void pointcut() {
 
@@ -54,6 +58,7 @@ public class LogAspect {
             fmsLog.setExectime(execTime+"");
             fmsLog.setExectime(exception);
             log.info(fmsLog.format(), fmsLog.args());
+            fmsLogService.insert(fmsLog);
         }
     }
 

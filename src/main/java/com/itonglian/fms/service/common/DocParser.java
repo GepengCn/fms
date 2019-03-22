@@ -4,6 +4,7 @@ import com.itonglian.fms.aspose.WordUtils;
 import com.itonglian.fms.config.ftp.FtpUtil;
 import com.itonglian.fms.service.bean.FtpFile;
 import com.itonglian.fms.utils.FileManager;
+import com.itonglian.fms.utils.ZipUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class DocParser {
     WordUtils wordUtils;
     @Autowired
     FileManager fileManager;
+
+    @Autowired
+    ZipUtils zipUtils;
 
     public void execute(FtpFile ftpFile) throws Exception {
 
@@ -71,19 +75,19 @@ public class DocParser {
 
         if(files.length==0){
             log.warn("ftp上没找到此公文的正文...");
-            return;
+            throw new Exception("ftp上没找到此公文的正文...");
         }
         //word转成pdf
+        log.info("正文路径:[{}]",files[0].getAbsolutePath());
         if(!wordUtils.word2Pdf(files[0].getAbsolutePath(),pdfAbsPath,false)){
-//            throw new Exception("word转pdf出错...");
-            return;
+            throw new Exception("word转pdf出错...");
         }
         //压缩包目录
         String zipPath = pdfPath+File.separator+UUID.randomUUID().toString()+".zip";
 
         File zipFile = new File(zipPath);
         //打包正文doc及pdf文件
-        ZipUtil.pack(new File(downloadPath),zipFile);
+        zipUtils.zip(downloadPath, zipPath);
         //删除临时下载目录
         FileUtils.deleteDirectory(new File(downloadPath));
         //上传zip包

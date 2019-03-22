@@ -30,7 +30,8 @@ public class FtpUtil {
     private String password;
     @Autowired
     ServiceConfig serviceConfig;
-
+    @Value("${ftp.encoding}")
+    private String ftpEncoding;
 
 
     public FTPClient init(String parentPath){
@@ -121,8 +122,8 @@ public class FtpUtil {
         try {
             ftpClient = init(parentPath);
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            ftpClient.setCharset(Charset.forName(serviceConfig.getEncoding()));
-            ftpClient.setControlEncoding(serviceConfig.getEncoding());
+            ftpClient.setCharset(Charset.forName(ftpEncoding));
+            ftpClient.setControlEncoding(ftpEncoding);
             ftpClient.enterLocalPassiveMode();
             FTPFile[] ftpFiles=ftpClient.listFiles();
             ftpClient.listFiles(parentPath);

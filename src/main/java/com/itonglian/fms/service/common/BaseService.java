@@ -2,6 +2,7 @@ package com.itonglian.fms.service.common;
 
 import com.google.common.util.concurrent.*;
 import com.itonglian.fms.entity.FMS_TASK;
+import com.itonglian.fms.log.OperationLog;
 import com.itonglian.fms.service.bean.FileType;
 import com.itonglian.fms.service.bean.Param;
 import org.springframework.stereotype.Component;
@@ -53,7 +54,7 @@ public abstract class BaseService {
             return param;
         }
     }
-
+    @OperationLog(description = "customizedImpl")
     public abstract Param customizedImpl(Param param,FMS_TASK fmsTask) throws Exception;
 
 }
