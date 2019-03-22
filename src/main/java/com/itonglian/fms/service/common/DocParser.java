@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
 import java.util.UUID;
@@ -23,6 +22,13 @@ public class DocParser {
     FtpUtil ftpUtil;
     @Value(value = "${template.pdfPath}")
     private String pdfPath;
+
+    @Value(value = "${zip.deleteTemp}")
+    private boolean deleteTemp;
+
+    @Value(value = "${ftp.deleteDoc}")
+    private boolean deleteDoc;
+
     @Autowired
     WordUtils wordUtils;
     @Autowired
@@ -72,14 +78,21 @@ public class DocParser {
         String pdfAbsPath = downloadPath+ File.separator+fileManager.getRandomFileName();
 
         File[] files = new File(downloadPath).listFiles();
-
-        if(files.length==0){
+        File destFile = null;
+        for(int i=0;i<files.length;i++){
+            File tempFile = files[i];
+            if(tempFile.getName().equals(ftpFile.getFileName())){
+                destFile = tempFile;
+                break;
+            }
+        }
+        if(destFile==null){
             log.warn("ftp上没找到此公文的正文...");
             throw new Exception("ftp上没找到此公文的正文...");
         }
         //word转成pdf
-        log.info("正文路径:[{}]",files[0].getAbsolutePath());
-        if(!wordUtils.word2Pdf(files[0].getAbsolutePath(),pdfAbsPath,false)){
+        log.info("正文路径:[{}]",destFile.getAbsolutePath());
+        if(!wordUtils.word2Pdf(destFile.getAbsolutePath(),pdfAbsPath,false)){
             throw new Exception("word转pdf出错...");
         }
         //压缩包目录
@@ -89,9 +102,11 @@ public class DocParser {
         //打包正文doc及pdf文件
         zipUtils.zip(downloadPath, zipPath);
         //删除临时下载目录
-        FileUtils.deleteDirectory(new File(downloadPath));
+        if(deleteTemp){
+            FileUtils.deleteDirectory(new File(downloadPath));
+        }
         //上传zip包
-        ftpUtil.upload(ftpFile.getFilePath(),zipFile.getName(),zipFile,true);
+        ftpUtil.upload(ftpFile.getFilePath(),zipFile.getName(),zipFile,deleteDoc);
     }
 
 }

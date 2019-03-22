@@ -28,6 +28,8 @@ public class FtpUtil {
     private String username;
     @Value("${ftp.password}")
     private String password;
+    @Value(value = "${ftp.setOptUtf8}")
+    private boolean setOptUtf8;
     @Autowired
     ServiceConfig serviceConfig;
     @Value("${ftp.encoding}")
@@ -59,6 +61,9 @@ public class FtpUtil {
             if(!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())){
                 ftpClient.disconnect();
                 log.error("连接ftp服务失败...");
+            }
+            if(setOptUtf8){
+                ftpClient.sendCommand("OPTS UTF8", "ON");
             }
             log.info("成功连接ftp服务...");
             return ftpClient;
