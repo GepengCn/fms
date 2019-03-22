@@ -2,6 +2,7 @@ package com.itonglian.fms.quartz;
 
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
@@ -11,6 +12,8 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @Configuration
 public class ResultScheduler {
 
+    @Value(value = "${service.resultCron}")
+    String resultCron;
     @Bean(name = "resultJobDetail")
     public MethodInvokingJobDetailFactoryBean detailFactoryBean(ResultJob resultJob) {
 
@@ -29,7 +32,6 @@ public class ResultScheduler {
         jobDetail.setTargetObject(resultJob);
 
         /*
-         * TODO  非常重要
          * 执行QuartzTask类中的需要执行方法
          */
         jobDetail.setTargetMethod("getResult");
@@ -44,7 +46,7 @@ public class ResultScheduler {
         cronTriggerFactoryBean.setJobDetail(jobDetail);
 
         //cron表达式，每天0时执行一次
-        cronTriggerFactoryBean.setCronExpression("0 0 0 * * ?");
+        cronTriggerFactoryBean.setCronExpression(resultCron);
 //        cronTriggerFactoryBean.setCronExpression(" 0/10 * * * * ? *");
 
         cronTriggerFactoryBean.setName("resultTrigger");

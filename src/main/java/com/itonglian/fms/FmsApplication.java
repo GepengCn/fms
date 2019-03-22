@@ -22,5 +22,6 @@ public class FmsApplication extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(FmsApplication.class);
 	}
+
 }
 
