@@ -91,6 +91,8 @@ public class WfTask {
 
     private String isdeploydate;
 
+    private Long fileflag;
+
     public Long getWt00() {
         return wt00;
     }
@@ -441,5 +443,13 @@ public class WfTask {
 
     public void setIsdeploydate(String isdeploydate) {
         this.isdeploydate = isdeploydate == null ? null : isdeploydate.trim();
+    }
+
+    public Long getFileflag() {
+        return fileflag;
+    }
+
+    public void setFileflag(Long fileflag) {
+        this.fileflag = fileflag;
     }
 }

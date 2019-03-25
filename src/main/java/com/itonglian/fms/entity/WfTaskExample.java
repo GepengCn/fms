@@ -3094,6 +3094,66 @@ public class WfTaskExample {
             addCriterion("ISDEPLOYDATE not between", value1, value2, "isdeploydate");
             return (Criteria) this;
         }
+
+        public Criteria andFileflagIsNull() {
+            addCriterion("FILEFLAG is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagIsNotNull() {
+            addCriterion("FILEFLAG is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagEqualTo(Long value) {
+            addCriterion("FILEFLAG =", value, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagNotEqualTo(Long value) {
+            addCriterion("FILEFLAG <>", value, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagGreaterThan(Long value) {
+            addCriterion("FILEFLAG >", value, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagGreaterThanOrEqualTo(Long value) {
+            addCriterion("FILEFLAG >=", value, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagLessThan(Long value) {
+            addCriterion("FILEFLAG <", value, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagLessThanOrEqualTo(Long value) {
+            addCriterion("FILEFLAG <=", value, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagIn(List<Long> values) {
+            addCriterion("FILEFLAG in", values, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagNotIn(List<Long> values) {
+            addCriterion("FILEFLAG not in", values, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagBetween(Long value1, Long value2) {
+            addCriterion("FILEFLAG between", value1, value2, "fileflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileflagNotBetween(Long value1, Long value2) {
+            addCriterion("FILEFLAG not between", value1, value2, "fileflag");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

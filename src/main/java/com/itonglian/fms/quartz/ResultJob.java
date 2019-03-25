@@ -1,18 +1,17 @@
 package com.itonglian.fms.quartz;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Strings;
 import com.itonglian.fms.bean.BackResult;
 import com.itonglian.fms.config.services.ServiceManager;
 import com.itonglian.fms.entity.FMS_TASK;
+import com.itonglian.fms.entity.WfTask;
 import com.itonglian.fms.service.FmsTaskService;
+import com.itonglian.fms.service.WfTaskService;
 import com.itonglian.fms.service.bean.FileStatus;
 import com.itonglian.fms.service.common.FileStatusManager;
 import com.itonglian.fms.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +35,9 @@ public class ResultJob {
     @Autowired
     FmsTaskService fmsTaskService;
 
+    @Autowired
+    WfTaskService wfTaskService;
+
     public void getResult(){
         log.info("执行业务处理逻辑:"+new Date());
         DateTime endDate = DateTime.now();
@@ -58,10 +60,16 @@ public class ResultJob {
 
                 FMS_TASK fmsTask = fmsTaskService.selectByTaskId(dataBean.getId());
 
-                if(dataBean.getGdzt()==0){
+                if(dataBean.getGdzt()==1){
                     fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_300);
+                    WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(fmsTask.getTaskid()));
+                    wfTask.setFileflag(1l);
+                    wfTaskService.updateByPrimaryKey(wfTask);
                 }else{
                     fileStatusManager.setStatus(fmsTask, FileStatus.STATUS_301);
+                    WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(fmsTask.getTaskid()));
+                    wfTask.setFileflag(2l);
+                    wfTaskService.updateByPrimaryKey(wfTask);
                 }
 
             }

@@ -46,6 +46,7 @@
     <result column="ISDEPLOY" jdbcType="VARCHAR" property="isdeploy" />
     <result column="ITEMSID" jdbcType="VARCHAR" property="itemsid" />
     <result column="ISDEPLOYDATE" jdbcType="VARCHAR" property="isdeploydate" />
+    <result column="FILEFLAG" jdbcType="DECIMAL" property="fileflag" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -109,7 +110,7 @@
     WT00, WT01, WT02, WT03, WT04, WT05, WT06, WT07, WT08, WT09, WT10, WT11, WT12, WT13, 
     WT14, WT15, WT16, WT17, WT18, WT19, WT20, WT21, WT22, WT23, WT24, WT25, WT26, WT27, 
     WT28, WT29, WT30, WT31, WT32, WT33, WT34, WT35, WT36, WT37, WT38, WT39, WT40, ISDEPLOY, 
-    ITEMSID, ISDEPLOYDATE
+    ITEMSID, ISDEPLOYDATE, FILEFLAG
   </sql>
   <select id="selectByExample" parameterType="com.itonglian.fms.entity.WfTaskExample" resultMap="BaseResultMap">
     select
@@ -154,8 +155,8 @@
       WT29, WT30, WT31, WT32, 
       WT33, WT34, WT35, WT36, 
       WT37, WT38, WT39, WT40, 
-      ISDEPLOY, ITEMSID, ISDEPLOYDATE
-      )
+      ISDEPLOY, ITEMSID, ISDEPLOYDATE, 
+      FILEFLAG)
     values (#{wt00,jdbcType=DECIMAL}, #{wt01,jdbcType=VARCHAR}, #{wt02,jdbcType=VARCHAR}, 
       #{wt03,jdbcType=VARCHAR}, #{wt04,jdbcType=DECIMAL}, #{wt05,jdbcType=VARCHAR}, #{wt06,jdbcType=VARCHAR}, 
       #{wt07,jdbcType=VARCHAR}, #{wt08,jdbcType=VARCHAR}, #{wt09,jdbcType=TIMESTAMP}, 
@@ -167,8 +168,8 @@
       #{wt29,jdbcType=VARCHAR}, #{wt30,jdbcType=VARCHAR}, #{wt31,jdbcType=DECIMAL}, #{wt32,jdbcType=VARCHAR}, 
       #{wt33,jdbcType=VARCHAR}, #{wt34,jdbcType=VARCHAR}, #{wt35,jdbcType=VARCHAR}, #{wt36,jdbcType=VARCHAR}, 
       #{wt37,jdbcType=DECIMAL}, #{wt38,jdbcType=VARCHAR}, #{wt39,jdbcType=VARCHAR}, #{wt40,jdbcType=VARCHAR}, 
-      #{isdeploy,jdbcType=VARCHAR}, #{itemsid,jdbcType=VARCHAR}, #{isdeploydate,jdbcType=VARCHAR}
-      )
+      #{isdeploy,jdbcType=VARCHAR}, #{itemsid,jdbcType=VARCHAR}, #{isdeploydate,jdbcType=VARCHAR}, 
+      #{fileflag,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.itonglian.fms.entity.WfTask">
     insert into WF_TASK
@@ -305,6 +306,9 @@
       <if test="isdeploydate != null">
         ISDEPLOYDATE,
       </if>
+      <if test="fileflag != null">
+        FILEFLAG,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="wt00 != null">
@@ -438,6 +442,9 @@
       </if>
       <if test="isdeploydate != null">
         #{isdeploydate,jdbcType=VARCHAR},
+      </if>
+      <if test="fileflag != null">
+        #{fileflag,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -582,6 +589,9 @@
       <if test="record.isdeploydate != null">
         ISDEPLOYDATE = #{record.isdeploydate,jdbcType=VARCHAR},
       </if>
+      <if test="record.fileflag != null">
+        FILEFLAG = #{record.fileflag,jdbcType=DECIMAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -632,7 +642,8 @@
       WT40 = #{record.wt40,jdbcType=VARCHAR},
       ISDEPLOY = #{record.isdeploy,jdbcType=VARCHAR},
       ITEMSID = #{record.itemsid,jdbcType=VARCHAR},
-      ISDEPLOYDATE = #{record.isdeploydate,jdbcType=VARCHAR}
+      ISDEPLOYDATE = #{record.isdeploydate,jdbcType=VARCHAR},
+      FILEFLAG = #{record.fileflag,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -769,6 +780,9 @@
       <if test="isdeploydate != null">
         ISDEPLOYDATE = #{isdeploydate,jdbcType=VARCHAR},
       </if>
+      <if test="fileflag != null">
+        FILEFLAG = #{fileflag,jdbcType=DECIMAL},
+      </if>
     </set>
     where WT00 = #{wt00,jdbcType=DECIMAL}
   </update>
@@ -816,7 +830,8 @@
       WT40 = #{wt40,jdbcType=VARCHAR},
       ISDEPLOY = #{isdeploy,jdbcType=VARCHAR},
       ITEMSID = #{itemsid,jdbcType=VARCHAR},
-      ISDEPLOYDATE = #{isdeploydate,jdbcType=VARCHAR}
+      ISDEPLOYDATE = #{isdeploydate,jdbcType=VARCHAR},
+      FILEFLAG = #{fileflag,jdbcType=DECIMAL}
     where WT00 = #{wt00,jdbcType=DECIMAL}
   </update>
 

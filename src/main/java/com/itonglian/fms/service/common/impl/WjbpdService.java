@@ -5,7 +5,6 @@ import com.itonglian.fms.service.ContentFilling;
 import com.itonglian.fms.service.SysUsersService;
 import com.itonglian.fms.service.bean.Customized;
 import com.itonglian.fms.service.bean.FileType;
-import com.itonglian.fms.service.bean.SwdjCustomized;
 import com.itonglian.fms.service.bean.WjbpdCustomized;
 import com.itonglian.fms.service.common.range.WjbpdContentFilling;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +72,7 @@ public class WjbpdService extends FFGLAdapter {
         wjbpdCustomized.setFF14(ffgl.getFf14());
         wjbpdCustomized.setFF15(ffgl.getFf15());
 
-        /*SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
+        SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
         sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
         List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
         Iterator<SYS_ATTACHMENT> iterator = sysAttachmentList.iterator();
@@ -102,7 +101,7 @@ public class WjbpdService extends FFGLAdapter {
                 refDocList.add(ff52);
             }
         }
-        wjbpdCustomized.setRefDocList(refDocList);*/
+        wjbpdCustomized.setRefDocList(refDocList);
         return wjbpdCustomized;
     }
 

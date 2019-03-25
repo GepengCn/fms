@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,19 +27,18 @@ public class ServiceManager {
 
         OkHttpClient client = new OkHttpClient();
 
-        String url = serviceConfig.getUrl();
-
+        String url = serviceConfig.getUrl()+encodeBlank(startDate)+"/"+encodeBlank(endDate);
         log.info("url="+url);
-        RequestBody body = RequestBody.create(JSON,startDate+"/"+endDate);
+//        RequestBody body = RequestBody.create(JSON,startDate+"/"+endDate);
         Request request = new Request.Builder()
                 .url(url)
-                .post(body)
+                .get()
                 .build();
         log.info("startDate="+startDate);
         log.info("endDate="+endDate);
         Response response = client.newCall(request).execute();
         if(response.isSuccessful()){
-            return response.body().toString();
+            return response.body().string();
         }else {
             throw new IOException("Unexpected code " + response);
         }
@@ -51,5 +52,12 @@ public class ServiceManager {
         dataBeanList.add(new BackResult.DataBean("290395",0,"2019-03-13 10:23:18"));
         backResult.setDataList(dataBeanList);
         return JSONObject.toJSONString(backResult);
+    }
+
+    private String encodeBlank(String value) throws UnsupportedEncodingException {
+        while(value.indexOf(" ")!=-1){
+            value = value.replace(" ","%20");
+        }
+        return value;
     }
 }
