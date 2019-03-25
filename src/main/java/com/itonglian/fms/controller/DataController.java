@@ -14,9 +14,7 @@ import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.FMS_TASKExample;
 import com.itonglian.fms.service.FmsDataService;
 import com.itonglian.fms.service.FmsTaskService;
-import com.itonglian.fms.service.bean.FileStatus;
-import com.itonglian.fms.service.bean.FtpFile;
-import com.itonglian.fms.service.bean.Param;
+import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.FileStatusManager;
 import com.itonglian.fms.utils.FileManager;
 import io.swagger.annotations.ApiOperation;
@@ -156,15 +154,45 @@ public class DataController {
     }
 
     @RequestMapping("detail")
-    public ModelAndView detail(String dataId) {
+    public ModelAndView detail(String dataId,String fileType) {
         ModelAndView modelAndView = new ModelAndView();
         FMS_DATAExample fmsDataExample = new FMS_DATAExample();
         fmsDataExample.or().andDataidEqualTo(dataId);
         FMS_DATAWithBLOBs fmsData = fmsDataService.selectByPrimaryKey(dataId);
-        Param params = JSONObject.parseObject(new String(fmsData.getCommon(),Charset.forName(serviceConfig.getEncoding())), Param.class);
-        modelAndView.addObject("params",params);
-        modelAndView.addObject("common",JSON.toJSONString(params));
-        modelAndView.addObject("ftpList",params.getFtpList());
+        switch (Integer.parseInt(fileType)){
+            case 1:
+                WjbpdParam wjbpdParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),WjbpdParam.class);
+                modelAndView.addObject("params",wjbpdParam);
+                modelAndView.addObject("ftpList",wjbpdParam.getFtpList());
+                break;
+            case 2:
+                ZyxwParam zyxwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),ZyxwParam.class);
+                modelAndView.addObject("params",zyxwParam);
+                modelAndView.addObject("ftpList",zyxwParam.getFtpList());
+                break;
+            case 3:
+                DwfwParam dwfwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),DwfwParam.class);
+                modelAndView.addObject("params",dwfwParam);
+                modelAndView.addObject("ftpList",dwfwParam.getFtpList());
+                break;
+            case 4:
+                DzfwParam dzfwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),DzfwParam.class);
+                modelAndView.addObject("params",dzfwParam);
+                modelAndView.addObject("ftpList",dzfwParam.getFtpList());
+                break;
+            case 5:
+                YfwParam yfwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),YfwParam.class);
+                modelAndView.addObject("params",yfwParam);
+                modelAndView.addObject("ftpList",yfwParam.getFtpList());
+                break;
+            case 6:
+                SwdjParam swdjParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),SwdjParam.class);
+                modelAndView.addObject("params",swdjParam);
+                modelAndView.addObject("ftpList",swdjParam.getFtpList());
+                break;
+            default:
+                break;
+        }
         modelAndView.addObject("dataid",fmsData.getDataid());
         modelAndView.setViewName("table-detail");
         return modelAndView;

@@ -37,6 +37,8 @@ public class FMS_TASK {
 
     private String protime;
 
+    private Long handlersize;
+
     public Long getId() {
         return id;
     }
@@ -179,5 +181,13 @@ public class FMS_TASK {
 
     public void setProtime(String protime) {
         this.protime = protime == null ? null : protime.trim();
+    }
+
+    public Long getHandlersize() {
+        return handlersize;
+    }
+
+    public void setHandlersize(Long handlersize) {
+        this.handlersize = handlersize;
     }
 }

@@ -1343,6 +1343,66 @@ public class FMS_TASKExample {
             addCriterion("PROTIME not between", value1, value2, "protime");
             return (Criteria) this;
         }
+
+        public Criteria andHandlersizeIsNull() {
+            addCriterion("HANDLERSIZE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeIsNotNull() {
+            addCriterion("HANDLERSIZE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeEqualTo(Long value) {
+            addCriterion("HANDLERSIZE =", value, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeNotEqualTo(Long value) {
+            addCriterion("HANDLERSIZE <>", value, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeGreaterThan(Long value) {
+            addCriterion("HANDLERSIZE >", value, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeGreaterThanOrEqualTo(Long value) {
+            addCriterion("HANDLERSIZE >=", value, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeLessThan(Long value) {
+            addCriterion("HANDLERSIZE <", value, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeLessThanOrEqualTo(Long value) {
+            addCriterion("HANDLERSIZE <=", value, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeIn(List<Long> values) {
+            addCriterion("HANDLERSIZE in", values, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeNotIn(List<Long> values) {
+            addCriterion("HANDLERSIZE not in", values, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeBetween(Long value1, Long value2) {
+            addCriterion("HANDLERSIZE between", value1, value2, "handlersize");
+            return (Criteria) this;
+        }
+
+        public Criteria andHandlersizeNotBetween(Long value1, Long value2) {
+            addCriterion("HANDLERSIZE not between", value1, value2, "handlersize");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

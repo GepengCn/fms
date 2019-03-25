@@ -2,11 +2,21 @@ package com.itonglian.fms.service.common;
 
 import com.google.common.util.concurrent.*;
 import com.itonglian.fms.entity.FMS_TASK;
+import com.itonglian.fms.entity.WF_INFOR;
+import com.itonglian.fms.entity.WF_INFORExample;
 import com.itonglian.fms.log.OperationLog;
+import com.itonglian.fms.service.SysUsersService;
+import com.itonglian.fms.service.WfInforService;
 import com.itonglian.fms.service.bean.FileType;
+import com.itonglian.fms.service.bean.HandlerDetail;
 import com.itonglian.fms.service.bean.Param;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
@@ -35,6 +45,28 @@ public abstract class BaseService {
         param.setTaskId(fmsTask.getTaskid());
         param.setDraftTime(fmsTask.getCreatetime());
         return param;
+    }
+
+    public static  List<HandlerDetail> setHandlerDetailList(WfInforService wfInforService, Param param, SysUsersService sysUsersService){
+        WF_INFORExample wfInforExample = new WF_INFORExample();
+        wfInforExample.or().andWi01EqualTo(Long.parseLong(param.getTaskId()));
+        List<WF_INFOR> wfInforList = wfInforService.selectByExample(wfInforExample);
+        Iterator<WF_INFOR> iterator = wfInforList.iterator();
+        List<HandlerDetail> handlerDetailList = new ArrayList<>();
+        while(iterator.hasNext()){
+            WF_INFOR wfInfor = iterator.next();
+            HandlerDetail handlerDetail = new HandlerDetail();
+            if(wfInfor.getWi05()!=null){
+                handlerDetail.setHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi05())).getSu02());
+            }
+            handlerDetail.setLastHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi15())).getSu02());
+            handlerDetail.setHandlerComment(wfInfor.getWi20());
+            handlerDetail.setHandlerStatus(wfInfor.getWi13());
+            handlerDetail.setHandlerTime(new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+            handlerDetail.setSendTime(new DateTime(wfInfor.getWi08()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+            handlerDetailList.add(handlerDetail);
+        }
+        return handlerDetailList;
     }
 
     private class Task implements Callable<Param> {

@@ -31,7 +31,7 @@ import java.util.UUID;
 @Configurable
 @EnableScheduling
 @Slf4j
-public class FileScanScheduler {
+public class FileScheduler {
 
     @Autowired
     FmsTaskService fmsTaskService;
@@ -41,6 +41,9 @@ public class FileScanScheduler {
     ServiceRouter serviceRouter;
     @Autowired
     FmsDataService fmsDataService;
+
+    @Autowired
+    FileUpdateJob fileUpdateJob;
 
     private boolean debug = log.isDebugEnabled();
     @Scheduled(fixedRate = 1000 * 10,initialDelay = 1000*10)
@@ -85,6 +88,7 @@ public class FileScanScheduler {
                     fmsData.setCustomized(JSON.toJSONString(commonDatas.getCustomized()).getBytes());
                     fmsDataService.insert(fmsData);
                     fmsFile.setDataid(fmsData.getDataid());
+                    fmsFile.setHandlersize((long)commonDatas.getHandlerDetailList().size());
                     fmsTaskService.updateByPrimaryKey(fmsFile);
                     if(debug){
                         log.debug("归档任务执行结束");
@@ -102,6 +106,11 @@ public class FileScanScheduler {
 
 
         }
+    }
+
+    @Scheduled(fixedRate = 1000*10,initialDelay = 1000*10)
+    public void doFileUpdate() throws Exception {
+        fileUpdateJob.doFileUpdate();
     }
 
 }

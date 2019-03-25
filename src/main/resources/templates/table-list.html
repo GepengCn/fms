@@ -78,7 +78,7 @@
             <td th:id="${fmsTask.taskid}+_name">
             </td>
             <td>
-              <a th:id="${fmsTask.taskid}+_href" th:href="@{'/dataController/detail?dataId='+${fmsTask.dataid}}"><span class="glyphicon glyphicon-th-list icon-title"></span></a>
+              <a th:id="${fmsTask.taskid}+_href" th:href="@{/dataController/detail(dataId=${fmsTask.dataid},fileType=${fmsTask.filetype})}"><span class="glyphicon glyphicon-th-list icon-title"></span></a>
               <a th:href="@{'/dataController/retry?id='+${fmsTask.id}}"><span class="glyphicon glyphicon-refresh icon-title"></span></a>
             </td>
           </tr>
@@ -147,7 +147,7 @@
           break;
         case 102:
           dataToHtml(fmsTask,"success","glyphicon glyphicon-play","处理成功");
-          $("#"+fmsTask.taskid+"_href").attr("href","/fms/dataController/detail?dataId="+fmsTask.dataid);
+          $("#"+fmsTask.taskid+"_href").attr("href","/fms/dataController/detail?dataId="+fmsTask.dataid+"&fileType="+fmsTask.filetype);
           break;
         case 103:
           dataToHtml(fmsTask,"failure","glyphicon glyphicon-remove","处理失败");

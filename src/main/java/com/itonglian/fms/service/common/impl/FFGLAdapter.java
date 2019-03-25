@@ -75,25 +75,7 @@ public abstract class FFGLAdapter extends BaseService {
         Future<Boolean> future1 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                WF_INFORExample wfInforExample = new WF_INFORExample();
-                wfInforExample.or().andWi01EqualTo(Long.parseLong(param.getTaskId()));
-                List<WF_INFOR> wfInforList = wfInforService.selectByExample(wfInforExample);
-                Iterator<WF_INFOR> iterator = wfInforList.iterator();
-                List<HandlerDetail> handlerDetailList = new ArrayList<>();
-                while(iterator.hasNext()){
-                    WF_INFOR wfInfor = iterator.next();
-                    HandlerDetail handlerDetail = new HandlerDetail();
-                    if(wfInfor.getWi05()!=null){
-                        handlerDetail.setHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi05())).getSu02());
-                    }
-                    handlerDetail.setLastHandlerUser(sysUsersService.selectByPrimaryKey(Long.parseLong(wfInfor.getWi15())).getSu02());
-                    handlerDetail.setHandlerComment(wfInfor.getWi20());
-                    handlerDetail.setHandlerStatus(wfInfor.getWi13());
-                    handlerDetail.setHandlerTime(new DateTime(wfInfor.getWi11()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
-                    handlerDetail.setSendTime(new DateTime(wfInfor.getWi08()).toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
-                    handlerDetailList.add(handlerDetail);
-                }
-                param.setHandlerDetailList(handlerDetailList);
+                param.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,param,sysUsersService));
             }
         }));
         List<FtpFile> ftpFileList = new ArrayList<>();
@@ -112,14 +94,16 @@ public abstract class FFGLAdapter extends BaseService {
         ftpFileList.add(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),getContentFilling(),contents,wfTask.getWt00(),FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),2,2)));
         //正文
         FtpFile docFtpFile = new FtpFile(fmsTask.getTextpath(),fmsTask.getTextname(),3,3);
-        ftpFileList.add(docFtpFile);
+
         //附件
         ftpFileList.add(new FtpFile(fmsTask.getAttachpath(),fmsTask.getAttachname(),4,4));
 
         Future<Boolean> future2 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                docParser.executeZip(docFtpFile);
+                if(docParser.executeZip(docFtpFile)){
+                    ftpFileList.add(docFtpFile);
+                }
             }
         }));
 

@@ -20,6 +20,7 @@
     <result column="PROLOGIN" jdbcType="VARCHAR" property="prologin" />
     <result column="PRONAME" jdbcType="VARCHAR" property="proname" />
     <result column="PROTIME" jdbcType="VARCHAR" property="protime" />
+    <result column="HANDLERSIZE" jdbcType="DECIMAL" property="handlersize" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,7 +82,8 @@
   </sql>
   <sql id="Base_Column_List">
     ID, TASKID, DRAFTLOGIN, DRAFTNAME, STATUS, CREATETIME, MODIFYTIME, TEXTPATH, ATTACHPATH, 
-    FILETYPE, TITLE, TEXTNAME, ATTACHNAME, PARENTROOT, DATAID, PROLOGIN, PRONAME, PROTIME
+    FILETYPE, TITLE, TEXTNAME, ATTACHNAME, PARENTROOT, DATAID, PROLOGIN, PRONAME, PROTIME, 
+    HANDLERSIZE
   </sql>
   <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_TASKExample" resultMap="BaseResultMap">
     select
@@ -120,15 +122,15 @@
       MODIFYTIME, TEXTPATH, ATTACHPATH, 
       FILETYPE, TITLE, TEXTNAME, 
       ATTACHNAME, PARENTROOT, DATAID, 
-      PROLOGIN, PRONAME, PROTIME
-      )
+      PROLOGIN, PRONAME, PROTIME, 
+      HANDLERSIZE)
     values (#{id,jdbcType=DECIMAL}, #{taskid,jdbcType=VARCHAR}, #{draftlogin,jdbcType=VARCHAR}, 
       #{draftname,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{createtime,jdbcType=VARCHAR}, 
       #{modifytime,jdbcType=VARCHAR}, #{textpath,jdbcType=VARCHAR}, #{attachpath,jdbcType=VARCHAR}, 
       #{filetype,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{textname,jdbcType=VARCHAR}, 
       #{attachname,jdbcType=VARCHAR}, #{parentroot,jdbcType=VARCHAR}, #{dataid,jdbcType=VARCHAR}, 
-      #{prologin,jdbcType=VARCHAR}, #{proname,jdbcType=VARCHAR}, #{protime,jdbcType=VARCHAR}
-      )
+      #{prologin,jdbcType=VARCHAR}, #{proname,jdbcType=VARCHAR}, #{protime,jdbcType=VARCHAR}, 
+      #{handlersize,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.itonglian.fms.entity.FMS_TASK">
     insert into FMS_TASK
@@ -187,6 +189,9 @@
       <if test="protime != null">
         PROTIME,
       </if>
+      <if test="handlersize != null">
+        HANDLERSIZE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -242,6 +247,9 @@
       </if>
       <if test="protime != null">
         #{protime,jdbcType=VARCHAR},
+      </if>
+      <if test="handlersize != null">
+        #{handlersize,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -308,6 +316,9 @@
       <if test="record.protime != null">
         PROTIME = #{record.protime,jdbcType=VARCHAR},
       </if>
+      <if test="record.handlersize != null">
+        HANDLERSIZE = #{record.handlersize,jdbcType=DECIMAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -332,7 +343,8 @@
       DATAID = #{record.dataid,jdbcType=VARCHAR},
       PROLOGIN = #{record.prologin,jdbcType=VARCHAR},
       PRONAME = #{record.proname,jdbcType=VARCHAR},
-      PROTIME = #{record.protime,jdbcType=VARCHAR}
+      PROTIME = #{record.protime,jdbcType=VARCHAR},
+      HANDLERSIZE = #{record.handlersize,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -391,6 +403,9 @@
       <if test="protime != null">
         PROTIME = #{protime,jdbcType=VARCHAR},
       </if>
+      <if test="handlersize != null">
+        HANDLERSIZE = #{handlersize,jdbcType=DECIMAL},
+      </if>
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
@@ -412,7 +427,8 @@
       DATAID = #{dataid,jdbcType=VARCHAR},
       PROLOGIN = #{prologin,jdbcType=VARCHAR},
       PRONAME = #{proname,jdbcType=VARCHAR},
-      PROTIME = #{protime,jdbcType=VARCHAR}
+      PROTIME = #{protime,jdbcType=VARCHAR},
+      HANDLERSIZE = #{handlersize,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
 </mapper>
