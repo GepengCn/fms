@@ -164,31 +164,37 @@ public class DataController {
                 WjbpdParam wjbpdParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),WjbpdParam.class);
                 modelAndView.addObject("params",wjbpdParam);
                 modelAndView.addObject("ftpList",wjbpdParam.getFtpList());
+                modelAndView.addObject("common",JSON.toJSONString(wjbpdParam));
                 break;
             case 2:
                 ZyxwParam zyxwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),ZyxwParam.class);
                 modelAndView.addObject("params",zyxwParam);
                 modelAndView.addObject("ftpList",zyxwParam.getFtpList());
+                modelAndView.addObject("common",JSON.toJSONString(zyxwParam));
                 break;
             case 3:
                 DwfwParam dwfwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),DwfwParam.class);
                 modelAndView.addObject("params",dwfwParam);
                 modelAndView.addObject("ftpList",dwfwParam.getFtpList());
+                modelAndView.addObject("common",JSON.toJSONString(dwfwParam));
                 break;
             case 4:
                 DzfwParam dzfwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),DzfwParam.class);
                 modelAndView.addObject("params",dzfwParam);
                 modelAndView.addObject("ftpList",dzfwParam.getFtpList());
+                modelAndView.addObject("common",JSON.toJSONString(dzfwParam));
                 break;
             case 5:
                 YfwParam yfwParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),YfwParam.class);
                 modelAndView.addObject("params",yfwParam);
                 modelAndView.addObject("ftpList",yfwParam.getFtpList());
+                modelAndView.addObject("common",JSON.toJSONString(yfwParam));
                 break;
             case 6:
                 SwdjParam swdjParam = JSONObject.parseObject(new String(fmsData.getCommon(), Charset.forName(serviceConfig.getEncoding())),SwdjParam.class);
                 modelAndView.addObject("params",swdjParam);
                 modelAndView.addObject("ftpList",swdjParam.getFtpList());
+                modelAndView.addObject("common",JSON.toJSONString(swdjParam));
                 break;
             default:
                 break;
