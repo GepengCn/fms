@@ -108,9 +108,9 @@ public class FileScheduler {
         }
     }
 
-    @Scheduled(fixedRate = 1000*10,initialDelay = 1000*10)
+    /*@Scheduled(fixedRate = 1000*10,initialDelay = 1000*10)
     public void doFileUpdate() throws Exception {
         fileUpdateJob.doFileUpdate();
-    }
+    }*/
 
 }
