@@ -7,6 +7,7 @@ import com.itonglian.fms.service.bean.Customized;
 import com.itonglian.fms.service.bean.DzfwCustomized;
 import com.itonglian.fms.service.bean.FileType;
 import com.itonglian.fms.service.common.range.DzfwContentFilling;
+import com.itonglian.fms.service.common.task.CustomizedTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,9 @@ public class DzfwService extends FFGLAdapter {
 
     @Autowired
     DzfwContentFilling dzfwContentFilling;
+
+    @Autowired
+    CustomizedTask customizedTask;
 
     @Override
     public FileType getType() {
@@ -67,23 +71,7 @@ public class DzfwService extends FFGLAdapter {
     }
 
     @Override
-    public Customized getCustomized(FFGL ffgl) {
-        DzfwCustomized dzfwCustomized = new DzfwCustomized();
-        dzfwCustomized.setFF02(ffgl.getFf02());
-        dzfwCustomized.setFF03(ffgl.getFf03());
-        dzfwCustomized.setFF04(ffgl.getFf04());
-        dzfwCustomized.setFF07(ffgl.getFf07());
-        dzfwCustomized.setFF12(ffgl.getFf12());
-        dzfwCustomized.setFF14(ffgl.getFf14());
-        dzfwCustomized.setFF15(ffgl.getFf15());
-        dzfwCustomized.setFF17(ffgl.getFf17());
-        dzfwCustomized.setFF18(ffgl.getFf18());
-        dzfwCustomized.setFF22(ffgl.getFf22());
-        dzfwCustomized.setFF23(ffgl.getFf23());
-        dzfwCustomized.setFF25(ffgl.getFf25()==null?0:ffgl.getFf25());
-        dzfwCustomized.setFF30(ffgl.getFf30());
-        dzfwCustomized.setFF32(ffgl.getFf32());
-        dzfwCustomized.setFF35(ffgl.getFf35());
-        return dzfwCustomized;
+    public Customized getCustomized(String taskId,FFGL ffgl) {
+        return customizedTask.getDzfwCustomized(taskId,ffgl);
     }
 }

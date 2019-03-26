@@ -16,7 +16,7 @@ public class DocParserTest {
     @Test
     public void execute() {
         try {
-            docParser.executeZip(new FtpFile("/abc/1f152b02-9571-42d2-a7e1-e10a932d829d","springmvc_day1",3,3));
+            docParser.executeZip("",new FtpFile("/abc/1f152b02-9571-42d2-a7e1-e10a932d829d","springmvc_day1",3,3));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -13,6 +13,7 @@ import com.itonglian.fms.service.SysUsersService;
 import com.itonglian.fms.service.WfInforService;
 import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.BaseService;
+import com.itonglian.fms.service.common.ServiceRouter;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -37,8 +38,8 @@ public class FileUpdateJob {
     WfInforService wfInforService;
     @Autowired
     SysUsersService sysUsersService;
-
-    boolean debug = log.isDebugEnabled();
+    @Autowired
+    ServiceRouter serviceRouter;
 
     public void doFileUpdate() throws Exception {
 
@@ -60,10 +61,8 @@ public class FileUpdateJob {
             wfInforExample.or().andWi01EqualTo(Long.parseLong(taskId));
             long nowCount = wfInforService.countByExample(wfInforExample);
 
-            if(debug){
-                log.debug("doFileUpdate=[{}]", DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
-                log.debug("dbCount=[{}],nowCount=[{}]",dbCount,nowCount);
-            }
+            log.debug("doFileUpdate=[{}]", DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+            log.debug("dbCount=[{}],nowCount=[{}]",dbCount,nowCount);
 
             if(dbCount==nowCount){
                 continue;
@@ -74,12 +73,13 @@ public class FileUpdateJob {
             FMS_DATAWithBLOBs fmsDataWithBLOBs = fmsDataService.selectByPrimaryKey(fmsTask.getDataid());
 
             //更新FMS_DATA
+            BaseService baseService = serviceRouter.getBean(FileType.parse(Integer.parseInt(fmsTask.getFiletype())));
 
             switch (Integer.parseInt(fmsTask.getFiletype())){
                 case 1:
                     WjbpdParam wjbpdParam = JSONObject.parseObject(new String(fmsDataWithBLOBs.getCommon(), Charset.forName(serviceConfig.getEncoding())),WjbpdParam.class);
 
-                    wjbpdParam.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,wjbpdParam,sysUsersService));
+                    wjbpdParam.setHandlerDetailList(baseService.setHandlerDetailList(wjbpdParam));
 
                     fmsDataWithBLOBs.setCommon(JSON.toJSONString(wjbpdParam).getBytes());
 
@@ -88,7 +88,7 @@ public class FileUpdateJob {
                 case 2:
                     ZyxwParam zyxwParam = JSONObject.parseObject(new String(fmsDataWithBLOBs.getCommon(), Charset.forName(serviceConfig.getEncoding())),ZyxwParam.class);
 
-                    zyxwParam.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,zyxwParam,sysUsersService));
+                    zyxwParam.setHandlerDetailList(baseService.setHandlerDetailList(zyxwParam));
 
                     fmsDataWithBLOBs.setCommon(JSON.toJSONString(zyxwParam).getBytes());
 
@@ -97,7 +97,7 @@ public class FileUpdateJob {
                 case 3:
                     DwfwParam dwfwParam = JSONObject.parseObject(new String(fmsDataWithBLOBs.getCommon(), Charset.forName(serviceConfig.getEncoding())),DwfwParam.class);
 
-                    dwfwParam.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,dwfwParam,sysUsersService));
+                    dwfwParam.setHandlerDetailList(baseService.setHandlerDetailList(dwfwParam));
 
                     fmsDataWithBLOBs.setCommon(JSON.toJSONString(dwfwParam).getBytes());
 
@@ -106,7 +106,7 @@ public class FileUpdateJob {
                 case 4:
                     DzfwParam dzfwParam = JSONObject.parseObject(new String(fmsDataWithBLOBs.getCommon(), Charset.forName(serviceConfig.getEncoding())),DzfwParam.class);
 
-                    dzfwParam.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,dzfwParam,sysUsersService));
+                    dzfwParam.setHandlerDetailList(baseService.setHandlerDetailList(dzfwParam));
 
                     fmsDataWithBLOBs.setCommon(JSON.toJSONString(dzfwParam).getBytes());
 
@@ -115,7 +115,7 @@ public class FileUpdateJob {
                 case 5:
                     YfwParam yfwParam = JSONObject.parseObject(new String(fmsDataWithBLOBs.getCommon(), Charset.forName(serviceConfig.getEncoding())),YfwParam.class);
 
-                    yfwParam.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,yfwParam,sysUsersService));
+                    yfwParam.setHandlerDetailList(baseService.setHandlerDetailList(yfwParam));
 
                     fmsDataWithBLOBs.setCommon(JSON.toJSONString(yfwParam).getBytes());
 
@@ -124,7 +124,7 @@ public class FileUpdateJob {
                 case 6:
                     SwdjParam swdjParam = JSONObject.parseObject(new String(fmsDataWithBLOBs.getCommon(), Charset.forName(serviceConfig.getEncoding())),SwdjParam.class);
 
-                    swdjParam.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,swdjParam,sysUsersService));
+                    swdjParam.setHandlerDetailList(baseService.setHandlerDetailList(swdjParam));
 
                     fmsDataWithBLOBs.setCommon(JSON.toJSONString(swdjParam).getBytes());
 

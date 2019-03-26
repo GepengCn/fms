@@ -12,6 +12,7 @@ import com.itonglian.fms.service.bean.HandlerDetail;
 import com.itonglian.fms.service.bean.Param;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,6 +23,12 @@ import java.util.concurrent.Executors;
 
 @Component
 public abstract class BaseService {
+
+    @Autowired
+    WfInforService wfInforService;
+
+    @Autowired
+    SysUsersService sysUsersService;
 
     public abstract FileType getType();
 
@@ -47,7 +54,7 @@ public abstract class BaseService {
         return param;
     }
 
-    public static  List<HandlerDetail> setHandlerDetailList(WfInforService wfInforService, Param param, SysUsersService sysUsersService){
+    public  List<HandlerDetail> setHandlerDetailList(Param param){
         WF_INFORExample wfInforExample = new WF_INFORExample();
         wfInforExample.or().andWi01EqualTo(Long.parseLong(param.getTaskId()));
         List<WF_INFOR> wfInforList = wfInforService.selectByExample(wfInforExample);

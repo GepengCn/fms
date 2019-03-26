@@ -1,31 +1,29 @@
 package com.itonglian.fms.service.common.impl;
 
-import com.itonglian.fms.entity.*;
+import com.itonglian.fms.entity.FFGL;
+import com.itonglian.fms.entity.FMS_TASK;
+import com.itonglian.fms.entity.WfTask;
 import com.itonglian.fms.service.*;
-import com.itonglian.fms.service.bean.*;
+import com.itonglian.fms.service.bean.FtpFile;
+import com.itonglian.fms.service.bean.Param;
 import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.DocParser;
-import com.itonglian.fms.service.common.FuturePieceTask;
 import com.itonglian.fms.service.common.SFGLService;
 import com.itonglian.fms.service.common.range.DwfwContentFilling;
+import com.itonglian.fms.service.common.task.ConvertTask;
+import com.itonglian.fms.service.common.task.DataTask;
 import com.itonglian.fms.utils.FileManager;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
-public abstract class FFGLAdapter extends BaseService {
+public abstract class FFGLAdapter extends BaseService implements DataTask {
 
     @Autowired
     FFGLService ffglService;
@@ -52,70 +50,53 @@ public abstract class FFGLAdapter extends BaseService {
     @Autowired
     DocParser docParser;
 
-    public abstract  ContentFilling getContentFilling();
+    @Autowired
+    ConvertTask convertTask;
+
     public abstract String getFormPath();
-
-    public abstract Map<String,String> getContents(FFGL ffgl);
-
-    public abstract Customized getCustomized(FFGL ffgl);
 
     @Override
     public Param customizedImpl(Param param, FMS_TASK fmsTask) throws Exception {
         this.formPath = getFormPath();
-        int taskSize = 7;
-        CountDownLatch countDownLatch = new CountDownLatch(taskSize);
+
+        String taskId = fmsTask.getTaskid();
+
+        String parent = fmsTask.getParentroot();
+
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
+
         FFGL ffgl = ffglService.selectByPrimaryKey(wfTask.getWt04());
-        Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
-            @Override
-            public void callback() throws Exception {
-                param.setCustomized(getCustomized(ffgl));
-            }
-        }));
-        Future<Boolean> future1 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
-            @Override
-            public void callback() throws Exception {
-                param.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,param,sysUsersService));
-            }
-        }));
+
+        param.setCustomized(getCustomized(taskId,ffgl));
+
+        param.setHandlerDetailList(setHandlerDetailList(param));
+
         List<FtpFile> ftpFileList = new ArrayList<>();
         //封皮
-        ftpFileList.add(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.cover,FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),0,0)));
+        ftpFileList.add(convertTask.getCoverFile(taskId,parent));
         //目录
-        ftpFileList.add(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.catalog,FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),1,1)));
+        ftpFileList.add(convertTask.getCatalogFile(taskId,parent));
         //备考表
-        ftpFileList.add(fileManager.handler(executorService,countDownLatch,fmsTask.getParentroot(),TemplateType.ref,FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),5,5)));
+        ftpFileList.add(convertTask.getRefFile(taskId,parent));
         //公文表单
         Map<String,String> contents = getContents(ffgl);
 
         contents.put("FF02",ffgl.getFf02());
+
         contents.put("BARCODE",ffgl.getFf02());
 
-        ftpFileList.add(fileManager.handler(executorService, countDownLatch, formPath, fmsTask.getParentroot(),getContentFilling(),contents,wfTask.getWt00(),FtpFile.createSimpleFtpFile(fmsTask.getParentroot(),2,2)));
+        ftpFileList.add(convertTask.getFormFile(taskId,parent,formPath,getContentFilling(),contents));
         //正文
-        FtpFile docFtpFile = new FtpFile(fmsTask.getTextpath(),fmsTask.getTextname(),3,3);
-
+        FtpFile docFtpFile = convertTask.getTextFile(taskId,fmsTask.getTextpath(),fmsTask.getTextname());
+        if(docFtpFile!=null){
+            ftpFileList.add(docFtpFile);
+        }
         //附件
-        ftpFileList.add(new FtpFile(fmsTask.getAttachpath(),fmsTask.getAttachname(),4,4));
+        ftpFileList.add(convertTask.getAttFile(taskId,fmsTask.getAttachpath(),fmsTask.getAttachname()));
 
-        Future<Boolean> future2 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
-            @Override
-            public void callback() throws Exception {
-                if(docParser.executeZip(docFtpFile)){
-                    ftpFileList.add(docFtpFile);
-                }
-            }
-        }));
-
-        if(!future.get()||!future1.get()||!future2.get()){
-            throw new Exception("业务处理出错...");
-        }
-        if(!countDownLatch.await(15, TimeUnit.MINUTES)){
-            throw new Exception("countDownLatch处理超时...");
-        }
         param.setFtpList(ftpFileList);
 
-        log.info("自定义任务执行完毕...");
+        log.debug("自定义任务执行完毕...");
         return param;
     }
 }

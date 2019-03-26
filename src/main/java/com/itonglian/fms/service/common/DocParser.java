@@ -66,7 +66,7 @@ public class DocParser {
         ftpUtil.upload(ftpFile.getFilePath(),pdfName,new File(pdfAbsPath),false);
     }
 
-    public boolean executeZip(FtpFile ftpFile) {
+    public boolean executeZip(String taskId,FtpFile ftpFile) {
 
         try {
             //临时下载目录

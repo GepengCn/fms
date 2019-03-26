@@ -56,10 +56,11 @@ public abstract class SFGLAdapter extends BaseService {
 
     public abstract Map<String,String> getContents(SFGL sfgl);
 
-    public abstract Customized getCustomized(SFGL sfgl);
+    public abstract Customized getCustomized(String taskId,SFGL sfgl);
 
     @Override
     public Param customizedImpl(Param param, FMS_TASK fmsTask) throws Exception {
+        String taskId = fmsTask.getTaskid();
         this.formPath = getFormPath();
         int taskSize = 7;
         CountDownLatch countDownLatch = new CountDownLatch(taskSize);
@@ -68,13 +69,13 @@ public abstract class SFGLAdapter extends BaseService {
         Future<Boolean> future = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                param.setCustomized(getCustomized(sfgl));
+                param.setCustomized(getCustomized(taskId,sfgl));
             }
         }));
         Future<Boolean> future1 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                param.setHandlerDetailList(BaseService.setHandlerDetailList(wfInforService,param,sysUsersService));
+                param.setHandlerDetailList(setHandlerDetailList(param));
             }
         }));
         List<FtpFile> ftpFileList = new ArrayList<>();
@@ -100,7 +101,7 @@ public abstract class SFGLAdapter extends BaseService {
         Future<Boolean> future2 = executorService.submit(new AttPieceTask(countDownLatch, new FuturePieceTask() {
             @Override
             public void callback() throws Exception {
-                docParser.executeZip(docFtpFile);
+                docParser.executeZip("",docFtpFile);
             }
         }));
 

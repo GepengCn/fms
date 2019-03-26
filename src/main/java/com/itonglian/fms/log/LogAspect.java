@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.UUID;
 
 @Aspect
 @Slf4j
@@ -23,12 +24,12 @@ import java.lang.reflect.Parameter;
 public class LogAspect {
 
     @Autowired
-    FmsLogService fmsLogService;
+    private FmsLogService fmsLogService;
+
     @Pointcut("@annotation(com.itonglian.fms.log.OperationLog)")
     public void pointcut() {
 
     }
-
     @Around("pointcut()")
     public Object doInvoke(ProceedingJoinPoint pjp) {
         FMS_LOG fmsLog = new FMS_LOG();
@@ -39,30 +40,30 @@ public class LogAspect {
             result = pjp.proceed();
         } catch (Throwable throwable) {
             fmsLog.setEndtime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
-            log.error(throwable.getMessage(), throwable);
-            save(pjp, null, System.currentTimeMillis()-start,throwable.getMessage());
+            fmsLog.setExectime((System.currentTimeMillis()-start)+"");
+            fmsLog.setException(throwable.getMessage());
+            save(pjp, fmsLog);
         } finally {
             fmsLog.setEndtime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
-            save(pjp, result, System.currentTimeMillis()-start,null);
+            fmsLog.setExectime((System.currentTimeMillis()-start)+"");
+            fmsLog.setResult(JSON.toJSONString(result));
+            save(pjp,fmsLog);
         }
 
         return result;
     }
 
-    private void save(ProceedingJoinPoint proceedingJoinPoint, Object result, long execTime,String exception) {
+    public void save(ProceedingJoinPoint proceedingJoinPoint, FMS_LOG fmsLog) {
 
-        FMS_LOG fmsLog = parseJoinPoint(proceedingJoinPoint);
+        fmsLog = parseJoinPoint(proceedingJoinPoint,fmsLog);
 
         if (null != fmsLog) {
-            fmsLog.setResult(JSON.toJSONString(result));
-            fmsLog.setExectime(execTime+"");
-            fmsLog.setExectime(exception);
-            log.info(fmsLog.format(), fmsLog.args());
+            fmsLog.setId(UUID.randomUUID().toString());
             fmsLogService.insert(fmsLog);
         }
     }
 
-    private FMS_LOG parseJoinPoint(ProceedingJoinPoint proceedingJoinPoint) {
+    public FMS_LOG parseJoinPoint(ProceedingJoinPoint proceedingJoinPoint,FMS_LOG fmsLog) {
         Signature signature = proceedingJoinPoint.getSignature();
         String className = signature.getDeclaringTypeName();
         String methodName = signature.getName();
@@ -74,13 +75,11 @@ public class LogAspect {
             for (Method method : methods) {
                 if (methodName.equals(method.getName())) {
                     if (args.length == method.getParameterCount()) {
-
-                        FMS_LOG fmsLog = new FMS_LOG();
                         fmsLog.setClassname(className);
                         fmsLog.setMethodname(methodName);
                         Parameter[] params = method.getParameters();
                         for(int i=0;i<params.length;i++){
-                            if("logKey".equals(params[i].getName())){
+                            if("taskId".equals(params[i].getName())){
                                 fmsLog.setTaskid((String)args[i]);
                             }
                         }

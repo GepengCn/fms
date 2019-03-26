@@ -6,8 +6,8 @@ import com.itonglian.fms.service.SysUsersService;
 import com.itonglian.fms.service.bean.Customized;
 import com.itonglian.fms.service.bean.DwfwCustomized;
 import com.itonglian.fms.service.bean.FileType;
-import com.itonglian.fms.service.bean.YfwCustomized;
 import com.itonglian.fms.service.common.range.DwfwContentFilling;
+import com.itonglian.fms.service.common.task.CustomizedTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +27,9 @@ public class DwfwService extends FFGLAdapter {
 
     @Autowired
     DwfwContentFilling dwfwContentFilling;
+
+    @Autowired
+    CustomizedTask customizedTask;
 
     @Override
     public FileType getType() {
@@ -64,55 +67,8 @@ public class DwfwService extends FFGLAdapter {
     }
 
     @Override
-    public Customized getCustomized(FFGL ffgl) {
-        DwfwCustomized dwfwCustomized = new DwfwCustomized();
-        dwfwCustomized.setFF07(ffgl.getFf07());
-        dwfwCustomized.setFF03(ffgl.getFf03());
-        dwfwCustomized.setFF04(ffgl.getFf04());
-        dwfwCustomized.setFF17(ffgl.getFf17());
-        dwfwCustomized.setFF18(ffgl.getFf18());
-        dwfwCustomized.setFF32(ffgl.getFf32());
-        dwfwCustomized.setFF30(ffgl.getFf30());
-        dwfwCustomized.setFF25(ffgl.getFf25()==null?0:ffgl.getFf25());
-        dwfwCustomized.setFF11(ffgl.getFf11());
-        dwfwCustomized.setFF35(ffgl.getFf35());
-        dwfwCustomized.setFF16(ffgl.getFf16());
-        dwfwCustomized.setFF12(ffgl.getFf12());
-        dwfwCustomized.setFF02(ffgl.getFf02());
-        dwfwCustomized.setFF14(ffgl.getFf14());
-        dwfwCustomized.setFF15(ffgl.getFf15());
-        SYS_ATTACHMENTExample sysAttachmentExample = new SYS_ATTACHMENTExample();
-        sysAttachmentExample.or().andSa01EqualTo(ffgl.getFf52());
-        List<SYS_ATTACHMENT> sysAttachmentList = sysAttachmentService.selectByExample(sysAttachmentExample);
-        Iterator<SYS_ATTACHMENT> iterator = sysAttachmentList.iterator();
-        List<DwfwCustomized.FF52> refDocList = new ArrayList<>();
-        while(iterator.hasNext()){
-            SYS_ATTACHMENT sysAttachment = iterator.next();
-            String taskId = sysAttachment.getSa02();
-            WfTask wfTask1 =  wfTaskService.selectByPrimaryKey(Long.parseLong(taskId));
-            if("FE_APP5.FFGL".equalsIgnoreCase(wfTask1.getWt03())){
-                FFGL ffgl1 = ffglService.selectByPrimaryKey(wfTask1.getWt04());
-                DwfwCustomized.FF52 ff52 = new DwfwCustomized.FF52();
-                ff52.setFF02(ffgl1.getFf02());
-                ff52.setFF12(ffgl1.getFf12());
-                ff52.setFF30(ffgl1.getFf30());
-                ff52.setFF31(ffgl1.getFf31());
-                ff52.setFF32(ffgl1.getFf32());
-                refDocList.add(ff52);
-            }else if("FE_APP5.SFGL".equalsIgnoreCase(wfTask1.getWt03())){
-                SFGL sfgl1 = sfglService.selectByPrimaryKey(wfTask1.getWt04());
-                DwfwCustomized.FF52 ff52 = new DwfwCustomized.FF52();
-                ff52.setFF02(sfgl1.getSf02());
-                ff52.setFF12(sfgl1.getSf13());
-                ff52.setFF30(sfgl1.getSf33());
-                ff52.setFF31(sfgl1.getSf26());
-                ff52.setFF32(sfgl1.getSf32());
-                refDocList.add(ff52);
-            }
-
-        }
-        dwfwCustomized.setRefDocList(refDocList);
-        return dwfwCustomized;
+    public Customized getCustomized(String taskId,FFGL ffgl) {
+        return customizedTask.getDwfwCustomized(taskId,ffgl);
     }
 
 }

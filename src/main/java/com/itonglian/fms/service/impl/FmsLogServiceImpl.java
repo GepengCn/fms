@@ -4,6 +4,7 @@ import com.itonglian.fms.dao.feapp5.FMS_LOGMapper;
 import com.itonglian.fms.entity.FMS_LOG;
 import com.itonglian.fms.entity.FMS_LOGExample;
 import com.itonglian.fms.service.FmsLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class FmsLogServiceImpl implements FmsLogService {
 
+    @Autowired
     FMS_LOGMapper fmsLogMapper;
     @Override
     public long countByExample(FMS_LOGExample example) {

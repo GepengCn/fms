@@ -32,7 +32,7 @@ public class WordUtils {
             doc.setWarningCallback(new IWarningCallback() {
                 @Override
                 public void warning(WarningInfo warningInfo) {
-                    log.warn(warningInfo.getDescription());
+//                    log.warn(warningInfo.getDescription());
                 }
             });
             doc.save(destFile);
@@ -66,7 +66,7 @@ public class WordUtils {
             doc.setWarningCallback(new IWarningCallback() {
                 @Override
                 public void warning(WarningInfo warningInfo) {
-                    log.warn(warningInfo.getDescription());
+//                    log.warn(warningInfo.getDescription());
                 }
             });
             doc.save(destFile);

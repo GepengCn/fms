@@ -1,28 +1,26 @@
 package com.itonglian.fms.utils;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+@Component
+public class SpringApplicationContextHolder implements ApplicationContextAware {
+    private static ApplicationContext applicationContext = null;
 
-public class SpringApplicationContextHolder implements ServletContextListener {
-    private static WebApplicationContext springContext = null;
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
 
     @Override
-    public void contextInitialized(ServletContextEvent sce) {
-
-        if (springContext == null) {
-            springContext = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
-        }
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 
-    public static Object getBean(String name) {
-        return springContext.getBean(name);
-    }
-
-    public static <T> T getBean(Class<T> clazz) {
-        return springContext.getBean(clazz);
+    public static Object getBean(Class requiredType)
+            throws BeansException {
+        return applicationContext.getBean(requiredType);
     }
 
 }
