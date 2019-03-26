@@ -46,7 +46,7 @@ public class LogAspect {
         } finally {
             fmsLog.setEndtime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
             fmsLog.setExectime((System.currentTimeMillis()-start)+"");
-            fmsLog.setResult(JSON.toJSONString(result));
+            fmsLog.setResult(maxString(JSON.toJSONString(result)));
             save(pjp,fmsLog);
         }
 
@@ -85,7 +85,8 @@ public class LogAspect {
                         }
                         OperationLog operationLog = method.getAnnotation(OperationLog.class);
                         if (null != operationLog) {
-                            fmsLog.setArguments(JSON.toJSONString(args));
+
+                            fmsLog.setArguments(maxString(JSON.toJSONString(args)));
                             fmsLog.setDescription(operationLog.description());
                             return fmsLog;
                         }
@@ -97,5 +98,12 @@ public class LogAspect {
             log.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    private String maxString(String value){
+        if(value.length()>200){
+            value = value.substring(0,200);
+        }
+        return value;
     }
 }

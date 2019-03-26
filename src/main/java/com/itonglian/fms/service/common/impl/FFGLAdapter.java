@@ -10,6 +10,7 @@ import com.itonglian.fms.service.common.BaseService;
 import com.itonglian.fms.service.common.DocParser;
 import com.itonglian.fms.service.common.SFGLService;
 import com.itonglian.fms.service.common.range.DwfwContentFilling;
+import com.itonglian.fms.service.common.task.CommonTask;
 import com.itonglian.fms.service.common.task.ConvertTask;
 import com.itonglian.fms.service.common.task.DataTask;
 import com.itonglian.fms.utils.FileManager;
@@ -53,6 +54,9 @@ public abstract class FFGLAdapter extends BaseService implements DataTask {
     @Autowired
     ConvertTask convertTask;
 
+    @Autowired
+    CommonTask commonTask;
+
     public abstract String getFormPath();
 
     @Override
@@ -69,7 +73,7 @@ public abstract class FFGLAdapter extends BaseService implements DataTask {
 
         param.setCustomized(getCustomized(taskId,ffgl));
 
-        param.setHandlerDetailList(setHandlerDetailList(param));
+        param.setHandlerDetailList(commonTask.setHandlerDetailList(taskId,param));
 
         List<FtpFile> ftpFileList = new ArrayList<>();
         //封皮
