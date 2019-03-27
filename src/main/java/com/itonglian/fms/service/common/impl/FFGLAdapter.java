@@ -1,6 +1,7 @@
 package com.itonglian.fms.service.common.impl;
 
 import com.itonglian.fms.entity.FFGL;
+import com.itonglian.fms.entity.FMS_LOGExample;
 import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.WfTask;
 import com.itonglian.fms.service.*;
@@ -57,15 +58,25 @@ public abstract class FFGLAdapter extends BaseService implements DataTask {
     @Autowired
     CommonTask commonTask;
 
+    @Autowired
+    FmsLogService fmsLogService;
+
     public abstract String getFormPath();
 
     @Override
     public Param customizedImpl(Param param, FMS_TASK fmsTask) throws Exception {
+
         this.formPath = getFormPath();
 
         String taskId = fmsTask.getTaskid();
 
         String parent = fmsTask.getParentroot();
+
+        FMS_LOGExample fmsLogExample = new FMS_LOGExample();
+
+        fmsLogExample.or().andTaskidEqualTo(taskId);
+
+        fmsLogService.deleteByExample(fmsLogExample);
 
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
 

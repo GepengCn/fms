@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Aspect
 @Slf4j
@@ -26,12 +28,14 @@ public class LogAspect {
     @Autowired
     private FmsLogService fmsLogService;
 
+    private static ExecutorService executorService = Executors.newFixedThreadPool(50);
     @Pointcut("@annotation(com.itonglian.fms.log.OperationLog)")
     public void pointcut() {
 
     }
     @Around("pointcut()")
-    public Object doInvoke(ProceedingJoinPoint pjp) {
+    public Object doInvoke(ProceedingJoinPoint pjp) throws Exception {
+
         FMS_LOG fmsLog = new FMS_LOG();
         long start = System.currentTimeMillis();
         fmsLog.setStarttime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
@@ -39,10 +43,8 @@ public class LogAspect {
         try {
             result = pjp.proceed();
         } catch (Throwable throwable) {
-            fmsLog.setEndtime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
-            fmsLog.setExectime((System.currentTimeMillis()-start)+"");
             fmsLog.setException(throwable.getMessage());
-            save(pjp, fmsLog);
+            throw new Exception(throwable);
         } finally {
             fmsLog.setEndtime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
             fmsLog.setExectime((System.currentTimeMillis()-start)+"");
@@ -53,13 +55,11 @@ public class LogAspect {
         return result;
     }
 
-    public void save(ProceedingJoinPoint proceedingJoinPoint, FMS_LOG fmsLog) {
-
-        fmsLog = parseJoinPoint(proceedingJoinPoint,fmsLog);
-
-        if (null != fmsLog) {
-            fmsLog.setId(UUID.randomUUID().toString());
-            fmsLogService.insert(fmsLog);
+    public void save(ProceedingJoinPoint proceedingJoinPoint, final FMS_LOG fmsLog) {
+        FMS_LOG newLog = parseJoinPoint(proceedingJoinPoint,fmsLog);
+        if (null != newLog) {
+            newLog.setId(UUID.randomUUID().toString());
+            fmsLogService.insert(newLog);
         }
     }
 
@@ -106,4 +106,5 @@ public class LogAspect {
         }
         return value;
     }
+
 }

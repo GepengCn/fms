@@ -1,5 +1,6 @@
 package com.itonglian.fms.service.common.impl;
 
+import com.itonglian.fms.entity.FMS_LOGExample;
 import com.itonglian.fms.entity.FMS_TASK;
 import com.itonglian.fms.entity.SFGL;
 import com.itonglian.fms.entity.WfTask;
@@ -56,6 +57,9 @@ public abstract class SFGLAdapter extends BaseService {
     @Autowired
     ConvertTask convertTask;
 
+    @Autowired
+    FmsLogService fmsLogService;
+
     public abstract ContentFilling getContentFilling();
     public abstract String getFormPath();
 
@@ -72,7 +76,14 @@ public abstract class SFGLAdapter extends BaseService {
 
         String parent = fmsTask.getParentroot();
 
+        FMS_LOGExample fmsLogExample = new FMS_LOGExample();
+
+        fmsLogExample.or().andTaskidEqualTo(taskId);
+
+        fmsLogService.deleteByExample(fmsLogExample);
+
         WfTask wfTask = wfTaskService.selectByPrimaryKey(Long.parseLong(param.getTaskId()));
+
         SFGL sfgl = sfglService.selectByPrimaryKey(wfTask.getWt04());
 
         param.setCustomized(getCustomized(taskId,sfgl));

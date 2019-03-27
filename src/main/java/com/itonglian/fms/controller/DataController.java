@@ -8,11 +8,9 @@ import com.google.common.base.Strings;
 import com.itonglian.fms.bean.FindListResult;
 import com.itonglian.fms.config.ftp.FtpUtil;
 import com.itonglian.fms.config.services.ServiceConfig;
-import com.itonglian.fms.entity.FMS_DATAExample;
-import com.itonglian.fms.entity.FMS_DATAWithBLOBs;
-import com.itonglian.fms.entity.FMS_TASK;
-import com.itonglian.fms.entity.FMS_TASKExample;
+import com.itonglian.fms.entity.*;
 import com.itonglian.fms.service.FmsDataService;
+import com.itonglian.fms.service.FmsLogService;
 import com.itonglian.fms.service.FmsTaskService;
 import com.itonglian.fms.service.bean.*;
 import com.itonglian.fms.service.common.FileStatusManager;
@@ -57,6 +55,8 @@ public class DataController {
     @Value(value = "${template.pdfPath}")
     private String pdfPath;
 
+    @Autowired
+    FmsLogService fmsLogService;
     @Autowired
     ServiceConfig serviceConfig;
 
@@ -273,5 +273,20 @@ public class DataController {
 
         }
         return null;
+    }
+
+
+    @RequestMapping("logIndex")
+    public ModelAndView logIndex(@RequestParam(required = false,defaultValue = "1") int pageNum,@RequestParam(required = false,defaultValue = "") String taskId) {
+        PageHelper.startPage(pageNum, 10);
+        ModelAndView modelAndView = new ModelAndView("table-log");
+        FMS_LOGExample fmsLogExample = new FMS_LOGExample();
+        fmsLogExample.or().andTaskidEqualTo(taskId);
+        fmsLogExample.setOrderByClause("ENDTIME ASC");
+        List<FMS_LOG> fmsLogList = fmsLogService.selectByExample(fmsLogExample);
+        PageInfo<FMS_LOG> pageInfo = new PageInfo<>(fmsLogList);
+        modelAndView.addObject("datas",fmsLogList);
+        modelAndView.addObject("pageInfo",pageInfo);
+        return modelAndView;
     }
 }

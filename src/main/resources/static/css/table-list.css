@@ -74,7 +74,7 @@ ul {
 /* 表格列表区域样式代码 start */
 .fms-content .fms-table-part {
   width: 100%;
-  overflow-y: auto;
+  overflow: auto;
   height: 100%;
   padding: 0px 20px 20px;
   box-sizing: border-box;
@@ -85,6 +85,10 @@ ul {
 }
 .fms-content .fms-table-part .fms-table-title{
   max-width: 250px;
+}
+.fms-max{
+  max-width: 250px!important;
+  min-width: 150px!important;
 }
 .fms-content .fms-table-part .final {
   color: #2AC566;

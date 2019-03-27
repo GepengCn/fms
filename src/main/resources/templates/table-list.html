@@ -79,6 +79,7 @@
             </td>
             <td>
               <a th:id="${fmsTask.taskid}+_href" th:href="@{/dataController/detail(dataId=${fmsTask.dataid},fileType=${fmsTask.filetype})}"><span class="glyphicon glyphicon-th-list icon-title"></span></a>
+              <a th:id="${fmsTask.taskid}+_log" th:href="@{/dataController/logIndex(taskId=${fmsTask.taskid})}"><span class="glyphicon glyphicon-eye-open icon-title"></span></a>
               <a th:href="@{'/dataController/retry?id='+${fmsTask.id}}"><span class="glyphicon glyphicon-refresh icon-title"></span></a>
             </td>
           </tr>
@@ -138,11 +139,15 @@
       $("#"+fmsTask.taskid+"_name").html("<span class=\""+color+"\"><span class=\""+icon+" icon-title \"></span>"+name+"</span>");
     }
     function setStatusAndName(fmsTask){
+      $("#"+fmsTask.taskid+"_href").show();
+      $("#"+fmsTask.taskid+"_log").show();
       switch (fmsTask.status) {
         case 100:
           dataToHtml(fmsTask,"waiting","glyphicon glyphicon-exclamation-sign","待处理");
           break;
         case 101:
+          $("#"+fmsTask.taskid+"_href").hide();
+          $("#"+fmsTask.taskid+"_log").hide();
           dataToHtml(fmsTask,"waiting","glyphicon glyphicon-retweet","正在处理");
           break;
         case 102:
