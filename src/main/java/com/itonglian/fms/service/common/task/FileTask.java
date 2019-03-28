@@ -14,7 +14,7 @@ public interface FileTask {
 
     FtpFile getRefFile(String taskId,String parent) throws FileHandlerException;
 
-    FtpFile getTextFile(String taskId,String textPath,String textName) throws FileHandlerException;
+    FtpFile getTextFile(String taskId,String textPath,String textName) throws FileHandlerException, Exception;
 
     FtpFile getAttFile(String taskId,String attPath,String attName) throws FileHandlerException;
 

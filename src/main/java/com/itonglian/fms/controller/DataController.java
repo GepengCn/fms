@@ -245,28 +245,38 @@ public class DataController {
         File zip = new File(pdfPath+File.separator+UUID.randomUUID().toString()+".zip");
         try {
             FileUtils.forceMkdir(tempFile);
-            ftpUtil.download(filePath,temp);
 
-            if(tempFile.listFiles().length==0){
+            if(!ftpUtil.downloadFile(filePath,temp,ftpFile.getFileName())){
                 return null;
             }
-            ZipUtil.pack(tempFile,zip);
-
             HttpHeaders headers = new HttpHeaders();
+            if(ftpFile.getFileName().endsWith(".zip")){
+                ZipUtil.pack(tempFile,zip);
 
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
-            headers.setContentDispositionFormData("attachment", zip.getName());
+                headers.setContentDispositionFormData("attachment",zip.getName());
 
+                return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(zip),
+                        headers, HttpStatus.CREATED);
 
-            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(zip),
-                    headers, HttpStatus.CREATED);
+            }else{
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+
+                headers.setContentDispositionFormData("attachment",ftpFile.getFileName());
+
+                return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(tempFile.listFiles()[0]),
+                        headers, HttpStatus.CREATED);
+            }
+
         } catch (IOException e) {
             log.error("IOException",e);
         }finally {
             try {
                 FileUtils.deleteDirectory(tempFile);
-                FileUtils.forceDelete(zip);
+                if(zip.exists()){
+                    FileUtils.forceDelete(zip);
+                }
             } catch (IOException e) {
                 log.error("IOException",e);
             }

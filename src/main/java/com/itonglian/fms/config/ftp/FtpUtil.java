@@ -1,6 +1,8 @@
 package com.itonglian.fms.config.ftp;
 
+import com.google.common.base.Strings;
 import com.itonglian.fms.config.services.ServiceConfig;
+import com.itonglian.fms.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.ftp.FTPClient;
@@ -154,5 +156,46 @@ public class FtpUtil {
                 }
             }
         }
+    }
+
+    public boolean downloadFile(String parentPath,String destPath,String fileName){
+
+        boolean hasFile = false;
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient = init(parentPath);
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.setCharset(Charset.forName(ftpEncoding));
+            ftpClient.setControlEncoding(ftpEncoding);
+            ftpClient.enterLocalPassiveMode();
+            FTPFile[] ftpFiles=ftpClient.listFiles();
+            ftpClient.listFiles(parentPath);
+            for (int i = 0; i <ftpFiles.length ; i++) {
+                FTPFile ftpFile = ftpFiles[i];
+                if(!ftpFile.isDirectory()){
+                    if(!Strings.isNullOrEmpty(fileName)&&fileName.equals(ftpFile.getName())){
+                        File file = new File(destPath+"/"+ftpFile.getName());
+                        OutputStream outputStream = new FileOutputStream(file);
+                        String localFileName = new String(ftpFile.getName().getBytes("UTF-8"), "ISO-8859-1");
+                        ftpClient.retrieveFile(localFileName,outputStream);
+                        outputStream.close();
+                        hasFile = true;
+                        break;
+                    }
+                }
+            }
+            ftpClient.logout();
+        }catch (Exception e){
+            log.error("error",e);
+        }finally {
+            if(ftpClient.isConnected()){
+                try {
+                    ftpClient.disconnect();
+                }catch (Exception e){
+                    log.error("error",e);
+                }
+            }
+        }
+        return hasFile;
     }
 }

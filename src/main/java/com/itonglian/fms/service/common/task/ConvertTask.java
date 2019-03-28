@@ -72,12 +72,9 @@ public class ConvertTask implements FileTask {
 
     @Override
     @OperationLog(description = "正文处理")
-    public FtpFile getTextFile(String taskId,String textPath,String textName) throws FileHandlerException{
+    public FtpFile getTextFile(String taskId,String textPath,String textName) throws Exception{
         FtpFile docFtpFile = new FtpFile(textPath,textName,3,3);
-        if(docParser.executeZip(taskId,docFtpFile)){
-            return docFtpFile;
-        }
-        return null;
+        return docParser.executeZip(taskId,docFtpFile);
     }
 
     @Override
