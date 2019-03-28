@@ -63,7 +63,7 @@ public abstract class SFGLAdapter extends BaseService {
     public abstract ContentFilling getContentFilling();
     public abstract String getFormPath();
 
-    public abstract Map<String,String> getContents(SFGL sfgl);
+    public abstract Map<String,String> getContents(SFGL sfgl) throws Exception;
 
     public abstract Customized getCustomized(String taskId,SFGL sfgl);
 

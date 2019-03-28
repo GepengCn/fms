@@ -37,7 +37,7 @@ public class SwdjService extends SFGLAdapter {
     }
 
     @Override
-    public Map<String, String> getContents(SFGL sfgl) {
+    public Map<String, String> getContents(SFGL sfgl) throws Exception {
         Map<String,String> contents = new HashMap<>();
         contents.put("SF13",sfgl.getSf13());
         contents.put("SF12",sfgl.getSf12());
