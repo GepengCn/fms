@@ -44,15 +44,15 @@ public class FtpUtil {
             int portInt = Integer.parseInt(this.port);
             ftpClient.connect(this.host,portInt);
             ftpClient.login(this.username,this.password);
-            log.info("连接FTP服务至:"+host);
-            log.info(ftpClient.getReplyString());
-            log.info("正在切换目录至:"+parentPath);
+            log.debug("连接FTP服务至:"+host);
+            log.debug(ftpClient.getReplyString());
+            log.debug("正在切换目录至:"+parentPath);
             if(!ftpClient.changeWorkingDirectory(parentPath)){
-                log.info("目录:"+parentPath+"不存在");
-                log.info("创建目录:"+parentPath);
+                log.debug("目录:"+parentPath+"不存在");
+                log.debug("创建目录:"+parentPath);
                 if(ftpClient.makeDirectory(parentPath)){
-                    log.info("成功创建目录:"+parentPath);
-                    log.info("开始切换到目录:"+parentPath);
+                    log.debug("成功创建目录:"+parentPath);
+                    log.debug("开始切换到目录:"+parentPath);
                     if(!ftpClient.changeWorkingDirectory(parentPath)){
                         throw new Exception("切换ftp目录失败");
                     }
@@ -67,7 +67,7 @@ public class FtpUtil {
             if(setOptUtf8){
                 ftpClient.sendCommand("OPTS UTF8", "ON");
             }
-            log.info("成功连接ftp服务...");
+            log.debug("成功连接ftp服务...");
             return ftpClient;
         }catch (Exception e){
             log.error("error",e);
@@ -93,12 +93,12 @@ public class FtpUtil {
                     }
                 }
             }
-            log.info("上传文件:"+fileName+"至"+parentPath);
+            log.debug("上传文件:"+fileName+"至"+parentPath);
             InputStream inputStream = new FileInputStream(srcFile);
             if(!ftpClient.storeFile(fileName,inputStream)){
                 throw new Exception("上传文件失败...");
             }
-            log.info("上传文件成功");
+            log.debug("上传文件成功");
             inputStream.close();
             ftpClient.logout();
         }catch (Exception e){
