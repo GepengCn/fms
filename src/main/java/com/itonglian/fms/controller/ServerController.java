@@ -41,7 +41,7 @@ public class ServerController {
         }
     }
 
-    @RequestMapping("serverIndex")
+    @RequestMapping("/serverIndex")
     public ModelAndView serverIndex() {
         ModelAndView modelAndView = new ModelAndView("server");
         return modelAndView;
@@ -60,7 +60,7 @@ public class ServerController {
     }
 
 
-    @RequestMapping("verify")
+    @RequestMapping("/verify")
     public ModelAndView verify() {
         ModelAndView modelAndView = new ModelAndView("verify");
         return modelAndView;

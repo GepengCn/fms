@@ -5,7 +5,7 @@ import com.itonglian.fms.entity.SYS_USERS;
 public interface SysUsersService {
     SYS_USERS selectByPrimaryKey(Long su00);
 
-    String findNameByPrimaryKey(Long su00);
+    String findNameByPrimaryKey(Long su00) throws Exception;
 
-    String findNameByPrimaryKey(String su00);
+    String findNameByPrimaryKey(String su00) throws Exception;
 }

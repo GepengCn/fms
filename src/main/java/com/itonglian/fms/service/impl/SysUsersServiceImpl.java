@@ -17,16 +17,16 @@ public class SysUsersServiceImpl implements SysUsersService {
     }
 
     @Override
-    public String findNameByPrimaryKey(Long su00) {
+    public String findNameByPrimaryKey(Long su00) throws Exception {
         SYS_USERS sysUsers = sysUsersMapper.selectByPrimaryKey(su00);
         if(sysUsers==null){
-            return null;
+            throw new Exception("不存在的用户："+su00);
         }
         return sysUsers.getSu02();
     }
 
     @Override
-    public String findNameByPrimaryKey(String su00) {
+    public String findNameByPrimaryKey(String su00) throws Exception {
         if(Strings.isNullOrEmpty(su00)){
             return "";
         }
