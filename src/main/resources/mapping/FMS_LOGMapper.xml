@@ -4,15 +4,12 @@
   <resultMap id="BaseResultMap" type="com.itonglian.fms.entity.FMS_LOG">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="TASKID" jdbcType="VARCHAR" property="taskid" />
-    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="CLASSNAME" jdbcType="VARCHAR" property="classname" />
     <result column="METHODNAME" jdbcType="VARCHAR" property="methodname" />
-    <result column="ARGUMENTS" jdbcType="VARCHAR" property="arguments" />
-    <result column="RESULT" jdbcType="VARCHAR" property="result" />
     <result column="STARTTIME" jdbcType="VARCHAR" property="starttime" />
     <result column="ENDTIME" jdbcType="VARCHAR" property="endtime" />
-    <result column="EXECTime" jdbcType="VARCHAR" property="exectime" />
+    <result column="EXECTIME" jdbcType="VARCHAR" property="exectime" />
     <result column="EXCEPTION" jdbcType="VARCHAR" property="exception" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -74,8 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, TASKID, LOCATION, DESCRIPTION, CLASSNAME, METHODNAME, ARGUMENTS, RESULT, STARTTIME, 
-    ENDTIME, EXECTime, EXCEPTION
+    ID, TASKID, DESCRIPTION, CLASSNAME, METHODNAME, STARTTIME, ENDTIME, EXECTIME, EXCEPTION
   </sql>
   <select id="selectByExample" parameterType="com.itonglian.fms.entity.FMS_LOGExample" resultMap="BaseResultMap">
     select
@@ -109,14 +105,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.itonglian.fms.entity.FMS_LOG">
-    insert into FMS_LOG (ID, TASKID, LOCATION, 
-      DESCRIPTION, CLASSNAME, METHODNAME, 
-      ARGUMENTS, RESULT, STARTTIME, 
-      ENDTIME, EXECTime, EXCEPTION
+    insert into FMS_LOG (ID, TASKID, DESCRIPTION, 
+      CLASSNAME, METHODNAME, STARTTIME, 
+      ENDTIME, EXECTIME, EXCEPTION
       )
-    values (#{id,jdbcType=VARCHAR}, #{taskid,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{methodname,jdbcType=VARCHAR}, 
-      #{arguments,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{taskid,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{classname,jdbcType=VARCHAR}, #{methodname,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, 
       #{endtime,jdbcType=VARCHAR}, #{exectime,jdbcType=VARCHAR}, #{exception,jdbcType=VARCHAR}
       )
   </insert>
@@ -129,9 +123,6 @@
       <if test="taskid != null">
         TASKID,
       </if>
-      <if test="location != null">
-        LOCATION,
-      </if>
       <if test="description != null">
         DESCRIPTION,
       </if>
@@ -141,12 +132,6 @@
       <if test="methodname != null">
         METHODNAME,
       </if>
-      <if test="arguments != null">
-        ARGUMENTS,
-      </if>
-      <if test="result != null">
-        RESULT,
-      </if>
       <if test="starttime != null">
         STARTTIME,
       </if>
@@ -154,7 +139,7 @@
         ENDTIME,
       </if>
       <if test="exectime != null">
-        EXECTime,
+        EXECTIME,
       </if>
       <if test="exception != null">
         EXCEPTION,
@@ -167,9 +152,6 @@
       <if test="taskid != null">
         #{taskid,jdbcType=VARCHAR},
       </if>
-      <if test="location != null">
-        #{location,jdbcType=VARCHAR},
-      </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
@@ -178,12 +160,6 @@
       </if>
       <if test="methodname != null">
         #{methodname,jdbcType=VARCHAR},
-      </if>
-      <if test="arguments != null">
-        #{arguments,jdbcType=VARCHAR},
-      </if>
-      <if test="result != null">
-        #{result,jdbcType=VARCHAR},
       </if>
       <if test="starttime != null">
         #{starttime,jdbcType=VARCHAR},
@@ -214,9 +190,6 @@
       <if test="record.taskid != null">
         TASKID = #{record.taskid,jdbcType=VARCHAR},
       </if>
-      <if test="record.location != null">
-        LOCATION = #{record.location,jdbcType=VARCHAR},
-      </if>
       <if test="record.description != null">
         DESCRIPTION = #{record.description,jdbcType=VARCHAR},
       </if>
@@ -226,12 +199,6 @@
       <if test="record.methodname != null">
         METHODNAME = #{record.methodname,jdbcType=VARCHAR},
       </if>
-      <if test="record.arguments != null">
-        ARGUMENTS = #{record.arguments,jdbcType=VARCHAR},
-      </if>
-      <if test="record.result != null">
-        RESULT = #{record.result,jdbcType=VARCHAR},
-      </if>
       <if test="record.starttime != null">
         STARTTIME = #{record.starttime,jdbcType=VARCHAR},
       </if>
@@ -239,7 +206,7 @@
         ENDTIME = #{record.endtime,jdbcType=VARCHAR},
       </if>
       <if test="record.exectime != null">
-        EXECTime = #{record.exectime,jdbcType=VARCHAR},
+        EXECTIME = #{record.exectime,jdbcType=VARCHAR},
       </if>
       <if test="record.exception != null">
         EXCEPTION = #{record.exception,jdbcType=VARCHAR},
@@ -253,15 +220,12 @@
     update FMS_LOG
     set ID = #{record.id,jdbcType=VARCHAR},
       TASKID = #{record.taskid,jdbcType=VARCHAR},
-      LOCATION = #{record.location,jdbcType=VARCHAR},
       DESCRIPTION = #{record.description,jdbcType=VARCHAR},
       CLASSNAME = #{record.classname,jdbcType=VARCHAR},
       METHODNAME = #{record.methodname,jdbcType=VARCHAR},
-      ARGUMENTS = #{record.arguments,jdbcType=VARCHAR},
-      RESULT = #{record.result,jdbcType=VARCHAR},
       STARTTIME = #{record.starttime,jdbcType=VARCHAR},
       ENDTIME = #{record.endtime,jdbcType=VARCHAR},
-      EXECTime = #{record.exectime,jdbcType=VARCHAR},
+      EXECTIME = #{record.exectime,jdbcType=VARCHAR},
       EXCEPTION = #{record.exception,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -273,9 +237,6 @@
       <if test="taskid != null">
         TASKID = #{taskid,jdbcType=VARCHAR},
       </if>
-      <if test="location != null">
-        LOCATION = #{location,jdbcType=VARCHAR},
-      </if>
       <if test="description != null">
         DESCRIPTION = #{description,jdbcType=VARCHAR},
       </if>
@@ -285,12 +246,6 @@
       <if test="methodname != null">
         METHODNAME = #{methodname,jdbcType=VARCHAR},
       </if>
-      <if test="arguments != null">
-        ARGUMENTS = #{arguments,jdbcType=VARCHAR},
-      </if>
-      <if test="result != null">
-        RESULT = #{result,jdbcType=VARCHAR},
-      </if>
       <if test="starttime != null">
         STARTTIME = #{starttime,jdbcType=VARCHAR},
       </if>
@@ -298,7 +253,7 @@
         ENDTIME = #{endtime,jdbcType=VARCHAR},
       </if>
       <if test="exectime != null">
-        EXECTime = #{exectime,jdbcType=VARCHAR},
+        EXECTIME = #{exectime,jdbcType=VARCHAR},
       </if>
       <if test="exception != null">
         EXCEPTION = #{exception,jdbcType=VARCHAR},
@@ -309,15 +264,12 @@
   <update id="updateByPrimaryKey" parameterType="com.itonglian.fms.entity.FMS_LOG">
     update FMS_LOG
     set TASKID = #{taskid,jdbcType=VARCHAR},
-      LOCATION = #{location,jdbcType=VARCHAR},
       DESCRIPTION = #{description,jdbcType=VARCHAR},
       CLASSNAME = #{classname,jdbcType=VARCHAR},
       METHODNAME = #{methodname,jdbcType=VARCHAR},
-      ARGUMENTS = #{arguments,jdbcType=VARCHAR},
-      RESULT = #{result,jdbcType=VARCHAR},
       STARTTIME = #{starttime,jdbcType=VARCHAR},
       ENDTIME = #{endtime,jdbcType=VARCHAR},
-      EXECTime = #{exectime,jdbcType=VARCHAR},
+      EXECTIME = #{exectime,jdbcType=VARCHAR},
       EXCEPTION = #{exception,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>

@@ -59,6 +59,13 @@ public class ServerController {
         }
     }
 
+
+    @RequestMapping("verify")
+    public ModelAndView verify() {
+        ModelAndView modelAndView = new ModelAndView("verify");
+        return modelAndView;
+    }
+
     @Data
     @AllArgsConstructor
     public class Result{

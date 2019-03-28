@@ -1,6 +1,5 @@
 package com.itonglian.fms.log;
 
-import com.alibaba.fastjson.JSON;
 import com.itonglian.fms.entity.FMS_LOG;
 import com.itonglian.fms.service.FmsLogService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +47,6 @@ public class LogAspect {
         } finally {
             fmsLog.setEndtime(DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
             fmsLog.setExectime((System.currentTimeMillis()-start)+"");
-            fmsLog.setResult(maxString(JSON.toJSONString(result)));
             save(pjp,fmsLog);
         }
 
@@ -85,8 +83,6 @@ public class LogAspect {
                         }
                         OperationLog operationLog = method.getAnnotation(OperationLog.class);
                         if (null != operationLog) {
-
-                            fmsLog.setArguments(maxString(JSON.toJSONString(args)));
                             fmsLog.setDescription(operationLog.description());
                             return fmsLog;
                         }
@@ -98,13 +94,6 @@ public class LogAspect {
             log.error(e.getMessage(), e);
         }
         return null;
-    }
-
-    private String maxString(String value){
-        if(value.length()>200){
-            value = value.substring(0,200);
-        }
-        return value;
     }
 
 }

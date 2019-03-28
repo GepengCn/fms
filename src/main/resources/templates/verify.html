@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link th:href="@{/static/css/verify.css}" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/verify.min.js}"></script>
+
+</head>
+
+<body>
+<div id="mpanel1" >
+</div>
+
+<!--确定的按钮，id名称在初始化时使用-->
+<button id="check-btn" class="verify-btn">确定</button>
+<script>
+
+    $('#mpanel1').codeVerify({
+
+        //常规验证码type=1， 运算验证码type=2
+        type : 1,
+
+        //验证码宽度
+        width : '400px',
+
+        //验证码高度
+        height : '50px',
+
+        //......更多参数设置请查阅文档
+
+        //提交按钮的id名称
+        btnId : 'check-btn',
+
+        //验证成功以后的回调
+        success : function() {
+            alert('验证匹配！');
+        }
+
+    });
+
+</script>
+</body>
+</html>

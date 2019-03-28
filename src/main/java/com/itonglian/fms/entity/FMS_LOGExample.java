@@ -244,76 +244,6 @@ public class FMS_LOGExample {
             return (Criteria) this;
         }
 
-        public Criteria andLocationIsNull() {
-            addCriterion("LOCATION is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationIsNotNull() {
-            addCriterion("LOCATION is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationEqualTo(String value) {
-            addCriterion("LOCATION =", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationNotEqualTo(String value) {
-            addCriterion("LOCATION <>", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationGreaterThan(String value) {
-            addCriterion("LOCATION >", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationGreaterThanOrEqualTo(String value) {
-            addCriterion("LOCATION >=", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationLessThan(String value) {
-            addCriterion("LOCATION <", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationLessThanOrEqualTo(String value) {
-            addCriterion("LOCATION <=", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationLike(String value) {
-            addCriterion("LOCATION like", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationNotLike(String value) {
-            addCriterion("LOCATION not like", value, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationIn(List<String> values) {
-            addCriterion("LOCATION in", values, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationNotIn(List<String> values) {
-            addCriterion("LOCATION not in", values, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationBetween(String value1, String value2) {
-            addCriterion("LOCATION between", value1, value2, "location");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocationNotBetween(String value1, String value2) {
-            addCriterion("LOCATION not between", value1, value2, "location");
-            return (Criteria) this;
-        }
-
         public Criteria andDescriptionIsNull() {
             addCriterion("DESCRIPTION is null");
             return (Criteria) this;
@@ -524,146 +454,6 @@ public class FMS_LOGExample {
             return (Criteria) this;
         }
 
-        public Criteria andArgumentsIsNull() {
-            addCriterion("ARGUMENTS is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsIsNotNull() {
-            addCriterion("ARGUMENTS is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsEqualTo(String value) {
-            addCriterion("ARGUMENTS =", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsNotEqualTo(String value) {
-            addCriterion("ARGUMENTS <>", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsGreaterThan(String value) {
-            addCriterion("ARGUMENTS >", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsGreaterThanOrEqualTo(String value) {
-            addCriterion("ARGUMENTS >=", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsLessThan(String value) {
-            addCriterion("ARGUMENTS <", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsLessThanOrEqualTo(String value) {
-            addCriterion("ARGUMENTS <=", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsLike(String value) {
-            addCriterion("ARGUMENTS like", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsNotLike(String value) {
-            addCriterion("ARGUMENTS not like", value, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsIn(List<String> values) {
-            addCriterion("ARGUMENTS in", values, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsNotIn(List<String> values) {
-            addCriterion("ARGUMENTS not in", values, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsBetween(String value1, String value2) {
-            addCriterion("ARGUMENTS between", value1, value2, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andArgumentsNotBetween(String value1, String value2) {
-            addCriterion("ARGUMENTS not between", value1, value2, "arguments");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultIsNull() {
-            addCriterion("RESULT is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultIsNotNull() {
-            addCriterion("RESULT is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultEqualTo(String value) {
-            addCriterion("RESULT =", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultNotEqualTo(String value) {
-            addCriterion("RESULT <>", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultGreaterThan(String value) {
-            addCriterion("RESULT >", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultGreaterThanOrEqualTo(String value) {
-            addCriterion("RESULT >=", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultLessThan(String value) {
-            addCriterion("RESULT <", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultLessThanOrEqualTo(String value) {
-            addCriterion("RESULT <=", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultLike(String value) {
-            addCriterion("RESULT like", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultNotLike(String value) {
-            addCriterion("RESULT not like", value, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultIn(List<String> values) {
-            addCriterion("RESULT in", values, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultNotIn(List<String> values) {
-            addCriterion("RESULT not in", values, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultBetween(String value1, String value2) {
-            addCriterion("RESULT between", value1, value2, "result");
-            return (Criteria) this;
-        }
-
-        public Criteria andResultNotBetween(String value1, String value2) {
-            addCriterion("RESULT not between", value1, value2, "result");
-            return (Criteria) this;
-        }
-
         public Criteria andStarttimeIsNull() {
             addCriterion("STARTTIME is null");
             return (Criteria) this;
@@ -805,72 +595,72 @@ public class FMS_LOGExample {
         }
 
         public Criteria andExectimeIsNull() {
-            addCriterion("EXECTime is null");
+            addCriterion("EXECTIME is null");
             return (Criteria) this;
         }
 
         public Criteria andExectimeIsNotNull() {
-            addCriterion("EXECTime is not null");
+            addCriterion("EXECTIME is not null");
             return (Criteria) this;
         }
 
         public Criteria andExectimeEqualTo(String value) {
-            addCriterion("EXECTime =", value, "exectime");
+            addCriterion("EXECTIME =", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeNotEqualTo(String value) {
-            addCriterion("EXECTime <>", value, "exectime");
+            addCriterion("EXECTIME <>", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeGreaterThan(String value) {
-            addCriterion("EXECTime >", value, "exectime");
+            addCriterion("EXECTIME >", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeGreaterThanOrEqualTo(String value) {
-            addCriterion("EXECTime >=", value, "exectime");
+            addCriterion("EXECTIME >=", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeLessThan(String value) {
-            addCriterion("EXECTime <", value, "exectime");
+            addCriterion("EXECTIME <", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeLessThanOrEqualTo(String value) {
-            addCriterion("EXECTime <=", value, "exectime");
+            addCriterion("EXECTIME <=", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeLike(String value) {
-            addCriterion("EXECTime like", value, "exectime");
+            addCriterion("EXECTIME like", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeNotLike(String value) {
-            addCriterion("EXECTime not like", value, "exectime");
+            addCriterion("EXECTIME not like", value, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeIn(List<String> values) {
-            addCriterion("EXECTime in", values, "exectime");
+            addCriterion("EXECTIME in", values, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeNotIn(List<String> values) {
-            addCriterion("EXECTime not in", values, "exectime");
+            addCriterion("EXECTIME not in", values, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeBetween(String value1, String value2) {
-            addCriterion("EXECTime between", value1, value2, "exectime");
+            addCriterion("EXECTIME between", value1, value2, "exectime");
             return (Criteria) this;
         }
 
         public Criteria andExectimeNotBetween(String value1, String value2) {
-            addCriterion("EXECTime not between", value1, value2, "exectime");
+            addCriterion("EXECTIME not between", value1, value2, "exectime");
             return (Criteria) this;
         }
 

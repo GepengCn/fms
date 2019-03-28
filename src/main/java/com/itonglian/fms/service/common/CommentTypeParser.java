@@ -58,7 +58,7 @@ public class CommentTypeParser {
 
         public TypeResult selectType(String typeValue){
             for (Map.Entry<String, List<String>> entry : datas.entrySet()) {
-                log.info("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                log.debug("Key = " + entry.getKey() + ", Value = " + entry.getValue());
                 List<String> list = entry.getValue();
                 if(list.contains(typeValue)){
                     return new TypeResult(true,entry.getKey());
