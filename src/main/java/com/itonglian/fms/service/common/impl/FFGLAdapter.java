@@ -107,7 +107,9 @@ public abstract class FFGLAdapter extends BaseService implements DataTask {
             ftpFileList.add(docFtpFile);
         }
         //附件
-        ftpFileList.add(convertTask.getAttFile(taskId,fmsTask.getAttachpath(),fmsTask.getAttachname()));
+        if(!(fmsTask.getAttachpath()==null||"".equals(fmsTask.getAttachpath()))){
+            ftpFileList.add(convertTask.getAttFile(taskId,fmsTask.getAttachpath(),fmsTask.getAttachname()));
+        }
 
         param.setFtpList(ftpFileList);
 
